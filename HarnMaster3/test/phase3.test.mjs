@@ -46,3 +46,44 @@ test('gated off: SB is not touched when the setting is disabled', () => {
   m.fire('change:str');
   assert.equal(m.get('climbing_sb'), '5'); // unchanged — manual entry preserved
 });
+
+// --- Repeating-row name lookup (Phase 3.3) ---
+
+test("Juryn's Dancing SB = 14  [Skills 1 example: (10+14+14)/3 + Hirin]", () => {
+  // Dancing (DEX AGL AGL), DEX 10 AGL 14, sunsign Hirin (+1 for Dancing) -> 13 + 1 = 14
+  const m = loadWorker({ initial: { hr_autocalc_sb: 1, dex: 10, agl: 14, sunsign: 'hirin' } });
+  m.set('repeating_physicalskill_physicalskill_name', 'Dancing');
+  m.fire('change:repeating_physicalskill:physicalskill_name');
+  assert.equal(m.get('repeating_physicalskill_physicalskill_sb'), '14');
+});
+
+test('repeating combat skill "Sword" gets SB on attribute change (full rescan)', () => {
+  const m = loadWorker({ initial: { hr_autocalc_sb: 1, str: 13, dex: 11 } });
+  m.sections.combatskill = ['r1'];
+  m.set('repeating_combatskill_r1_combatskill_name', 'Sword');
+  m.fire('change:str');
+  // Sword (STR DEX DEX) = (13+11+11)/3 = 11.67 -> 12; no sunsign match -> 12
+  assert.equal(m.get('repeating_combatskill_r1_combatskill_sb'), '12');
+});
+
+test('specialty in parentheses matches the base skill', () => {
+  const m = loadWorker({ initial: { hr_autocalc_sb: 1, str: 13, dex: 11 } });
+  m.set('repeating_combatskill_combatskill_name', 'Sword (Broadsword)');
+  m.fire('change:repeating_combatskill:combatskill_name');
+  assert.equal(m.get('repeating_combatskill_combatskill_sb'), '12'); // -> sword
+});
+
+test('ritual skill by deity name (Larani) computes SB', () => {
+  // Larani (VOI INT WIL); VOI 12 INT 12 WIL 12 -> 12; sunsign none matching here
+  const m = loadWorker({ initial: { hr_autocalc_sb: 1, voi: 12, int: 12, wil: 12 } });
+  m.set('repeating_ritualskill_ritualskill_name', 'Larani');
+  m.fire('change:repeating_ritualskill:ritualskill_name');
+  assert.equal(m.get('repeating_ritualskill_ritualskill_sb'), '12');
+});
+
+test('unrecognised skill name leaves SB untouched', () => {
+  const m = loadWorker({ initial: { hr_autocalc_sb: 1, str: 13, dex: 11, repeating_combatskill_combatskill_sb: 7 } });
+  m.set('repeating_combatskill_combatskill_name', 'Flibbertigibbet');
+  m.fire('change:repeating_combatskill:combatskill_name');
+  assert.equal(m.get('repeating_combatskill_combatskill_sb'), '7'); // unchanged
+});
