@@ -46,3 +46,24 @@ test('the combat-stats Dodge button uses the same centralized EML', () => {
   // both roll_DodgeCheck and roll_CombatDodgeCheck reference dodge_eml_eff now
   assert.equal(evalTarget('CombatDodgeCheck', { dodge_eml_eff: 29 }, { 'Target Modifier?': 0 }), 29);
 });
+
+// --- 2.2 repeating skills ---
+
+test('repeating skill: per-row EML on ML change (combat = physical penalty)', () => {
+  const m = loadWorker({ initial: { physical_penalty: 2 } });
+  m.set('repeating_combatskill_combatskill_ml', 60);
+  m.fire('change:repeating_combatskill:combatskill_ml');
+  assert.equal(m.get('repeating_combatskill_combatskill_eml_eff'), '50'); // 60 - 10
+});
+
+test('repeating skill: fan-out on penalty change (lore = universal penalty)', () => {
+  const m = loadWorker({ initial: { universal_penalty: 1 } });
+  m.sections.loreskill = ['r1'];
+  m.set('repeating_loreskill_r1_loreskill_ml', 40);
+  m.fire('change:universal_penalty');
+  assert.equal(m.get('repeating_loreskill_r1_loreskill_eml_eff'), '35'); // 40 - 5
+});
+
+test('repeating skill macro references the centralized EML', () => {
+  assert.equal(evalTarget('CombatSkillCheck', { combatskill_eml_eff: 50 }, { 'Target Modifier?': 0 }), 50);
+});

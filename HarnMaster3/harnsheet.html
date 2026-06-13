@@ -199,7 +199,8 @@
     			</button>
     			<input type="number" name="attr_combatskill_sb" class="skill-value" value="0">
     			<input type="number" name="attr_combatskill_ml" class="skill-value" value="0">
-    			<button type="roll" aria-label="Combat Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} tests @{combatskill_name}}} {{rolltarget=[[{[[{[[@{combatskill_ml} - [[(@{physical_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{combatskill_ml}]]}} {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}}" name="roll_CombatSkillCheck">
+			<input type="hidden" name="attr_combatskill_eml_eff" value="0">
+    			<button type="roll" aria-label="Combat Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} tests @{combatskill_name}}} {{rolltarget=[[{[[{[[@{combatskill_eml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{combatskill_ml}]]}} {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}}" name="roll_CombatSkillCheck">
     			</button>
     		</fieldset>
     
@@ -278,7 +279,8 @@
     			</button>					
     			<input type="number" name="attr_physicalskill_sb" class="skill-value" value="0">
     			<input type="number" name="attr_physicalskill_ml" class="skill-value" value="0">
-    			<button type="roll" aria-label="Physical Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} tests @{physicalskill_name}}} {{rolltarget=[[{[[{[[@{physicalskill_ml} - [[(@{physical_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{physicalskill_ml}]]}} {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}}"	name="roll_PhysicalSkillCheck">
+			<input type="hidden" name="attr_physicalskill_eml_eff" value="0">
+    			<button type="roll" aria-label="Physical Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} tests @{physicalskill_name}}} {{rolltarget=[[{[[{[[@{physicalskill_eml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{physicalskill_ml}]]}} {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}}"	name="roll_PhysicalSkillCheck">
     			</button>
     		</fieldset>
         </div>
@@ -336,7 +338,8 @@
     			</button>					
     			<input type="number" name="attr_communicationskill_sb" class="skill-value" value="0">
     			<input type="number" name="attr_communicationskill_ml" class="skill-value" value="0">
-    			<button type="roll" aria-label="Communication Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} tests @{communicationskill_name}}} {{rolltarget=[[{[[{[[@{communicationskill_ml} - [[(@{universal_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{communicationskill_ml}]]}} {{penalty=[[(@{universal_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}}" name="roll_CommunicationSkillCheck">
+			<input type="hidden" name="attr_communicationskill_eml_eff" value="0">
+    			<button type="roll" aria-label="Communication Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} tests @{communicationskill_name}}} {{rolltarget=[[{[[{[[@{communicationskill_eml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{communicationskill_ml}]]}} {{penalty=[[(@{universal_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}}" name="roll_CommunicationSkillCheck">
     			</button>
     		</fieldset>		
         </div>    
@@ -353,7 +356,8 @@
     			</button>						
     			<input type="number" name="attr_loreskill_sb" class="skill-value" value="0">
     			<input type="number" name="attr_loreskill_ml" class="skill-value" value="0">
-    			<button type="roll" aria-label="Lore Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} tests @{loreskill_name}}} {{rolltarget=[[{[[{[[@{loreskill_ml} - [[(@{universal_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{loreskill_ml}]]}} {{penalty=[[(@{universal_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}}" name="roll_LoreSkillCheck">
+			<input type="hidden" name="attr_loreskill_eml_eff" value="0">
+    			<button type="roll" aria-label="Lore Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} tests @{loreskill_name}}} {{rolltarget=[[{[[{[[@{loreskill_eml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{loreskill_ml}]]}} {{penalty=[[(@{universal_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}}" name="roll_LoreSkillCheck">
     			</button>
     		</fieldset>
     
@@ -371,7 +375,8 @@
     			</button>					
     			<input type="number" name="attr_ritualskill_sb" class="skill-value" value="0">
     			<input type="number" name="attr_ritualskill_ml" class="skill-value" value="0">
-    			<button type="roll" aria-label="Ritual Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} tests @{ritualskill_name}}} {{rolltarget=[[{[[{[[@{ritualskill_ml} - [[(@{universal_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{ritualskill_ml}]]}} {{penalty=[[(@{universal_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}}"	name="roll_RitualSkillCheck">
+			<input type="hidden" name="attr_ritualskill_eml_eff" value="0">
+    			<button type="roll" aria-label="Ritual Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} tests @{ritualskill_name}}} {{rolltarget=[[{[[{[[@{ritualskill_eml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{ritualskill_ml}]]}} {{penalty=[[(@{universal_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}}"	name="roll_RitualSkillCheck">
     			</button>
     		</fieldset>
     	</div>
@@ -388,7 +393,8 @@
     			</button>						
     			<input type="number" name="attr_magicskill_sb" class="skill-value" value="0">
     			<input type="number" name="attr_magicskill_ml" class="skill-value" value="0">
-    			<button type="roll" aria-label="Magic Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} tests @{magicskill_name}}} {{rolltarget=[[{[[{[[@{magicskill_ml} - [[(@{universal_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{magicskill_ml}]]}} {{penalty=[[(@{universal_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}}" name="roll_MagicSkillCheck">
+			<input type="hidden" name="attr_magicskill_eml_eff" value="0">
+    			<button type="roll" aria-label="Magic Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} tests @{magicskill_name}}} {{rolltarget=[[{[[{[[@{magicskill_eml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{magicskill_ml}]]}} {{penalty=[[(@{universal_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}}" name="roll_MagicSkillCheck">
     			</button>
     		</fieldset>		
     	</div> 
@@ -2888,6 +2894,36 @@ on('change:physical_penalty change:universal_penalty change:climbing_ml change:c
 		FIXED_EML_UNIV.forEach(function(s){ out[s+'_eml_eff'] = (parseInt(v[s+'_ml'])||0) - up; });
 		setAttrs(out);
 	});
+});
+
+// Phase 2.2 — repeating-skill EML centralization (per-row eml_eff = ML - 5*penalty).
+const REPEAT_EML = { combatskill:'physical_penalty', physicalskill:'physical_penalty', communicationskill:'universal_penalty', loreskill:'universal_penalty', ritualskill:'universal_penalty', magicskill:'universal_penalty' };
+function recalcRepeatEML(section, penAttr) {
+	getAttrs([penAttr], function(p) {
+		var pen = (parseInt(p[penAttr])||0)*5;
+		getSectionIDs('repeating_'+section, function(ids) {
+			if (!ids.length) return;
+			var mlf = ids.map(function(id){ return 'repeating_'+section+'_'+id+'_'+section+'_ml'; });
+			getAttrs(mlf, function(v) {
+				var out = {};
+				ids.forEach(function(id){ out['repeating_'+section+'_'+id+'_'+section+'_eml_eff'] = (parseInt(v['repeating_'+section+'_'+id+'_'+section+'_ml'])||0) - pen; });
+				setAttrs(out);
+			});
+		});
+	});
+}
+Object.keys(REPEAT_EML).forEach(function(section) {
+	var penAttr = REPEAT_EML[section];
+	on('change:repeating_'+section+':'+section+'_ml', function() {
+		getAttrs(['repeating_'+section+'_'+section+'_ml', penAttr], function(v) {
+			var out = {};
+			out['repeating_'+section+'_'+section+'_eml_eff'] = (parseInt(v['repeating_'+section+'_'+section+'_ml'])||0) - (parseInt(v[penAttr])||0)*5;
+			setAttrs(out);
+		});
+	});
+});
+on('change:physical_penalty change:universal_penalty sheet:opened', function() {
+	Object.keys(REPEAT_EML).forEach(function(section){ recalcRepeatEML(section, REPEAT_EML[section]); });
 });
 
 on("clicked:dismissupgradenotice", function() {
