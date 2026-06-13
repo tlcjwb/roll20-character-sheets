@@ -203,7 +203,10 @@ behind a setting so tables using the current free-form tracker can opt out.
 2. Add `aria-label` to every roll button (can be generated from its `name`/title in the build step).
 3. Add a non-color success/failure cue in the roll template (icon/text already present — ensure not
    color-only).
-4. (Stretch) wire Roll20 `data-i18n` for labels + a translation JSON; rename the `--background-dark`
+4. Fix `sheet.json` `instructions`: it points to "the github repository readme" with **no link** —
+   add the real repo URL (Markdown is supported in that field) + a fuller GM-facing blurb. Quick win,
+   independent of other phases. (Also referenced in Phase 7d.)
+5. (Stretch) wire Roll20 `data-i18n` for labels + a translation JSON; rename the `--background-dark`
    variable; broaden responsive `@media` coverage.
 **Risk:** low. **Verify:** screen-reader pass on roll buttons; in-VTT dark/light + mobile.
 
@@ -236,11 +239,72 @@ worked example: +4 STR → +20); in-VTT toggle on/off restores baseline exactly.
 **Note:** this is the clearest payoff of the "smart sheet" direction — a single "STR +2 (item)" input
 auto-applies to exactly the right skills, which is impossible in today's all-manual model.
 
+### Phase 7 — Multiple horses for a mounted ostler (separate sheets + companion Mod script) · L · new feature (your-game / Pro)
+The largest feature; spans **three artifacts** — the sheet, a companion **Roll20 Mod (API) script**,
+and the README. It is **Pro-only and per-campaign** (Mod scripts don't ship with the published
+sheet), so it's a "your game" enhancement, not something all sheet users get. Rules basis: HM
+intends each steed to have its own profile (Combat 19) and a **per-steed Riding EML** (Combat 20).
+
+**Architecture (approach #1 + hybrid):**
+- **Each horse is its own Roll20 character + token** (RAW: "each steed should have its own Character
+  Profile").
+- The **rider's sheet keeps one embedded "active mount" panel** (the existing `h*` horse section)
+  for whichever horse is currently ridden, plus the existing mounted move/initiative integration.
+- A **companion Mod script** bridges what sheetworkers can't do (cross-character reads, token edits).
+
+**7a — Steed-mode sheet toggle (sheet-only).** A `sheetmode` setting (`character`/`steed`) that
+hides inapplicable sections (Religion, Magic, communication/craft skills, etc.) via the existing
+hidden-input + CSS pattern, so a horse's own sheet is decluttered. *Easy* for the hiding; add
+horse-correct calc variants (Move × gait, Load = STR×8, natural armour B4/E3/P1/F3) only if you want
+the steed sheet's automation fully right (*medium*) — otherwise those few values are entered by hand.
+
+**7b — Companion Mod (API) script, stored in the repo.** Place it at e.g.
+`HarnMaster3/mod/harnmaster3-mod.js`; the README documents install (campaign → Settings → Mod (API)
+Scripts → paste → Save). It does what the sheet cannot:
+- **Import:** select a horse token, run a command/token-action (`!hm-mount`); the script reads that
+  horse character's attributes (`getAttrByName`/`findObjs`) and writes them into the rider's `h*`
+  active-mount panel. Keep a small per-steed Riding-EML list on the rider.
+- **Token image swap:** watch `is_mounted` (`on('change:attribute')`) or a command; set the rider
+  token's `imgsrc` between on-foot and mounted art. Caveat: token `imgsrc` must be a **Roll20-library
+  URL** (`files.d20.io/...`, `thumb.` variant) — upload the mounted art first. (TokenMod can do this
+  part with no custom code.)
+- **Presence handshake** (see 7c).
+Community scripts **TokenMod** and **ChatSetAttr** may cover parts with little custom code.
+
+**7c — Detecting whether the Mod script is installed (to gate the import UI).** Feasible via a
+sheet↔script handshake, because the API can observe sheetworker attribute changes and write back:
+1. Sheet `sheet:opened`: set `api_present = 0` (assume absent), then `api_ping = Date.now()` (a
+   changing value guarantees a `change:` event).
+2. Mod script: `on('change:attribute')` on `api_ping` → set `api_present = <mod version>`.
+3. Sheet: `on('change:api_present')` reveals the import button / horse-import UI via the CSS-toggle
+   pattern; while `api_present = 0` it stays hidden.
+Resetting to `0` each open means **removing the script is also detected** (the UI re-hides).
+Trade-offs: brief async flash before the button appears; one tiny ping attribute. The returned
+version also enables a Mod/sheet compatibility check.
+
+**7d — Settings help + README + sheet.json (docs).**
+- **Settings tab:** today it has only toggles + a changelog and *no actual help*. Add an in-sheet
+  **Help/Instructions** block (the sheet's only player-facing doc surface): equipped/carried flow,
+  the houserules, the horse/mount workflow, and — **gated on `api_present`** — how to use the
+  import/mount features (with a "install the Mod script" note when absent).
+- **README.md:** add a **Mod-script install** section + the multiple-horses workflow.
+- **sheet.json `instructions`:** currently references "the github repository readme" with **no
+  link** — add the real URL (`…/roll20-character-sheets/tree/master/HarnMaster3#readme`; Markdown is
+  supported in that field) + a fuller GM-facing blurb. *(Worthwhile standalone quick-win even without
+  Phase 7 — also listed under Phase 5.)*
+
+**Risk:** high — spans sheet + API + docs, introduces active-mount/handshake concepts, and the Mod
+script is a separate per-campaign artifact to maintain. **Distribution:** Pro-only, per-game; does
+not travel with the published sheet. **Verify:** in-VTT with the Mod installed (import fills the
+panel; token swaps; button shows) *and* not installed (import UI stays hidden; sheet otherwise
+normal).
+
 ### Suggested sequence
-Phase 0 → 1 → 2 → 3 (and 3b alongside 3), with 4/5 interleaved as convenient, then **6 last** (it
-depends on 2 + 3). 0 and 1 are low-risk and make 2/3 safe to attempt; 3b reuses 3's SB-from-attrs
-machinery; 6 reuses 2's EML pipeline and 3's skill→attribute table. Each phase is its own version
-bump + changelog entry (see process notes).
+Phase 0 → 1 → 2 → 3 (and 3b alongside 3), with 4/5 interleaved as convenient, then **6**, then **7 last** (a
+your-game/Pro feature spanning sheet + Mod script). 0 and 1 are low-risk and make 2/3 safe to
+attempt; 3b reuses 3's SB-from-attrs machinery; 6 reuses 2's EML pipeline and 3's skill→attribute
+table; 7 is largely independent (separate sheets + a companion Mod script) and need not block the
+others. Each phase is its own version bump + changelog entry (see process notes).
 
 ---
 
