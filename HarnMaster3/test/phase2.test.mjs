@@ -128,3 +128,16 @@ test('ritual cast EML fan-out on universal penalty', () => {
 test('cast macros reference centralized EML', () => {
   assert.equal(evalTarget('spellcastcheck', { spell_eml_eff: 55 }, { 'Target Modifier?': 0 }), 55);
 });
+
+// --- 2.6 horse abilities & attacks ---
+
+test('horse ability EML = ML - 5*hPhysicalPenalty; trample uses htrample_aml', () => {
+  const m = loadWorker({ initial: { hawareness_ml: 50, htrample_aml: 55, hphysical_penalty: 2 } });
+  m.fire('change:hphysical_penalty');
+  assert.equal(m.get('hawareness_eml_eff'), '40'); // 50 - 10
+  assert.equal(m.get('htrample_eml_eff'), '45');   // 55 - 10
+});
+
+test('horse macros reference centralized EML', () => {
+  assert.equal(evalTarget('HorseAwarenessCheck', { hawareness_eml_eff: 40 }, { 'Target Modifier?': 0 }), 40);
+});
