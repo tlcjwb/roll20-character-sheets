@@ -831,7 +831,8 @@
 				<input type="number" name="attr_spell_sb" class="skill-value" value="0">
 				<input type="number" name="attr_spell_si" class="skill-value" value="0" readonly>
 				<input type="number" name="attr_spell_eml" class="skill-value" value="0">
-				<button type="roll" aria-label="Spellcastcheck" value="&{template:custom} {{color=harn}} {{title=@{character_name} casts @{spell_name}}} {{subtitle=@{spell_convocation}}} {{rolltarget=[[{[[{[[@{spell_eml} - [[(@{universal_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{spell_eml}]]}} {{penalty=[[(@{universal_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifiers=[[?{Target Modifier?|0}]]}} {{successdesc=@{spell_note}}}" name="roll_spellcastcheck">
+				<input type="hidden" name="attr_spell_eml_eff" value="0">
+				<button type="roll" aria-label="Spellcastcheck" value="&{template:custom} {{color=harn}} {{title=@{character_name} casts @{spell_name}}} {{subtitle=@{spell_convocation}}} {{rolltarget=[[{[[{[[@{spell_eml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{spell_eml}]]}} {{penalty=[[(@{universal_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifiers=[[?{Target Modifier?|0}]]}} {{successdesc=@{spell_note}}}" name="roll_spellcastcheck">
 				</button>
 				
 				<label for="spell-description">Spell description</label>
@@ -863,7 +864,8 @@
 				<input type="number" name="attr_ritual_sb" class="skill-value" value="0">
 				<input type="number" name="attr_ritual_si" class="skill-value" value="0" readonly>
 				<input type="number" name="attr_ritual_eml" class="skill-value" value="0">
-				<button type="roll" aria-label="Ritualcheck" value="&{template:custom} {{color=harn}} {{title=@{character_name} performs @{ritual_name}}} {{subtitle=@{ritual_religion}}} {{rolltarget=[[{[[{[[@{ritual_eml} - [[(@{universal_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{ritual_eml}]]}} {{penalty=[[(@{universal_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifiers=[[?{Target Modifier?|0}]]}} {{successdesc=@{ritual_note}}}" name="roll_ritualcheck"></button>
+				<input type="hidden" name="attr_ritual_eml_eff" value="0">
+				<button type="roll" aria-label="Ritualcheck" value="&{template:custom} {{color=harn}} {{title=@{character_name} performs @{ritual_name}}} {{subtitle=@{ritual_religion}}} {{rolltarget=[[{[[{[[@{ritual_eml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{ritual_eml}]]}} {{penalty=[[(@{universal_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifiers=[[?{Target Modifier?|0}]]}} {{successdesc=@{ritual_note}}}" name="roll_ritualcheck"></button>
 				<label for="ritual-description">Ritual description</label>
 				<input id="ritual-description" type="text" name="attr_ritual_note" class="magic-note">
 			</fieldset>			
@@ -892,7 +894,8 @@
 				<input type="number" name="attr_talent_sb" class="skill-value" value="0">
 				<input type="number" name="attr_talent_si" class="skill-value" value="0" readonly>
 				<input type="number" name="attr_talent_eml" class="skill-value" value="0">
-				<button type="roll" aria-label="Talentcheck" value="&{template:custom} {{color=harn}} {{title=@{character_name} invokes @{talent_name}}}  {{rolltarget=[[{[[{[[@{talent_eml} - [[(@{universal_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{talent_eml}]]}} {{penalty=[[(@{universal_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifiers=[[?{Target Modifier?|0}]]}} {{successdesc=(@{talent_time}); @{talent_note}}}" name="roll_talentcheck"></button>
+				<input type="hidden" name="attr_talent_eml_eff" value="0">
+				<button type="roll" aria-label="Talentcheck" value="&{template:custom} {{color=harn}} {{title=@{character_name} invokes @{talent_name}}}  {{rolltarget=[[{[[{[[@{talent_eml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{talent_eml}]]}} {{penalty=[[(@{universal_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifiers=[[?{Target Modifier?|0}]]}} {{successdesc=(@{talent_time}); @{talent_note}}}" name="roll_talentcheck"></button>
 				<label for="psionic-description">Talent description</label>
 				<input id="psionic-description" type="text" name="attr_talent_note" class="magic-note">
 			</fieldset>			
@@ -2987,6 +2990,31 @@ on('change:repeating_missileweapon change:physical_penalty change:is_mounted she
 				ids.forEach(function(id){ ranges.forEach(function(r){
 					out['repeating_missileweapon_'+id+'_missileweapon_'+r+'_aml_eff'] = (parseInt(v['repeating_missileweapon_'+id+'_missileweapon_'+r+'_aml'])||0) - adj;
 				}); });
+				setAttrs(out);
+			});
+		});
+	});
+});
+
+// Phase 2.5 — spell/ritual/psionic cast EML centralization (EML - 5*UP).
+const CAST_EML = [ {sec:'spells', f:'spell_eml'}, {sec:'rituals', f:'ritual_eml'}, {sec:'psionics', f:'talent_eml'} ];
+CAST_EML.forEach(function(c) {
+	on('change:repeating_'+c.sec+':'+c.f, function() {
+		getAttrs(['repeating_'+c.sec+'_'+c.f, 'universal_penalty'], function(v) {
+			var out = {};
+			out['repeating_'+c.sec+'_'+c.f+'_eff'] = (parseInt(v['repeating_'+c.sec+'_'+c.f])||0) - (parseInt(v.universal_penalty)||0)*5;
+			setAttrs(out);
+		});
+	});
+});
+on('change:universal_penalty sheet:opened', function() {
+	CAST_EML.forEach(function(c) {
+		getSectionIDs('repeating_'+c.sec, function(ids) {
+			if (!ids.length) return;
+			getAttrs(['universal_penalty'].concat(ids.map(function(id){return 'repeating_'+c.sec+'_'+id+'_'+c.f;})), function(v) {
+				var up = (parseInt(v.universal_penalty)||0)*5;
+				var out = {};
+				ids.forEach(function(id){ out['repeating_'+c.sec+'_'+id+'_'+c.f+'_eff'] = (parseInt(v['repeating_'+c.sec+'_'+id+'_'+c.f])||0) - up; });
 				setAttrs(out);
 			});
 		});

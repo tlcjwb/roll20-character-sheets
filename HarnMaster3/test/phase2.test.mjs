@@ -107,3 +107,24 @@ test('missile EML = range AML - 5*PP - 10*mounted', () => {
 test('missile macro references centralized EML', () => {
   assert.equal(evalTarget('MissileWeaponShortSkillCheck', { missileweapon_short_aml_eff: 30 }, { 'Target Modifier?': 0 }), 30);
 });
+
+// --- 2.5 spells / rituals / psionics ---
+
+test('spell cast EML = spell_eml - 5*UP (per-row)', () => {
+  const m = loadWorker({ initial: { universal_penalty: 3 } });
+  m.set('repeating_spells_spell_eml', 70);
+  m.fire('change:repeating_spells:spell_eml');
+  assert.equal(m.get('repeating_spells_spell_eml_eff'), '55'); // 70 - 15
+});
+
+test('ritual cast EML fan-out on universal penalty', () => {
+  const m = loadWorker({ initial: { universal_penalty: 2 } });
+  m.sections.rituals = ['r1'];
+  m.set('repeating_rituals_r1_ritual_eml', 60);
+  m.fire('change:universal_penalty');
+  assert.equal(m.get('repeating_rituals_r1_ritual_eml_eff'), '50'); // 60 - 10
+});
+
+test('cast macros reference centralized EML', () => {
+  assert.equal(evalTarget('spellcastcheck', { spell_eml_eff: 55 }, { 'Target Modifier?': 0 }), 55);
+});
