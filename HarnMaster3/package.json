@@ -1,0 +1,10 @@
+{
+  "name": "harnmaster3-sheet",
+  "version": "3.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Dev/test tooling for the HarnMaster3 Roll20 character sheet (not part of the published sheet).",
+  "scripts": {
+    "test": "node --test"
+  }
+}
