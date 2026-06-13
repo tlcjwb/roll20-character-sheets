@@ -1583,6 +1583,9 @@
 			<input id=showhorsetoggle name="attr_hrhorseonsheet" type="checkbox" value="1" checked>
 			<label for=showpietytoggle class="harntooltip" data-tooltiptext="When this is unchecked the sheet will show space for tracking piety per god with repeating rows" >Show consolidated piety?</label>
 			<input id=showpietytoggle name="attr_hrconsolidatedpiety" type="checkbox" value="1" checked>
+			<div class="full-width skill-header">Calculation</div>
+			<label for=autocalcsbtoggle class="harntooltip" data-tooltiptext="When enabled, Skill Base (SB) for recognised skills is computed from your attributes + sunsign and kept in sync. Leave off to enter SB by hand.">Auto-calculate Skill Base?</label>
+			<input id=autocalcsbtoggle name="attr_hr_autocalc_sb" type="checkbox" value="1">
 			<div class="full-width skill-header">Legacy info</div>
 			<label for=showlegacyarmortoggle>Hide armor info from legacy (v1) sheet?</label>
 			<input id=showlegacyarmortoggle name="attr_legacyarmorhidden" type="checkbox" value="1">	
@@ -2701,6 +2704,43 @@ on('change:repeating_spells:spell_eml change:repeating_rituals:ritual_eml change
 on("clicked:hidelegacyarmor", function() {
   setAttrs({'legacyarmorhidden' : 1});
   console.log("Remove legacy armor button clicked (note: we're just hiding, not removing)"); 
+});
+
+// Phase 3 — auto-calculate Skill Base (SB) from attributes + sunsign for recognised skills.
+// Gated by the hr_autocalc_sb setting (default off). SB = round(mean of the skill's three
+// component attributes) + sunsign modifier. Source: HarnMaster Skills 3 (Skill Data table).
+// (Increment 1: the fixed standard skills, SB only. Repeating-row name lookup + OML default to follow.)
+const SKILL_SB = {
+	climbing:       { attrs: ['str','dex','agl'], sun: { ulandus:2, aralius:2 } },
+	condition:      { attrs: ['str','sta','wil'], sun: { ulandus:1, lado:1 } },
+	jumping:        { attrs: ['str','agl','agl'], sun: { nadai:2, hirin:2 } },
+	stealth:        { attrs: ['agl','hrg','wil'], sun: { hirin:2, tarael:2, tai:2 } },
+	throwing:       { attrs: ['str','dex','eye'], sun: { hirin:2, tarael:1, nadai:1 } },
+	awareness:      { attrs: ['eye','hrg','sml'], sun: { hirin:2, tarael:2 } },
+	intrigue:       { attrs: ['int','aur','wil'], sun: { tai:1, tarael:1, skorus:1 } },
+	oratory:        { attrs: ['cml','voi','int'], sun: { tarael:1 } },
+	rhetoric:       { attrs: ['voi','int','wil'], sun: { tai:1, tarael:1, skorus:1 } },
+	singing:        { attrs: ['hrg','voi','voi'], sun: { masara:1 } },
+	initiative:     { attrs: ['agl','wil','wil'], sun: {} },
+	unarmed:        { attrs: ['str','dex','agl'], sun: { masara:2, lado:2, ulandus:2 } },
+	ridingpersonal: { attrs: ['dex','agl','wil'], sun: { ulandus:1, aralius:1 } }
+};
+function computeSB(skill, v, signTokens) {
+	var sum = 0;
+	skill.attrs.forEach(function(a) { sum += parseInt(v[a]) || 0; });
+	var sb = Math.round(sum / 3);
+	var bonus = 0;
+	signTokens.forEach(function(tok) { if (skill.sun[tok] != null && skill.sun[tok] > bonus) bonus = skill.sun[tok]; });
+	return sb + bonus;
+}
+on('change:str change:sta change:dex change:agl change:eye change:hrg change:sml change:voi change:int change:aur change:wil change:cml change:sunsign change:hr_autocalc_sb sheet:opened', function() {
+	getAttrs(['hr_autocalc_sb','sunsign','str','sta','dex','agl','eye','hrg','sml','voi','int','aur','wil','cml'], function(v) {
+		if (!(parseInt(v.hr_autocalc_sb) || 0)) return; // only when the setting is enabled
+		var tokens = String(v.sunsign || '').toLowerCase().trim().split('-'); // handle cusp signs
+		var out = {};
+		for (var key in SKILL_SB) { out[key + '_sb'] = computeSB(SKILL_SB[key], v, tokens); }
+		setAttrs(out);
+	});
 });
 
 on("clicked:dismissupgradenotice", function() {
