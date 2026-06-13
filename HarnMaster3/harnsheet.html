@@ -35,7 +35,11 @@
 <input type="hidden" name="attr_intrigue_eml_eff" value="0"/>
 <input type="hidden" name="attr_oratory_eml_eff" value="0"/>
 <input type="hidden" name="attr_rhetoric_eml_eff" value="0"/>
-<input type="hidden" name="attr_singing_eml_eff" value="0"/><!-- to facilitate migration from old HarnMaster3 sheet to v2 -->
+<input type="hidden" name="attr_singing_eml_eff" value="0"/>
+<input type="hidden" name="attr_punch_weapon_aml_eff" value="0"/>
+<input type="hidden" name="attr_punch_weapon_dml_eff" value="0"/>
+<input type="hidden" name="attr_kick_weapon_aml_eff" value="0"/>
+<input type="hidden" name="attr_kick_weapon_dml_eff" value="0"/><!-- to facilitate migration from old HarnMaster3 sheet to v2 -->
 
 <!-- actual character sheet, divided in tabs -->
 <div class='character'> <!-- CHARACTER TAB -->
@@ -674,10 +678,10 @@
     		<input type="number" name="attr_punch_weapon_f" class="skill-value" readonly value="0">
     		<input type="number" name="attr_punch_weapon_ml" class="skill-value" value="0" readonly>
     		<input type="number" name="attr_punch_weapon_aml" class="skill-value" value="0" readonly>
-    		<button type="roll" aria-label="Punch Weapon AML Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} attacks with @{punch_weapon_name}}} {{rolltarget=[[{[[{[[@{punch_weapon_aml} - [[(@{physical_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{punch_weapon_aml}]]}} {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifiers=[[?{Target Modifier?|0}]]}}  {{desc=B(@{punch_weapon_b}) E(@{punch_weapon_e}) P(@{punch_weapon_p})}}" name="roll_PunchWeaponAMLSkillCheck">
+    		<button type="roll" aria-label="Punch Weapon AML Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} attacks with @{punch_weapon_name}}} {{rolltarget=[[{[[{[[@{punch_weapon_aml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{punch_weapon_aml}]]}} {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifiers=[[?{Target Modifier?|0}]]}}  {{desc=B(@{punch_weapon_b}) E(@{punch_weapon_e}) P(@{punch_weapon_p})}}" name="roll_PunchWeaponAMLSkillCheck">
     		</button>
     		<input type="number" name="attr_punch_weapon_dml" class="skill-value" value="0" readonly>
-    		<button type="roll" aria-label="Punch Weapon DML Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} blocks with a @{punch_weapon_name}}}  {{rolltarget=[[{[[{[[@{punch_weapon_dml} - [[(@{physical_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{punch_weapon_dml}]]}} {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifiers=[[?{Target Modifier?|0}]]}}" name="roll_PunchWeaponDMLSkillCheck">
+    		<button type="roll" aria-label="Punch Weapon DML Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} blocks with a @{punch_weapon_name}}}  {{rolltarget=[[{[[{[[@{punch_weapon_dml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{punch_weapon_dml}]]}} {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifiers=[[?{Target Modifier?|0}]]}}" name="roll_PunchWeaponDMLSkillCheck">
     		</button>
     		<input type="text" name="attr_punch_weapon_note" class="skill-label weapon-note">
     			
@@ -697,10 +701,10 @@
     		<input type="number" name="attr_kick_weapon_f" class="skill-value" readonly value="0">
     		<input type="number" name="attr_kick_weapon_ml" class="skill-value" value="0" readonly>
     		<input type="number" name="attr_kick_weapon_aml" class="skill-value" value="0" readonly>
-    		<button type="roll" aria-label="Kick Weapon AML Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} attacks with a @{kick_weapon_name}}} {{rolltarget=[[{[[{[[@{kick_weapon_aml} - [[(@{physical_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}}{{Mastery Lvl=[[@{kick_weapon_aml}]]}}  {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifiers=[[?{Target Modifier?|0}]]}} {{desc=B(@{kick_weapon_b}) E(@{kick_weapon_e}) P(@{kick_weapon_p})}}" name="roll_KickWeaponAMLSkillCheck">
+    		<button type="roll" aria-label="Kick Weapon AML Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} attacks with a @{kick_weapon_name}}} {{rolltarget=[[{[[{[[@{kick_weapon_aml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}}{{Mastery Lvl=[[@{kick_weapon_aml}]]}}  {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifiers=[[?{Target Modifier?|0}]]}} {{desc=B(@{kick_weapon_b}) E(@{kick_weapon_e}) P(@{kick_weapon_p})}}" name="roll_KickWeaponAMLSkillCheck">
     		</button>
     		<input type="number" name="attr_kick_weapon_dml" class="skill-value" value="0" readonly>
-    		<button type="roll" aria-label="Kick Weapon DML Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} defends with a @{kick_weapon_name}}} {{rolltarget=[[{[[{[[@{kick_weapon_dml} - [[(@{physical_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{kick_weapon_dml}]]}} {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifiers=[[?{Target Modifier?|0}]]}}" name="roll_KickWeaponDMLSkillCheck">
+    		<button type="roll" aria-label="Kick Weapon DML Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} defends with a @{kick_weapon_name}}} {{rolltarget=[[{[[{[[@{kick_weapon_dml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{kick_weapon_dml}]]}} {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifiers=[[?{Target Modifier?|0}]]}}" name="roll_KickWeaponDMLSkillCheck">
     		</button>		
     		<input type="text" name="attr_kick_weapon_note" class="skill-label weapon-note">		
     
@@ -716,7 +720,7 @@
     				<input type="number" name="attr_weapon_atk" class="skill-value" readonly>
     				<input type="number" name="attr_weapon_def" class="skill-value" readonly>
     				<input type="number" name="attr_weapon_hm" class="skill-value" readonly>
-    				<button type="roll" aria-label="Weapon HMAML Skill Check" class="harntooltip" value="&{template:custom} {{color=harn}} {{title=@{character_name} attacks with a @{weapon_name}}} {{subtitle=With HM penalty}} {{rolltarget=[[{[[{[[@{weapon_aml} + @{weapon_hm} - [[(@{physical_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{weapon_aml}]]}} {{penalty=[[[[(@{physical_penalty})*5]] + [[-1*@{weapon_hm}]]]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}} {{desc=B(@{weapon_b}) E(@{weapon_e}) P(@{weapon_p}) F(@{weapon_f})}}" name="roll_WeaponHMAMLSkillCheck" data-tooltiptext="Use this button to roll attack with included HM penalty">
+    				<button type="roll" aria-label="Weapon HMAML Skill Check" class="harntooltip" value="&{template:custom} {{color=harn}} {{title=@{character_name} attacks with a @{weapon_name}}} {{subtitle=With HM penalty}} {{rolltarget=[[{[[{[[@{weapon_hmaml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{weapon_aml}]]}} {{penalty=[[[[(@{physical_penalty})*5]] + [[-1*@{weapon_hm}]]]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}} {{desc=B(@{weapon_b}) E(@{weapon_e}) P(@{weapon_p}) F(@{weapon_f})}}" name="roll_WeaponHMAMLSkillCheck" data-tooltiptext="Use this button to roll attack with included HM penalty">
     				</button>
     				<input type="number" name="attr_weapon_b" class="skill-value" readonly>
     				<input type="number" name="attr_weapon_e" class="skill-value" readonly>
@@ -724,10 +728,10 @@
     				<input type="number" name="attr_weapon_f" class="skill-value" readonly>
     				<input type="number" name="attr_weapon_ml" class="skill-value" readonly>
     				<input type="number" name="attr_weapon_aml" class="skill-value" value="0" readonly>  
-    				<button type="roll" aria-label="Weapon AML Skill Check"	class="harntooltip" value="&{template:custom} {{color=harn}} {{title=@{character_name} attacks with a @{weapon_name}}}  {{rolltarget=[[{[[{[[@{weapon_aml} - [[(@{physical_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}}{{Mastery Lvl=[[@{weapon_aml}]]}}  {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}} {{successdesc=B(@{weapon_b}) E(@{weapon_e}) P(@{weapon_p}) F(@{weapon_f})}}" name="roll_WeaponAMLSkillCheck" data-tooltiptext="Use this button to roll a normal attack">
+    				<button type="roll" aria-label="Weapon AML Skill Check"	class="harntooltip" value="&{template:custom} {{color=harn}} {{title=@{character_name} attacks with a @{weapon_name}}}  {{rolltarget=[[{[[{[[@{weapon_aml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}}{{Mastery Lvl=[[@{weapon_aml}]]}}  {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}} {{successdesc=B(@{weapon_b}) E(@{weapon_e}) P(@{weapon_p}) F(@{weapon_f})}}" name="roll_WeaponAMLSkillCheck" data-tooltiptext="Use this button to roll a normal attack">
     				</button>
     				<input type="number" name="attr_weapon_dml" class="skill-value" value="0" readonly>
-    				<button type="roll" aria-label="Weapon DML Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} blocks with a @{weapon_name}}} {{rolltarget=[[{[[{[[@{weapon_dml} - [[(@{physical_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{weapon_dml}]]}}  {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}} {{desc=WQ @{weapon_wq}}}" name="roll_WeaponDMLSkillCheck">
+    				<button type="roll" aria-label="Weapon DML Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} blocks with a @{weapon_name}}} {{rolltarget=[[{[[{[[@{weapon_dml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{weapon_dml}]]}}  {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}} {{desc=WQ @{weapon_wq}}}" name="roll_WeaponDMLSkillCheck">
     				</button>
     				<input type="text" name="attr_weapon_note" class="skill-label weapon-note" readonly>
     			</div>
@@ -1146,6 +1150,9 @@
 	
 		<fieldset class="repeating_weapon">
 			<input type="text" name="attr_weapon_name" class="weapon-label">
+			<input type="hidden" name="attr_weapon_aml_eff" value="0">
+			<input type="hidden" name="attr_weapon_dml_eff" value="0">
+			<input type="hidden" name="attr_weapon_hmaml_eff" value="0">
 			<input type="checkbox" name="attr_weapon_iscarried" value="1">
 			<input type="number" name="attr_weapon_wgt" class="skill-value" value="0">
 			<input type="number" name="attr_weapon_wq" class="skill-value" value="0">
@@ -2924,6 +2931,42 @@ Object.keys(REPEAT_EML).forEach(function(section) {
 });
 on('change:physical_penalty change:universal_penalty sheet:opened', function() {
 	Object.keys(REPEAT_EML).forEach(function(section){ recalcRepeatEML(section, REPEAT_EML[section]); });
+});
+
+// Phase 2.3 — weapon EML centralization (aml/dml/hm-attack), physical penalty.
+function recalcWeaponEML() {
+	getAttrs(['physical_penalty'], function(p) {
+		var pp = (parseInt(p.physical_penalty)||0)*5;
+		getSectionIDs('repeating_weapon', function(ids) {
+			if (!ids.length) return;
+			var f = [];
+			ids.forEach(function(id){ ['weapon_aml','weapon_dml','weapon_hm'].forEach(function(x){ f.push('repeating_weapon_'+id+'_'+x); }); });
+			getAttrs(f, function(v) {
+				var out = {};
+				ids.forEach(function(id) {
+					var aml = parseInt(v['repeating_weapon_'+id+'_weapon_aml'])||0;
+					var dml = parseInt(v['repeating_weapon_'+id+'_weapon_dml'])||0;
+					var hm = parseInt(v['repeating_weapon_'+id+'_weapon_hm'])||0;
+					out['repeating_weapon_'+id+'_weapon_aml_eff'] = aml - pp;
+					out['repeating_weapon_'+id+'_weapon_dml_eff'] = dml - pp;
+					out['repeating_weapon_'+id+'_weapon_hmaml_eff'] = aml + hm - pp;
+				});
+				setAttrs(out);
+			});
+		});
+	});
+}
+on('change:repeating_weapon change:physical_penalty sheet:opened', recalcWeaponEML);
+on('change:punch_weapon_aml change:punch_weapon_dml change:kick_weapon_aml change:kick_weapon_dml change:physical_penalty sheet:opened', function() {
+	getAttrs(['punch_weapon_aml','punch_weapon_dml','kick_weapon_aml','kick_weapon_dml','physical_penalty'], function(v) {
+		var pp = (parseInt(v.physical_penalty)||0)*5;
+		setAttrs({
+			punch_weapon_aml_eff:(parseInt(v.punch_weapon_aml)||0)-pp,
+			punch_weapon_dml_eff:(parseInt(v.punch_weapon_dml)||0)-pp,
+			kick_weapon_aml_eff:(parseInt(v.kick_weapon_aml)||0)-pp,
+			kick_weapon_dml_eff:(parseInt(v.kick_weapon_dml)||0)-pp
+		});
+	});
 });
 
 on("clicked:dismissupgradenotice", function() {

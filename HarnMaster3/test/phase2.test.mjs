@@ -67,3 +67,29 @@ test('repeating skill: fan-out on penalty change (lore = universal penalty)', ()
 test('repeating skill macro references the centralized EML', () => {
   assert.equal(evalTarget('CombatSkillCheck', { combatskill_eml_eff: 50 }, { 'Target Modifier?': 0 }), 50);
 });
+
+// --- 2.3 weapons ---
+
+test('weapon EML: aml/dml/hm-attack from physical penalty (fan-out)', () => {
+  const m = loadWorker({ initial: { physical_penalty: 2 } });
+  m.sections.weapon = ['r1'];
+  m.set('repeating_weapon_r1_weapon_aml', 70);
+  m.set('repeating_weapon_r1_weapon_dml', 60);
+  m.set('repeating_weapon_r1_weapon_hm', -5);
+  m.fire('change:physical_penalty');
+  assert.equal(m.get('repeating_weapon_r1_weapon_aml_eff'), '60');   // 70 - 10
+  assert.equal(m.get('repeating_weapon_r1_weapon_dml_eff'), '50');   // 60 - 10
+  assert.equal(m.get('repeating_weapon_r1_weapon_hmaml_eff'), '55'); // 70 + (-5) - 10
+});
+
+test('punch/kick EML from physical penalty', () => {
+  const m = loadWorker({ initial: { punch_weapon_aml: 10, kick_weapon_aml: 12, physical_penalty: 2 } });
+  m.fire('change:physical_penalty');
+  assert.equal(m.get('punch_weapon_aml_eff'), '0');  // 10 - 10
+  assert.equal(m.get('kick_weapon_aml_eff'), '2');   // 12 - 10
+});
+
+test('weapon attack/HM macros reference centralized EML', () => {
+  assert.equal(evalTarget('WeaponAMLSkillCheck', { weapon_aml_eff: 60 }, { 'Target Modifier?': 0 }), 60);
+  assert.equal(evalTarget('WeaponHMAMLSkillCheck', { weapon_hmaml_eff: 55 }, { 'Target Modifier?': 0 }), 55);
+});
