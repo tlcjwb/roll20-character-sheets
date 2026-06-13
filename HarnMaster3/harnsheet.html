@@ -1634,7 +1634,7 @@
 			<input id=legacycharname name="attr_name" type="text" class="full-width" readonly>
 			<div class="full-width skill-header">Sheet version</div>
 			<div class="full-width">
-			  <input name="attr_character_sheet_version" type="number" value="20260613" readonly>
+			  <input name="attr_character_sheet_version" type="number" value="20260614" readonly>
 			  <input type="hidden" name="attr_data_version" value="" readonly>
 			</div>
     	</div>
@@ -1700,6 +1700,18 @@
 	</div>
 	<div class="changelog">
 		<h2>Changelog</h2>
+		<h3>20260614 - Version 3.2.0</h3>
+		<details>
+			<summary class="changelog-summary"><p class="changelog-summary">Auto-calculate Skill Base, in-sheet Help, accessibility, and internal hardening</p></summary>
+			<ul>
+				<li><b>New (optional): Auto-calculate Skill Base</b> (Settings). When enabled, SB for recognised skills &mdash; including weapons, crafts, lore and rituals &mdash; is computed from your attributes + sunsign and kept in sync. Off by default, so manual SB entry is unchanged.</li>
+				<li><b>New: a Help section</b> on the Settings tab covering the tabs, skills &amp; rolls, equipped items, auto-calculations, the house-rule toggles, and mounted combat.</li>
+				<li>Roll buttons now carry accessibility labels (screen-reader friendly), and the sheet's GitHub README is now linked from the sheet description.</li>
+				<li>Encumbrance / penalty / move / initiative calculations were de-duplicated and now self-heal when a character sheet is opened (older characters pick up fixes without a manual edit).</li>
+				<li>Internal: skill, weapon, missile, spell and horse rolls now use one centralized, penalty-adjusted target value instead of repeating the penalty math in every roll button. No change to roll results.</li>
+				<li>Internal: added an automated test suite for the sheet's calculations, verified against worked examples in the HarnMaster rulebooks.</li>
+			</ul>
+		</details>
 		<h3>20260613 - Version 3.1.1</h3>
 		<details>
 			<summary class="changelog-summary">
@@ -2005,6 +2017,17 @@ props:
 
 <!-- SHEETWORKERS -->
 <script type="text/worker">
+/*
+HarnMaster3 sheet — developer conventions:
+- Skills: common skills are "fixed" rows with dedicated attributes (e.g. climbing_sb/_ml);
+  all others live in repeating_*skill sections. Auto-SB (Settings > Auto-calculate Skill Base,
+  default OFF) fills SB for any recognised skill name from SKILL_DATA (HarnMaster Skills 3-4).
+- EML centralization (v3.2.0): every skill/weapon/missile/cast/horse check rolls against a
+  precomputed *_eml_eff attribute (= ML/AML/DML - 5*penalty, minus 10*mounted for missiles),
+  set by sheetworkers and defaulted to 0 by hidden inputs. Roll macros keep only the runtime
+  Target Modifier query and the 5/95 clamp, so the penalty rule lives in ONE worker, not ~70
+  macros. (Attribute checks keep an inline penalty because their multiplier is chosen at roll time.)
+*/
 // small helper to make sure we have an integeer, and set a fallback in case the score is empty
 const int = (score, fallback = 0) => parseInt(score) || fallback;
 
