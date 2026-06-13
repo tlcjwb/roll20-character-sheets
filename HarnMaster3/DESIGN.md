@@ -329,3 +329,34 @@ Learned during the v3.1.0 fix pass; follow these to keep edits safe and reviewab
 - **Releases:** bump `attr_character_sheet_version` (date `YYYYMMDD`) + add a `<details>` changelog
   entry at the top of the Changelog block. Only add to `versionsWithMigrations` when stored data must
   be rewritten (most changes recompute on next interaction and need no migration).
+
+---
+
+## Validation workstream — rulebook examples as golden tests
+
+A standing workstream (rides on the Phase 0 harness; also serves as acceptance criteria for Phases
+1–4 and beyond). Goal: turn every worked example in the rulebooks into a regression test.
+
+**Process, per example:** (1) verify the book's own arithmetic is internally correct; (2) feed the
+same inputs to the sheet and assert the same result. Three outcomes:
+- ✅ **pass** — book correct + sheet matches → a golden test.
+- 📕 **errata** — the book is internally inconsistent (e.g. steed encumbrance `40÷21` printed as 2 =
+  *round*, while character `33÷14` is "rounds **down** to 2" = *floor*; the book rounds steeds but
+  floors characters, and the sheet faithfully mirrors that).
+- 📗 **intentional deviation** — book correct, sheet differs by design (e.g. the missile per-range
+  impact approximation: the formula matches most weapons but yields 2 vs the table's 3 for Staff
+  Sling / Shorkana at extreme range — the item-13 finding; mitigated by the now-editable fields).
+
+**Two test surfaces:**
+- **Worker calcs** (derived attributes) → `test/*.test.mjs` via the Phase 0 harness.
+- **Roll-*target* values** (healing/shock targets, attribute `attr×mult`, skill `EML − 5×PP`, the
+  5/95 clamp) live in roll-button *macros*, not workers → tested via a small Roll20 inline-roll
+  **evaluator** (`testkit/roll-eval.mjs`): substitutes `@{attr}`, takes `?{query|default}` (or test
+  overrides), and evaluates the deterministic parts (`[[ ]]`, `{a,b}kh1/kl1`, `floor/round`) so the
+  macro's *target* can be checked (dice in `rollresult` are random and not evaluated).
+
+Examples needing values the sheet doesn't yet compute (SB/OML — e.g. Juryn's Dancing
+`(10+14+14)/3+Hir = 14`, OML SB×2 = 28) become tests once **Phase 3** lands, and double as Phase 3's
+acceptance criteria. Track results in three buckets (pass / errata / deviation) so we end with both a
+suite and a documented errata-&-deviation list. Files: `test/rulebook-examples.test.mjs` (+ the
+evaluator in `testkit/`).
