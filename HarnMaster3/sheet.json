@@ -4,5 +4,5 @@
 	"authors": "Olaf van Tol; based on work by Scott Turnbull, Streamweaver on Roll20",
 	"preview": "harnsheet.png",
 	"roll20userid": "1408325",
-	"instructions": "Straight Forward HM3 Character sheet. Should be self evident, some features/tips can be found in the github repository readme."
+	"instructions": "HârnMaster (3rd Edition, Columbia Games) character sheet. Tabs for Character, Inventory, and Settings; auto-calculates encumbrance, penalties (Universal/Physical), endurance, armour-by-location, and mounted-combat stats. Roll buttons cover skill checks and development rolls, weapon attack/defense (including an HM-penalty attack), weapon-break, shock/fumble/stumble, and healing. House-rule toggles and an optional Horse section are on the Settings tab. **Open Settings → Help in the sheet for usage notes, and Settings → Changelog for version history.** Full documentation: [HarnMaster3 README](https://github.com/Roll20/roll20-character-sheets/tree/master/HarnMaster3#readme)."
 }

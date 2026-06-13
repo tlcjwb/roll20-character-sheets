@@ -152,15 +152,21 @@ target before/after for a fixed test character; in-VTT roll spot-checks per sect
 ### Phase 3 — SB / OML auto-calculation · L · addresses C1 (biggest user win)
 1. Encode the Skills 3 table as data: `{skill: {attrs:[a,b,c], sunsign:{ula:+2,...}, omlMult:N}}`
    (source rows already extracted in `../PDF/4001-Harnmaster.txt`).
-2. Worker: on change of component attrs or `sunsign`, compute `SB = round(mean(attrs)) + sunsignMod`
-   and set `X_sb` for the **fixed** standard skills only (repeating/custom skills have unknown attrs).
+2. Worker: on change of component attrs or `sunsign`, compute `SB = round(mean(attrs)) + sunsignMod`.
+   **Scope = all known skills** (decided 2026-06-13): the **fixed rows** by their known label, AND
+   **repeating rows** by the name the user types (case-insensitive, trimmed). Specialties match their
+   base skill ("Sword (Broadsword)" → Sword's triplet). **Unrecognized/custom names → SB stays
+   manual** (no clobber, graceful). Repeating-row auto-SB recomputes on name change + attr/sunsign
+   change (iterate `getSectionIDs`).
 3. ML stays user-controlled (improves in play). Default ML to OML (`SB × omlMult`) **only when ML is
    0/unset** — never clobber an improved ML. Enforce max ML = 100 + SB.
 4. Gate behind a setting (`hr_autocalc_sb`, default on for new sheets) so existing manual trackers
    aren't surprised; on existing characters, only fill when SB is empty.
-5. (Future) optional attr-picker per repeating skill row to extend auto-SB to custom skills.
-**Risk:** medium (must not clobber existing data — gate + only-when-empty). **Verify:** unit tests
-per skill against the rulebook worked examples (e.g. Dancing (DEX+AGL+AGL)/3 +Hir).
+5. Sunsign handling: map `attr_sunsign` (datalist value) → 3-letter code and apply the per-skill
+   `+1/+2` modifier.
+**Risk:** medium (must not clobber existing data — gate + only-when-empty; name-matching for
+repeating rows). **Verify:** unit tests per skill against the rulebook worked examples (e.g. Dancing
+(DEX+AGL+AGL)/3 +Hir = 14, OML SB×2 = 28).
 
 ### Phase 3b — Reshape the religion subsystem to the rules · M–L · addresses C8
 Pairs naturally with Phase 3 (same theme: model the rules, don't just record them). Scope creep
