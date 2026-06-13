@@ -774,23 +774,23 @@
     				<input type="number" name="attr_missileweapon_short" class="skill-value" value="0" readonly>
     				<input type="number" name="attr_missileweapon_short_aml" class="skill-value" value="0" readonly>
     				<input type="number" name="attr_missileweapon_short_dmg" class="skill-value" value="0" readonly>
-    				<button type="roll" aria-label="Missile Weapon Short Skill Check"	value="&{template:custom} {{color=harn}} {{title=@{character_name} shoots with a @{missileweapon_name}}} {{subtitle=at Short Range}} {{rolltarget=[[{[[{[[@{missileweapon_short_aml} - [[(@{physical_penalty})*5]] - [[(@{is_mounted})*10]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{missileweapon_short_aml}]]}} {{penalty=[[(@{physical_penalty})*5 +(@{is_mounted})*10]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}} {{successdesc=@{missileweapon_aspect}(@{missileweapon_short_dmg}) }}" name="roll_MissileWeaponShortSkillCheck">
+    				<button type="roll" aria-label="Missile Weapon Short Skill Check"	value="&{template:custom} {{color=harn}} {{title=@{character_name} shoots with a @{missileweapon_name}}} {{subtitle=at Short Range}} {{rolltarget=[[{[[{[[@{missileweapon_short_aml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{missileweapon_short_aml}]]}} {{penalty=[[(@{physical_penalty})*5 +(@{is_mounted})*10]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}} {{successdesc=@{missileweapon_aspect}(@{missileweapon_short_dmg}) }}" name="roll_MissileWeaponShortSkillCheck">
     				</button>
     				<div class="mw-extraranges">			
 						<input type="number" name="attr_missileweapon_medium" class="skill-value" value="0" readonly>
 						<input type="number" name="attr_missileweapon_medium_aml" class="skill-value" value="0" readonly>
 						<input type="number" name="attr_missileweapon_medium_dmg" class="skill-value" value="0" readonly> 
-						<button type="roll" aria-label="Missile Weapon Medium Skill Check"	value="&{template:custom} {{color=harn}} {{title=@{character_name} shoots with a @{missileweapon_name}}} {{subtitle=at Medium Range}} {{rolltarget=[[{[[{[[@{missileweapon_medium_aml} - [[(@{physical_penalty})*5]] - [[(@{is_mounted})*10]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{missileweapon_medium_aml}]]}} {{penalty=[[(@{physical_penalty})*5 +(@{is_mounted})*10]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}} {{successdesc=@{missileweapon_aspect}(@{missileweapon_medium_dmg})}}" name="roll_MissileWeaponMediumSkillCheck">
+						<button type="roll" aria-label="Missile Weapon Medium Skill Check"	value="&{template:custom} {{color=harn}} {{title=@{character_name} shoots with a @{missileweapon_name}}} {{subtitle=at Medium Range}} {{rolltarget=[[{[[{[[@{missileweapon_medium_aml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{missileweapon_medium_aml}]]}} {{penalty=[[(@{physical_penalty})*5 +(@{is_mounted})*10]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}} {{successdesc=@{missileweapon_aspect}(@{missileweapon_medium_dmg})}}" name="roll_MissileWeaponMediumSkillCheck">
 						</button>
 						<input type="number" name="attr_missileweapon_long" class="skill-value" value="0" readonly>
 						<input type="number" name="attr_missileweapon_long_aml" class="skill-value" value="0" readonly>
 						<input type="number" name="attr_missileweapon_long_dmg" class="skill-value" value="0" readonly>
-						<button type="roll" aria-label="Missile Weapon Long Skill Check"	value="&{template:custom} {{color=harn}} {{title=@{character_name} shoots with a @{missileweapon_name}}} {{subtitle=at Long Range}} {{rolltarget=[[{[[{[[@{missileweapon_long_aml} - [[(@{physical_penalty})*5]] - [[(@{is_mounted})*10]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{missileweapon_long_aml}]]}} {{penalty=[[(@{physical_penalty})*5 +(@{is_mounted})*10]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}} {{successdesc=@{missileweapon_aspect}(@{missileweapon_long_dmg})}}" name="roll_MissileWeaponLongSkillCheck">
+						<button type="roll" aria-label="Missile Weapon Long Skill Check"	value="&{template:custom} {{color=harn}} {{title=@{character_name} shoots with a @{missileweapon_name}}} {{subtitle=at Long Range}} {{rolltarget=[[{[[{[[@{missileweapon_long_aml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{missileweapon_long_aml}]]}} {{penalty=[[(@{physical_penalty})*5 +(@{is_mounted})*10]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}} {{successdesc=@{missileweapon_aspect}(@{missileweapon_long_dmg})}}" name="roll_MissileWeaponLongSkillCheck">
 						</button>
 						<input type="number" name="attr_missileweapon_extreme" class="skill-value" value="0" readonly>					
 						<input type="number" name="attr_missileweapon_extreme_aml" class="skill-value" value="0" readonly>
 						<input type="number" name="attr_missileweapon_extreme_dmg" class="skill-value" value="0" readonly>
-						<button type="roll" aria-label="Missile Weapon Extreme Skill Check"	value="&{template:custom} {{color=harn}} {{title=@{character_name} shoots with a @{missileweapon_name}}} {{subtitle=at Extreme Range}} {{rolltarget=[[{[[{[[@{missileweapon_extreme_aml} - [[(@{physical_penalty})*5]] - [[(@{is_mounted})*10]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{missileweapon_extreme_aml}]]}} {{penalty=[[(@{physical_penalty})*5 +(@{is_mounted})*10]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}} {{successdesc=@{missileweapon_aspect}(@{missileweapon_extreme_dmg})}}" name="roll_MissileWeaponExtremeSkillCheck">
+						<button type="roll" aria-label="Missile Weapon Extreme Skill Check"	value="&{template:custom} {{color=harn}} {{title=@{character_name} shoots with a @{missileweapon_name}}} {{subtitle=at Extreme Range}} {{rolltarget=[[{[[{[[@{missileweapon_extreme_aml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{missileweapon_extreme_aml}]]}} {{penalty=[[(@{physical_penalty})*5 +(@{is_mounted})*10]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}} {{successdesc=@{missileweapon_aspect}(@{missileweapon_extreme_dmg})}}" name="roll_MissileWeaponExtremeSkillCheck">
 						</button>
     				</div>
     				<input type="number" name="attr_missileweapon_ammo" class="skill-value">
@@ -1201,6 +1201,10 @@
 		<div class="skill-header skill-value">Ammo</div>
 		<fieldset class="repeating_missileweapon">
 			<input type="text" name="attr_missileweapon_name" class="weapon-label">
+			<input type="hidden" name="attr_missileweapon_short_aml_eff" value="0">
+			<input type="hidden" name="attr_missileweapon_medium_aml_eff" value="0">
+			<input type="hidden" name="attr_missileweapon_long_aml_eff" value="0">
+			<input type="hidden" name="attr_missileweapon_extreme_aml_eff" value="0">
 			<input type="checkbox" name="attr_missileweapon_iscarried" value="1">
 			<input type="text" name="attr_missileweapon_aspect" class="skill-value" value="P">
 			<input type="number" name="attr_missileweapon_p" class="skill-value" value="0">
@@ -2965,6 +2969,26 @@ on('change:punch_weapon_aml change:punch_weapon_dml change:kick_weapon_aml chang
 			punch_weapon_dml_eff:(parseInt(v.punch_weapon_dml)||0)-pp,
 			kick_weapon_aml_eff:(parseInt(v.kick_weapon_aml)||0)-pp,
 			kick_weapon_dml_eff:(parseInt(v.kick_weapon_dml)||0)-pp
+		});
+	});
+});
+
+// Phase 2.4 — missile EML centralization (range AML - 5*PP - 10*mounted).
+on('change:repeating_missileweapon change:physical_penalty change:is_mounted sheet:opened', function() {
+	getAttrs(['physical_penalty','is_mounted'], function(p) {
+		var adj = (parseInt(p.physical_penalty)||0)*5 + (parseInt(p.is_mounted)||0)*10;
+		getSectionIDs('repeating_missileweapon', function(ids) {
+			if (!ids.length) return;
+			var ranges = ['short','medium','long','extreme'];
+			var f = [];
+			ids.forEach(function(id){ ranges.forEach(function(r){ f.push('repeating_missileweapon_'+id+'_missileweapon_'+r+'_aml'); }); });
+			getAttrs(f, function(v) {
+				var out = {};
+				ids.forEach(function(id){ ranges.forEach(function(r){
+					out['repeating_missileweapon_'+id+'_missileweapon_'+r+'_aml_eff'] = (parseInt(v['repeating_missileweapon_'+id+'_missileweapon_'+r+'_aml'])||0) - adj;
+				}); });
+				setAttrs(out);
+			});
 		});
 	});
 });

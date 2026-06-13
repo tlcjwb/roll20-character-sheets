@@ -93,3 +93,17 @@ test('weapon attack/HM macros reference centralized EML', () => {
   assert.equal(evalTarget('WeaponAMLSkillCheck', { weapon_aml_eff: 60 }, { 'Target Modifier?': 0 }), 60);
   assert.equal(evalTarget('WeaponHMAMLSkillCheck', { weapon_hmaml_eff: 55 }, { 'Target Modifier?': 0 }), 55);
 });
+
+// --- 2.4 missiles (mounted -10 folded in) ---
+
+test('missile EML = range AML - 5*PP - 10*mounted', () => {
+  const m = loadWorker({ initial: { physical_penalty: 2, is_mounted: 1 } });
+  m.sections.missileweapon = ['r1'];
+  m.set('repeating_missileweapon_r1_missileweapon_short_aml', 50);
+  m.fire('change:physical_penalty');
+  assert.equal(m.get('repeating_missileweapon_r1_missileweapon_short_aml_eff'), '30'); // 50 - 10 - 10
+});
+
+test('missile macro references centralized EML', () => {
+  assert.equal(evalTarget('MissileWeaponShortSkillCheck', { missileweapon_short_aml_eff: 30 }, { 'Target Modifier?': 0 }), 30);
+});
