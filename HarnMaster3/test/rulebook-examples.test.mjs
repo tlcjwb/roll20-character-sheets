@@ -114,11 +114,10 @@ test('Physician 2 — Healing applies Fatigue penalty (5 x FL)', () => {
 });
 
 test('Skills 2 — EML clamped to [5, 95]', () => {
-  const hi = evalTarget('ClimbingSkillCheck',
-    { climbing_ml: 120, physical_penalty: 0 }, { 'Target Modifier?': 0 });
+  // Post-Phase-2 the macro references the precomputed climbing_eml_eff.
+  const hi = evalTarget('ClimbingSkillCheck', { climbing_eml_eff: 120 }, { 'Target Modifier?': 0 });
   assert.equal(hi, 95);
-  const lo = evalTarget('ClimbingSkillCheck',
-    { climbing_ml: 2, physical_penalty: 0 }, { 'Target Modifier?': 0 });
+  const lo = evalTarget('ClimbingSkillCheck', { climbing_eml_eff: 2 }, { 'Target Modifier?': 0 });
   assert.equal(lo, 5);
 });
 
