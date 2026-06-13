@@ -2245,7 +2245,7 @@ on('change:repeating_hinventoryitems remove:repeating_hinventoryitems', function
 }); 
 
 // endurance  
-on('change:str change:sta change:wil', 
+on('change:str change:sta change:wil sheet:opened', 
 function() {
     getAttrs(['str', 'sta', 'wil'], 
 	function(values) {
@@ -2275,7 +2275,7 @@ function() {
 });
 	
 // condition/5 for use in load, shock and healing rolls (depending on rules settings); see Skills 9 of HarnMaster rulebook   
-on('change:condition_ml change:combat_endurance change:hrcondition4endurance', 
+on('change:condition_ml change:combat_endurance change:hrcondition4endurance sheet:opened', 
 function() {
     getAttrs(['condition_ml', 'combat_endurance', 'hrcondition4endurance'], 
 	function(values) {
@@ -2300,7 +2300,7 @@ function() {
 
 
 // load and encumbrance  
-on('change:load_weapons_total change:load_armor_total change:load_inventory_total change:combat_effectivecondition change:combat_endurance change:is_mounted', function() {
+on('change:load_weapons_total change:load_armor_total change:load_inventory_total change:combat_effectivecondition change:combat_endurance change:is_mounted sheet:opened', function() {
     var total = 0.0;
     getAttrs(['load_armor_total', 'load_weapons_total', 'load_inventory_total', 'combat_effectivecondition','combat_endurance' ,'is_mounted', 'hrcondition4endurance'], function(values) {
         total += parseFloat(values['load_armor_total'])||0.0;
@@ -2396,7 +2396,7 @@ on('change:repeating_hinjury:hinjury_infected', function() {
 });
 
 // universal and physical penalties  
-on('change:is_mounted change:injury_total change:fatigue_total change:encumbrance change:hrfumblestumblepenalty', function() {
+on('change:is_mounted change:injury_total change:fatigue_total change:encumbrance change:hrfumblestumblepenalty sheet:opened', function() {
     getAttrs(['hrfumblestumblepenalty', 'injury_total', 'fatigue_total', 'encumbrance', 'is_mounted'], function(values) {
         var inj = parseInt(values.injury_total)||0;
 		var fat = parseInt(values.fatigue_total)||0;
@@ -2415,7 +2415,7 @@ on('change:is_mounted change:injury_total change:fatigue_total change:encumbranc
 });
 
 // horse universal and physical penalties   
-on('change:hinjury_total change:hfatigue_total change:hencumbrance', function() {
+on('change:hinjury_total change:hfatigue_total change:hencumbrance sheet:opened', function() {
     getAttrs(['hinjury_total', 'hfatigue_total', 'hencumbrance'], function(values) {
         var hfat = parseInt(values.hfatigue_total)||0;
 		var hinj = parseInt(values.hinjury_total)||0;
@@ -2430,9 +2430,9 @@ on('change:hinjury_total change:hfatigue_total change:hencumbrance', function() 
 });
 
 // Move speed in combat  
-on('change:encumbrance change:universal_penalty change:agl change:is_mounted change:hcombat_move', function() {
-    getAttrs(['agl', 'universal_penalty', 'encumbrance', 'is_mounted', 'hcombat_move', 'hrhorseonsheet'], function(values) {
-        var cmove = parseInt(values.agl) - parseInt(values.universal_penalty) - parseInt(values.encumbrance);
+on('change:physical_penalty change:agl change:is_mounted change:hcombat_move sheet:opened', function() {
+    getAttrs(['agl', 'physical_penalty', 'is_mounted', 'hcombat_move', 'hrhorseonsheet'], function(values) {
+        var cmove = parseInt(values.agl) - parseInt(values.physical_penalty);
 		var currenthcmove = parseInt(values.hcombat_move);
 		cmove = Math.max(cmove, 1); // move is never less than 1 -->
 		if (values.is_mounted == 1 && values.hrhorseonsheet != 0) { cmove = currenthcmove }; // use horse move when mounted, don't do this if horse is not shown on sheet (horse speed would be 0)  
@@ -2445,14 +2445,14 @@ on('change:encumbrance change:universal_penalty change:agl change:is_mounted cha
 
 
 // effective riding skill on horse  
-on('change:ridingpersonal_ml change:hinitiative_ml change:hencumbrance change:huniversal_penalty change:encumbrance change:universal_penalty ', 
+on('change:ridingpersonal_ml change:hinitiative_ml change:physical_penalty change:hphysical_penalty sheet:opened', 
 function() {
-    getAttrs(['ridingpersonal_ml', 'hinitiative_ml', 'hencumbrance', 'huniversal_penalty', 'encumbrance', 'universal_penalty'], 
+    getAttrs(['ridingpersonal_ml', 'hinitiative_ml', 'physical_penalty', 'hphysical_penalty'], 
 	function(values) {
-        var charphyspen = parseInt(values.encumbrance);
-		charphyspen += parseInt(values.universal_penalty);
-		var horsephyspen = parseInt(values.hencumbrance);
-		horsephyspen += parseInt(values.huniversal_penalty);
+        var charphyspen = parseInt(values.physical_penalty)||0;
+		
+		var horsephyspen = parseInt(values.hphysical_penalty)||0;
+		
 		var charridingml = parseInt(values.ridingpersonal_ml);
 		var charridingeml = Math.round ( charridingml - 5*charphyspen);
 		var horseinitml = parseInt(values.hinitiative_ml);
@@ -2467,13 +2467,13 @@ function() {
 });
 
 // combat initiative toggle between on and off horse  
-on('change:is_mounted change:ridinghorse_ml change:initiative_ml change:encumbrance change:universal_penalty', 
+on('change:is_mounted change:ridinghorse_ml change:initiative_ml change:physical_penalty sheet:opened', 
 function() {
-    getAttrs(['initiative_ml', 'ridinghorse_ml', 'is_mounted', 'combat_initiative', 'encumbrance', 'universal_penalty', 'hrhorseonsheet'], 
+    getAttrs(['initiative_ml', 'ridinghorse_ml', 'is_mounted', 'combat_initiative', 'physical_penalty', 'hrhorseonsheet'], 
 	function(values) {
 		var cinit = parseInt(values['initiative_ml'])||0;
-		var physpen = parseInt(values['encumbrance'])||0;
-		physpen += parseInt(values['universal_penalty'])||0;
+		var physpen = parseInt(values['physical_penalty'])||0;
+		
 		cinit = Math.round(cinit - physpen*5);
 		if(values.is_mounted != 0 && values.hrhorseonsheet != 0) { cinit = parseInt(values['ridinghorse_ml'])}; // note: don't use horse ml if horse is not shown on sheet 
 		setAttrs({

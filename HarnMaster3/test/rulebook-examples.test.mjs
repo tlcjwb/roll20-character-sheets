@@ -53,8 +53,8 @@ test('Combat 20 — Steed move: (Move 36 - PP 2) x gait', () => {
 
 test('Combat 20 — Riding EML = avg(rider Riding EML 80, steed Init EML 43) = 62', () => {
   const m = loadWorker({ initial: {
-    ridingpersonal_ml: 80, encumbrance: 0, universal_penalty: 0,   // rider EML 80
-    hinitiative_ml: 58, hencumbrance: 3, huniversal_penalty: 0,    // steed: 58 - 5*3 = 43
+    ridingpersonal_ml: 80, physical_penalty: 0,        // rider Riding EML 80
+    hinitiative_ml: 58, hphysical_penalty: 3,          // steed Init EML: 58 - 5*3 = 43
   } });
   m.fire('change:ridingpersonal_ml');
   assert.equal(m.get('ridinghorse_ml'), '62'); // round((80+43)/2) = round(61.5) = 62
