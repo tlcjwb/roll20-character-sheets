@@ -153,3 +153,7 @@ sync_sheets.sh
 **/*/dist/*.json
 
 .idea
+
+# HarnMaster rulebook PDFs — copyrighted reference material, never commit
+PDF/
+*.pdf

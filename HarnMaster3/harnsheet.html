@@ -2,7 +2,7 @@
 
 <input class="showupgradenotification"  name="attr_notifyupgrade"   type="hidden" value="0"/><!-- hide upgrade notice if not relevant or dismissed -->
 <div class="newversion-notifcation">
-	The sheet has been updated to a new version. Please check the information in the <button id=settingstab type="action" name="act_settings" class="buttonaslink">Settings</button> tab
+	The sheet has been updated to a new version. Please check the information in the <button type="action" name="act_settings" class="buttonaslink">Settings</button> tab
 	<button type="action" name="act_dismissupgradenotice" class="dismissnotification">Dismiss notification</button>
 </div>
 
@@ -95,7 +95,7 @@
     		</button>
             <label for=voi>VOI</label>
             <input id=voi type="number" name="attr_voi" class="attribute-input" value="0">
-			<button type="roll" value="&{template:custom} {{color=harn}} {{title=@{character_name} tests Voice}} {{rolltarget=[[{[[{[[@{voi} * ?{Attribute multiplier?|3|4|5|6|7} - [[(@{universal_penalty})*5]] ]],5}kh1]],95}kl1]]}} {{Target Level=[[@{voi} * ?{Attribute multiplier?}]] (@{voi} * ?{Attribute multiplier?}) }} {{penalty=[[(@{universal_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} " name="roll_VoiceCheck">
+			<button type="roll" value="&{template:custom} {{color=harn}} {{title=@{character_name} tests Voice}} {{rolltarget=[[{[[{[[@{voi} * ?{Attribute multiplier?|3|4|5|6|7} - [[(@{physical_penalty})*5]] ]],5}kh1]],95}kl1]]}} {{Target Level=[[@{voi} * ?{Attribute multiplier?}]] (@{voi} * ?{Attribute multiplier?}) }} {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} " name="roll_VoiceCheck">
     		</button>
             <label for=int>INT</label>
             <input id=int type="number" name="attr_int" class="attribute-input" value="0">
@@ -155,7 +155,7 @@
             <div class="skill-header skill-value">ML</div>	
     		<div class="skill-header">&nbsp;</div>
     		
-    		<input type="text" class="skill-label" name="attr_initiative_name" value="Initiative" disabled="true">
+    		<input type="text" class="skill-label" name="attr_initiative_name" value="Initiative" readonly>
     		<button type="roll" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{initiative_name}}} {{rolltarget=[[@{initiative_ml}]]}} {{rollresult=[[1d100+@{initiative_sb}]]}}" name="roll_InitiativeDevelop" class="skilldev-button">
     		</button> 
     		<input type="number" name="attr_initiative_sb" class="skill-value" value="0">
@@ -165,14 +165,14 @@
 			<button type="roll"	value="&{template:custom} {{color=harn}} {{title=@{character_name} tests @{initiative_name}}} {{Mastery Lvl=[[@{initiative_ml}]]}} {{penalty=[[(@{physical_penalty})*5]]}} {{Modifiers=[[?{Target Modifier?|0}]]}} {{rolltarget=[[{[[{[[@{initiative_ml} - [[(@{physical_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}}" name="roll_InitiativeCheck" >
     		</button>
     
-    		<input type="text" class="skill-label" name="attr_unarmed_name" value="Unarmed" disabled="true">
+    		<input type="text" class="skill-label" name="attr_unarmed_name" value="Unarmed" readonly>
     		<button type="roll" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{unarmed_name}}} {{rolltarget=[[@{unarmed_ml}]]}} {{rollresult=[[1d100+@{unarmed_sb}]]}}" name="roll_UnarmedDevelop" class="skilldev-button"></button>
     		<input type="number" name="attr_unarmed_sb" class="skill-value" value="0">
     		<input type="number" name="attr_unarmed_ml" class="skill-value" value="0">
     		<button type="roll" value="&{template:custom} {{color=harn}} {{title=@{character_name} tests @{unarmed_name}}} {{rolltarget=[[{[[{[[@{unarmed_ml} - [[(@{physical_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{unarmed_ml}]]}} {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}}" name="roll_UnarmedCheck">
     		</button>
     
-    		<input type="text" class="skill-label" name="attr_dodge_name" value="Dodge" disabled="true">
+    		<input type="text" class="skill-label" name="attr_dodge_name" value="Dodge" readonly>
     		<button type="roll" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{dodge_name}}} {{rolltarget=[[@{dodge_ml}]]}} {{rollresult=[[1d100+@{dodge_sb}]]}}" name="roll_DodgeDevelop" class="skilldev-button">
     		</button>
     		<input type="number" name="attr_dodge_sb" class="skill-value" value="0">
@@ -199,7 +199,7 @@
             <div class="skill-header skill-value">ML</div>	
     		<div class="skill-header">&nbsp;</div>
             
-            <input type="text" class="skill-label" name="attr_climbing_name" value="Climbing" disabled="true">
+            <input type="text" class="skill-label" name="attr_climbing_name" value="Climbing" readonly>
             <button type="roll" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{climbing_name}}} {{rolltarget=[[@{climbing_ml}]]}} {{rollresult=[[1d100+@{climbing_sb}]]}}" name="roll_ClimbingDevelop" class="skilldev-button">
             </button>
             <input type="number" name="attr_climbing_sb" class="skill-value" value="0">
@@ -207,14 +207,14 @@
             <button type="roll" value="&{template:custom} {{color=harn}} {{title=@{character_name} tests @{climbing_name}}} {{rolltarget=[[{[[{[[@{climbing_ml} - [[(@{physical_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{climbing_ml}]]}} {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}}" name="roll_ClimbingSkillCheck">
             </button>
             
-            <input type="text" class="skill-label" name="attr_condition_name" value="Condition" disabled="true">
+            <input type="text" class="skill-label" name="attr_condition_name" value="Condition" readonly>
             <button type="roll" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{condition_name}}} {{rolltarget=[[@{condition_ml}]]}} {{rollresult=[[1d100+@{condition_sb}]]}}" name="roll_ConditionDevelop" class="skilldev-button"></button>				
             <input type="number" name="attr_condition_sb" class="skill-value" value="0">
             <input type="number" name="attr_condition_ml" class="skill-value" value="0">
             <button type="roll" value="&{template:custom} {{color=harn}} {{title=@{character_name} tests @{condition_name}}} {{rolltarget=[[{[[{[[@{condition_ml} - [[(@{physical_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{condition_ml}]]}} {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}}"	name="roll_ConditionSkillCheck">
             </button>
             
-            <input type="text" class="skill-label" name="attr_jumping_name" value="Jumping" disabled="true">
+            <input type="text" class="skill-label" name="attr_jumping_name" value="Jumping" readonly>
             <button type="roll" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{jumping_name}}} {{rolltarget=[[@{jumping_ml}]]}} {{rollresult=[[1d100+@{jumping_sb}]]}}" name="roll_JumpingDevelop" class="skilldev-button">
             </button>					
             <input type="number" name="attr_jumping_sb" class="skill-value" value="0">
@@ -222,7 +222,7 @@
             <button type="roll" value="&{template:custom} {{color=harn}} {{title=@{character_name} tests @{jumping_name}}} {{rolltarget=[[{[[{[[@{jumping_ml} - [[(@{physical_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{jumping_ml}]]}} {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}}" name="roll_JumpingSkillCheck">
             </button>
             
-            <input type="text" class="skill-label" name="attr_ridingpersonal_name" value="Riding (Personal)" disabled="true">
+            <input type="text" class="skill-label" name="attr_ridingpersonal_name" value="Riding (Personal)" readonly>
             <button type="roll" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{ridingpersonal_name}}} {{rolltarget=[[@{ridingpersonal_ml}]]}} {{rollresult=[[1d100+@{ridingpersonal_sb}]]}}" name="roll_RidingDevelop" class="skilldev-button">
             </button>	
             <input type="number" name="attr_ridingpersonal_sb" class="skill-value" value="0">
@@ -233,7 +233,7 @@
 			<input class="showhorse"  name="attr_hrhorseonsheet"   type="hidden" value="1"/><!-- hide calculated EML for horse-riding if horse is not shown on sheet --> 
             <div class="horse-section">
 				<div class="harntooltip" data-tooltiptext="Your effective ML for your current horse, calculated based on personal riding skill and horse initiative. All rider and horse penalties are taken into account, do NOT adjust this number further.">
-					<input type="text" class="skill-label harntooltip " data-tooltiptext="Your effective ML for your current horse, calculated based on personal riding skill and horse initiative. All rider and horse penalties are taken into account, do NOT adjust this number further." name="attr_ridinghorse_name" value="Riding EML" disabled="true">
+					<input type="text" class="skill-label harntooltip " data-tooltiptext="Your effective ML for your current horse, calculated based on personal riding skill and horse initiative. All rider and horse penalties are taken into account, do NOT adjust this number further." name="attr_ridinghorse_name" value="Riding EML" readonly>
 				</div>
 				<div class="horse-section">&nbsp;</div>
 				<input type="text" name="attr_ridinghorse_sb" class="skill-value" value="n/a"  readonly>
@@ -243,7 +243,7 @@
 			</div>
 			
             
-            <input type="text" class="skill-label" name="attr_stealth_name" value="Stealth" disabled="true">
+            <input type="text" class="skill-label" name="attr_stealth_name" value="Stealth" readonly>
             <button type="roll" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{stealth_name}}} {{rolltarget=[[@{stealth_ml}]]}} {{rollresult=[[1d100+@{stealth_sb}]]}}" name="roll_StealthDevelop" class="skilldev-button">
             </button>				
             <input type="number" name="attr_stealth_sb" class="skill-value" value="0">
@@ -251,7 +251,7 @@
             <button type="roll" value="&{template:custom} {{color=harn}} {{title=@{character_name} tests @{stealth_name}}} {{rolltarget=[[{[[{[[@{stealth_ml} - [[(@{physical_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{stealth_ml}]]}} {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}}" name="roll_StealthSkillCheck">
             </button>
             
-            <input type="text" class="skill-label" name="attr_throwing_name" value="Throwing" disabled="true">
+            <input type="text" class="skill-label" name="attr_throwing_name" value="Throwing" readonly>
             <button type="roll" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{throwing_name}}} {{rolltarget=[[@{throwing_ml}]]}} {{rollresult=[[1d100+@{throwing_sb}]]}}" name="roll_ThrowingDevelop" class="skilldev-button">
             </button>				
             <input type="number" name="attr_throwing_sb" class="skill-value" value="0">
@@ -277,7 +277,7 @@
             <div class="skill-header skill-value">ML</div>	
     		<div class="skill-header">&nbsp;</div>
     		
-    		<input type="text" class="skill-label" name="attr_awareness_name" value="Awareness" disabled="true">
+    		<input type="text" class="skill-label" name="attr_awareness_name" value="Awareness" readonly>
     		<button type="roll"	value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{awareness_name}}} {{rolltarget=[[@{awareness_ml}]]}} {{rollresult=[[1d100+@{awareness_sb}]]}}" name="roll_AwarenessDevelop" class="skilldev-button">
     		</button>				
     		<input type="number" name="attr_awareness_sb" class="skill-value" value="0">
@@ -285,7 +285,7 @@
     		<button type="roll" value="&{template:custom} {{color=harn}} {{title=@{character_name} tests @{awareness_name}}} {{rolltarget=[[{[[{[[@{awareness_ml} - [[(@{universal_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{awareness_ml}]]}} {{penalty=[[(@{universal_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}}" name="roll_AwarenessSkillCheck">
     		</button>
     
-    		<input type="text" class="skill-label" name="attr_intrigue_name" value="Intrigue" disabled="true">
+    		<input type="text" class="skill-label" name="attr_intrigue_name" value="Intrigue" readonly>
     		<button type="roll" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{intrigue_name}}} {{rolltarget=[[@{intrigue_ml}]]}} {{rollresult=[[1d100+@{intrigue_sb}]]}}"	name="roll_IntrigueDevelop" class="skilldev-button">
     		</button>					
     		<input type="number" name="attr_intrigue_sb" class="skill-value" value="0">
@@ -293,7 +293,7 @@
     		<button type="roll" value="&{template:custom} {{color=harn}} {{title=@{character_name} tests @{intrigue_name}}} {{rolltarget=[[{[[{[[@{intrigue_ml} - [[(@{universal_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{intrigue_ml}]]}} {{penalty=[[(@{universal_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}}" name="roll_IntrigueSkillCheck">
     		</button>
     
-    		<input type="text" class="skill-label" name="attr_oratory_name" value="Oratory" disabled="true">
+    		<input type="text" class="skill-label" name="attr_oratory_name" value="Oratory" readonly>
     		<button type="roll" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{oratory_name}}} {{rolltarget=[[@{oratory_ml}]]}} {{rollresult=[[1d100+@{oratory_sb}]]}}" name="roll_OratoryDevelop" class="skilldev-button">
     		</button>				
     		<input type="number" name="attr_oratory_sb" class="skill-value" value="0">
@@ -301,7 +301,7 @@
     		<button type="roll" value="&{template:custom} {{color=harn}} {{title=@{character_name} tests @{oratory_name}}} {{rolltarget=[[{[[{[[@{oratory_ml} - [[(@{universal_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{oratory_ml}]]}} {{penalty=[[(@{universal_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}}" name="roll_OratorySkillCheck">
     		</button>
     
-    		<input type="text" class="skill-label" name="attr_rhetoric_name" value="Rhetoric" disabled="true">
+    		<input type="text" class="skill-label" name="attr_rhetoric_name" value="Rhetoric" readonly>
     		<button type="roll" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{rhetoric_name}}} {{rolltarget=[[@{rhetoric_ml}]]}} {{rollresult=[[1d100+@{rhetoric_sb}]]}}" name="roll_RhetoricDevelop" class="skilldev-button">
     		</button>				
     		<input type="number" name="attr_rhetoric_sb" class="skill-value" value="0">
@@ -309,7 +309,7 @@
     		<button type="roll" value="&{template:custom} {{color=harn}} {{title=@{character_name} tests @{rhetoric_name}}} {{rolltarget=[[{[[{[[@{rhetoric_ml} - [[(@{universal_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{rhetoric_ml}]]}} {{penalty=[[(@{universal_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}}" name="roll_RhetoricSkillCheck">
     		</button>
     
-    		<input type="text" class="skill-label" name="attr_singing_name" value="Singing" disabled="true">
+    		<input type="text" class="skill-label" name="attr_singing_name" value="Singing" readonly>
     		<button type="roll" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{singing_name}}} {{rolltarget=[[@{singing_ml}]]}} {{rollresult=[[1d100+@{singing_sb}]]}}" name="roll_SingingDevelop" class="skilldev-button">
     		</button>					
     		<input type="number" name="attr_singing_sb" class="skill-value" value="0">
@@ -465,8 +465,8 @@
     				<input type="number" name="attr_injury_level" class="skill-value" value="0">
     				<input type="number" name="attr_injury_healingroll" class="skill-value" value="0">
     				<input type="number" name="attr_injury_day" class="skill-value" value="0">				
-    				<button type="roll" value="&{template:custom} {{color=harn}} {{title=@{character_name} rolls a healing check}} {{infected=[[@{injury_infected_feedback}]]}} {{rolltarget=[[{[[{[[(@{injury_healingroll} * [[@{healing_effectivecondition}]]) + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifiers=[[?{Target Modifier?|0}]]}} {{Healing Roll=[[@{injury_healingroll} * [[@{healing_effectivecondition}]]]]}} {{desc=@{injury_location} @{injury_severity}@{injury_level} H@{injury_healingroll}}}" name="roll_healingcheck"></button>
-    				<input type="checkbox" name="attr_injury_infected"><span></span>
+    				<button type="roll" value="&{template:custom} {{color=harn}} {{title=@{character_name} rolls a healing check}} {{infected=[[@{injury_infected_feedback}]]}} {{rolltarget=[[{[[{[[(@{injury_healingroll} * [[@{healing_effectivecondition}]]) - [[(@{fatigue_total})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifiers=[[?{Target Modifier?|0}]]}} {{penalty=[[(@{fatigue_total})*5]]}} {{Healing Roll=[[@{injury_healingroll} * [[@{healing_effectivecondition}]]]]}} {{desc=@{injury_location} @{injury_severity}@{injury_level} H@{injury_healingroll}}}" name="roll_healingcheck"></button>
+    				<input type="checkbox" name="attr_injury_infected" value="1"><span></span>
     				<input type="hidden" name="attr_injury_infected_feedback" value="0" readonly>
     			</fieldset>	
 				<div class="injuryrollbutton-grid">
@@ -639,20 +639,20 @@
     		<div class="skill-header skill-value">&nbsp;</div>
     		<div class="skill-header skill-label weapon-note">Note</div>
     		
-    		<input type="text" name="attr_punch_weapon_name" class="weapon-label" disabled="true" value="Punch">
+    		<input type="text" name="attr_punch_weapon_name" class="weapon-label" readonly value="Punch">
     		<div>&nbsp;</div>
-    		<input type="number" name="attr_punch_weapon_wgt" class="skill-value" disabled="true" value="0">
-    		<input type="number" name="attr_punch_weapon_wq" class="skill-value" disabled="true" value="0">
+    		<input type="number" name="attr_punch_weapon_wgt" class="skill-value" readonly value="0">
+    		<input type="number" name="attr_punch_weapon_wq" class="skill-value" readonly value="0">
     		<button type="roll"  value="&{template:custom} {{color=harn}} {{nocrit=1}} {{title=@{character_name} tests weapon break}} {{subtitle=@{punch_weapon_name}}} {{rolltarget=[[@{punch_weapon_wq}]]}} {{rollresult=[[3d6]]}} {{base=@{punch_weapon_wq}}} {{rolltype=3d6}}" name="roll_unarmedweaponbreakcheck">
     		</button>
-    		<input type="number" name="attr_punch_weapon_atk" class="skill-value" disabled="true" value="0">
-    		<input type="number" name="attr_punch_weapon_def" class="skill-value" disabled="true" value="15">
-    		<input type="number" name="attr_punch_weapon_hm" class="skill-value" disabled="true" value="0">
+    		<input type="number" name="attr_punch_weapon_atk" class="skill-value" readonly value="0">
+    		<input type="number" name="attr_punch_weapon_def" class="skill-value" readonly value="15">
+    		<input type="number" name="attr_punch_weapon_hm" class="skill-value" readonly value="0">
     		<div>&nbsp;</div>
-    		<input type="number" name="attr_punch_weapon_b" class="skill-value" disabled="true" value="0">
-    		<input type="number" name="attr_punch_weapon_e" class="skill-value" disabled="true" value="0">
-    		<input type="number" name="attr_punch_weapon_p" class="skill-value" disabled="true" value="0">
-    		<input type="number" name="attr_punch_weapon_f" class="skill-value" disabled="true" value="0">
+    		<input type="number" name="attr_punch_weapon_b" class="skill-value" readonly value="0">
+    		<input type="number" name="attr_punch_weapon_e" class="skill-value" readonly value="0">
+    		<input type="number" name="attr_punch_weapon_p" class="skill-value" readonly value="0">
+    		<input type="number" name="attr_punch_weapon_f" class="skill-value" readonly value="0">
     		<input type="number" name="attr_punch_weapon_ml" class="skill-value" readonly>
     		<input type="number" name="attr_punch_weapon_aml" class="skill-value" readonly>
     		<button type="roll" value="&{template:custom} {{color=harn}} {{title=@{character_name} attacks with @{punch_weapon_name}}} {{rolltarget=[[{[[{[[@{punch_weapon_aml} - [[(@{physical_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{punch_weapon_aml}]]}} {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifiers=[[?{Target Modifier?|0}]]}}  {{desc=B(@{punch_weapon_b}) E(@{punch_weapon_e}) P(@{punch_weapon_p})}}" name="roll_UnarmedWeaponAMLSkillCheck">
@@ -662,20 +662,20 @@
     		</button>
     		<input type="text" name="attr_punch_weapon_note" class="skill-label weapon-note">
     			
-    		<input type="text" name="attr_kick_weapon_name" class="weapon-label" disabled="true" value="Kick">
+    		<input type="text" name="attr_kick_weapon_name" class="weapon-label" readonly value="Kick">
     		<div>&nbsp;</div>
-    		<input type="number" name="attr_kick_weapon_wgt" class="skill-value" disabled="true" value="0">
-    		<input type="number" name="attr_kick_weapon_wq" class="skill-value" disabled="true" value="0">
+    		<input type="number" name="attr_kick_weapon_wgt" class="skill-value" readonly value="0">
+    		<input type="number" name="attr_kick_weapon_wq" class="skill-value" readonly value="0">
     		<button type="roll"  value="&{template:custom} {{color=harn}} {{nocrit=1}} {{title=@{character_name} tests weapon break}} {{subtitle=@{kick_weapon_name}}} {{rolltarget=[[@{kick_weapon_wq}]]}} {{rollresult=[[3d6]]}} {{base=@{kick_weapon_wq}}} {{rolltype=3d6}}" name="roll_unarmedweaponbreakcheck">
     		</button>
-    		<input type="number" name="attr_kick_weapon_atk" class="skill-value" disabled="true" value="5">
-    		<input type="number" name="attr_kick_weapon_def" class="skill-value" disabled="true" value="5">
-    		<input type="number" name="attr_kick_weapon_hm" class="skill-value" disabled="true" value="0">
+    		<input type="number" name="attr_kick_weapon_atk" class="skill-value" readonly value="5">
+    		<input type="number" name="attr_kick_weapon_def" class="skill-value" readonly value="5">
+    		<input type="number" name="attr_kick_weapon_hm" class="skill-value" readonly value="0">
     		<div>&nbsp;</div>
-    		<input type="number" name="attr_kick_weapon_b" class="skill-value" disabled="true" value="1">
-    		<input type="number" name="attr_kick_weapon_e" class="skill-value" disabled="true" value="0">
-    		<input type="number" name="attr_kick_weapon_p" class="skill-value" disabled="true" value="0">
-    		<input type="number" name="attr_kick_weapon_f" class="skill-value" disabled="true" value="0">
+    		<input type="number" name="attr_kick_weapon_b" class="skill-value" readonly value="1">
+    		<input type="number" name="attr_kick_weapon_e" class="skill-value" readonly value="0">
+    		<input type="number" name="attr_kick_weapon_p" class="skill-value" readonly value="0">
+    		<input type="number" name="attr_kick_weapon_f" class="skill-value" readonly value="0">
     		<input type="number" name="attr_kick_weapon_ml" class="skill-value" readonly>
     		<input type="number" name="attr_kick_weapon_aml" class="skill-value" readonly>
     		<button type="roll" value="&{template:custom} {{color=harn}} {{title=@{character_name} attacks with a @{kick_weapon_name}}} {{rolltarget=[[{[[{[[@{kick_weapon_aml} - [[(@{physical_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}}{{Mastery Lvl=[[@{kick_weapon_aml}]]}}  {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifiers=[[?{Target Modifier?|0}]]}} {{desc=B(@{kick_weapon_b}) E(@{kick_weapon_e}) P(@{kick_weapon_p})}}" name="roll_UnarmedWeaponAMLSkillCheck">
@@ -942,32 +942,32 @@
 			<div class="skill-header">SB</div>
 			<div class="skill-header">ML</div>
 			<div class="skill-header">&nbsp </div>			
-			<input type="text" class="skill-label" name="attr_hawareness_name" value="Awareness" disabled="true">
+			<input type="text" class="skill-label" name="attr_hawareness_name" value="Awareness" readonly>
 			<input type="number" name="attr_hawareness_sb" class="skill-value" value="0">
 			<input type="number" name="attr_hawareness_ml" class="skill-value" value="0">
 			<button type="roll" value="&{template:custom} {{color=harn}} {{title=@{hname} tests @{hawareness_name}}} {{rolltarget=[[{[[{[[@{hawareness_ml} - [[(@{hphysical_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{hawareness_ml}]]}} {{Modifiers=[[?{Target Modifier?|0}]]}} {{penalty=[[(@{hphysical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}}" name="roll_HorseAwarenessCheck">
 			</button>
-			<input type="text" class="skill-label" name="attr_hdodge_name" value="Dodge" disabled="true">
+			<input type="text" class="skill-label" name="attr_hdodge_name" value="Dodge" readonly>
 			<input type="number" name="attr_hdodge_sb" class="skill-value" value="0">
 			<input type="number" name="attr_hdodge_ml" class="skill-value" value="0">
 			<button type="roll" value="&{template:custom} {{color=harn}} {{title=@{hname} tests @{hdodge_name}}} {{rolltarget=[[{[[{[[@{hdodge_ml} - [[(@{hphysical_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{hdodge_ml}]]}} {{Modifiers=[[?{Target Modifier?|0}]]}} {{penalty=[[(@{hphysical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}}" name="roll_HorseDodgeCheck">
 			</button>
-			<input type="text" class="skill-label" name="attr_hinitiative_name" value="Horse Initiative" disabled="true">
+			<input type="text" class="skill-label" name="attr_hinitiative_name" value="Horse Initiative" readonly>
 			<input type="number" name="attr_hinitiative_sb" class="skill-value" value="0">
 			<input type="number" name="attr_hinitiative_ml" class="skill-value" value="0">
 			<button type="roll" value="&{template:custom} {{color=harn}} {{title=@{hname} tests @{hinitiative_name}}} {{rolltarget=[[{[[{[[@{hinitiative_ml} - [[(@{hphysical_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{hinitiative_ml}]]}} {{Modifiers=[[?{Target Modifier?|0}]]}} {{penalty=[[(@{hphysical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}}" name="roll_HorseInitiativeCheck">
 			</button>
-			<input type="text" class="skill-label" name="attr_hjumping_name" value="Jumping" disabled="true">
+			<input type="text" class="skill-label" name="attr_hjumping_name" value="Jumping" readonly>
 			<input type="number" name="attr_hjumping_sb" class="skill-value" value="0">
 			<input type="number" name="attr_hjumping_ml" class="skill-value" value="0">
 			<button type="roll" value="&{template:custom} {{color=harn}} {{title=@{hname} tests @{hjumping_name}}} {{rolltarget=[[{[[{[[@{hjumping_ml} - [[(@{hphysical_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{hjumping_ml}]]}} {{Modifiers=[[?{Target Modifier?|0}]]}} {{penalty=[[(@{hphysical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}}" name="roll_HorseJumpCheck">
 			</button>
-			<input type="text" class="skill-label" name="attr_hstealth_name" value="Stealth" disabled="true">
+			<input type="text" class="skill-label" name="attr_hstealth_name" value="Stealth" readonly>
 			<input type="number" name="attr_hstealth_sb" class="skill-value" value="0">
 			<input type="number" name="attr_hstealth_ml" class="skill-value" value="0">
 			<button type="roll" value="&{template:custom} {{color=harn}} {{title=@{hname} tests @{hstealth_name}}} {{rolltarget=[[{[[{[[@{hstealth_ml} - [[(@{hphysical_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{hstealth_ml}]]}} {{Modifiers=[[?{Target Modifier?|0}]]}} {{penalty=[[(@{hphysical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}}" name="roll_HorseStealthCheck">
 			</button>
-			<input type="text" class="skill-label" name="attr_htrample_name" value="Trample" disabled="true">
+			<input type="text" class="skill-label" name="attr_htrample_name" value="Trample" readonly>
 			<input type="number" name="attr_htrample_sb" class="skill-value" value="0">
 			<input type="number" name="attr_htrample_ml" class="skill-value" value="0">
 		</div>
@@ -1026,7 +1026,7 @@
 			<div class="skill-value skill-header">P</div>
 			<div class="skill-value skill-header">F</div>
 			<div class="info-label">All (-/- eyes)</div>
-			<input type="text" name="attr_hnatural_layers" class="armor-label" disabled="true" value="Natural Armour">
+			<input type="text" name="attr_hnatural_layers" class="armor-label" readonly value="Natural Armour">
 			<input type="number" name="attr_hnatural_aq" class="skill-value" value="0">
 			<input type="number" name="attr_hnatural_b" class="skill-value" value="4" readonly >
 			<input type="number" name="attr_hnatural_e" class="skill-value" value="3" readonly >
@@ -1052,17 +1052,17 @@
 			<fieldset class="repeating_hinjury">
 				<input type="text" name="attr_hinjury_location" class="skill-label">
 				<select name="attr_hinjury_severity" class="skill-label">
-					<option value="m">M</option>
-					<option value="s">S</option>
-					<option value="g">G</option>
-					<option value="k">K</option>
+					<option value="M">M</option>
+					<option value="S">S</option>
+					<option value="G">G</option>
+					<option value="K">K</option>
 				</select>
 				<input type="number" name="attr_hinjury_level" class="skill-value" value="0">
 				<input type="number" name="attr_hinjury_healingroll" class="skill-value" value="0">
 				<input type="number" name="attr_hinjury_day" class="skill-value" value="0">
-				<button type="roll" value="&{template:custom} {{color=harn}} {{title=@{hname} rolls a healing check}} {{infected=[[@{hinjury_infected_feedback}]]}} {{rolltarget=[[{[[{[[(@{hinjury_healingroll} * [[@{hcombat_endurance}]]) + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Healing Roll=[[@{hinjury_healingroll} * [[@{hcombat_endurance}]]]]}} {{Modifiers=[[?{Target Modifier?|0}]]}} {{penalty=[[0]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{desc=@{hinjury_location} @{hinjury_severity}@{hinjury_level} h@{hinjury_healingroll}}}" name="roll_horsehealingcheck">
+				<button type="roll" value="&{template:custom} {{color=harn}} {{title=@{hname} rolls a healing check}} {{infected=[[@{hinjury_infected_feedback}]]}} {{rolltarget=[[{[[{[[(@{hinjury_healingroll} * [[@{hcombat_endurance}]]) - [[(@{hfatigue_total})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Healing Roll=[[@{hinjury_healingroll} * [[@{hcombat_endurance}]]]]}} {{Modifiers=[[?{Target Modifier?|0}]]}} {{penalty=[[(@{hfatigue_total})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{desc=@{hinjury_location} @{hinjury_severity}@{hinjury_level} h@{hinjury_healingroll}}}" name="roll_horsehealingcheck">
 				</button>
-				<input type="checkbox" name="attr_hinjury_infected"><span></span>
+				<input type="checkbox" name="attr_hinjury_infected" value="1"><span></span>
 				<input type="hidden" name="attr_hinjury_infected_feedback" value="0" readonly>
 			</fieldset>			
 		</div> 
@@ -1088,13 +1088,13 @@
 			<div class="skill-header skill-value">ML</div>
 			<div class="skill-header skill-value">AML</div>
 			<div class="skill-header skill-value">&nbsp;</div>
-			<input type="text" name="attr_trample_weapon_name" class="skill-label" disabled="true" value="Trample">
+			<input type="text" name="attr_trample_weapon_name" class="skill-label" readonly value="Trample">
 			<input type="number" name="attr_trample_weapon_b" class="skill-value" value="8">
-			<input type="number" name="attr_trample_weapon_e" class="skill-value" disabled="true" value="0">
-			<input type="number" name="attr_trample_weapon_p" class="skill-value" disabled="true" value="0">
+			<input type="number" name="attr_trample_weapon_e" class="skill-value" readonly value="0">
+			<input type="number" name="attr_trample_weapon_p" class="skill-value" readonly value="0">
 			<input type="number" name="attr_htrample_ml" class="skill-value" readonly>
-			<input type="number" name="attr_htrample_ml" class="skill-value" readonly>
-			<button type="roll" value="&{template:custom} {{color=harn}} {{title=@{hname} tramples}} {{rolltarget=[[{[[{[[@{htrample_ml} - [[(@{hphysical_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{htrample_ml}]]}} {{Modifiers=[[?{Target Modifier?|0}]]}} {{penalty=[[(@{hphysical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}}  {{note=B(@{trample_weapon_b}) E(@{trample_weapon_e}) P(@{trample_weapon_p})}}" name="roll_trampleweaponamlskillcheck">
+			<input type="number" name="attr_htrample_aml" class="skill-value" readonly>
+			<button type="roll" value="&{template:custom} {{color=harn}} {{title=@{hname} tramples}} {{rolltarget=[[{[[{[[@{htrample_aml} - [[(@{hphysical_penalty})*5]] + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{htrample_aml}]]}} {{Modifiers=[[?{Target Modifier?|0}]]}} {{penalty=[[(@{hphysical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}}  {{note=B(@{trample_weapon_b}) E(@{trample_weapon_e}) P(@{trample_weapon_p})}}" name="roll_trampleweaponamlskillcheck">
 			</button>
 		</div>
     </div> 
@@ -1186,15 +1186,15 @@
 			<div class="mw-extraranges">
 				<input type="number" name="attr_missileweapon_medium" class="skill-value" value="0">
 				<input type="number" name="attr_missileweapon_medium_aml" class="skill-value" readonly value="0">
-				<input type="number" name="attr_missileweapon_medium_dmg" class="skill-value" readonly value="0"> 
+				<input type="number" name="attr_missileweapon_medium_dmg" class="skill-value" value="0"> 
 				<div class="skill-value">&nbsp;</div>
 				<input type="number" name="attr_missileweapon_long" class="skill-value" value="0">
 				<input type="number" name="attr_missileweapon_long_aml" class="skill-value" readonly value="0">
-				<input type="number" name="attr_missileweapon_long_dmg" class="skill-value" readonly value="0">
+				<input type="number" name="attr_missileweapon_long_dmg" class="skill-value" value="0">
 				<div class="skill-value">&nbsp;</div>
 				<input type="number" name="attr_missileweapon_extreme" class="skill-value" value="0">					
 				<input type="number" name="attr_missileweapon_extreme_aml" class="skill-value" readonly value="0">
-				<input type="number" name="attr_missileweapon_extreme_dmg" class="skill-value" readonly value="0">
+				<input type="number" name="attr_missileweapon_extreme_dmg" class="skill-value" value="0">
 				<div class="skill-value">&nbsp;</div>
 			</div>
 			<input type="number" name="attr_missileweapon_ammo" class="skill-value">
@@ -1592,13 +1592,31 @@
 			<input id=legacycharname name="attr_name" type="text" class="full-width" readonly>
 			<div class="full-width skill-header">Sheet version</div>
 			<div class="full-width">
-			  <input name="attr_character_sheet_version" type="number" value="20240927" readonly>
+			  <input name="attr_character_sheet_version" type="number" value="20260612" readonly>
 			  <input type="hidden" name="attr_data_version" value="" readonly>
 			</div>
     	</div>
 	</div>
 	<div class="changelog">
 		<h2>Changelog</h2>
+		<h3>20260612 - Version 3.1.0</h3>
+		<details>
+			<summary class="changelog-summary">
+				<p class="changelog-summary">Bug fixes for data migration, horse tracking, and rules accuracy (verified against HârnMaster v3.5.2)</p>
+			</summary>
+			<ul>
+				<li>Fixed migration of older sheets that had no weapons: data version is now written correctly, so the sheet no longer re-runs migration (and re-shows this notice) every time it is opened.</li>
+				<li>Fixed the horse injury "Infected" indicator, which was wired to the wrong section and never displayed.</li>
+				<li>Encumbrance is now rounded down per the rules (Skills 6); also guarded against a divide-by-zero that could make penalties show as "Infinity" when weight was entered before attributes.</li>
+				<li>Healing rolls now apply the Fatigue penalty (Injury and Encumbrance correctly ignored), per Physician 2.</li>
+				<li>Voice attribute tests now use the Physical Penalty (Voice is a physical attribute).</li>
+				<li>Missile per-range Impact (Medium/Long/Extreme) is now editable on the Inventory tab so you can enter the exact values from the Missile Data table; the auto-fill remains as a starting guess.</li>
+				<li>Horse Trample now has its own AML field (previously shared the ML field).</li>
+				<li>Fixed skill/weapon labels now use readonly instead of disabled, so their values resolve reliably in macros dragged to the macro bar.</li>
+				<li>Horse injury severity now displays in uppercase (M/S/G/K) to match the character section.</li>
+				<li>Internal cleanup: removed obsolete commented-out code, de-duplicated an event handler and an element id, and improved armour-weight calculation performance.</li>
+			</ul>
+		</details>
 		<h3>20240927 - Version 3.0.2</h3>
 		<details>
 			<summary class="changelog-summary">
@@ -2086,7 +2104,7 @@ function migrateTo20210801 (migrationChain) {
 	/* add re-calc armor (after moving armor values to new attrib) */ 
 		getSectionIDs('weapon', ids => {
 			if (ids.length === 0) {
-			console.log("Migration: No weapons found, nothing to migrate.");
+			console.log("Migration: No weapons found, nothing to migrate."); callNextMigration(migrationChain);
 			return;
 			}
 			const fieldArray = [];
@@ -2224,7 +2242,7 @@ on('change:load_weapons_total change:load_armor_total change:load_inventory_tota
 		} else {
 			var carrycapacity = int(values['combat_endurance']);
 		}
-		var encumbrance = Math.round(total/carrycapacity)||0;
+		var encumbrance = carrycapacity > 0 ? Math.floor(total/carrycapacity) : 0;
 		if(values.is_mounted != 0) { 
 			encumbrance = Math.round(encumbrance/2);
 			} 
@@ -2237,7 +2255,7 @@ on('change:load_weapons_total change:load_armor_total change:load_inventory_tota
 });
 
 // horse load limit, load and encumbrance  
-on('change:hstr change:weight change:load_total change:hload_armor_total change:hload_inventory_total change:hcombat_endurance change:hstr', 
+on('change:hstr change:weight change:load_total change:hload_armor_total change:hload_inventory_total change:hcombat_endurance', 
 function() {
     var total = 0.0;
     getAttrs(['weight', 'load_total', 'hload_armor_total', 'hload_inventory_total', 'hcombat_endurance', 'hstr'], 
@@ -2285,8 +2303,8 @@ on('change:repeating_hinjury:hinjury_level remove:repeating_hinjury', function()
 // injury infected feedback  
 on('change:repeating_injury:injury_infected', function() {
    getAttrs([
-      'repeating_injury_injury_infected',
-      'repeating_spells_injury_infected_feedback'
+      'repeating_injury_injury_infected'
+      
     ], function(values) {
         var isinfected = (values.repeating_injury_injury_infected == 0 ? 0 : 1);
        setAttrs({
@@ -2298,12 +2316,12 @@ on('change:repeating_injury:injury_infected', function() {
 // horse injury infected feedback  
 on('change:repeating_hinjury:hinjury_infected', function() {
    getAttrs([
-      'repeating_injury_hinjury_infected',
-      'repeating_spells_hinjury_infected_feedback'
+      'repeating_hinjury_hinjury_infected'
+      
     ], function(values) {
-        var isinfected = (values.repeating_injury_hinjury_infected == 0 ? 0 : 1);
+        var isinfected = (values.repeating_hinjury_hinjury_infected == 0 ? 0 : 1);
        setAttrs({
-            repeating_injury_hinjury_infected_feedback: isinfected
+            repeating_hinjury_hinjury_infected_feedback: isinfected
        });
    });
 });
@@ -2454,7 +2472,7 @@ on('change:repeating_weapon', function() {
 });
 
 // Missile Weapon AML and DML calculations -->
-on('change:repeating_missileweapon', function() {
+on('change:repeating_missileweapon:missileweapon_ml change:repeating_missileweapon:missileweapon_p', function() {
     getAttrs(['repeating_missileweapon_missileweapon_ml', 'repeating_missileweapon_missileweapon_p'], function(values) {
 		var mml = parseInt(values.repeating_missileweapon_missileweapon_ml);
 		var mdmg = parseInt(values.repeating_missileweapon_missileweapon_p);
@@ -2464,8 +2482,8 @@ on('change:repeating_missileweapon', function() {
 		var extremeaml = mml - 80;
 		var shortdmg = mdmg;
 		var mediumdmg = mdmg - 1;
-		var longdmg = Math.max(mdmg - 2, mdmg/2); // dmg is never less than 50% weapon dmg 
-		var extremedmg = Math.max(mdmg - 3, mdmg/2); // dmg is never less than 50% weapon dmg 
+		var longdmg = Math.max(mdmg - 2, Math.floor(mdmg/2)); // dmg is never less than 50% weapon dmg 
+		var extremedmg = Math.max(mdmg - 3, Math.floor(mdmg/2)); // dmg is never less than 50% weapon dmg 
 		// console.log("ML", wml, "ATK", watk, "DEF", wdef, "Weapon AML", waml, "Weapon DML", wdml); 
 		// note: mounted penalty calculated in roll button, don't add here 
         setAttrs({
@@ -2500,6 +2518,13 @@ on('change:unarmed_ml', function() {
     });
 });
 
+// Trample AML mirrors trample ML (no separate attack bonus for trample)
+on('change:htrample_ml sheet:opened', function() {
+    getAttrs(['htrample_ml'], function(values) {
+        setAttrs({'htrample_aml': int(values.htrample_ml)});
+    });
+});
+
 // ARMOR PROTECTION 
 
 // horse natural armour values based on aq  
@@ -2524,29 +2549,6 @@ on('change:hnatural_aq', function() {
 });
 
 
-/* OBSOLETE with new armour code; remove after testing - loop through all locations and fill with B/E/P/F values if location covered  
-const locations = ['sk','fa','nk','sh','ua','el','fo','ha','tx','ab','hp','gr','th','kn','ca','ft'];
-locations.forEach(function (location) {
-	on('change:repeating_armoritems', function() {
-		const armorinfo = ['repeating_armoritems_armor_b', 'repeating_armoritems_armor_e', 'repeating_armoritems_armor_p', 'repeating_armoritems_armor_f'];
-		const currentloc = 'repeating_armoritems_armor_loc_' + location;
-		armorinfo.push(currentloc);
-			getAttrs(armorinfo, function(values) {
-			const locationarmorb = parseInt(values['repeating_armoritems_armor_b'])*parseInt(values[currentloc]);
-			const locationarmore = parseInt(values['repeating_armoritems_armor_e'])*parseInt(values[currentloc]);
-			const locationarmorp = parseInt(values['repeating_armoritems_armor_p'])*parseInt(values[currentloc]);
-			const locationarmorf = parseInt(values['repeating_armoritems_armor_f'])*parseInt(values[currentloc]);
-			setAttrs({
-				['repeating_armoritems_armor_' + location + '_bvalue']: locationarmorb,
-				['repeating_armoritems_armor_' + location + '_evalue']: locationarmore,
-				['repeating_armoritems_armor_' + location + '_pvalue']: locationarmorp,
-				['repeating_armoritems_armor_' + location + '_fvalue']: locationarmorf
-			});
-			// debugger; works, no longer needed -->
-		});
-	}); 
-}); // end set armour values per location 
-*/
 
 
 
@@ -2594,15 +2596,14 @@ on('change:repeating_armoritems remove:repeating_armoritems', function() {
                         })  
                     }
                 });
-                // calculate armour weight and add it.
-                let load_armor_total = 0;
-                id_array.forEach(id => {
-                    const equipped = int(values[section_name(section, id, 'armor_iscarried')]);
-                    load_armor_total += (equipped * parseFloat(values[section_name(section, id, 'armor_wgt')]));
-                });
-                
-                output['load_armor_total'] = load_armor_total;
             });
+            // calculate total armour weight (equipped pieces only), once
+            let load_armor_total = 0;
+            id_array.forEach(id => {
+                const equipped = int(values[section_name(section, id, 'armor_iscarried')]);
+                load_armor_total += (equipped * parseFloat(values[section_name(section, id, 'armor_wgt')]));
+            });
+            output['load_armor_total'] = load_armor_total;
             
             setAttrs(output);
         });
@@ -2610,12 +2611,12 @@ on('change:repeating_armoritems remove:repeating_armoritems', function() {
 });
 
 // spell characteristics 
-// calculate SI from SB 
+// calculate SI (Skill Index = floor(ML/10), per Skills 2); the *_eml fields hold the spell/ritual/talent ML 
 on('change:repeating_spells:spell_eml change:repeating_rituals:ritual_eml change:repeating_psionics:talent_eml', function() {
     getAttrs(['repeating_spells_spell_eml', 'repeating_rituals_ritual_eml', 'repeating_psionics_talent_eml'], function(values) {
-		var spellsi = Math.floor(parseInt(values['repeating_spells_spell_eml']/10));
-		var ritualsi = Math.floor(parseInt(values['repeating_rituals_ritual_eml']/10));
-		var talentsi = Math.floor(parseInt(values['repeating_psionics_talent_eml']/10));
+		var spellsi = Math.floor((parseInt(values['repeating_spells_spell_eml'])||0)/10);
+		var ritualsi = Math.floor((parseInt(values['repeating_rituals_ritual_eml'])||0)/10);
+		var talentsi = Math.floor((parseInt(values['repeating_psionics_talent_eml'])||0)/10);
 		console.log("spell si: ", spellsi);
 		setAttrs({
 			repeating_spells_spell_si: spellsi,
