@@ -1143,9 +1143,11 @@ button.buttonaslink {
 }
 
 
+.ui-dialog .charsheet button.skilldev-button { background-color: var(--button-background); color: var(--textcolor-dark); }
+
 /* Development roll button */
-.ui-dialog .charsheet button[type=roll].skilldev-button::before,
-body.sheet-darkmode .ui-dialog .charsheet button[type=roll].skilldev-button::before {
+.ui-dialog .charsheet button.skilldev-button::before,
+body.sheet-darkmode .ui-dialog .charsheet button.skilldev-button::before {
 	font-family: 'Pictos';
 	content: '{ ';
 }

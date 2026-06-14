@@ -181,7 +181,7 @@
     		<div class="skill-header">&nbsp;</div>
     		
     		<input type="text" class="skill-label" name="attr_initiative_name" value="Initiative" readonly>
-    		<button type="roll" aria-label="Initiative Develop" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{initiative_name}}} {{rolltarget=[[@{initiative_ml}]]}} {{rollresult=[[1d100+@{initiative_sb}]]}}" name="roll_InitiativeDevelop" class="skilldev-button">
+    		<button type="action" aria-label="Initiative Develop" name="act_initiativedevelop" class="skilldev-button">
     		</button> 
     		<input type="number" name="attr_initiative_sb" class="skill-value" value="0">
     		<input type="number" name="attr_initiative_ml" class="skill-value" value="0">
@@ -189,14 +189,14 @@
     		</button>
     
     		<input type="text" class="skill-label" name="attr_unarmed_name" value="Unarmed" readonly>
-    		<button type="roll" aria-label="Unarmed Develop" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{unarmed_name}}} {{rolltarget=[[@{unarmed_ml}]]}} {{rollresult=[[1d100+@{unarmed_sb}]]}}" name="roll_UnarmedDevelop" class="skilldev-button"></button>
+    		<button type="action" aria-label="Unarmed Develop" name="act_unarmeddevelop" class="skilldev-button"></button>
     		<input type="number" name="attr_unarmed_sb" class="skill-value" value="0">
     		<input type="number" name="attr_unarmed_ml" class="skill-value" value="0">
     		<button type="roll" aria-label="Unarmed Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} tests @{unarmed_name}}} {{rolltarget=[[{[[{[[@{unarmed_eml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{unarmed_ml}]]}} {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}}" name="roll_UnarmedCheck">
     		</button>
     
     		<input type="text" class="skill-label" name="attr_dodge_name" value="Dodge" readonly>
-    		<button type="roll" aria-label="Dodge Develop" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{dodge_name}}} {{rolltarget=[[@{dodge_ml}]]}} {{rollresult=[[1d100+@{dodge_sb}]]}}" name="roll_DodgeDevelop" class="skilldev-button">
+    		<button type="action" aria-label="Dodge Develop" name="act_dodgedevelop" class="skilldev-button">
     		</button>
     		<input type="number" name="attr_dodge_sb" class="skill-value" value="0">
     		<input type="number" name="attr_dodge_ml" class="skill-value" value="0">
@@ -205,7 +205,7 @@
     						
     		<fieldset class="repeating_combatskill">
     			<input type="text" name="attr_combatskill_name" class="skill-label">
-    			<button type="roll" aria-label="Combat Skill Develop" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{combatskill_name}}} {{rolltarget=[[@{combatskill_ml}]]}} {{rollresult=[[1d100+@{combatskill_sb}]]}}" name="roll_CombatSkillDevelop" class="skilldev-button">
+    			<button type="action" aria-label="Combat Skill Develop" name="act_combatskilldevelop" class="skilldev-button">
     			</button>
     			<input type="number" name="attr_combatskill_sb" class="skill-value" value="0">
     			<input type="number" name="attr_combatskill_ml" class="skill-value" value="0">
@@ -224,7 +224,7 @@
     		<div class="skill-header">&nbsp;</div>
             
             <input type="text" class="skill-label" name="attr_climbing_name" value="Climbing" readonly>
-            <button type="roll" aria-label="Climbing Develop" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{climbing_name}}} {{rolltarget=[[@{climbing_ml}]]}} {{rollresult=[[1d100+@{climbing_sb}]]}}" name="roll_ClimbingDevelop" class="skilldev-button">
+            <button type="action" aria-label="Climbing Develop" name="act_climbingdevelop" class="skilldev-button">
             </button>
             <input type="number" name="attr_climbing_sb" class="skill-value" value="0">
             <input type="number" name="attr_climbing_ml" class="skill-value" value="0">
@@ -232,14 +232,14 @@
             </button>
             
             <input type="text" class="skill-label" name="attr_condition_name" value="Condition" readonly>
-            <button type="roll" aria-label="Condition Develop" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{condition_name}}} {{rolltarget=[[@{condition_ml}]]}} {{rollresult=[[1d100+@{condition_sb}]]}}" name="roll_ConditionDevelop" class="skilldev-button"></button>				
+            <button type="action" aria-label="Condition Develop" name="act_conditiondevelop" class="skilldev-button"></button>				
             <input type="number" name="attr_condition_sb" class="skill-value" value="0">
             <input type="number" name="attr_condition_ml" class="skill-value" value="0">
             <button type="roll" aria-label="Condition Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} tests @{condition_name}}} {{rolltarget=[[{[[{[[@{condition_eml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{condition_ml}]]}} {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}}"	name="roll_ConditionSkillCheck">
             </button>
             
             <input type="text" class="skill-label" name="attr_jumping_name" value="Jumping" readonly>
-            <button type="roll" aria-label="Jumping Develop" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{jumping_name}}} {{rolltarget=[[@{jumping_ml}]]}} {{rollresult=[[1d100+@{jumping_sb}]]}}" name="roll_JumpingDevelop" class="skilldev-button">
+            <button type="action" aria-label="Jumping Develop" name="act_jumpingdevelop" class="skilldev-button">
             </button>					
             <input type="number" name="attr_jumping_sb" class="skill-value" value="0">
             <input type="number" name="attr_jumping_ml" class="skill-value" value="0">
@@ -247,7 +247,7 @@
             </button>
             
             <input type="text" class="skill-label" name="attr_ridingpersonal_name" value="Riding (Personal)" readonly>
-            <button type="roll" aria-label="Riding Develop" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{ridingpersonal_name}}} {{rolltarget=[[@{ridingpersonal_ml}]]}} {{rollresult=[[1d100+@{ridingpersonal_sb}]]}}" name="roll_RidingDevelop" class="skilldev-button">
+            <button type="action" aria-label="Riding Develop" name="act_ridingdevelop" class="skilldev-button">
             </button>	
             <input type="number" name="attr_ridingpersonal_sb" class="skill-value" value="0">
             <input type="number" name="attr_ridingpersonal_ml" class="skill-value" value="0">
@@ -268,7 +268,7 @@
 			
             
             <input type="text" class="skill-label" name="attr_stealth_name" value="Stealth" readonly>
-            <button type="roll" aria-label="Stealth Develop" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{stealth_name}}} {{rolltarget=[[@{stealth_ml}]]}} {{rollresult=[[1d100+@{stealth_sb}]]}}" name="roll_StealthDevelop" class="skilldev-button">
+            <button type="action" aria-label="Stealth Develop" name="act_stealthdevelop" class="skilldev-button">
             </button>				
             <input type="number" name="attr_stealth_sb" class="skill-value" value="0">
             <input type="number" name="attr_stealth_ml" class="skill-value" value="0">
@@ -276,7 +276,7 @@
             </button>
             
             <input type="text" class="skill-label" name="attr_throwing_name" value="Throwing" readonly>
-            <button type="roll" aria-label="Throwing Develop" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{throwing_name}}} {{rolltarget=[[@{throwing_ml}]]}} {{rollresult=[[1d100+@{throwing_sb}]]}}" name="roll_ThrowingDevelop" class="skilldev-button">
+            <button type="action" aria-label="Throwing Develop" name="act_throwingdevelop" class="skilldev-button">
             </button>				
             <input type="number" name="attr_throwing_sb" class="skill-value" value="0">
             <input type="number" name="attr_throwing_ml" class="skill-value" value="0">
@@ -285,7 +285,7 @@
     
     		<fieldset class="repeating_physicalskill">
     			<input type="text" name="attr_physicalskill_name" class="skill-label">
-    			<button type="roll" aria-label="Phys Skill Develop" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{physicalskill_name}}} {{rolltarget=[[@{physicalskill_ml}]]}} {{rollresult=[[1d100+@{physicalskill_sb}]]}}" name="roll_PhysSkillDevelop" class="skilldev-button">
+    			<button type="action" aria-label="Phys Skill Develop" name="act_physskilldevelop" class="skilldev-button">
     			</button>					
     			<input type="number" name="attr_physicalskill_sb" class="skill-value" value="0">
     			<input type="number" name="attr_physicalskill_ml" class="skill-value" value="0">
@@ -303,7 +303,7 @@
     		<div class="skill-header">&nbsp;</div>
     		
     		<input type="text" class="skill-label" name="attr_awareness_name" value="Awareness" readonly>
-    		<button type="roll" aria-label="Awareness Develop"	value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{awareness_name}}} {{rolltarget=[[@{awareness_ml}]]}} {{rollresult=[[1d100+@{awareness_sb}]]}}" name="roll_AwarenessDevelop" class="skilldev-button">
+    		<button type="action" aria-label="Awareness Develop" name="act_awarenessdevelop" class="skilldev-button">
     		</button>				
     		<input type="number" name="attr_awareness_sb" class="skill-value" value="0">
     		<input type="number" name="attr_awareness_ml" class="skill-value" value="0">
@@ -311,7 +311,7 @@
     		</button>
     
     		<input type="text" class="skill-label" name="attr_intrigue_name" value="Intrigue" readonly>
-    		<button type="roll" aria-label="Intrigue Develop" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{intrigue_name}}} {{rolltarget=[[@{intrigue_ml}]]}} {{rollresult=[[1d100+@{intrigue_sb}]]}}"	name="roll_IntrigueDevelop" class="skilldev-button">
+    		<button type="action" aria-label="Intrigue Develop" name="act_intriguedevelop" class="skilldev-button">
     		</button>					
     		<input type="number" name="attr_intrigue_sb" class="skill-value" value="0">
     		<input type="number" name="attr_intrigue_ml" class="skill-value" value="0">
@@ -319,7 +319,7 @@
     		</button>
     
     		<input type="text" class="skill-label" name="attr_oratory_name" value="Oratory" readonly>
-    		<button type="roll" aria-label="Oratory Develop" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{oratory_name}}} {{rolltarget=[[@{oratory_ml}]]}} {{rollresult=[[1d100+@{oratory_sb}]]}}" name="roll_OratoryDevelop" class="skilldev-button">
+    		<button type="action" aria-label="Oratory Develop" name="act_oratorydevelop" class="skilldev-button">
     		</button>				
     		<input type="number" name="attr_oratory_sb" class="skill-value" value="0">
     		<input type="number" name="attr_oratory_ml" class="skill-value" value="0">
@@ -327,7 +327,7 @@
     		</button>
     
     		<input type="text" class="skill-label" name="attr_rhetoric_name" value="Rhetoric" readonly>
-    		<button type="roll" aria-label="Rhetoric Develop" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{rhetoric_name}}} {{rolltarget=[[@{rhetoric_ml}]]}} {{rollresult=[[1d100+@{rhetoric_sb}]]}}" name="roll_RhetoricDevelop" class="skilldev-button">
+    		<button type="action" aria-label="Rhetoric Develop" name="act_rhetoricdevelop" class="skilldev-button">
     		</button>				
     		<input type="number" name="attr_rhetoric_sb" class="skill-value" value="0">
     		<input type="number" name="attr_rhetoric_ml" class="skill-value" value="0">
@@ -335,7 +335,7 @@
     		</button>
     
     		<input type="text" class="skill-label" name="attr_singing_name" value="Singing" readonly>
-    		<button type="roll" aria-label="Singing Develop" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{singing_name}}} {{rolltarget=[[@{singing_ml}]]}} {{rollresult=[[1d100+@{singing_sb}]]}}" name="roll_SingingDevelop" class="skilldev-button">
+    		<button type="action" aria-label="Singing Develop" name="act_singingdevelop" class="skilldev-button">
     		</button>					
     		<input type="number" name="attr_singing_sb" class="skill-value" value="0">
     		<input type="number" name="attr_singing_ml" class="skill-value" value="0">
@@ -344,7 +344,7 @@
     
     		<fieldset class="repeating_communicationskill">
     			<input type="text" name="attr_communicationskill_name" class="skill-label">
-    			<button type="roll" aria-label="Comm Skill Develop" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{communicationskill_name}}} {{rolltarget=[[@{communicationskill_ml}]]}} {{rollresult=[[1d100+@{communicationskill_sb}]]}}" name="roll_CommSkillDevelop" class="skilldev-button">
+    			<button type="action" aria-label="Comm Skill Develop" name="act_commskilldevelop" class="skilldev-button">
     			</button>					
     			<input type="number" name="attr_communicationskill_sb" class="skill-value" value="0">
     			<input type="number" name="attr_communicationskill_ml" class="skill-value" value="0">
@@ -362,7 +362,7 @@
     		<div class="skill-header">&nbsp;</div>
     		<fieldset class="repeating_loreskill">
     			<input type="text" name="attr_loreskill_name" class="skill-label">
-    			<button type="roll" aria-label="Lore Skill Develop" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{loreskill_name}}} {{rolltarget=[[@{loreskill_ml}]]}} {{rollresult=[[1d100+@{loreskill_sb}]]}}" name="roll_LoreSkillDevelop" class="skilldev-button">
+    			<button type="action" aria-label="Lore Skill Develop" name="act_loreskilldevelop" class="skilldev-button">
     			</button>						
     			<input type="number" name="attr_loreskill_sb" class="skill-value" value="0">
     			<input type="number" name="attr_loreskill_ml" class="skill-value" value="0">
@@ -381,7 +381,7 @@
     		<div class="skill-header">&nbsp;</div>
     		<fieldset class="repeating_ritualskill">
     			<input type="text" name="attr_ritualskill_name" class="skill-label">
-    			<button type="roll" aria-label="Ritual Skill Develop" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{ritualskill_name}}} {{rolltarget=[[@{ritualskill_ml}]]}} {{rollresult=[[1d100+@{ritualskill_sb}]]}}" name="roll_RitualSkillDevelop" class="skilldev-button">
+    			<button type="action" aria-label="Ritual Skill Develop" name="act_ritualskilldevelop" class="skilldev-button">
     			</button>					
     			<input type="number" name="attr_ritualskill_sb" class="skill-value" value="0">
     			<input type="number" name="attr_ritualskill_ml" class="skill-value" value="0">
@@ -399,7 +399,7 @@
     		<div class="skill-header">&nbsp;</div>
     		<fieldset class="repeating_magicskill">
     			<input type="text" name="attr_magicskill_name" class="skill-label">
-    			<button type="roll" aria-label="Magic Skill Develop" value="&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title=@{character_name} tries to improve @{magicskill_name}}} {{rolltarget=[[@{magicskill_ml}]]}} {{rollresult=[[1d100+@{magicskill_sb}]]}}" name="roll_MagicSkillDevelop" class="skilldev-button">
+    			<button type="action" aria-label="Magic Skill Develop" name="act_magicskilldevelop" class="skilldev-button">
     			</button>						
     			<input type="number" name="attr_magicskill_sb" class="skill-value" value="0">
     			<input type="number" name="attr_magicskill_ml" class="skill-value" value="0">
@@ -1654,6 +1654,8 @@
 			<div class="full-width skill-header">Calculation</div>
 			<label for=autocalcsbtoggle class="harntooltip" data-tooltiptext="When enabled, Skill Base (SB) for recognised skills is computed from your attributes + sunsign and kept in sync. Leave off to enter SB by hand.">Auto-calculate Skill Base?</label>
 			<input id=autocalcsbtoggle name="attr_hr_autocalc_sb" type="checkbox" value="1">
+			<label for=specialtiestoggle class="harntooltip" data-tooltiptext="When on, a skill named &amp;quot;Base (Specialty)&amp;quot; (e.g. Sword (Broadsword)) inherits the base skill's SB and starts at its ML. Per the rules you specialize at base ML 40+, and a specialty develops +2 per development roll.">Skill specialties?</label>
+			<input id=specialtiestoggle name="attr_hr_specialties" type="checkbox" value="1">
 			<div class="full-width skill-header">Legacy info</div>
 			<label for=showlegacyarmortoggle>Hide armor info from legacy (v1) sheet?</label>
 			<input id=showlegacyarmortoggle name="attr_legacyarmorhidden" type="checkbox" value="1">	
@@ -1661,7 +1663,7 @@
 			<input id=legacycharname name="attr_name" type="text" class="full-width" readonly>
 			<div class="full-width skill-header">Sheet version</div>
 			<div class="full-width">
-			  <input name="attr_character_sheet_version" type="number" value="20260615" readonly>
+			  <input name="attr_character_sheet_version" type="number" value="20260616" readonly>
 			  <input type="hidden" name="attr_data_version" value="" readonly>
 			</div>
     	</div>
@@ -1727,6 +1729,15 @@
 	</div>
 	<div class="changelog">
 		<h2>Changelog</h2>
+		<h3>20260616 - Version 3.2.2</h3>
+		<details>
+			<summary class="changelog-summary"><p class="changelog-summary">Skill specialties + skills auto-develop (Phase 11)</p></summary>
+			<ul>
+				<li><b>New (optional): Skill specialties</b> (Settings). When on, a skill named <i>Base (Specialty)</i> &mdash; e.g. <i>Sword (Broadsword)</i> &mdash; is treated as a specialty of <i>Sword</i>: it inherits Sword&rsquo;s Skill Base and starts at Sword&rsquo;s ML. Per the rules you specialize once the base reaches ML 40, and a specialty develops twice as fast.</li>
+				<li><b>Develop buttons now update ML.</b> A development roll (1d100 + SB) that beats the current ML automatically raises ML by <b>1</b> (a specialty by <b>2</b>), capped at the maximum ML of 100 + SB. The roll still shows Success/Failure in chat.</li>
+				<li>The sheet doesn&rsquo;t decide <i>when</i> you earn a development roll, and it doesn&rsquo;t enforce GM-discretion limits (e.g. weapons past ML70 needing combat experience, or Ritual/RML developing by learning rather than practice).</li>
+			</ul>
+		</details>
 		<h3>20260615 - Version 3.2.1</h3>
 		<details>
 			<summary class="changelog-summary"><p class="changelog-summary">Combat: modifiers panel, auto Strike Location, per-weapon Damage, Missile Data (Phase 9)</p></summary>
@@ -2919,6 +2930,7 @@ Object.keys(SKILL_DATA).forEach(function(k){SKILL_DATA[k].sunmap=parseSunMods(SK
 function sbSignTokens(sunsign){return String(sunsign||'').toLowerCase().trim().split('-').map(function(s){return SUN_ABBR[s.trim()];}).filter(Boolean);}
 function computeSB(data,v,tokens){var sum=0;data.attrs.forEach(function(a){sum+=parseInt(v[a])||0;});var sb=Math.round(sum/3);var bonus=0;tokens.forEach(function(t){if(data.sunmap[t]!=null&&data.sunmap[t]>bonus)bonus=data.sunmap[t];});return sb+bonus;}
 function skillKey(name){return String(name||'').toLowerCase().trim().replace(/\s*\(.*\)\s*$/,'');}
+function resolveSkillData(name){var d=SKILL_DATA[skillKey(name)];if(d)return d;var m=String(name||'').match(/\(([^)]+)\)\s*$/);return m?SKILL_DATA[m[1].trim().toLowerCase()]:undefined;}
 
 // fixed skills: sheet attr-prefix -> Skill Data name
 const FIXED_SKILLS = {climbing:'climbing',condition:'condition',jumping:'jumping',stealth:'stealth',throwing:'throwing',awareness:'awareness',intrigue:'intrigue',oratory:'oratory',rhetoric:'rhetoric',singing:'singing',initiative:'initiative',unarmed:'unarmed',ridingpersonal:'riding'};
@@ -2933,7 +2945,7 @@ function recalcSectionSB(section,v,tokens){
         getAttrs(nameFields,function(names){
             var out={};
             ids.forEach(function(id){
-                var data=SKILL_DATA[skillKey(names['repeating_'+section+'_'+id+'_'+section+'_name'])];
+                var data=resolveSkillData(names['repeating_'+section+'_'+id+'_'+section+'_name']);
                 if(data)out['repeating_'+section+'_'+id+'_'+section+'_sb']=computeSB(data,v,tokens);
             });
             if(Object.keys(out).length)setAttrs(out);
@@ -2956,7 +2968,7 @@ REPEAT_SKILL_SECTIONS.forEach(function(section){
     on('change:repeating_'+section+':'+section+'_name',function(){
         getAttrs(['hr_autocalc_sb','sunsign','repeating_'+section+'_'+section+'_name'].concat(SB_ATTRS),function(v){
             if(!(parseInt(v.hr_autocalc_sb)||0))return;
-            var data=SKILL_DATA[skillKey(v['repeating_'+section+'_'+section+'_name'])];
+            var data=resolveSkillData(v['repeating_'+section+'_'+section+'_name']);
             if(!data)return;
             var out={};
             out['repeating_'+section+'_'+section+'_sb']=computeSB(data,v,sbSignTokens(v.sunsign));
@@ -3237,6 +3249,81 @@ on('clicked:repeating_missileweapon:missileshortdmg clicked:repeating_missilewea
     postMissileStrike(v[pre+'missileweapon_name'], v[pre+'missileweapon_aspect'], label, v[pre+'missileweapon_'+range+'_dmg'], v.combat_aim);
   });
 });
+
+// ===== Phase 11 — skill specialties (parenthetical naming, either order) =====
+// Gated by hr_specialties. A row with a trailing "(...)" is a specialty; its base is the sibling
+// skill matching EITHER the name before the parens OR the text inside them, so both
+// "Sword (Broadsword)" and "Broadsword (Sword)" link to base "Sword". The specialty inherits the
+// base SB (when SB isn't auto-calculated; auto-calc resolves it via resolveSkillData) and seeds
+// its ML from the base while its own ML is still 0.
+function hasParenSpec(n){ return /\([^)]*\)\s*$/.test(String(n||'').trim()); }
+function specBaseKeys(n){ var k=[skillKey(n)]; var m=String(n||'').match(/\(([^)]+)\)\s*$/); if(m)k.push(m[1].trim().toLowerCase()); return k; }
+REPEAT_SKILL_SECTIONS.forEach(function(section){
+  on('change:repeating_'+section+':'+section+'_name change:repeating_'+section+':'+section+'_ml change:hr_specialties sheet:opened', function(){
+    getAttrs(['hr_specialties','hr_autocalc_sb'], function(s){
+      if(!(int(s.hr_specialties)>0)) return;
+      var autocalc=int(s.hr_autocalc_sb)>0;
+      getSectionIDs('repeating_'+section, function(ids){
+        if(!ids.length) return;
+        var f=[]; ids.forEach(function(id){ var p='repeating_'+section+'_'+id+'_'+section+'_'; f.push(p+'name',p+'sb',p+'ml'); });
+        getAttrs(f, function(v){
+          var bases={};
+          ids.forEach(function(id){ var p='repeating_'+section+'_'+id+'_'+section+'_', nm=v[p+'name'];
+            if(nm && !hasParenSpec(nm)) bases[skillKey(nm)]={sb:v[p+'sb'],ml:v[p+'ml']}; });
+          var out={};
+          ids.forEach(function(id){ var p='repeating_'+section+'_'+id+'_'+section+'_', nm=v[p+'name'];
+            if(nm && hasParenSpec(nm)){
+              var b=null, keys=specBaseKeys(nm);
+              for(var i=0;i<keys.length;i++){ if(bases[keys[i]]){ b=bases[keys[i]]; break; } }
+              if(b){
+                if(!autocalc && b.sb!=null && String(b.sb)!=='') out[p+'sb']=b.sb;
+                if(!int(v[p+'ml']) && int(b.ml)) out[p+'ml']=int(b.ml);
+              }
+            } });
+          if(Object.keys(out).length) setAttrs(out);
+        });
+      });
+    });
+  });
+});
+
+// ===== Phase 11 Stage B — auto-increment ML on a successful development roll =====
+// Standard SDR (HarnMaster Skills 7): roll 1d100 + SB; if > ML, ML increases by 1 (a specialty,
+// per Skills 2, increases by 2), capped at the max ML of 100 + SB. The skilldevroll template
+// shows Success/Failure; this worker reads the roll and updates ML. GM-discretion limits (e.g.
+// weapons past ML70 need combat experience; Ritual/RML develops by learning, not practice) are
+// intentionally NOT auto-enforced.
+function developRoll(mlAttr, sbAttr, nameAttr, specialty){
+  getAttrs([mlAttr, sbAttr, nameAttr], function(v){
+    var ml=int(v[mlAttr]), sb=int(v[sbAttr]), name=v[nameAttr]||'Skill', maxml=100+sb;
+    startRoll('&{template:custom} {{skilldevroll=1}} {{color=harn}} {{title='+name+' development}} {{rolltarget=[['+ml+']]}} {{rollresult=[[1d100+'+sb+']]}}', function(roll){
+      var rr = (roll.results.rollresult && int(roll.results.rollresult.result)) || 0;
+      finishRoll(roll.rollId);
+      if (ml < maxml && rr > ml){ var o={}; o[mlAttr]=Math.min(ml + (specialty?2:1), maxml); setAttrs(o); }
+    });
+  });
+}
+function developFixed(prefix){ developRoll(prefix+'_ml', prefix+'_sb', prefix+'_name', false); }
+function developRepeating(pre, section){
+  getAttrs([pre+section+'_name','hr_specialties'], function(v){
+    var spec = (int(v.hr_specialties)>0) && hasParenSpec(v[pre+section+'_name']);
+    developRoll(pre+section+'_ml', pre+section+'_sb', pre+section+'_name', spec);
+  });
+}
+[['initiativedevelop','initiative'],['unarmeddevelop','unarmed'],['dodgedevelop','dodge'],
+ ['climbingdevelop','climbing'],['conditiondevelop','condition'],['jumpingdevelop','jumping'],
+ ['ridingdevelop','ridingpersonal'],['stealthdevelop','stealth'],['throwingdevelop','throwing'],
+ ['awarenessdevelop','awareness'],['intriguedevelop','intrigue'],['oratorydevelop','oratory'],
+ ['rhetoricdevelop','rhetoric'],['singingdevelop','singing']
+].forEach(function(p){ on('clicked:'+p[0], function(){ developFixed(p[1]); }); });
+[['combatskilldevelop','combatskill'],['physskilldevelop','physicalskill'],['commskilldevelop','communicationskill'],
+ ['loreskilldevelop','loreskill'],['ritualskilldevelop','ritualskill'],['magicskilldevelop','magicskill']
+].forEach(function(p){
+  on('clicked:repeating_'+p[1]+':'+p[0], function(e){
+    developRepeating(String(e.sourceAttribute).replace(new RegExp(p[0]+'$','i'),''), p[1]);
+  });
+});
+// ===== end Phase 11 Stage B =====
 </script>
 
 

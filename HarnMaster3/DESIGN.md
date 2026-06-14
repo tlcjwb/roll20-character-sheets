@@ -503,6 +503,34 @@ the base SB and seeds ML from the base, and that the ML-40 gate warns correctly;
 specialty rolls off its own ML via the existing pipeline and that toggling the setting off leaves
 existing rows working.
 
+**Built (v3.2.2):** option (a), parenthetical naming — `Sword (Broadsword)` is detected as a Sword
+specialty (no new per-row field); the `hr_specialties` worker inherits the base SB and seeds ML from
+the base. **Also added (owner request): develop buttons auto-increment ML** — the 20 develop buttons
+became action buttons whose worker rolls the standard SDR (1d100+SB), and on `> ML` raises ML by 1
+(**specialty +2**, capped at 100+SB), keeping the skilldevroll template's Success/Failure display.
+This makes the +2 specialty advantage real (it no longer depends on a separate SDR tracker).
+GM-discretion limits (weapon ML70/combat-experience, Ritual/RML develops by learning) are *not*
+auto-enforced. Icon CSS generalized from `button[type=roll].skilldev-button` to `button.skilldev-button`.
+
+### Phase 12 — Print / PDF stylesheet · S · quick win
+Roll20 has **no native print or PDF export** for character sheets; the only built-in path is the
+browser's Print (→ "Save as PDF"), and out of the box it captures the whole VTT and only the active
+tab is visible. But this sheet keeps **all tabs in the DOM** (inactive ones hidden via CSS off the
+`sheetTab` attribute), so a print stylesheet can produce a clean full-sheet printout with no Roll20
+feature or Pro needed.
+1. **Add an `@media print` block** that: isolates the sheet (hide everything outside `.charsheet` /
+   the sheet dialog — Roll20 wraps it in a jQuery-UI dialog), **reveals all tabs** (override the
+   `sheetTab` show/hide so Character + Inventory + Settings all render), and **hides interactive
+   chrome** (roll buttons, action buttons, the Settings/Help/Changelog blocks, datalists' arrows).
+2. **Lay out for paper:** force light colors (ignore dark mode), single-column/section flow, avoid
+   awkward page breaks (`break-inside: avoid` on grids/sections), readable font sizes.
+3. **Optional:** a small "Print" affordance/note, or rely on Ctrl/Cmd-P.
+**Risk:** low — pure CSS, additive, no worker/markup logic. **Caveats:** isolating the sheet from
+Roll20's surrounding dialog/VTT chrome is trial-and-error and can only be confirmed **in-VTT**
+(iterate like the combat work); Roll20 DOM/classes may shift over time. **Verify:** in-VTT Ctrl-P →
+Save as PDF yields a clean, full (all-tab) sheet in both light and dark mode; no VTT chrome; sensible
+page breaks.
+
 ### Suggested sequence
 **Shipped in v3.2.0 (20260614):** Phases 0, 5, 1, 2, 3. **Deferred:** Phase 4 legacy-armor sunset
 (owner decision) and Phase 3.2 ML→OML auto-seed.

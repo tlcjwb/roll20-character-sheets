@@ -31,8 +31,17 @@ export function loadWorker({ initial = {}, loud = false } = {}) {
   // invoked with a stub result; finishRoll is a no-op.
   const rolls = [];
   const startRoll = (template, cb) => {
+    // Populate a result for each {{Label=[[...]]}} inline roll so handlers that read
+    // roll.results.<Label>.result can be tested. The value comes from mock.nextRoll
+    // (settable per test; default 50).
+    const results = {};
+    const re = /\{\{([\w ]+)=\[\[.*?\]\]\}\}/g;
+    let m;
+    while ((m = re.exec(template))) {
+      results[m[1].trim()] = { result: (mock.nextRoll != null ? mock.nextRoll : 50) };
+    }
     rolls.push({ template });
-    if (typeof cb === 'function') cb({ rollId: 'roll-' + rolls.length, results: {} });
+    if (typeof cb === 'function') cb({ rollId: 'roll-' + rolls.length, results });
   };
   const finishRoll = () => {};
 
