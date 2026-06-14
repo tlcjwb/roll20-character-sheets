@@ -83,10 +83,13 @@ mobile admittedly partial) and a self-noted `TODO rename variable` (`--backgroun
 
 **C8 — Religion is a magic-clone, not a religion implementation.** The "Rituals" section is a
 near-verbatim copy of the Shek-Pvar **Spells** section, and its data model contradicts how
-HârnMaster religion actually works. The deep religion rules live in the **Religion supplement
-(4401)**, not the core book — the core book only provides the ten Ritual *skills* (skill table) and
-cleric char-gen hooks (open Ritual to SB×4, Piety = 5d6 / Will×5, learn invocations by Circle) and
-defers the rest to the supplement. The actual structure:
+HârnMaster religion actually works — **and this contradicts the core book 4001 itself**, not merely
+the supplement. 4001's Character/Clerics section (pp. 22–24) already defines the whole structural
+model: "Clerics open *ritual* to SB×4" = **RML**; "a separate Piety Point total **and Ritual
+Skill**… for each deity"; Piety = 5d6 / Will×5; and **invocations learned by Circle** (1 Ritual
+Option point per Circle, Common Circle-II free). The **Religion supplement (4401)** only adds the
+per-deity *invocation catalog* and detailed effects — it does not introduce the model. The actual
+structure (stated in 4001, detailed in 4401):
 - **One Ritual skill per deity** → its ML is **RML**. Improved *only* by learning invocations,
   reading holy tomes, or adverse-situation use — **never by practice** (Religion 7).
 - **Invocations** are *known abilities tagged by Circle (II–VII)*, **cast off the single RML** —
@@ -169,30 +172,62 @@ repeating rows). **Verify:** unit tests per skill against the rulebook worked ex
 (DEX+AGL+AGL)/3 +Hir = 14, OML SB×2 = 28).
 
 ### Phase 3b — Reshape the religion subsystem to the rules · M–L · addresses C8
-Pairs naturally with Phase 3 (same theme: model the rules, don't just record them). Scope creep
-risk is real — keep it optional/additive so existing characters' data isn't stranded.
-1. **RML as a first-class skill.** Treat the per-deity Ritual skill as the single source: a row in
-   the existing `repeating_ritualskill` section *is* RML. (Optionally auto-compute Ritual SB from
-   VOI+INT+deity-attr + deity sunsign, using the table in `../PDF/4401-…txt` Religion 7 — same
-   mechanism as Phase 3.) Remove the "develop by practice" affordance for Ritual, or label it
-   "(learning/tomes/adverse only)", since RML can't be practice-improved.
-2. **Invocations keyed by Circle, cast off RML.** Rework the "Rituals" repeating section: replace
-   the per-ritual SB/SI/ML with **Circle (II–VII)** + a deity selector that points at the relevant
-   RML; the cast roll targets **RML − 5×UP + modifiers** (clamped 5/95), not a per-ritual ML. Keep
-   name/CT/Dur/Range/notes as free reference fields. (Migration: existing `ritual_eml` values can
-   seed the chosen deity's RML, or be left as a notes field — decide at build time.)
-3. **Divine Grace flag.** Compute a read-only indicator when a deity's Piety ≥ its RML (Religion 4);
-   surface it next to the piety row and, if present, apply the +10 to healing/curing invocations.
-4. **Piety economy helpers (optional, additive).** A "spend piety" control for Divine Intervention
-   (per-deity base chance table + ±20 worthiness + 1%/PP to 95%), and a prayer-boost helper
-   (1 PP → +1 to a chosen roll, max 20). These are GM-adjudicated, so keep them as convenience roll
-   buttons, not enforced state.
-5. **RSI uses (stretch).** Expose RSI = floor(RML/10) and offer Counseling (Rhetoric+RSI) and Sermon
-   (Oratory+RSI) roll buttons.
-**Risk:** medium-high (reworks a repeating section's schema + migration of existing ritual data).
-**Verify:** unit tests for SB-from-attrs and the Divine-Grace threshold; in-VTT check that an
-invocation rolls off the chosen deity's RML and that piety spends behave. **Gate** the new model
-behind a setting so tables using the current free-form tracker can opt out.
+Pairs naturally with Phase 3 (same theme: model the rules, don't just record them). Today the
+"Rituals" section is a Shek-Pvar magic clone — each ritual carries its own SB/SI/ML — which
+contradicts **4001 itself** (Character/Clerics pp. 22–24): there is *one* Ritual skill per deity
+(**RML**), and invocations are *known abilities tagged by Circle* cast off that single RML.
+
+**Two paths, selected by one setting `hr_hm_religion` ("HM Religion", default OFF).** The setting
+chooses how much of the religion rules the sheet models; both paths share a common 4001 foundation.
+
+#### Shared foundation (built in BOTH paths)
+1. **RML as the single per-deity skill.** Treat the per-deity Ritual skill as the source of truth:
+   a row in `repeating_ritualskill` *is* RML (opens at SB×4; never practice-improved — label it
+   "learning/tomes/adverse only"). Per-deity **Piety** already exists (`repeating_piety`).
+2. **Invocations = a hand-entered list, keyed by Circle, cast off RML.** Rework `repeating_rituals`:
+   **drop the per-ritual SB/SI/ML**; keep name + deity selector + CT/Dur/Range/notes; **add
+   `ritual_circle` (II–VII)** and an **editable `ritual_circle_mod`**. Cast target =
+   **RML − 5×UP − Circle Modifier**, clamped 5/95 (validated by the 4001 worked example: Peoni
+   RML 78, UP 2 → −10, Circle Mod −20 ⇒ 48). This is correct *without* any catalog — the user types
+   the invocation and its Circle, and the modifier defaults editable.
+   *(Note: 4001 contains only invocation **examples**, never a catalog — so the foundation must not
+   try to generate or hard-code invocations.)*
+
+#### Path A — setting OFF (default): 4001-conformant, catalog-free
+Ship only the Shared foundation. Each invocation is user-entered; `ritual_circle_mod` is a plain
+editable field (GM/player fills it). No deity catalog, no Divine-Intervention tables. This is the
+complete, self-contained, supplement-independent model — and the default so no table is forced into
+supplement detail it doesn't use.
+
+#### Path B — setting ON ("HM Religion"): adds the 4401 supplement layer
+Everything in Path A, **plus** modifications to be 4401-compatible (extra fields/UI revealed by the
+setting via the existing CSS-toggle pattern):
+1. **Invocation catalog (4401).** Per-deity known-invocation pick-lists (datalists keyed by deity)
+   sourced from the Religion supplement; selecting an invocation **auto-fills its Circle, the Circle
+   Modifier, CT/Dur/Range,** and effect notes. Manual entry still allowed for homebrew.
+2. **Circle-Modifier table (4401).** Derive `ritual_circle_mod` from `ritual_circle` automatically
+   per the supplement's table instead of hand-entry.
+3. **Divine Grace.** Read-only flag when a deity's Piety ≥ its RML (Religion 4); apply its bonus
+   (e.g. +10 to healing/curing invocations) to the relevant cast targets.
+4. **Piety economy.** "Spend piety" control for **Divine Intervention** (per-deity base-chance table
+   + ±20 worthiness + 1%/PP to 95%) and a **prayer-boost** helper (1 PP → +1 to a chosen roll,
+   max 20). GM-adjudicated ⇒ convenience roll buttons, not enforced state.
+5. **RSI uses (stretch).** RSI = ⌊RML/10⌋ with Counseling (Rhetoric+RSI) and Sermon (Oratory+RSI)
+   roll buttons.
+
+#### Migration & gating
+Changing `repeating_rituals` is a data-shape change ⇒ bump `versionsWithMigrations`. One-time
+convert: preserve each legacy row's `ritual_eml`/SB/SI into notes (or seed the chosen deity's RML
+from `ritual_eml` if no RML exists), then map the row to the new fields. The `hr_hm_religion` toggle
+gates Path B's extra UI; Path A remains fully functional with the toggle off so existing free-form
+trackers aren't stranded. Both paths share the same underlying attrs — toggling only reveals/derives
+the 4401 extras, it does not migrate data again.
+
+**Risk:** medium-high (reworks a repeating section's schema + migration). Path B additionally needs
+the 4401 catalog transcribed (copyright: ship structure/Circle/CT, not prose effects — link/note
+instead). **Verify:** unit tests for the RML−5×UP−CircleMod target (Larinda = 48) and the
+Divine-Grace threshold; in-VTT, an invocation rolls off the chosen deity's RML in both paths, and in
+Path B the catalog pick auto-fills Circle/modifier.
 
 ### Phase 4 — Model & legacy cleanup · M · addresses C4
 1. Document the fixed-vs-repeating rationale in a comment block (or, ambitious: make fixed skills a
@@ -305,12 +340,181 @@ not travel with the published sheet. **Verify:** in-VTT with the Mod installed (
 panel; token swaps; button shows) *and* not installed (import UI stays hidden; sheet otherwise
 normal).
 
+### Phase 8 — Rules-conformance enhancements (from the v3.2.0 audit) · M · polish / coverage
+A conformance sweep of Character / Skills / Combat / Physician / Psionics against the core rules
+(4001), done after v3.2.0, found **no deviations in those five areas** — the 90-skill auto-SB table
+checked **90/90** against Skills 3–4, and attribute-test penalties, the psionics roll, healing,
+shock, fumble/stumble, etc. all conform. (The sweep **excluded Religion**, which is the one major
+structural deviation — see **C8 / Phase 3b**; it deviates from 4001 itself, not just the supplement.)
+The items below are the optional **conveniences / coverage gaps** the sweep surfaced; none fix
+wrong behavior:
+1. **Psionic-talent auto-SB.** Talent SB is uniformly **AUR AUR WIL + a per-talent sunsign**
+   (Psionics 2). Extend the Phase 3 machinery to `repeating_psionics`: an optional per-talent name
+   lookup (Charm / Clairvoyance / Healing / Mental Bolt / Telepathy / … with their sunsign mods)
+   that computes SB. Gated by the same `hr_autocalc_sb` toggle. *(S)*
+2. **Max-ML validation (ML ≤ 100 + SB).** The roll already clamps EML to 95, but ML itself isn't
+   capped; optionally warn or clamp ML at 100 + SB per Skills 2. Cosmetic, low value/risk. *(S)*
+3. **HM weapon-field UX.** Today HM is a *signed* modifier added to AML (enter **negative** for a
+   penalty), and the chat "penalty" line shows `PP×5 − HM`. Relabel the field (e.g. "HM ±") or flip
+   the sign so a positive value reads as a penalty. **NOTE:** flipping the sign changes the meaning
+   of any HM values already entered → a deliberate change needing a migration or a one-time note. *(S
+   + migration care)*
+4. **Physician recovery rolls (optional buttons).** The sheet has the combat Shock roll, the 5-day
+   Healing roll, and an infection flag, but not dedicated buttons for **Shock-Recovery** (HR×End per
+   watch), **Infection** (HR×End daily + physician SI), **Blood-Regeneration** (End×6 / 5 days), or
+   **Disease** (CI×End). All share the HR×End shape, so these are convenience buttons over the
+   Physician 3–4 tables, not new math. *(M)*
+**Risk:** low except #3 (HM sign flip touches existing data). **Verify:** psionic SB against the
+Psionics 2 worked example (Mardisa: Mental Bolt SB 17, Healing 16); recovery-roll targets against
+the Physician tables. All four are additive/gated and independent of the other phases.
+
+### Phase 9 — Attacker-side combat helpers + minor coverage gaps · M · coverage
+From a full 4001 read (Combat 9–14 Melee/Missile Attack Sequence, plus Skills/Physician/Campaign).
+**Scope boundary (owner decision):** the sheet models **only our character's side**. The defender is
+another token / GM-controlled, and sheet workers can only see their own character — so the
+two-combatant pieces (the Melee Attack results cross-index, and Injury Determination against the
+defender's armour) are **out of scope**. Full end-to-end resolution would require a Pro-only
+companion Mod script (Tier 3) and is explicitly **not** being pursued. Everything below is pure-sheet
+and ships to every user; all sub-features are additive and individually gateable.
+
+#### A. Attacker-side combat-resolution helpers
+The sheet already automates the to-hit roll (phase [3]). These add the attacker-side inputs around it
+(4001 phases [1] and [5], our half only):
+1. **Aim zone + situational modifiers as roll queries** (replace the lone `?{Target Modifier?}` with
+   structured options that compute the net EML adjustment, keeping the 5/95 clamp). Per the rules the
+   modifier set differs by roll type:
+   - **Attack rolls:** Aim (Mid 0 / **High −10 / Low −10**), **target Prone +20**, **Close Mode −10**,
+     plus a free GM modifier.
+   - **Defense rolls:** **Outnumbered −10 per foe above one**, target/own Prone +20, Close Mode −10,
+     plus a free modifier. *(Outnumbering does not apply to attacks; Aim does not apply to defense.)*
+2. **Potential Strike-Location roll button.** `1d100` read in the declared **Aim-zone column** (High/
+   Mid/Low) of the Strike Location table → a body location. "Potential" because it only matters if the
+   attack actually strikes (the defender resolves that). **Data dependency:** the 3-column Strike
+   Location table must be transcribed (values only — like the existing Weapon Data table; no prose).
+3. **Damage roll button.** `impact(chosen aspect) + ?{Strike multiplier}d6`. The player picks the
+   aspect (Blunt/Edge/Point; default = highest impact) and **enters the ×Nd6 multiplier** read off the
+   GM's cross-index of our success vs the defender's defense (the result table is the GM's to apply).
+   No book data needed — aspect impacts already live on each weapon row.
+
+#### B. Minor / GM-adjudicated coverage gaps (low priority, optional)
+Surfaced by the full read; mostly GM-side, so keep light and gated:
+4. **Skill Development (Skills 7).** A between-session aid: a per-skill "used this session" flag and an
+   **SDR** roll button (`1d100`; SB is added to the development roll, +2 for fast-developing skills).
+   Tracker, not a play aid — lowest priority.
+5. **Movement helpers.** Combat Move is already derived and Jumping is already a skill (SB×4); at most
+   expose running/sprint distances as read-only derived values. Marginal.
+6. **Healing-over-time / disease / bloodloss (Physician 3–4).** Injury rows already carry
+   day/healing/infected, and the **recovery-roll buttons live in Phase 8** — so here only note that
+   disease/allergy/bloodloss remain **GM reference tables** with no sheet automation planned.
+7. **Environmental damage.** Falling (>5 ft), fire/ignition (13+ gross Fire Impact, flammable armour),
+   drowning, frostbite — all GM-adjudicated and scattered. At most a falling-impact helper; otherwise
+   out of scope.
+
+**Risk:** low-medium. A/1 and A/3 are additive query/roll-button changes (no stored-data change). A/2
+needs the Strike Location table transcribed and verified. B items are individually optional. **Verify:**
+unit tests for the aim/situational net-modifier math and the 5/95 clamp; the Strike-Location button
+against the table's aim-zone columns; in-VTT that a Damage roll = aspect impact + entered ×Nd6.
+**Gate** B/4 (and any B item built) behind its own setting.
+
+### Phase 10 — Character Generation · XL · biggest coverage gap
+The sheet is purely a **play** sheet — it has no character generation, yet 4001's whole ~58-page
+Character section *is* the generation pipeline. This phase adds a guided chargen system on its own
+tab that produces a playable character and **propagates** into the existing attribute/skill fields.
+
+#### The 4001 pipeline to model (Character 2–24)
+1. **Birth attributes:** Species [1d100/choice] → Birthdate [1d12 mo + 1d30 day] → **Sunsign**
+   [derived from birthdate] → Birthplace→Culture → Social Class [1d100/choice] → **Sibling Rank**
+   [1d100] + Family Size [1d6−1+rank] → **Parent** [1d100: Offspring / Fostered / Adopted / Bastard
+   sub-tables] → **Estrangement** [1d100].
+2. **Appearance / Medical:** Frame [3d6] → Height → Weight [derived from height+frame] →
+   Comeliness [3d6 ± frame] → medical traits/disorders (some carry skill penalties).
+3. **Attributes:** Physical (STR/STA/DEX/AGL/EYE/HRG/SML/VOI) and Personality (INT/AUR/WIL) by the
+   species dice; **Morality** [3d6/choice]; **Psyche** [1d100 personality traits]; **Honor**.
+4. **Occupation:** **Parent Occupation** (sets social options; may be accepted as your own) → your
+   **Occupation** → **Skills**: Automatic (all chars, e.g. Initiative/4) + Occupational (open to
+   SB×mult) + parent's primary skill (OML+SB) + **5 Option Points** to open/improve (veterans +3
+   OP/yr). ML = SB × multiplier.
+5. **Equipment & Funds → Contacts.**
+
+#### Design
+- **Dedicated "Character Generation" tab**, separate from the play tabs — a step-by-step flow in the
+  pipeline order above.
+- **Random or manual per field.** Every rollable field gets a **roll button** (a worker generates
+  the value from the table) *and* stays editable, so a player can roll, accept, or type a chosen
+  result. Re-rolling a step is allowed until the character is locked.
+- **Propagation (the point of it).** Generated values flow into the live sheet, reusing existing
+  machinery wherever possible:
+  - Birthdate → **sunsign** (existing `attr_sunsign`); attributes → the existing attribute fields.
+  - Attributes + sunsign → **Skill Bases** via Phase 3's `SKILL_DATA` (already built).
+  - Occupation → open its skill list into the correct repeating sections (Phase 3's skill→section
+    routing) with **ML = SB × the listed multiplier**; an **Option-Point budget** tracker (start 5,
+    +3/veteran-yr) that decrements as skills are opened/improved.
+  - Psyche/medical traits → a **traits section** whose mechanical entries feed the penalty math
+    (this is the *psyche & honor* hole noted separately — folded in here).
+- **Lock when live.** A `character_finalized` flag: once set ("begin play"), the chargen tab goes
+  **read-only** (roll buttons hidden, inputs disabled) so an in-use character can't be accidentally
+  regenerated. Reversible behind a confirm. New sheets start unlocked; imported/existing characters
+  can simply leave the tab unused (chargen is fully opt-in).
+- **Data tables to transcribe** (values only, no prose — copyright, like the Weapon Data table):
+  Species, Social Class, Sibling Rank, Parent, Estrangement, Frame/Weight/Comeliness modifiers,
+  Psyche, medical traits, Honor, and the per-occupation skill lists (the large one).
+
+**Risk:** high — largest feature in the plan; many tables; writes attribute + skill data, so the
+lock + opt-in gating are essential to avoid clobbering a live character. **Dependencies:** builds on
+Phase 3 (SB-from-attrs + skill routing) and the existing sunsign mapping; pairs with Phase 3b if
+clerical chargen (RML = SB×4, opening Piety = Will×5) is included. **Verify:** unit tests that each
+table roll lands in-range and that occupation→skill propagation opens the right skills at SB×mult
+(against a worked chargen example, e.g. Takar the Peoni cleric, Character 23–24); in-VTT that
+locking disables the tab and that re-rolling before lock doesn't corrupt play-tab data.
+
+### Phase 11 — Skill specialties · S–M · setting-gated
+Adds structured **skill specialties** (4001 Skills 7), toggled by a setting `hr_specialties`
+(default OFF). The rules: a specialty may be declared once its base skill reaches **ML 40**; it
+**opens at the base skill's current ML**, is then a **separate skill** with its own ML developed
+independently, and **develops at +2 per development roll** (vs +1); the base skill improves
+separately and is used outside the specialty.
+
+The sheet already half-supports this: parenthetical names (`Sword (Broadsword)`) work as free-text
+rows, and Phase 3's `SKILL_DATA` lookup already strips the parenthetical so the specialty row gets
+the **base skill's SB** (same attribute triplet). This phase makes the relationship explicit.
+
+**When OFF (default):** unchanged — specialties remain free-text `Base (Specialty)` rows; SB still
+auto-derives from the base. No migration, nothing stranded.
+
+**When ON:**
+1. **Specialty link.** Add a per-row marker (e.g. `*_specialty_of` naming the base skill) so a row is
+   recognized as a specialty of an existing skill — kept in the *same* repeating section as the base
+   (combatskill/physicalskill/loreskill/…), so the Phase 2 per-row EML pipeline and roll button work
+   unchanged.
+2. **SB shared from base.** Reuse Phase 3's lookup: specialty SB = base skill's SB (same triplet +
+   sunsign). Already true for parenthetical names; make it explicit for the linked row.
+3. **Open-at-base-ML + ML 40 gate.** An "add specialty" affordance on a base skill row that seeds the
+   new specialty's ML to the base skill's **current ML**, with a validation warning if base ML < 40
+   (warn, don't hard-block — house rules vary). After creation the specialty ML is independent.
+4. **Faster development (+2/SDR).** Only meaningful if the Phase 9 B/4 SDR tracker exists — when both
+   are on, a specialty's development roll advances +2. **Dependency note:** standalone, this is just a
+   label; the +2 behavior needs Phase 9's SDR.
+5. **Grouped display (nice-to-have).** Visually group specialties under their base skill.
+
+**Risk:** low–medium — mostly additive per-row fields + a small seeding/gating worker + optional
+display grouping; reuses Phase 2 (EML) and Phase 3 (SB). **Dependencies:** Phase 3 (built); the +2
+development advantage depends on Phase 9 B/4. **Verify:** unit tests that a linked specialty inherits
+the base SB and seeds ML from the base, and that the ML-40 gate warns correctly; in-VTT that a
+specialty rolls off its own ML via the existing pipeline and that toggling the setting off leaves
+existing rows working.
+
 ### Suggested sequence
-Phase 0 → 1 → 2 → 3 (and 3b alongside 3), with 4/5 interleaved as convenient, then **6**, then **7 last** (a
-your-game/Pro feature spanning sheet + Mod script). 0 and 1 are low-risk and make 2/3 safe to
-attempt; 3b reuses 3's SB-from-attrs machinery; 6 reuses 2's EML pipeline and 3's skill→attribute
-table; 7 is largely independent (separate sheets + a companion Mod script) and need not block the
-others. Each phase is its own version bump + changelog entry (see process notes).
+**Shipped in v3.2.0 (20260614):** Phases 0, 5, 1, 2, 3. **Deferred:** Phase 4 legacy-armor sunset
+(owner decision) and Phase 3.2 ML→OML auto-seed.
+**Remaining, each its own version:** Phase 3b (religion), Phase 6 (attribute buffs), Phase 7
+(multiple horses + Mod script), Phase 8 (conformance-audit polish), Phase 9 (attacker-side combat
+helpers + minor gaps), Phase 10 (character generation). 3b reuses 3's SB-from-attrs machinery; 6
+reuses 2's EML pipeline and 3's skill→attribute table; 7 is largely independent (separate sheets + a
+companion Mod script); 8 and 9 are independent/additive coverage that can land any time (9 reuses
+Phase 2's roll-query + clamp pattern); **10 is the largest** — it depends on Phase 3 (SB-from-attrs +
+skill routing) and pairs with 3b for clerical chargen, so sequence it after those. Phase 11 (skill
+specialties) reuses Phase 2/3 and is small; its +2-development advantage depends on Phase 9 B/4.
+Each is its own version bump + changelog entry (see process notes).
 
 ---
 
