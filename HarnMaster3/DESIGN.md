@@ -577,11 +577,31 @@ Learned during the v3.1.0 fix pass; follow these to keep edits safe and reviewab
   rolls, macro rendering, CSS show/hide). Add a **copyright-guard test** for any feature that touches
   rulebook tables, asserting the protected content is *not* embedded (see `phase9.test.mjs`).
 
-### Deferred cosmetic fixes
-- **Attribute panel row height (low priority).** Character & horse attribute panels now match (label
-  and value input both `33px`; fixed in v3.2.1 by dropping the horse label from the `.characterviewer`
-  `2.7em` override). But the rows feel a touch tight — revisit the attribute label/input height for a
-  roomier fit in the panel, applying the same value to both panels so they stay consistent.
+### Backlog / deferred items
+Smaller deferred features and polish carried over from **shipped** phases (the named, not-yet-built
+phases — 3b, 4, 6, 7, 8, 10, 12 — are tracked above). Keep this list current so every recap is complete.
+
+- **3.2 — ML→OML auto-seed** *(BUILT v3.2.3, pending in-VTT)*: sets an unset ML to `SB × OML` for
+  recognised skills. **Ungated — base canon.** Skips specialty rows (they open at the base's current
+  ML via Phase 11); only-when-ML-0 (never clobbers an improved ML). `SKILL_OML` map attaches an OML
+  multiplier to each `SKILL_DATA` entry; Language/Script omitted (non-SB×N openings).
+- **Phase 5 — i18n stretch:** wire Roll20 `data-i18n` on labels + a translation JSON (only the locale
+  files exist now); rename the confusing `--background-dark` CSS variable.
+- **Phase 9 — movement helpers:** running/sprint distances. Marginal.
+- **Phase 9 — environmental damage:** falling / fire / drowning / frostbite. Mostly GM-adjudicated;
+  at most a falling-impact helper.
+- **Phase 9 — "skills used this session" tracker:** mark-used + batch develop. (The *auto-increment
+  on develop* half shipped in Phase 11.)
+- **Phase 11 — grouped specialty display:** visually group specialties under their base skill.
+  Skipped because Roll20 can't reorder repeating rows.
+- **HM weapon-field UX:** the HM attack field must be entered as a *negative*; relabel or flip the
+  sign (needs migration care). Also listed inside Phase 8.
+- **max-ML manual validation:** warn if a *manually-entered* ML exceeds 100 + SB. (Phase 11's develop
+  already caps at 100+SB; this is the manual-entry warning, a Phase 8 item.)
+- **Attribute-panel row height (cosmetic, low priority):** character & horse panels now match (both
+  `33px`, fixed v3.2.1) but feel tight — revisit for a roomier fit, same value on both panels.
+- **Phase 4 sub-idea:** make the fixed skills a pre-seeded repeating section (larger; part of the
+  legacy/model cleanup).
 
 ---
 

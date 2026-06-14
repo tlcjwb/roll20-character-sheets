@@ -1643,6 +1643,9 @@
 			<label for=fumblestumblehrtoggle>Use universal penalty instead of physical penalty for Fumble/Stumble?</label>
 			<input id=fumblestumblehrtoggle name="attr_hrfumblestumblepenalty" type="checkbox" value="1">
 			<input name="attr_fumblestumblepenalty" type="hidden" value="0"> <!-- provide a default value in case someone rolls before either the option or any penalty is set --> 
+			<div class="full-width skill-header">Skill specialties</div>
+			<label for=specialtiestoggle class="harntooltip" data-tooltiptext="When on, a skill named Base (Specialty) — e.g. Sword (Broadsword) — is treated as a specialty of the base skill: it inherits the base SB, opens at the base ML, and develops +2 per development roll. Per the rules you specialize once the base reaches ML 40.">Enable skill specialties?</label>
+			<input id=specialtiestoggle name="attr_hr_specialties" type="checkbox" value="1">
     	</div>
     	<div class='settings-grid-section settingsgroup colored-grid'>
 			<div class="skill-section-title">Sheet settings</div> 
@@ -1654,8 +1657,6 @@
 			<div class="full-width skill-header">Calculation</div>
 			<label for=autocalcsbtoggle class="harntooltip" data-tooltiptext="When enabled, Skill Base (SB) for recognised skills is computed from your attributes + sunsign and kept in sync. Leave off to enter SB by hand.">Auto-calculate Skill Base?</label>
 			<input id=autocalcsbtoggle name="attr_hr_autocalc_sb" type="checkbox" value="1">
-			<label for=specialtiestoggle class="harntooltip" data-tooltiptext="When on, a skill named &amp;quot;Base (Specialty)&amp;quot; (e.g. Sword (Broadsword)) inherits the base skill's SB and starts at its ML. Per the rules you specialize at base ML 40+, and a specialty develops +2 per development roll.">Skill specialties?</label>
-			<input id=specialtiestoggle name="attr_hr_specialties" type="checkbox" value="1">
 			<div class="full-width skill-header">Legacy info</div>
 			<label for=showlegacyarmortoggle>Hide armor info from legacy (v1) sheet?</label>
 			<input id=showlegacyarmortoggle name="attr_legacyarmorhidden" type="checkbox" value="1">	
@@ -1663,7 +1664,7 @@
 			<input id=legacycharname name="attr_name" type="text" class="full-width" readonly>
 			<div class="full-width skill-header">Sheet version</div>
 			<div class="full-width">
-			  <input name="attr_character_sheet_version" type="number" value="20260616" readonly>
+			  <input name="attr_character_sheet_version" type="number" value="20260617" readonly>
 			  <input type="hidden" name="attr_data_version" value="" readonly>
 			</div>
     	</div>
@@ -1729,6 +1730,14 @@
 	</div>
 	<div class="changelog">
 		<h2>Changelog</h2>
+		<h3>20260617 - Version 3.2.3</h3>
+		<details>
+			<summary class="changelog-summary"><p class="changelog-summary">Skills open at their Opening ML (Phase 3.2)</p></summary>
+			<ul>
+				<li><b>New skills start at their Opening ML.</b> When a recognised skill has a Skill Base but no ML, the sheet now fills the ML with its <b>OML</b> (SB &times; the skill&rsquo;s multiplier from the Skill Data table). This is base canon, so it&rsquo;s always on (not a house-rule toggle).</li>
+				<li>It only fills a <b>blank</b> ML &mdash; it never changes an ML you&rsquo;ve set or developed. Specialties instead open at their base skill&rsquo;s current ML (the Specialties rule), and Language/Script (whose openings aren&rsquo;t a simple SB&times;N) are left for you to enter.</li>
+			</ul>
+		</details>
 		<h3>20260616 - Version 3.2.2</h3>
 		<details>
 			<summary class="changelog-summary"><p class="changelog-summary">Skill specialties + skills auto-develop (Phase 11)</p></summary>
@@ -2927,6 +2936,10 @@ const SKILL_DATA = {
 const SUN_ABBR = {ulandus:'ula',aralius:'ara',feniri:'fen',ahnu:'ahn',angberelius:'ang',nadai:'nad',hirin:'hir',tarael:'tar',tai:'tai',skorus:'sko',masara:'mas',lado:'lad'};
 function parseSunMods(str){var map={};if(!str)return map;String(str).toLowerCase().split(';').forEach(function(g){var m=g.match(/([a-z\/ ]+)\+(\d+)/);if(!m)return;var b=parseInt(m[2]);m[1].split('/').forEach(function(s){s=s.trim();if(s)map[s]=b;});});return map;}
 Object.keys(SKILL_DATA).forEach(function(k){SKILL_DATA[k].sunmap=parseSunMods(SKILL_DATA[k].sun);});
+// Phase 3.2: OML multiplier per skill (SB×N from the Skill Data table). Language/Script omitted
+// (their OMLs aren't a simple SB×N).
+const SKILL_OML={acrobatics:2,climbing:4,condition:5,dancing:2,jumping:4,legerdemain:1,skiing:1,stealth:3,swimming:1,throwing:4,acting:2,awareness:4,intrigue:3,lovecraft:3,'mental conflict':3,musician:1,oratory:2,rhetoric:3,singing:3,initiative:4,unarmed:4,riding:1,axe:3,blowgun:4,bow:2,club:4,dagger:3,flail:1,net:1,polearm:2,shield:3,sling:1,spear:3,sword:3,whip:1,agrik:1,halea:1,ilvir:1,larani:1,morgath:1,naveh:1,peoni:1,sarajin:1,"save-k'nor":1,siem:1,agriculture:2,alchemy:1,animalcraft:1,astrology:1,brewing:2,ceramics:2,cookery:3,drawing:2,embalming:1,engineering:1,fishing:3,fletching:1,folklore:3,foraging:3,glassworking:1,heraldry:1,herblore:1,hidework:2,hunting:2,inkcraft:1,jewelcraft:1,law:1,lockcraft:1,lore:2,masonry:1,mathematics:1,metalcraft:1,milling:2,mining:1,perfumery:1,physician:1,piloting:1,runecraft:1,seamanship:2,shipwright:1,survival:3,tarotry:1,textilecraft:2,timbercraft:2,tracking:2,weaponcraft:1,weatherlore:3,woodcraft:2};
+Object.keys(SKILL_OML).forEach(function(k){if(SKILL_DATA[k])SKILL_DATA[k].oml=SKILL_OML[k];});
 function sbSignTokens(sunsign){return String(sunsign||'').toLowerCase().trim().split('-').map(function(s){return SUN_ABBR[s.trim()];}).filter(Boolean);}
 function computeSB(data,v,tokens){var sum=0;data.attrs.forEach(function(a){sum+=parseInt(v[a])||0;});var sb=Math.round(sum/3);var bonus=0;tokens.forEach(function(t){if(data.sunmap[t]!=null&&data.sunmap[t]>bonus)bonus=data.sunmap[t];});return sb+bonus;}
 function skillKey(name){return String(name||'').toLowerCase().trim().replace(/\s*\(.*\)\s*$/,'');}
@@ -3324,6 +3337,41 @@ function developRepeating(pre, section){
   });
 });
 // ===== end Phase 11 Stage B =====
+
+// ===== Phase 3.2 — ML defaults to OML for a recognised skill with no ML (base canon, ungated) =====
+// fixed skills
+on('change:'+Object.keys(FIXED_SKILLS).map(function(p){return p+'_sb';}).join(' change:')+' sheet:opened', function(){
+  var attrs=[]; for(var p in FIXED_SKILLS){ attrs.push(p+'_sb',p+'_ml'); }
+  getAttrs(attrs, function(v){
+    var out={};
+    for(var p in FIXED_SKILLS){
+      var d=SKILL_DATA[FIXED_SKILLS[p]];
+      if(d && d.oml && !int(v[p+'_ml']) && int(v[p+'_sb'])) out[p+'_ml']=int(v[p+'_sb'])*d.oml;
+    }
+    if(Object.keys(out).length) setAttrs(out);
+  });
+});
+// repeating skills (skip specialties — they open at the base's current ML via Phase 11)
+REPEAT_SKILL_SECTIONS.forEach(function(section){
+  on('change:repeating_'+section+':'+section+'_name change:repeating_'+section+':'+section+'_sb sheet:opened', function(){
+    getSectionIDs('repeating_'+section, function(ids){
+      if(!ids.length) return;
+      var f=[]; ids.forEach(function(id){ var p='repeating_'+section+'_'+id+'_'+section+'_'; f.push(p+'name',p+'sb',p+'ml'); });
+      getAttrs(f, function(v){
+        var out={};
+        ids.forEach(function(id){
+          var p='repeating_'+section+'_'+id+'_'+section+'_', nm=v[p+'name'];
+          if(nm && !hasParenSpec(nm)){
+            var d=resolveSkillData(nm);
+            if(d && d.oml && !int(v[p+'ml']) && int(v[p+'sb'])) out[p+'ml']=int(v[p+'sb'])*d.oml;
+          }
+        });
+        if(Object.keys(out).length) setAttrs(out);
+      });
+    });
+  });
+});
+// ===== end Phase 3.2 =====
 </script>
 
 
