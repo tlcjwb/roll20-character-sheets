@@ -411,6 +411,19 @@
         <div class='character-grid-section section-title'><h2>Combat Profile</h2></div>
         <div class='character-grid-section combat combat-grid colored-grid'>
 			<div class="skill-section-title">COMBAT STATS</div>
+			<label for=combat_aim class="harntooltip" data-tooltiptext="Aim zone: High/Low give -10 to attacks and shift Strike Location">Aim Zone</label>
+			  <select id=combat_aim name="attr_combat_aim" class="skill-label combat-mod-select"><option value="mid">Mid</option><option value="high">High</option><option value="low">Low</option></select>
+			<div>&nbsp;</div>
+			<label for=combat_aspect class="harntooltip" data-tooltiptext="Preferred damage aspect for the Damage roll; Default uses the weapon's highest impact">Aspect</label>
+			  <select id=combat_aspect name="attr_combat_aspect" class="skill-label combat-mod-select"><option value="default">Default</option><option value="b">Blunt</option><option value="e">Edge</option><option value="p">Point</option></select>
+			<div>&nbsp;</div>
+			<label for=combat_prone class="harntooltip" data-tooltiptext="Opponent is prone: +20 to your attack or defense">Opp. Prone</label>
+			  <input id=combat_prone type="checkbox" name="attr_combat_prone" value="20" class="skill-value">
+			<div>&nbsp;</div>
+			<label for=combat_close class="harntooltip" data-tooltiptext="Close mode: -10 (swung weapons in tight space)">Close Mode</label>
+			  <input id=combat_close type="checkbox" name="attr_combat_close" value="-10" class="skill-value">
+			<div>&nbsp;</div>
+			<input type="hidden" name="attr_combat_aim_mod" value="0">
     		<label for=combatinit>Combat Init</label>
     		  <input id=combatinit type="number" name="attr_combat_initiative" class="skill-value" value="0" readonly>
     		<button type="roll" aria-label="Combat Initiative To Turn"	value="&{template:custom} {{color=harn}} {{title=Turn Order}} {{subtitle=@{character_name}}} {{Initiative=[[@{combat_initiative} &{tracker}]]}} {{desc=Initiative (adjusted for penalties) added to the Turn Order}}" name="roll_CombatInitiativeToTurn" class="turnorder-button harntooltip" data-tooltiptext="Add current initiative to Turn Order. Remember to select your token!">
@@ -440,7 +453,7 @@
     
     		<label for=combatdodge>Dodge</label>
     		  <input id=combatdodge type="number" name="attr_dodge_ml" class="skill-value" readonly>
-    		<button type="roll" aria-label="Combat Dodge Check"	value="&{template:custom} {{color=harn}} {{title=@{character_name} tests dodge}} {{rolltarget=[[{[[{[[@{dodge_eml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{dodge_ml}]]}} {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}}"	name="roll_CombatDodgeCheck"></button>	
+    		<button type="roll" aria-label="Combat Dodge Check"	value="&{template:custom} {{color=harn}} {{title=@{character_name} tests dodge}} {{rolltarget=[[{[[{[[@{dodge_eml_eff} + @{combat_prone} + @{combat_close} + ?{Other modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{dodge_ml}]]}} {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[@{combat_prone} + @{combat_close} + ?{Other modifier?|0}]]}}"	name="roll_CombatDodgeCheck"></button>	
 		</div>
         <div class='character-grid-section load load-grid colored-grid'>
     	    <div class="skill-section-title">LOAD CARRIED</div>
@@ -666,6 +679,7 @@
     		<div class="skill-header skill-value">&nbsp;</div>
     		<div class="skill-header skill-value">DML</div>
     		<div class="skill-header skill-value">&nbsp;</div>
+    		<div class="skill-header skill-value">DMG</div>
     		<div class="skill-header skill-label weapon-note">Note</div>
     		
     		<input type="text" name="attr_punch_weapon_name" class="weapon-label" readonly value="Punch">
@@ -684,11 +698,12 @@
     		<input type="number" name="attr_punch_weapon_f" class="skill-value" readonly value="0">
     		<input type="number" name="attr_punch_weapon_ml" class="skill-value" value="0" readonly>
     		<input type="number" name="attr_punch_weapon_aml" class="skill-value" value="0" readonly>
-    		<button type="roll" aria-label="Punch Weapon AML Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} attacks with @{punch_weapon_name}}} {{rolltarget=[[{[[{[[@{punch_weapon_aml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{punch_weapon_aml}]]}} {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifiers=[[?{Target Modifier?|0}]]}}  {{desc=B(@{punch_weapon_b}) E(@{punch_weapon_e}) P(@{punch_weapon_p})}}" name="roll_PunchWeaponAMLSkillCheck">
+    		<button type="roll" aria-label="Punch Weapon AML Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} attacks with @{punch_weapon_name}}} {{rolltarget=[[{[[{[[@{punch_weapon_aml_eff} + @{combat_aim_mod} + @{combat_prone} + @{combat_close} + ?{Other modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{punch_weapon_aml}]]}} {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifiers=[[@{combat_aim_mod} + @{combat_prone} + @{combat_close} + ?{Other modifier?|0}]]}}  {{desc=B(@{punch_weapon_b}) E(@{punch_weapon_e}) P(@{punch_weapon_p})}}" name="roll_PunchWeaponAMLSkillCheck">
     		</button>
     		<input type="number" name="attr_punch_weapon_dml" class="skill-value" value="0" readonly>
-    		<button type="roll" aria-label="Punch Weapon DML Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} blocks with a @{punch_weapon_name}}}  {{rolltarget=[[{[[{[[@{punch_weapon_dml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{punch_weapon_dml}]]}} {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifiers=[[?{Target Modifier?|0}]]}}" name="roll_PunchWeaponDMLSkillCheck">
+    		<button type="roll" aria-label="Punch Weapon DML Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} blocks with a @{punch_weapon_name}}}  {{rolltarget=[[{[[{[[@{punch_weapon_dml_eff} + @{combat_prone} + @{combat_close} + ?{Other modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{punch_weapon_dml}]]}} {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifiers=[[@{combat_prone} + @{combat_close} + ?{Other modifier?|0}]]}}" name="roll_PunchWeaponDMLSkillCheck">
     		</button>
+    		<button type="action" class="injuryroll harntooltip" name="act_punchdamage" data-tooltiptext="Strike Location + Damage (Punch)">&#127922;</button>
     		<input type="text" name="attr_punch_weapon_note" class="skill-label weapon-note">
     			
     		<input type="text" name="attr_kick_weapon_name" class="weapon-label" readonly value="Kick">
@@ -707,11 +722,12 @@
     		<input type="number" name="attr_kick_weapon_f" class="skill-value" readonly value="0">
     		<input type="number" name="attr_kick_weapon_ml" class="skill-value" value="0" readonly>
     		<input type="number" name="attr_kick_weapon_aml" class="skill-value" value="0" readonly>
-    		<button type="roll" aria-label="Kick Weapon AML Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} attacks with a @{kick_weapon_name}}} {{rolltarget=[[{[[{[[@{kick_weapon_aml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}}{{Mastery Lvl=[[@{kick_weapon_aml}]]}}  {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifiers=[[?{Target Modifier?|0}]]}} {{desc=B(@{kick_weapon_b}) E(@{kick_weapon_e}) P(@{kick_weapon_p})}}" name="roll_KickWeaponAMLSkillCheck">
+    		<button type="roll" aria-label="Kick Weapon AML Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} attacks with a @{kick_weapon_name}}} {{rolltarget=[[{[[{[[@{kick_weapon_aml_eff} + @{combat_aim_mod} + @{combat_prone} + @{combat_close} + ?{Other modifier?|0}]],5}kh1]],95}kl1]]}}{{Mastery Lvl=[[@{kick_weapon_aml}]]}}  {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifiers=[[@{combat_aim_mod} + @{combat_prone} + @{combat_close} + ?{Other modifier?|0}]]}} {{desc=B(@{kick_weapon_b}) E(@{kick_weapon_e}) P(@{kick_weapon_p})}}" name="roll_KickWeaponAMLSkillCheck">
     		</button>
     		<input type="number" name="attr_kick_weapon_dml" class="skill-value" value="0" readonly>
-    		<button type="roll" aria-label="Kick Weapon DML Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} defends with a @{kick_weapon_name}}} {{rolltarget=[[{[[{[[@{kick_weapon_dml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{kick_weapon_dml}]]}} {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifiers=[[?{Target Modifier?|0}]]}}" name="roll_KickWeaponDMLSkillCheck">
-    		</button>		
+    		<button type="roll" aria-label="Kick Weapon DML Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} defends with a @{kick_weapon_name}}} {{rolltarget=[[{[[{[[@{kick_weapon_dml_eff} + @{combat_prone} + @{combat_close} + ?{Other modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{kick_weapon_dml}]]}} {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifiers=[[@{combat_prone} + @{combat_close} + ?{Other modifier?|0}]]}}" name="roll_KickWeaponDMLSkillCheck">
+    		</button>
+    		<button type="action" class="injuryroll harntooltip" name="act_kickdamage" data-tooltiptext="Strike Location + Damage (Kick)">&#127922;</button>		
     		<input type="text" name="attr_kick_weapon_note" class="skill-label weapon-note">		
     
     		<fieldset class="repeating_weapon">
@@ -729,7 +745,7 @@
     				<input type="number" name="attr_weapon_atk" class="skill-value" readonly>
     				<input type="number" name="attr_weapon_def" class="skill-value" readonly>
     				<input type="number" name="attr_weapon_hm" class="skill-value" readonly>
-    				<button type="roll" aria-label="Weapon HMAML Skill Check" class="harntooltip" value="&{template:custom} {{color=harn}} {{title=@{character_name} attacks with a @{weapon_name}}} {{subtitle=With HM penalty}} {{rolltarget=[[{[[{[[@{weapon_hmaml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{weapon_aml}]]}} {{penalty=[[[[(@{physical_penalty})*5]] + [[-1*@{weapon_hm}]]]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}} {{desc=B(@{weapon_b}) E(@{weapon_e}) P(@{weapon_p}) F(@{weapon_f})}}" name="roll_WeaponHMAMLSkillCheck" data-tooltiptext="Use this button to roll attack with included HM penalty">
+    				<button type="roll" aria-label="Weapon HMAML Skill Check" class="harntooltip" value="&{template:custom} {{color=harn}} {{title=@{character_name} attacks with a @{weapon_name}}} {{subtitle=With HM penalty}} {{rolltarget=[[{[[{[[@{weapon_hmaml_eff} + @{combat_aim_mod} + @{combat_prone} + @{combat_close} + ?{Other modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{weapon_aml}]]}} {{penalty=[[[[(@{physical_penalty})*5]] + [[-1*@{weapon_hm}]]]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[@{combat_aim_mod} + @{combat_prone} + @{combat_close} + ?{Other modifier?|0}]]}} {{desc=B(@{weapon_b}) E(@{weapon_e}) P(@{weapon_p}) F(@{weapon_f})}}" name="roll_WeaponHMAMLSkillCheck" data-tooltiptext="Use this button to roll attack with included HM penalty">
     				</button>
     				<input type="number" name="attr_weapon_b" class="skill-value" readonly>
     				<input type="number" name="attr_weapon_e" class="skill-value" readonly>
@@ -737,11 +753,12 @@
     				<input type="number" name="attr_weapon_f" class="skill-value" readonly>
     				<input type="number" name="attr_weapon_ml" class="skill-value" readonly>
     				<input type="number" name="attr_weapon_aml" class="skill-value" value="0" readonly>  
-    				<button type="roll" aria-label="Weapon AML Skill Check"	class="harntooltip" value="&{template:custom} {{color=harn}} {{title=@{character_name} attacks with a @{weapon_name}}}  {{rolltarget=[[{[[{[[@{weapon_aml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}}{{Mastery Lvl=[[@{weapon_aml}]]}}  {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}} {{successdesc=B(@{weapon_b}) E(@{weapon_e}) P(@{weapon_p}) F(@{weapon_f})}}" name="roll_WeaponAMLSkillCheck" data-tooltiptext="Use this button to roll a normal attack">
+    				<button type="roll" aria-label="Weapon AML Skill Check"	class="harntooltip" value="&{template:custom} {{color=harn}} {{title=@{character_name} attacks with a @{weapon_name}}}  {{rolltarget=[[{[[{[[@{weapon_aml_eff} + @{combat_aim_mod} + @{combat_prone} + @{combat_close} + ?{Other modifier?|0}]],5}kh1]],95}kl1]]}}{{Mastery Lvl=[[@{weapon_aml}]]}}  {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[@{combat_aim_mod} + @{combat_prone} + @{combat_close} + ?{Other modifier?|0}]]}} {{successdesc=B(@{weapon_b}) E(@{weapon_e}) P(@{weapon_p}) F(@{weapon_f})}}" name="roll_WeaponAMLSkillCheck" data-tooltiptext="Use this button to roll a normal attack">
     				</button>
     				<input type="number" name="attr_weapon_dml" class="skill-value" value="0" readonly>
-    				<button type="roll" aria-label="Weapon DML Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} blocks with a @{weapon_name}}} {{rolltarget=[[{[[{[[@{weapon_dml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{weapon_dml}]]}}  {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}} {{desc=WQ @{weapon_wq}}}" name="roll_WeaponDMLSkillCheck">
+    				<button type="roll" aria-label="Weapon DML Skill Check" value="&{template:custom} {{color=harn}} {{title=@{character_name} blocks with a @{weapon_name}}} {{rolltarget=[[{[[{[[@{weapon_dml_eff} + @{combat_prone} + @{combat_close} + ?{Other modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{weapon_dml}]]}}  {{penalty=[[(@{physical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[@{combat_prone} + @{combat_close} + ?{Other modifier?|0}]]}} {{desc=WQ @{weapon_wq}}}" name="roll_WeaponDMLSkillCheck">
     				</button>
+    				<button type="action" class="injuryroll harntooltip" name="act_weapondamage" data-tooltiptext="Roll Strike Location + Damage for this weapon (uses the Combat Modifiers panel)">&#127922;</button>
     				<input type="text" name="attr_weapon_note" class="skill-label weapon-note" readonly>
     			</div>
     		</fieldset>		
@@ -787,25 +804,26 @@
     				<input type="number" name="attr_missileweapon_short" class="skill-value" value="0" readonly>
     				<input type="number" name="attr_missileweapon_short_aml" class="skill-value" value="0" readonly>
     				<input type="number" name="attr_missileweapon_short_dmg" class="skill-value" value="0" readonly>
-    				<button type="roll" aria-label="Missile Weapon Short Skill Check"	value="&{template:custom} {{color=harn}} {{title=@{character_name} shoots with a @{missileweapon_name}}} {{subtitle=at Short Range}} {{rolltarget=[[{[[{[[@{missileweapon_short_aml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{missileweapon_short_aml}]]}} {{penalty=[[(@{physical_penalty})*5 +(@{is_mounted})*10]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}} {{successdesc=@{missileweapon_aspect}(@{missileweapon_short_dmg}) }}" name="roll_MissileWeaponShortSkillCheck">
-    				</button>
+    				<span class="mw-dmgwrap"><button type="roll" aria-label="Missile Weapon Short Skill Check"	value="&{template:custom} {{color=harn}} {{title=@{character_name} shoots with a @{missileweapon_name}}} {{subtitle=at Short Range}} {{rolltarget=[[{[[{[[@{missileweapon_short_aml_eff} + @{combat_aim_mod} + @{combat_prone} + ?{Other modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{missileweapon_short_aml}]]}} {{penalty=[[(@{physical_penalty})*5 +(@{is_mounted})*10]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[@{combat_aim_mod} + @{combat_prone} + ?{Other modifier?|0}]]}} {{successdesc=@{missileweapon_aspect}(@{missileweapon_short_dmg}) }}" name="roll_MissileWeaponShortSkillCheck">
+    				</button><button type="action" class="injuryroll harntooltip damage-die" name="act_missileshortdmg" data-tooltiptext="Strike Location + Damage (Short range)">&#127922;</button></span>
     				<div class="mw-extraranges">			
 						<input type="number" name="attr_missileweapon_medium" class="skill-value" value="0" readonly>
 						<input type="number" name="attr_missileweapon_medium_aml" class="skill-value" value="0" readonly>
 						<input type="number" name="attr_missileweapon_medium_dmg" class="skill-value" value="0" readonly> 
-						<button type="roll" aria-label="Missile Weapon Medium Skill Check"	value="&{template:custom} {{color=harn}} {{title=@{character_name} shoots with a @{missileweapon_name}}} {{subtitle=at Medium Range}} {{rolltarget=[[{[[{[[@{missileweapon_medium_aml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{missileweapon_medium_aml}]]}} {{penalty=[[(@{physical_penalty})*5 +(@{is_mounted})*10]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}} {{successdesc=@{missileweapon_aspect}(@{missileweapon_medium_dmg})}}" name="roll_MissileWeaponMediumSkillCheck">
-						</button>
+						<span class="mw-dmgwrap"><button type="roll" aria-label="Missile Weapon Medium Skill Check"	value="&{template:custom} {{color=harn}} {{title=@{character_name} shoots with a @{missileweapon_name}}} {{subtitle=at Medium Range}} {{rolltarget=[[{[[{[[@{missileweapon_medium_aml_eff} + @{combat_aim_mod} + @{combat_prone} + ?{Other modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{missileweapon_medium_aml}]]}} {{penalty=[[(@{physical_penalty})*5 +(@{is_mounted})*10]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[@{combat_aim_mod} + @{combat_prone} + ?{Other modifier?|0}]]}} {{successdesc=@{missileweapon_aspect}(@{missileweapon_medium_dmg})}}" name="roll_MissileWeaponMediumSkillCheck">
+						</button><button type="action" class="injuryroll harntooltip damage-die" name="act_missilemediumdmg" data-tooltiptext="Strike Location + Damage (Medium range)">&#127922;</button></span>
 						<input type="number" name="attr_missileweapon_long" class="skill-value" value="0" readonly>
 						<input type="number" name="attr_missileweapon_long_aml" class="skill-value" value="0" readonly>
 						<input type="number" name="attr_missileweapon_long_dmg" class="skill-value" value="0" readonly>
-						<button type="roll" aria-label="Missile Weapon Long Skill Check"	value="&{template:custom} {{color=harn}} {{title=@{character_name} shoots with a @{missileweapon_name}}} {{subtitle=at Long Range}} {{rolltarget=[[{[[{[[@{missileweapon_long_aml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{missileweapon_long_aml}]]}} {{penalty=[[(@{physical_penalty})*5 +(@{is_mounted})*10]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}} {{successdesc=@{missileweapon_aspect}(@{missileweapon_long_dmg})}}" name="roll_MissileWeaponLongSkillCheck">
-						</button>
+						<span class="mw-dmgwrap"><button type="roll" aria-label="Missile Weapon Long Skill Check"	value="&{template:custom} {{color=harn}} {{title=@{character_name} shoots with a @{missileweapon_name}}} {{subtitle=at Long Range}} {{rolltarget=[[{[[{[[@{missileweapon_long_aml_eff} + @{combat_aim_mod} + @{combat_prone} + ?{Other modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{missileweapon_long_aml}]]}} {{penalty=[[(@{physical_penalty})*5 +(@{is_mounted})*10]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[@{combat_aim_mod} + @{combat_prone} + ?{Other modifier?|0}]]}} {{successdesc=@{missileweapon_aspect}(@{missileweapon_long_dmg})}}" name="roll_MissileWeaponLongSkillCheck">
+						</button><button type="action" class="injuryroll harntooltip damage-die" name="act_missilelongdmg" data-tooltiptext="Strike Location + Damage (Long range)">&#127922;</button></span>
 						<input type="number" name="attr_missileweapon_extreme" class="skill-value" value="0" readonly>					
 						<input type="number" name="attr_missileweapon_extreme_aml" class="skill-value" value="0" readonly>
 						<input type="number" name="attr_missileweapon_extreme_dmg" class="skill-value" value="0" readonly>
-						<button type="roll" aria-label="Missile Weapon Extreme Skill Check"	value="&{template:custom} {{color=harn}} {{title=@{character_name} shoots with a @{missileweapon_name}}} {{subtitle=at Extreme Range}} {{rolltarget=[[{[[{[[@{missileweapon_extreme_aml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{missileweapon_extreme_aml}]]}} {{penalty=[[(@{physical_penalty})*5 +(@{is_mounted})*10]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[?{Target Modifier?|0}]]}} {{successdesc=@{missileweapon_aspect}(@{missileweapon_extreme_dmg})}}" name="roll_MissileWeaponExtremeSkillCheck">
-						</button>
+						<span class="mw-dmgwrap"><button type="roll" aria-label="Missile Weapon Extreme Skill Check"	value="&{template:custom} {{color=harn}} {{title=@{character_name} shoots with a @{missileweapon_name}}} {{subtitle=at Extreme Range}} {{rolltarget=[[{[[{[[@{missileweapon_extreme_aml_eff} + @{combat_aim_mod} + @{combat_prone} + ?{Other modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{missileweapon_extreme_aml}]]}} {{penalty=[[(@{physical_penalty})*5 +(@{is_mounted})*10]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}} {{Modifier=[[@{combat_aim_mod} + @{combat_prone} + ?{Other modifier?|0}]]}} {{successdesc=@{missileweapon_aspect}(@{missileweapon_extreme_dmg})}}" name="roll_MissileWeaponExtremeSkillCheck">
+						</button><button type="action" class="injuryroll harntooltip damage-die" name="act_missileextremedmg" data-tooltiptext="Strike Location + Damage (Extreme range)">&#127922;</button></span>
     				</div>
+    				
     				<input type="number" name="attr_missileweapon_ammo" class="skill-value">
     			</div>
     		</fieldset>		
@@ -1031,7 +1049,7 @@
 			<div>&nbsp; </div>
 			<label for=horsecombatdodge>Dodge</label>
 			<input id=horsecombatdodge type="number" name="attr_hdodge_ml" class="skill-value" readonly>
-			<button type="roll" aria-label="Horse Combat Dodge Check" value="&{template:custom} {{color=harn}} {{title=@{hname} dodges}}  {{rolltarget=[[{[[{[[@{hdodge_eml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{hdodge_ml}]]}} {{Modifiers=[[?{Target Modifier?|0}]]}} {{penalty=[[(@{hphysical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}}" name="roll_HorseCombatDodgeCheck">
+			<button type="roll" aria-label="Horse Combat Dodge Check" value="&{template:custom} {{color=harn}} {{title=@{hname} dodges}}  {{rolltarget=[[{[[{[[@{hdodge_eml_eff} + @{combat_prone} + @{combat_close} + ?{Other modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{hdodge_ml}]]}} {{Modifiers=[[@{combat_prone} + @{combat_close} + ?{Other modifier?|0}]]}} {{penalty=[[(@{hphysical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}}" name="roll_HorseCombatDodgeCheck">
 			</button>
 			<label for=horsespeed>Horse speed:</label>
             <select id=horsespeed name="attr_horse_speed" class="skill-label width-2col">
@@ -1127,14 +1145,16 @@
 			<div class="skill-header skill-value">ML</div>
 			<div class="skill-header skill-value">AML</div>
 			<div class="skill-header skill-value">&nbsp;</div>
+			<div class="skill-header skill-value">DMG</div>
 			<input type="text" name="attr_trample_weapon_name" class="skill-label" readonly value="Trample">
 			<input type="number" name="attr_trample_weapon_b" class="skill-value" value="8">
 			<input type="number" name="attr_trample_weapon_e" class="skill-value" readonly value="0">
 			<input type="number" name="attr_trample_weapon_p" class="skill-value" readonly value="0">
 			<input type="number" name="attr_htrample_ml" class="skill-value" readonly>
 			<input type="number" name="attr_htrample_aml" class="skill-value" readonly>
-			<button type="roll" aria-label="Trampleweaponamlskillcheck" value="&{template:custom} {{color=harn}} {{title=@{hname} tramples}} {{rolltarget=[[{[[{[[@{htrample_eml_eff} + ?{Target Modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{htrample_aml}]]}} {{Modifiers=[[?{Target Modifier?|0}]]}} {{penalty=[[(@{hphysical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}}  {{note=B(@{trample_weapon_b}) E(@{trample_weapon_e}) P(@{trample_weapon_p})}}" name="roll_trampleweaponamlskillcheck">
+			<button type="roll" aria-label="Trampleweaponamlskillcheck" value="&{template:custom} {{color=harn}} {{title=@{hname} tramples}} {{rolltarget=[[{[[{[[@{htrample_eml_eff} + @{combat_aim_mod} + @{combat_prone} + @{combat_close} + ?{Other modifier?|0}]],5}kh1]],95}kl1]]}} {{Mastery Lvl=[[@{htrample_aml}]]}} {{Modifiers=[[@{combat_aim_mod} + @{combat_prone} + @{combat_close} + ?{Other modifier?|0}]]}} {{penalty=[[(@{hphysical_penalty})*5]]}} {{rollresult=[[1d100cs5cs10cs15cs20cs25cs30cs35cs40cs45cs50cs55cs60cs65cs70cs75cs80cs85cs90cs95cs100]]}}  {{note=B(@{trample_weapon_b}) E(@{trample_weapon_e}) P(@{trample_weapon_p})}}" name="roll_trampleweaponamlskillcheck">
 			</button>
+    		<button type="action" class="injuryroll harntooltip" name="act_trampledamage" data-tooltiptext="Strike Location + Damage (Trample)">&#127922;</button>
 		</div>
     </div> 
 </div>
@@ -1641,7 +1661,7 @@
 			<input id=legacycharname name="attr_name" type="text" class="full-width" readonly>
 			<div class="full-width skill-header">Sheet version</div>
 			<div class="full-width">
-			  <input name="attr_character_sheet_version" type="number" value="20260614" readonly>
+			  <input name="attr_character_sheet_version" type="number" value="20260615" readonly>
 			  <input type="hidden" name="attr_data_version" value="" readonly>
 			</div>
     	</div>
@@ -1707,7 +1727,17 @@
 	</div>
 	<div class="changelog">
 		<h2>Changelog</h2>
-		<h3>20260614 - Version 3.2.0</h3>
+		<h3>20260615 - Version 3.2.1</h3>
+		<details>
+			<summary class="changelog-summary"><p class="changelog-summary">Combat: modifiers panel, auto Strike Location, per-weapon Damage, Missile Data (Phase 9)</p></summary>
+				<ul>
+					<li><b>Combat Modifiers panel</b> (top of Combat Stats): set <b>Aim</b> (High/Low &minus;10), <b>Opponent Prone</b> (+20), <b>Close Mode</b> (&minus;10), and a preferred <b>Aspect</b> once &mdash; every attack/defense roll reads them, so you only get a single optional "Other modifier" prompt (use it for outnumbering, etc.). Aim also drives Strike Location.</li>
+					<li><b>Per-weapon Damage + Strike Location</b> (the &#127922; button on each melee weapon, Punch, Kick, Horse Trample, and beside each Missile range). One click rolls the <b>body location</b> (from your Aim, with left/right side and an auto Face sub-roll) and the <b>Strike Impact</b> (the weapon's aspect impact + Nd6; you enter N from the Melee Attack result). Aspect is auto-picked: a single-aspect weapon uses it, otherwise your preferred Aspect (or the highest impact). Missiles have a separate die per range (Short/Medium/Long/Extreme), each using that range's impact &mdash; no range prompt.</li>
+					<li><b>Missiles: exact range &amp; impact.</b> Naming a standard missile weapon (Shortbow, Longbow, Crossbow, Sling, Staff-sling, Javelin, Spear, etc.) auto-fills its exact per-range hexes and impact from the Missile Data table, replacing the old &ldquo;&minus;1 per band&rdquo; estimate (so e.g. Staff-sling extreme is now 3). Unknown/homebrew weapons keep the estimate, and all fields stay editable.</li>
+					<li>Resolution against a defender (the combat results cross-index and injury determination) stays with the GM &mdash; the sheet covers your character's side only.</li>
+				</ul>
+			</details>
+			<h3>20260614 - Version 3.2.0</h3>
 		<details>
 			<summary class="changelog-summary"><p class="changelog-summary">Auto-calculate Skill Base, in-sheet Help, accessibility, and internal hardening</p></summary>
 			<ul>
@@ -1952,10 +1982,10 @@ props:
       {{/allprops() title subtitle successdesc desc color rollresult rolltarget infected nocrit skilldevroll}}
       
 	  {{^Initiative}} 
-	  <div class="sheet-key sheet-rolltarget">TARGET</div>
-      <div class="sheet-value sheet-rolltarget">{{rolltarget}}</div>	  
-	  <div class="sheet-key sheet-rollresult">RESULT</div>
-      <div class="sheet-value sheet-rollresult">{{rollresult}}</div>
+	  {{#rolltarget}}<div class="sheet-key sheet-rolltarget">TARGET</div>
+      <div class="sheet-value sheet-rolltarget">{{rolltarget}}</div>{{/rolltarget}}	  
+	  {{#rollresult}}<div class="sheet-key sheet-rollresult">RESULT</div>
+      <div class="sheet-value sheet-rollresult">{{rollresult}}</div>{{/rollresult}}
 	  {{/Initiative}}
 	  
 	  {{^skilldevroll}} <!-- normal rolls have to roll under target and can possibly crit -->
@@ -2615,30 +2645,35 @@ on('change:repeating_weapon', function() {
 });
 
 // Missile Weapon AML and DML calculations -->
-on('change:repeating_missileweapon:missileweapon_ml change:repeating_missileweapon:missileweapon_p', function() {
-    getAttrs(['repeating_missileweapon_missileweapon_ml', 'repeating_missileweapon_missileweapon_p'], function(values) {
-		var mml = parseInt(values.repeating_missileweapon_missileweapon_ml);
-		var mdmg = parseInt(values.repeating_missileweapon_missileweapon_p);
-		var shortaml = mml;
-		var mediumaml = mml - 20;
-		var longaml = mml - 40;
-		var extremeaml = mml - 80;
-		var shortdmg = mdmg;
-		var mediumdmg = mdmg - 1;
-		var longdmg = Math.max(mdmg - 2, Math.floor(mdmg/2)); // dmg is never less than 50% weapon dmg 
-		var extremedmg = Math.max(mdmg - 3, Math.floor(mdmg/2)); // dmg is never less than 50% weapon dmg 
-		// console.log("ML", wml, "ATK", watk, "DEF", wdef, "Weapon AML", waml, "Weapon DML", wdml); 
-		// note: mounted penalty calculated in roll button, don't add here 
-        setAttrs({
-            'repeating_missileweapon_missileweapon_short_aml': shortaml,
-			'repeating_missileweapon_missileweapon_medium_aml': mediumaml,
-			'repeating_missileweapon_missileweapon_long_aml': longaml,
-			'repeating_missileweapon_missileweapon_extreme_aml': extremeaml,
-			'repeating_missileweapon_missileweapon_short_dmg': shortdmg,
-			'repeating_missileweapon_missileweapon_medium_dmg': mediumdmg,
-			'repeating_missileweapon_missileweapon_long_dmg': longdmg,
-			'repeating_missileweapon_missileweapon_extreme_dmg': extremedmg
-        });
+on('change:repeating_missileweapon:missileweapon_ml change:repeating_missileweapon:missileweapon_p change:repeating_missileweapon:missileweapon_name', function() {
+    getAttrs(['repeating_missileweapon_missileweapon_ml', 'repeating_missileweapon_missileweapon_p', 'repeating_missileweapon_missileweapon_name'], function(values) {
+        var mml = parseInt(values.repeating_missileweapon_missileweapon_ml) || 0;
+        var out = {
+            'repeating_missileweapon_missileweapon_short_aml': mml,
+            'repeating_missileweapon_missileweapon_medium_aml': mml - 20,
+            'repeating_missileweapon_missileweapon_long_aml': mml - 40,
+            'repeating_missileweapon_missileweapon_extreme_aml': mml - 80
+        };
+        var md = MISSILE_DATA[skillKey(values.repeating_missileweapon_missileweapon_name)];
+        if (md) {
+            // exact range hexes + impact per band (Missile Data table, Combat 16)
+            out['repeating_missileweapon_missileweapon_short']       = md.s[0];
+            out['repeating_missileweapon_missileweapon_medium']      = md.m[0];
+            out['repeating_missileweapon_missileweapon_long']        = md.l[0];
+            out['repeating_missileweapon_missileweapon_extreme']     = md.x[0];
+            out['repeating_missileweapon_missileweapon_short_dmg']   = md.s[1];
+            out['repeating_missileweapon_missileweapon_medium_dmg']  = md.m[1];
+            out['repeating_missileweapon_missileweapon_long_dmg']    = md.l[1];
+            out['repeating_missileweapon_missileweapon_extreme_dmg'] = md.x[1];
+        } else {
+            // unknown/homebrew weapon: approximate impact from base pierce (-1/band, floored at 50%)
+            var mdmg = parseInt(values.repeating_missileweapon_missileweapon_p) || 0;
+            out['repeating_missileweapon_missileweapon_short_dmg']   = mdmg;
+            out['repeating_missileweapon_missileweapon_medium_dmg']  = mdmg - 1;
+            out['repeating_missileweapon_missileweapon_long_dmg']    = Math.max(mdmg - 2, Math.floor(mdmg / 2));
+            out['repeating_missileweapon_missileweapon_extreme_dmg'] = Math.max(mdmg - 3, Math.floor(mdmg / 2));
+        }
+        setAttrs(out);
     });
 });
 
@@ -3077,6 +3112,131 @@ on("clicked:dismissupgradenotice", function() {
   console.log("Hiding sheet upgrade notification until next upgrade."); 
 });
 
+
+// ===== Phase 9 combat rule-data (HârnMaster, Combat 13/16 + Combat Tables p.169) =====
+// Functional game data (d100 ranges, weapon range/impact) — referenced throughout the rules.
+const MISSILE_DATA = {
+  'shortbow':    {s:[20,6],  m:[40,5],  l:[80,4],   x:[160,3]},
+  'longbow':     {s:[25,8],  m:[50,7],  l:[100,6],  x:[200,5]},
+  'hartbow':     {s:[30,9],  m:[60,8],  l:[120,7],  x:[240,6]},
+  'crossbow':    {s:[20,8],  m:[40,7],  l:[80,6],   x:[160,5]},
+  'blowgun':     {s:[5,0],   m:[10,0],  l:[20,0],   x:[40,0]},
+  'sling':       {s:[15,4],  m:[30,3],  l:[60,2],   x:[120,2]},
+  'staff-sling': {s:[25,5],  m:[50,4],  l:[100,3],  x:[200,3]},
+  'taburi':      {s:[4,4],   m:[8,3],   l:[16,2],   x:[32,2]},
+  'shorkana':    {s:[3,5],   m:[6,4],   l:[12,3],   x:[24,3]},
+  'javelin':     {s:[8,7],   m:[16,6],  l:[32,5],   x:[64,4]},
+  'spear':       {s:[6,8],   m:[12,7],  l:[24,6],   x:[48,5]}
+};
+// Strike Location: each column is a contiguous 1-100 partition; 3rd element = sided (odd=left/even=right).
+const STRIKE_LOC = {
+  mid:  [[5,'Skull'],[10,'Face'],[15,'Neck'],[27,'Shoulder',1],[33,'Upper Arm',1],[35,'Elbow',1],[39,'Forearm',1],[43,'Hand',1],[60,'Thorax'],[70,'Abdomen'],[74,'Groin'],[80,'Hip',1],[88,'Thigh',1],[90,'Knee',1],[96,'Calf',1],[100,'Foot',1]],
+  high: [[15,'Skull'],[30,'Face'],[45,'Neck'],[57,'Shoulder',1],[69,'Upper Arm',1],[73,'Elbow',1],[81,'Forearm',1],[85,'Hand',1],[95,'Thorax'],[100,'Abdomen']],
+  low:  [[6,'Forearm',1],[12,'Hand',1],[19,'Thorax'],[29,'Abdomen'],[35,'Groin'],[49,'Hip',1],[70,'Thigh',1],[78,'Knee',1],[92,'Calf',1],[100,'Foot',1]]
+};
+const FACE_SUB = [[15,'Jaw'],[30,'Eye',1],[65,'Cheek',1],[80,'Nose'],[90,'Ear',1],[100,'Mouth']];
+function strikeRow(table, roll){ for (var i=0;i<table.length;i++){ if (roll <= table[i][0]) return table[i]; } return table[table.length-1]; }
+function strikeLocation(roll, aim, faceRoll){
+  roll = parseInt(roll) || 0;
+  if (roll < 1 || roll > 100) return '';
+  var col = STRIKE_LOC[String(aim||'mid').toLowerCase()] || STRIKE_LOC.mid;
+  var row = strikeRow(col, roll);
+  if (row[1] === 'Face'){
+    var fr = parseInt(faceRoll);
+    if (!(fr >= 1 && fr <= 100)) return 'Face';
+    var f = strikeRow(FACE_SUB, fr);
+    return 'Face: ' + (f[2] ? ((fr % 2 === 1 ? 'left ' : 'right ') + f[1]) : f[1]);
+  }
+  return (row[2] ? (roll % 2 === 1 ? 'left ' : 'right ') : '') + row[1];
+}
+on('change:strike_roll change:strike_aim change:strike_face_roll', function() {
+  getAttrs(['strike_roll','strike_aim','strike_face_roll'], function(v){
+    setAttrs({ strike_location_result: strikeLocation(v.strike_roll, v.strike_aim, v.strike_face_roll) });
+  });
+});
+// ===== end Phase 9 combat rule-data =====
+
+// Combat Modifiers panel: derive the attack EML modifier from the Aim zone (High/Low = -10).
+on('change:combat_aim sheet:opened', function() {
+  getAttrs(['combat_aim'], function(v){
+    var a = String(v.combat_aim || 'mid').toLowerCase();
+    setAttrs({ combat_aim_mod: (a === 'high' || a === 'low') ? -10 : 0 });
+  });
+});
+
+// Phase 9 — per-weapon Damage + Strike Location.
+// chooseAspect: single present aspect -> it; multiple -> panel Preferred if present,
+// else (Default or absent) the highest-impact aspect (tie -> Blunt, Edge, Point order).
+function chooseAspect(b, e, p, preferred){
+  var asp = [['Blunt', parseInt(b)||0], ['Edge', parseInt(e)||0], ['Point', parseInt(p)||0]];
+  var present = [];
+  for (var i=0;i<asp.length;i++) if (asp[i][1] > 0) present.push(asp[i]);
+  if (present.length === 0) return { aspect: '\u2014', impact: 0 };
+  if (present.length === 1) return { aspect: present[0][0], impact: present[0][1] };
+  var prefMap = { b:'Blunt', e:'Edge', p:'Point' };
+  var pref = prefMap[String(preferred||'').toLowerCase()];
+  if (pref) { for (var j=0;j<present.length;j++) if (present[j][0] === pref) return { aspect: present[j][0], impact: present[j][1] }; }
+  var best = present[0];
+  for (var k=1;k<present.length;k++) if (present[k][1] > best[1]) best = present[k];
+  return { aspect: best[0], impact: best[1] };
+}
+// Roll the location (worker-rolled so the NAME can be in the message) and post one message
+// with a real inline Damage roll (impact + Nd6, N from the combat result).
+function postDamageLocation(name, aspectName, impact, aim){
+  aim = String(aim || 'mid');
+  var d100 = 1 + Math.floor(Math.random()*100);
+  var faceRoll = 1 + Math.floor(Math.random()*100);
+  var loc = strikeLocation(d100, aim, faceRoll);
+  startRoll('&{template:custom} {{color=harn}} {{nocrit=1}} {{title=' + (name || 'Weapon') + ' — strike}} {{Location=' + aim + ' (d' + d100 + ') -> ' + loc + '}} {{Aspect=' + aspectName + ' (' + impact + ')}} {{Strike Impact=[[?{Strike dice (Nd6 from the combat result)|2}d6 + ' + impact + ']]}}', function(results){
+    finishRoll(results.rollId);
+  });
+}
+on('clicked:repeating_weapon:weapondamage', function(e){
+  var pre = String(e.sourceAttribute).replace(/weapondamage$/i, '');
+  getAttrs([pre+'weapon_b', pre+'weapon_e', pre+'weapon_p', pre+'weapon_name', 'combat_aim', 'combat_aspect'], function(v){
+    var a = chooseAspect(v[pre+'weapon_b'], v[pre+'weapon_e'], v[pre+'weapon_p'], v.combat_aspect);
+    postDamageLocation(v[pre+'weapon_name'], a.aspect, a.impact, v.combat_aim);
+  });
+});
+
+// Phase 9 — Damage + Location for Punch/Kick, Trample, and Missiles.
+on('clicked:punchdamage', function(){
+  getAttrs(['punch_weapon_b','punch_weapon_e','punch_weapon_p','punch_weapon_name','combat_aim','combat_aspect'], function(v){
+    var a = chooseAspect(v.punch_weapon_b, v.punch_weapon_e, v.punch_weapon_p, v.combat_aspect);
+    postDamageLocation(v.punch_weapon_name, a.aspect, a.impact, v.combat_aim);
+  });
+});
+on('clicked:kickdamage', function(){
+  getAttrs(['kick_weapon_b','kick_weapon_e','kick_weapon_p','kick_weapon_name','combat_aim','combat_aspect'], function(v){
+    var a = chooseAspect(v.kick_weapon_b, v.kick_weapon_e, v.kick_weapon_p, v.combat_aspect);
+    postDamageLocation(v.kick_weapon_name, a.aspect, a.impact, v.combat_aim);
+  });
+});
+on('clicked:trampledamage', function(){
+  getAttrs(['trample_weapon_b','trample_weapon_e','trample_weapon_p','htrample_name','combat_aim','combat_aspect'], function(v){
+    var a = chooseAspect(v.trample_weapon_b, v.trample_weapon_e, v.trample_weapon_p, v.combat_aspect);
+    postDamageLocation(v.htrample_name || 'Trample', a.aspect, a.impact, v.combat_aim);
+  });
+});
+function postMissileStrike(name, aspect, rangeLabel, impact, aim){
+  aim = String(aim || 'mid');
+  var d100 = 1 + Math.floor(Math.random()*100);
+  var faceRoll = 1 + Math.floor(Math.random()*100);
+  var loc = strikeLocation(d100, aim, faceRoll);
+  var imp = parseInt(impact) || 0;
+  startRoll('&{template:custom} {{color=harn}} {{nocrit=1}} {{title=' + (name || 'Missile') + ' \u2014 ' + rangeLabel + ' strike}} {{Location=' + aim + ' (d' + d100 + ') -> ' + loc + '}} {{Aspect=' + (aspect || '\u2014') + ' (' + imp + ')}} {{Strike Impact=[[?{Strike dice (Nd6 from the combat result)|2}d6 + ' + imp + ']]}}', function(r){ finishRoll(r.rollId); });
+}
+on('clicked:repeating_missileweapon:missileshortdmg clicked:repeating_missileweapon:missilemediumdmg clicked:repeating_missileweapon:missilelongdmg clicked:repeating_missileweapon:missileextremedmg', function(e){
+  var src = String(e.sourceAttribute);
+  var m = src.match(/missile(short|medium|long|extreme)dmg$/i);
+  if (!m) return;
+  var range = m[1].toLowerCase();
+  var pre = src.replace(/missile(short|medium|long|extreme)dmg$/i, '');
+  getAttrs([pre+'missileweapon_name', pre+'missileweapon_aspect', pre+'missileweapon_'+range+'_dmg', 'combat_aim'], function(v){
+    var label = range.charAt(0).toUpperCase() + range.slice(1);
+    postMissileStrike(v[pre+'missileweapon_name'], v[pre+'missileweapon_aspect'], label, v[pre+'missileweapon_'+range+'_dmg'], v.combat_aim);
+  });
+});
 </script>
 
 

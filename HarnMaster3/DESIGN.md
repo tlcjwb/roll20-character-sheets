@@ -538,7 +538,22 @@ Learned during the v3.1.0 fix pass; follow these to keep edits safe and reviewab
   repeating-section recompute, show/hide CSS).
 - **Releases:** bump `attr_character_sheet_version` (date `YYYYMMDD`) + add a `<details>` changelog
   entry at the top of the Changelog block. Only add to `versionsWithMigrations` when stored data must
-  be rewritten (most changes recompute on next interaction and need no migration).
+  be rewritten (most changes recompute on next interaction and need no migration). **Version policy
+  (agreed 2026-06-13):** additive phases that need no data migration are **patch** bumps (3.2.1,
+  3.2.2, …); a phase that needs a migration is a **minor** bump (3.3, 3.4, …) and touches
+  `versionsWithMigrations`.
+- **Tests + test plan per phase (standing rule):** every phase ships (1) **automated tests** wherever
+  the harness can reach the logic — worker calcs via `testkit/harness.mjs`, roll-button target math
+  and macro structure via `testkit/roll-eval.mjs` (`node --test` from `HarnMaster3/`) — and (2) an
+  **in-VTT test plan** (`TESTPLAN-phase<N>.md`) for what only live Roll20 can exercise (query UX, dice
+  rolls, macro rendering, CSS show/hide). Add a **copyright-guard test** for any feature that touches
+  rulebook tables, asserting the protected content is *not* embedded (see `phase9.test.mjs`).
+
+### Deferred cosmetic fixes
+- **Attribute panel row height (low priority).** Character & horse attribute panels now match (label
+  and value input both `33px`; fixed in v3.2.1 by dropping the horse label from the `.characterviewer`
+  `2.7em` override). But the rows feel a touch tight — revisit the attribute label/input height for a
+  roomier fit in the panel, applying the same value to both panels so they stay consistent.
 
 ---
 

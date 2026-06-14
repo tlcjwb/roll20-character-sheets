@@ -73,12 +73,18 @@ export function evalExpr(expr, store = {}, queries = {}) {
     const v = store[n];
     return (v === undefined || v === '') ? '0' : String(Number(v));
   });
-  // ?{Label|opt1|opt2...}
+  // ?{Label|opt1|opt2...}  — supports both free queries (?{L|default}) and dropdowns
+  // (?{L|Text,value|Text,value}); the default is the FIRST option, and a dropdown option's
+  // numeric value is the part after its comma ("High -10,-10" -> -10).
+  const optValue = (opt) => {
+    const v = opt.includes(',') ? opt.slice(opt.lastIndexOf(',') + 1) : opt;
+    return String(Number(v));
+  };
   s = s.replace(/\?\{([^}]*)\}/g, (_, inner) => {
     const parts = inner.split('|');
     const label = parts[0];
     if (Object.prototype.hasOwnProperty.call(queries, label)) return String(Number(queries[label]));
-    return parts.length > 1 ? String(Number(parts[1])) : '0';
+    return parts.length > 1 ? optValue(parts[1]) : '0';
   });
   // [[ ]] inline rolls -> grouping parens
   s = s.replace(/\[\[/g, '(').replace(/\]\]/g, ')');

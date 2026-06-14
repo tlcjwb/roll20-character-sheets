@@ -26,12 +26,23 @@ export function loadWorker({ initial = {}, loud = false } = {}) {
   const win = {}; // worker only touches window inside migration fns; not at load time
   const cons = loud ? console : { log() {}, warn() {}, error() {}, info() {} };
 
+  // Capture Custom Roll Parsing calls (startRoll/finishRoll) so action-button handlers
+  // can be tested: each startRoll pushes {template} to mock.rolls and its callback is
+  // invoked with a stub result; finishRoll is a no-op.
+  const rolls = [];
+  const startRoll = (template, cb) => {
+    rolls.push({ template });
+    if (typeof cb === 'function') cb({ rollId: 'roll-' + rolls.length, results: {} });
+  };
+  const finishRoll = () => {};
+
   const factory = new Function(
-    'on', 'getAttrs', 'setAttrs', 'getSectionIDs', 'window', 'console',
+    'on', 'getAttrs', 'setAttrs', 'getSectionIDs', 'window', 'console', 'startRoll', 'finishRoll',
     src + '\n//# sourceURL=harnsheet-worker.js'
   );
-  factory(mock.on, mock.getAttrs, mock.setAttrs, mock.getSectionIDs, win, cons);
+  factory(mock.on, mock.getAttrs, mock.setAttrs, mock.getSectionIDs, win, cons, startRoll, finishRoll);
 
+  mock.rolls = rolls;
   mock.setAll(initial);
   return mock;
 }

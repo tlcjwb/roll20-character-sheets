@@ -60,8 +60,16 @@ export function createMock() {
     } finally { depth--; }
   }
 
+  // Fire a single event with caller-supplied eventInfo (e.g. a realistic repeating-row
+  // sourceAttribute for clicked: handlers). Defaults match fire()'s synthesized info.
+  function emit(ev, info) {
+    for (const fn of (handlers[ev] || [])) {
+      fn(Object.assign({ sourceAttribute: ev.split(':').slice(1).join(':'), triggerName: ev }, info || {}));
+    }
+  }
+
   return {
-    on, getAttrs, setAttrs, getSectionIDs, fire,
+    on, getAttrs, setAttrs, getSectionIDs, fire, emit,
     // test helpers
     set: (n, v) => { attrs[n] = (v === undefined || v === null) ? '' : String(v); },
     setAll: (o) => { for (const k of Object.keys(o)) attrs[k] = String(o[k]); },

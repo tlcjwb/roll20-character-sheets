@@ -511,7 +511,7 @@ input[type="hidden"].showhorse[value="0"] ~ .inven-personal {
 .weapons-grid,
 .weapons-grid .repcontainer > .repitem {
    display: grid;
-   grid-template-columns: repeat(4, 2.1em) 1em repeat(3, 2.2em) repeat(2, 2.7em) repeat(5, 2.2em) 2.7em 2.7em 2.3em 2.5em 2.3em 2.2em 1fr;
+   grid-template-columns: repeat(4, 2.1em) 1em repeat(3, 2.2em) repeat(2, 2.7em) repeat(5, 2.2em) 2.7em 2.7em 2.3em 2.5em 2.3em 2.2em 2.5em 1fr;
    align-items: center;	
    align-content: baseline;	
 }
@@ -523,7 +523,7 @@ input[type="hidden"].showhorse[value="0"] ~ .inven-personal {
 .missileweapons-grid,
 .missileweapons-grid .repcontainer > .repitem {
    display: grid;
-   grid-template-columns: repeat(4, 3em) 2em 2em 2.2em 2.5em repeat(4, 4.5em 2.5em 2.5em 2.2em) 4em;
+   grid-template-columns: repeat(4, 3em) 2em 2em 2.2em 2.5em repeat(4, 4.5em 2.5em 2.5em 4.6em) 4em;
    align-items: center;	
    align-content: baseline;	
 }
@@ -590,7 +590,7 @@ input[type="hidden"].showsinglepiety[value="0"] ~ .piety-grid .repcontainer > .r
 
 .horseattacks-grid {
    display: grid;
-   grid-template-columns: 1fr repeat(6, 2.5em);
+   grid-template-columns: 1fr repeat(7, 2.5em);
    align-items: center;	
    align-content: baseline;		
 }
@@ -953,8 +953,7 @@ input.piety-label[readonly] {
 
 .characterviewer .charsheet .personal-grid label,
 .characterviewer .charsheet .family-grid label,
-.characterviewer .charsheet .physical-grid label,
-.characterviewer .charsheet .horseattribs-grid label {
+.characterviewer .charsheet .physical-grid label {
 	height:2.7em;
 	font-size: 0.8em;
 }
@@ -1790,3 +1789,13 @@ h1.tab-header {
 }
 
 }
+/* Combat Modifiers panel: just widen Aim/Aspect; readability comes from skill-label */
+.combat-mod-select { min-width: 5em; }
+#combat_aim, #combat_aspect { background-color: var(--background-sheet); }
+/* Damage die buttons follow the theme (incl. dark mode) */
+button[name="act_weapondamage"], button[name="act_punchdamage"], button[name="act_kickdamage"], button[name="act_trampledamage"] {
+  background-color: var(--button-background); color: var(--textcolor-dark);
+}
+
+.mw-dmgwrap { display: inline-flex; align-items: center; gap: 2px; }
+.damage-die { background-color: var(--button-background); color: var(--textcolor-dark); }
