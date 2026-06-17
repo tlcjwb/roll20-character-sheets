@@ -67,6 +67,12 @@ describe('Character 17 — Equipment & Funds', () => {
     assert.equal(out.character.gear.items[0].name, 'Mail Habergeon');
     assert.equal(out.character.gear.remaining, 855);
   });
+  test('provenance: state.sources is recorded in the harnchar envelope (omitted if absent)', () => {
+    const withSrc = buildHarncharPC({ sources: ['4001', '4823'], identity: {}, attributes: {}, skills: [] });
+    assert.deepEqual(withSrc.sources, ['4001', '4823']);
+    const noSrc = buildHarncharPC({ identity: {}, attributes: {}, skills: [] });
+    assert.ok(!('sources' in noSrc));
+  });
 });
 
 describe('Character 17 — public 4001 equipment catalog (Combat 3-5)', () => {
@@ -231,9 +237,10 @@ describe('Character 26 — Mages (Pattern E, convocation-driven)', () => {
 });
 
 describe('public + private (4001 ± owner extensions; homebrew ignored)', () => {
-  test('private 4823 layer augments the Ostler (skips cleanly if owner file absent)', (t) => {
-    if (!existsSync('chargen/occupations.private.json')) { t.skip('owner-only occupations.private.json absent'); return; }
-    const priv = JSON.parse(readFileSync('chargen/occupations.private.json', 'utf8'));
+  test('owner 4823 layer augments the Ostler (skips cleanly if owner file absent)', (t) => {
+    const owner = 'chargen/owner/occupations.4823.json';
+    if (!existsSync(owner)) { t.skip('owner-only ' + owner + ' absent'); return; }
+    const priv = JSON.parse(readFileSync(owner, 'utf8'));
     const withPriv = occBundle('ostler', { culture: 'Feudal' }, dataFor([OCC_PUB, priv]));
     const pubOnly = occBundle('ostler', { culture: 'Feudal' }, DATA);
     assert.notDeepEqual(withPriv, pubOnly, 'loading the private layer changes the Ostler');

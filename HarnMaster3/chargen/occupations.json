@@ -2,7 +2,9 @@
   "_meta": {
     "harnoccupations": 1,
     "layer": "public",
-    "note": "PUBLIC occupations — the 4001 Occupational Skills table (Character 15), functional data, ships with the product. `oml` = OML multiplier (ML = SB × oml). `special` holds verbatim non-numeric grants (Script, 2nd Language, \"Three weapons at OML+SB×2\", \"Depends on deity…\"). Supplement expansions (e.g. 4823 Ostler guild/specializations) live owner-only in occupations.private.json and deep-merge on top by id (precedence public → private → homebrew).",
+    "distribution": "public",
+    "source": "4001",
+    "note": "PUBLIC occupations — the 4001 Occupational Skills table (Character 15), functional data, ships with the product. `oml` = OML multiplier (ML = SB × oml). `special` holds verbatim non-numeric grants (Script, 2nd Language, \"Three weapons at OML+SB×2\", \"Depends on deity…\"). Supplement expansions (e.g. 4823 Ostler guild/specializations) live owner-only in chargen/owner/occupations.4823.json and deep-merge on top by id (precedence public → owner → homebrew).",
     "generatedBy": "chargen/tools/parse-occupations.mjs from 4001 Character 15"
   },
   "occupations": [

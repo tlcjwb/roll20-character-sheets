@@ -2,6 +2,7 @@
   "_meta": {
     "harntables": 1,
     "layer": "public",
+    "distribution": "public",
     "source": "4001",
     "note": "PUBLIC chargen roll/lookup tables from 4001 Character 2-5 (functional data). Range tables use 1d100 unless `die` says otherwise; `mod`/notes per the rules. Sunsign is date-based (1d12 month + 1d30 day → day-of-year 1..360). Supplement/homebrew layers deep-merge on top via merge-util."
   },

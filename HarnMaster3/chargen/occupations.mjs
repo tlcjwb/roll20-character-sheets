@@ -93,7 +93,12 @@ export function lintOccupations(files) {
       if (!o || !o.id) { errors.push(`${tag} occupation with no id`); continue; }
       if (ids.has(o.id)) errors.push(`${tag} duplicate occupation id "${o.id}"`);
       ids.add(o.id);
-      for (const s of o.skills || []) if (typeof s.oml !== 'number') errors.push(`${tag} "${o.id}" skill "${s.name}" has non-numeric oml`);
+      // A skill is well-formed if it carries any ML shape computeOccupationSkills understands:
+      // numeric oml (SB×oml), numeric base (base+SB — Language/Script "70+SB"), or useOwnOml (weapon picks).
+      for (const s of o.skills || []) {
+        if (typeof s.oml !== 'number' && typeof s.base !== 'number' && s.useOwnOml !== true)
+          errors.push(`${tag} "${o.id}" skill "${s.name}" needs a numeric oml, a numeric base, or useOwnOml`);
+      }
     }
   }
   const merged = mergeOccupations(files);

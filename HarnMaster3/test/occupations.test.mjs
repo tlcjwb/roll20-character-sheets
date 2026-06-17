@@ -74,9 +74,14 @@ test('lintOccupations passes clean files and flags bad oml / dangling specializa
     { id: 'x', skills: [{ name: 'Y', oml: 'four' }] }, { id: 'x' },
   ], specializations: [{ id: 's', of: 'ghost' }] };
   const { errors } = lintOccupations([bad]);
-  assert.ok(errors.some((e) => e.includes('non-numeric oml')));
+  assert.ok(errors.some((e) => e.includes('needs a numeric oml')));
   assert.ok(errors.some((e) => e.includes('duplicate occupation id "x"')));
   assert.ok(errors.some((e) => e.includes('missing occupation "ghost"')));
+  // base+SB (Language/Script "70+SB") and useOwnOml (weapon picks) are valid ML shapes — not errors
+  const ok = { _meta: { layer: 'homebrew' }, occupations: [
+    { id: 'z', skills: [{ name: 'Script', base: 70, mult: 1 }, { name: 'Sword', useOwnOml: true, bonus: 0 }] },
+  ] };
+  assert.deepEqual(lintOccupations([ok]).errors, []);
 });
 
 test('LAYERS is the documented precedence order', () => {

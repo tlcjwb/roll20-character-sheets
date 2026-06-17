@@ -2,6 +2,7 @@
   "_meta": {
     "harnequip": 1,
     "build": "public",
+    "distribution": "public",
     "note": "PUBLIC core 4001 equipment — functional game data (names/weights/prices/protection/weapon class), inlined into the generator. No prose. Weapons = Combat 3 Weapon Data; armour = Combat 4 Armour Data + Combat 5 Armour Protective Values. Prices in d (pennies); M/W/H price prefixes are craftsman codes.",
     "source": "HarnMaster Third Edition core (4001), Combat 3-5",
     "edition": "v3.5.2",

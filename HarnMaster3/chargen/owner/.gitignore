@@ -1,0 +1,5 @@
+# Owner-only data folder. The transcribed/owned-supplement files here are NEVER committed —
+# they derive from books/sources the owner owns (4823, 4401, 4601, 4611, the lythia CPL, …) or
+# are copyrightable prose. Only templates + this README ship.
+*.json
+!*.template.json

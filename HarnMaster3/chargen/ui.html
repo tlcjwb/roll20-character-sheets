@@ -48,6 +48,14 @@
   .steps a:hover { border-color:var(--accent); color:var(--accent); }
   .steps a.on { background:var(--accent); color:var(--paper); border-color:var(--accent); }
   .steps a .n { font-weight:bold; opacity:.7; margin-right:.25rem; }
+  #ownerPanel { border:1px solid var(--accent); border-radius:6px; margin:.5rem 1rem; background:var(--paper2); }
+  .ownerbar { display:flex; align-items:center; gap:.5rem; padding:.4rem .6rem; border-bottom:1px solid var(--line); }
+  #ownerTable { width:100%; border-collapse:collapse; font-size:.82rem; }
+  #ownerTable th, #ownerTable td { text-align:left; padding:.2rem .5rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  #ownerTable td.num, #ownerTable th.num { text-align:right; }
+  .srcpill { font-size:.7rem; border-radius:10px; padding:.05rem .45rem; border:1px solid var(--line); background:var(--paper); white-space:nowrap; }
+  .srcpill button { border:none; background:none; cursor:pointer; color:var(--accent); font-weight:bold; margin-left:.2rem; padding:0; }
+  .badwarn { color:var(--accent); }
 </style>
 </head>
 <body>
@@ -56,14 +64,24 @@
   <span id="buildPill" class="pill dist">public build</span>
   <label style="display:flex;align-items:center;gap:.3rem;color:var(--muted)">
     <span>Load owner data…</span>
-    <input id="ownerFiles" type="file" accept=".json" multiple style="width:auto">
+    <input id="ownerDir" type="file" webkitdirectory directory multiple style="width:auto" title="Pick a folder of owner data (e.g. chargen/owner). Files are scanned locally; nothing is uploaded.">
   </label>
+  <span id="ownerSources" class="muted" style="display:flex;gap:.3rem;flex-wrap:wrap;align-items:center"></span>
   <div class="tabs">
     <button data-tab="pc" class="active">Character</button>
     <button data-tab="creature">Creature</button>
     <button data-tab="houserules">Options</button>
   </div>
 </header>
+<div id="ownerPanel" style="display:none">
+  <div class="ownerbar">
+    <b>Owner data found</b> <span id="ownerScanNote" class="muted"></span>
+    <span style="flex:1"></span>
+    <button id="ownerLoadSel" class="rollall">Load selected</button>
+    <button id="ownerPanelClose" class="rollall">Close</button>
+  </div>
+  <table id="ownerTable"><thead><tr><th></th><th>File</th><th>Kind</th><th>Source</th><th>License</th><th class="num">Items</th><th>Effect</th><th>Note</th></tr></thead><tbody></tbody></table>
+</div>
 <main>
   <!-- ============ PC ============ -->
   <section id="tab-pc" class="panel active">

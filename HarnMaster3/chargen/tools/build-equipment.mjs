@@ -170,6 +170,7 @@ const out = {
   _meta: {
     harnequip: 1,
     build: 'public',
+    distribution: 'public',
     note:
       'PUBLIC core 4001 equipment — functional game data (names/weights/prices/protection/weapon class), ' +
       'inlined into the generator. No prose. Weapons = Combat 3 Weapon Data; armour = Combat 4 Armour Data + ' +

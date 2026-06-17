@@ -324,6 +324,7 @@ export function buildHarncharPC(state) {
   const hr = state.houserules || {};
   return {
     harnchar: 1, kind: 'pc', generator: 'harnchargen', generatorVersion: '0.1.0', build: state.build || 'dist',
+    ...(state.sources ? { sources: state.sources } : {}),
     ...(Object.keys(hr).length ? { houserules: hr } : {}),
     character: {
       identity: state.identity || {},
