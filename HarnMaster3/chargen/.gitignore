@@ -1,0 +1,11 @@
+# Owner-only content — never distribute. Two kinds stay private: copyrightable PROSE
+# (flavor.private.json) and UNOWNED-supplement content (occupations.private.json = 4823 Ostler guild).
+# NOTE: 4001-core creature STAT BLOCKS are functional data and now ship PUBLIC in bestiary.json — there
+# is no bestiary.private.json anymore (only a future UNOWNED bestiary supplement would create one).
+*.private.json
+# Build intermediates from the bestiary parser — regenerable from the owner's PDF, never committed.
+*.parsed.json
+# Comprehensive Price List (lythia.com / toastygm-hm3-cpl) — CC BY-NC-SA 3.0 fan compilation.
+# Optional & runtime-loaded by the owner's choice; never inlined or distributed with the sheet.
+# Regenerable: node chargen/tools/build-equipment-lythia.mjs <hm3-cpl checkout>
+equipment.lythia.json

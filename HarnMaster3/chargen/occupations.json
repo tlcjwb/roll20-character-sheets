@@ -1,0 +1,1852 @@
+{
+  "_meta": {
+    "harnoccupations": 1,
+    "layer": "public",
+    "note": "PUBLIC occupations — the 4001 Occupational Skills table (Character 15), functional data, ships with the product. `oml` = OML multiplier (ML = SB × oml). `special` holds verbatim non-numeric grants (Script, 2nd Language, \"Three weapons at OML+SB×2\", \"Depends on deity…\"). Supplement expansions (e.g. 4823 Ostler guild/specializations) live owner-only in occupations.private.json and deep-merge on top by id (precedence public → private → homebrew).",
+    "generatedBy": "chargen/tools/parse-occupations.mjs from 4001 Character 15"
+  },
+  "occupations": [
+    {
+      "id": "alchemist",
+      "name": "Alchemist",
+      "category": "guilded",
+      "years": 7,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Alchemy",
+          "oml": 4
+        },
+        {
+          "name": "Mathematics",
+          "oml": 3
+        },
+        {
+          "name": "Herblore",
+          "oml": 3
+        },
+        {
+          "name": "Mining",
+          "oml": 2
+        },
+        {
+          "name": "Physician",
+          "oml": 2
+        },
+        {
+          "name": "Script",
+          "base": 70,
+          "mult": 1
+        }
+      ],
+      "special": [],
+      "selectable": true,
+      "flavorKey": "alchemist"
+    },
+    {
+      "id": "animal-trainer",
+      "name": "Animal Trainer",
+      "category": "unguilded",
+      "years": 3,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Animalcraft",
+          "oml": 4
+        },
+        {
+          "name": "Hidework",
+          "oml": 3
+        },
+        {
+          "name": "Riding",
+          "oml": 2
+        }
+      ],
+      "selectable": true,
+      "flavorKey": "animal-trainer"
+    },
+    {
+      "id": "apothecary",
+      "name": "Apothecary",
+      "category": "guilded",
+      "years": 6,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Herblore",
+          "oml": 4
+        },
+        {
+          "name": "Alchemy",
+          "oml": 2
+        },
+        {
+          "name": "Mathematics",
+          "oml": 2
+        },
+        {
+          "name": "Physician",
+          "oml": 2
+        },
+        {
+          "name": "Script",
+          "base": 70,
+          "mult": 1
+        }
+      ],
+      "special": [],
+      "selectable": true,
+      "flavorKey": "apothecary"
+    },
+    {
+      "id": "astrologer",
+      "name": "Astrologer",
+      "category": "guilded",
+      "years": 4,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Astrology",
+          "oml": 4
+        },
+        {
+          "name": "Mathematics",
+          "oml": 3
+        },
+        {
+          "name": "Drawing",
+          "oml": 3
+        },
+        {
+          "name": "Tarotry",
+          "oml": 2
+        },
+        {
+          "name": "Script",
+          "base": 70,
+          "mult": 1
+        }
+      ],
+      "special": [],
+      "selectable": true,
+      "flavorKey": "astrologer"
+    },
+    {
+      "id": "beggar",
+      "name": "Beggar/Scavenger",
+      "category": "unguilded",
+      "years": 1,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Rhetoric",
+          "oml": 5
+        },
+        {
+          "name": "Intrigue",
+          "oml": 4
+        },
+        {
+          "name": "Dagger",
+          "oml": 4
+        }
+      ],
+      "selectable": true,
+      "flavorKey": "beggar",
+      "titles": [
+        "Beggar",
+        "Scavenger"
+      ]
+    },
+    {
+      "id": "cartographer-artist",
+      "name": "Cartographer/Artist",
+      "category": "unguilded",
+      "years": 5,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Drawing",
+          "oml": 4
+        },
+        {
+          "name": "Mathematics",
+          "oml": 2
+        },
+        {
+          "name": "Script",
+          "base": 70,
+          "mult": 1
+        }
+      ],
+      "special": [],
+      "selectable": true,
+      "flavorKey": "cartographer-artist",
+      "titles": [
+        "Cartographer",
+        "Artist"
+      ]
+    },
+    {
+      "id": "chandler",
+      "name": "Chandler",
+      "category": "guilded",
+      "years": 4,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Alchemy",
+          "oml": 2
+        },
+        {
+          "name": "Metalcraft",
+          "oml": 2
+        },
+        {
+          "name": "Script",
+          "base": 70,
+          "mult": 1
+        }
+      ],
+      "special": [],
+      "selectable": true,
+      "flavorKey": "chandler",
+      "choices": [
+        {
+          "category": "craft",
+          "count": 3,
+          "oml": 3
+        }
+      ]
+    },
+    {
+      "id": "charcoaler",
+      "name": "Charcoaler",
+      "category": "guilded",
+      "years": 3,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Timbercraft",
+          "oml": 3
+        },
+        {
+          "name": "Survival",
+          "oml": 4
+        },
+        {
+          "name": "Woodcraft",
+          "oml": 3
+        },
+        {
+          "name": "Metalcraft",
+          "oml": 2
+        }
+      ],
+      "selectable": true,
+      "flavorKey": "charcoaler"
+    },
+    {
+      "id": "cleric-shaman",
+      "name": "Cleric/Shaman",
+      "category": "unguilded",
+      "years": 3,
+      "source": "4001",
+      "skills": [],
+      "special": [
+        "Depends on deity. See Character 23"
+      ],
+      "selectable": true,
+      "flavorKey": "cleric-shaman",
+      "nameByCulture": {
+        "Tribal": "Shaman",
+        "default": "Cleric"
+      }
+    },
+    {
+      "id": "clothier",
+      "name": "Clothier",
+      "category": "guilded",
+      "years": 6,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Textilecraft",
+          "oml": 5
+        },
+        {
+          "name": "Hidework",
+          "oml": 4
+        },
+        {
+          "name": "Jewelcraft",
+          "oml": 3
+        },
+        {
+          "name": "Script",
+          "base": 70,
+          "mult": 1
+        }
+      ],
+      "special": [],
+      "selectable": true,
+      "flavorKey": "clothier"
+    },
+    {
+      "id": "cook-servant",
+      "name": "Cook/Servant",
+      "category": "unguilded",
+      "years": 3,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Intrigue",
+          "oml": 4
+        },
+        {
+          "name": "Rhetoric",
+          "oml": 4
+        },
+        {
+          "name": "Cookery",
+          "oml": 4
+        },
+        {
+          "name": "Textilecraft",
+          "oml": 4
+        },
+        {
+          "name": "Herblore",
+          "oml": 2
+        }
+      ],
+      "selectable": true,
+      "flavorKey": "cook-servant",
+      "titles": [
+        "Cook",
+        "Servant"
+      ]
+    },
+    {
+      "id": "courtesan",
+      "name": "Courtesan",
+      "category": "guilded",
+      "years": 3,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Lovecraft",
+          "oml": 5
+        },
+        {
+          "name": "Intrigue",
+          "oml": 5
+        },
+        {
+          "name": "Singing",
+          "oml": 5
+        },
+        {
+          "name": "Musician",
+          "oml": 3
+        },
+        {
+          "name": "Dancing",
+          "oml": 3
+        },
+        {
+          "name": "Script",
+          "base": 70,
+          "mult": 1
+        }
+      ],
+      "special": [],
+      "selectable": true,
+      "flavorKey": "courtesan"
+    },
+    {
+      "id": "embalmer",
+      "name": "Embalmer",
+      "category": "guilded",
+      "years": 7,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Embalming",
+          "oml": 4
+        },
+        {
+          "name": "Woodcraft",
+          "oml": 3
+        },
+        {
+          "name": "Alchemy",
+          "oml": 2
+        },
+        {
+          "name": "Perfumery",
+          "oml": 2
+        },
+        {
+          "name": "Script",
+          "base": 70,
+          "mult": 1
+        }
+      ],
+      "special": [],
+      "selectable": true,
+      "flavorKey": "embalmer"
+    },
+    {
+      "id": "farmer",
+      "name": "Farmer",
+      "category": "unguilded",
+      "years": 4,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Agriculture",
+          "oml": 4
+        },
+        {
+          "name": "Weatherlore",
+          "oml": 4
+        },
+        {
+          "name": "Animalcraft",
+          "oml": 3
+        }
+      ],
+      "selectable": true,
+      "flavorKey": "farmer"
+    },
+    {
+      "id": "fisherman",
+      "name": "Fisherman",
+      "category": "unguilded",
+      "years": 5,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Fishing",
+          "oml": 6
+        },
+        {
+          "name": "Seamanship",
+          "oml": 5
+        },
+        {
+          "name": "Weatherlore",
+          "oml": 4
+        },
+        {
+          "name": "Piloting",
+          "oml": 2
+        },
+        {
+          "name": "Shipwright",
+          "oml": 2
+        }
+      ],
+      "selectable": true,
+      "flavorKey": "fisherman"
+    },
+    {
+      "id": "gladiator",
+      "name": "Gladiator/Guard",
+      "category": "unguilded",
+      "years": 4,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Initiative",
+          "oml": 6
+        },
+        {
+          "name": "Unarmed",
+          "oml": 6
+        },
+        {
+          "name": "Physician",
+          "oml": 2
+        }
+      ],
+      "special": [],
+      "selectable": true,
+      "flavorKey": "gladiator",
+      "titles": [
+        "Gladiator",
+        "Guard"
+      ],
+      "choices": [
+        {
+          "category": "weapon",
+          "count": 3,
+          "bonus": 2
+        }
+      ]
+    },
+    {
+      "id": "glassworker",
+      "name": "Glassworker",
+      "category": "guilded",
+      "years": 7,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Glassworking",
+          "oml": 4
+        },
+        {
+          "name": "Ceramics",
+          "oml": 3
+        },
+        {
+          "name": "Alchemy",
+          "oml": 2
+        },
+        {
+          "name": "Script",
+          "base": 70,
+          "mult": 1
+        }
+      ],
+      "special": [],
+      "selectable": true,
+      "flavorKey": "glassworker"
+    },
+    {
+      "id": "harper-skald",
+      "name": "Harper/Skald",
+      "category": "guilded",
+      "years": 7,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Singing",
+          "oml": 5
+        },
+        {
+          "name": "Folklore",
+          "oml": 5
+        },
+        {
+          "name": "Oratory",
+          "oml": 4
+        },
+        {
+          "name": "Woodcraft",
+          "oml": 3
+        },
+        {
+          "name": "Musician (1st instrument)",
+          "oml": 4
+        },
+        {
+          "name": "Musician (2nd instrument)",
+          "oml": 3
+        },
+        {
+          "name": "Musician (3rd instrument)",
+          "oml": 3
+        },
+        {
+          "name": "Script (Local)",
+          "base": 70,
+          "mult": 1
+        }
+      ],
+      "special": [
+        "Rename the three Musician specialties to chosen instruments (see tables.instruments)"
+      ],
+      "selectable": true,
+      "flavorKey": "harper-skald",
+      "titles": [
+        "Harper",
+        "Skald"
+      ]
+    },
+    {
+      "id": "herald",
+      "name": "Herald",
+      "category": "noble",
+      "years": 5,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Heraldry",
+          "oml": 4
+        },
+        {
+          "name": "Oratory",
+          "oml": 4
+        },
+        {
+          "name": "Rhetoric",
+          "oml": 4
+        },
+        {
+          "name": "Intrigue",
+          "oml": 5
+        },
+        {
+          "name": "Drawing",
+          "oml": 4
+        },
+        {
+          "name": "Language (2nd)",
+          "oml": 2
+        },
+        {
+          "name": "Script",
+          "base": 70,
+          "mult": 1
+        }
+      ],
+      "special": [],
+      "selectable": true,
+      "flavorKey": "herald",
+      "knightSkills": true
+    },
+    {
+      "id": "herdsman",
+      "name": "Herdsman",
+      "category": "unguilded",
+      "years": 2,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Animalcraft",
+          "oml": 4
+        },
+        {
+          "name": "Tracking",
+          "oml": 4
+        },
+        {
+          "name": "Survival",
+          "oml": 4
+        },
+        {
+          "name": "Weatherlore",
+          "oml": 4
+        }
+      ],
+      "selectable": true,
+      "flavorKey": "herdsman"
+    },
+    {
+      "id": "hideworker",
+      "name": "Hideworker",
+      "category": "guilded",
+      "years": 5,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Hidework",
+          "oml": 5
+        },
+        {
+          "name": "Textilecraft",
+          "oml": 3
+        },
+        {
+          "name": "Alchemy",
+          "oml": 2
+        }
+      ],
+      "selectable": true,
+      "flavorKey": "hideworker"
+    },
+    {
+      "id": "hunter-trapper",
+      "name": "Hunter/Trapper",
+      "category": "unguilded",
+      "years": 5,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Tracking",
+          "oml": 5
+        },
+        {
+          "name": "Stealth",
+          "oml": 4
+        },
+        {
+          "name": "Foraging",
+          "oml": 4
+        },
+        {
+          "name": "Survival",
+          "oml": 4
+        },
+        {
+          "name": "Hidework",
+          "oml": 3
+        },
+        {
+          "name": "Hunting",
+          "oml": 3
+        },
+        {
+          "name": "Fletching",
+          "oml": 2
+        }
+      ],
+      "special": [],
+      "selectable": true,
+      "flavorKey": "hunter-trapper",
+      "titles": [
+        "Hunter",
+        "Trapper"
+      ],
+      "choices": [
+        {
+          "category": "weapon",
+          "count": 3,
+          "bonus": 1
+        }
+      ]
+    },
+    {
+      "id": "innkeeper",
+      "name": "Innkeeper",
+      "category": "guilded",
+      "years": 5,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Brewing",
+          "oml": 5
+        },
+        {
+          "name": "Cookery",
+          "oml": 4
+        },
+        {
+          "name": "Rhetoric",
+          "oml": 4
+        },
+        {
+          "name": "Intrigue",
+          "oml": 4
+        },
+        {
+          "name": "Language (2nd)",
+          "oml": 2
+        },
+        {
+          "name": "Script",
+          "base": 70,
+          "mult": 1
+        }
+      ],
+      "special": [],
+      "selectable": true,
+      "flavorKey": "innkeeper"
+    },
+    {
+      "id": "jeweler",
+      "name": "Jeweler",
+      "category": "guilded",
+      "years": 7,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Jewelcraft",
+          "oml": 4
+        },
+        {
+          "name": "Metalcraft",
+          "oml": 3
+        },
+        {
+          "name": "Mining",
+          "oml": 2
+        },
+        {
+          "name": "Script",
+          "base": 70,
+          "mult": 1
+        }
+      ],
+      "special": [],
+      "selectable": true,
+      "flavorKey": "jeweler"
+    },
+    {
+      "id": "knight-bachelor",
+      "name": "Knight Bachelor",
+      "category": "noble",
+      "years": 7,
+      "source": "4001",
+      "skills": [],
+      "special": [
+        "See Character 27"
+      ],
+      "selectable": true,
+      "flavorKey": "knight-bachelor"
+    },
+    {
+      "id": "knight-bailiff",
+      "name": "Knight/Bailiff",
+      "category": "noble",
+      "years": 7,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Law",
+          "oml": 3
+        },
+        {
+          "name": "Agriculture",
+          "oml": 2
+        }
+      ],
+      "special": [
+        "Knight Bachelor"
+      ],
+      "selectable": true,
+      "flavorKey": "knight-bailiff",
+      "extends": "knight-bachelor",
+      "nameByCulture": {
+        "Imperial": "Patrician",
+        "default": "Knight"
+      }
+    },
+    {
+      "id": "laborer",
+      "name": "Laborer",
+      "category": "unguilded",
+      "years": 1,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Intrigue",
+          "oml": 4
+        }
+      ],
+      "selectable": true,
+      "flavorKey": "laborer"
+    },
+    {
+      "id": "lady",
+      "name": "Lady",
+      "category": "noble",
+      "years": 7,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Intrigue",
+          "oml": 5
+        },
+        {
+          "name": "Folklore",
+          "oml": 4
+        },
+        {
+          "name": "Needlework",
+          "oml": 3
+        },
+        {
+          "name": "Dancing",
+          "oml": 3
+        },
+        {
+          "name": "Heraldry",
+          "oml": 3
+        },
+        {
+          "name": "Astrology",
+          "oml": 2
+        },
+        {
+          "name": "Drawing",
+          "oml": 3
+        }
+      ],
+      "selectable": true,
+      "flavorKey": "lady"
+    },
+    {
+      "id": "lexigrapher",
+      "name": "Lexigrapher",
+      "category": "guilded",
+      "years": 5,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Hidework (parchment/vellum)",
+          "oml": 5
+        },
+        {
+          "name": "Inkcraft",
+          "oml": 4
+        },
+        {
+          "name": "Drawing",
+          "oml": 3
+        },
+        {
+          "name": "Script (1st)",
+          "base": 70,
+          "mult": 1
+        },
+        {
+          "name": "Script (2nd)",
+          "base": 70,
+          "mult": 1
+        }
+      ],
+      "special": [],
+      "selectable": true,
+      "flavorKey": "lexigrapher"
+    },
+    {
+      "id": "litigant",
+      "name": "Litigant",
+      "category": "guilded",
+      "years": 7,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Law",
+          "oml": 4
+        },
+        {
+          "name": "Oratory",
+          "oml": 5
+        },
+        {
+          "name": "Rhetoric",
+          "oml": 5
+        },
+        {
+          "name": "Intrigue",
+          "oml": 5
+        },
+        {
+          "name": "Language (2nd)",
+          "oml": 2
+        },
+        {
+          "name": "Script",
+          "base": 70,
+          "mult": 1
+        }
+      ],
+      "special": [],
+      "selectable": true,
+      "flavorKey": "litigant"
+    },
+    {
+      "id": "locksmith",
+      "name": "Locksmith",
+      "category": "guilded",
+      "years": 6,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Lockcraft",
+          "oml": 4
+        },
+        {
+          "name": "Metalcraft",
+          "oml": 3
+        },
+        {
+          "name": "Woodcraft",
+          "oml": 3
+        },
+        {
+          "name": "Script",
+          "base": 70,
+          "mult": 1
+        }
+      ],
+      "special": [],
+      "selectable": true,
+      "flavorKey": "locksmith"
+    },
+    {
+      "id": "longshoreman",
+      "name": "Longshoreman",
+      "category": "unguilded",
+      "years": 1,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Intrigue",
+          "oml": 4
+        },
+        {
+          "name": "Seamanship",
+          "oml": 3
+        }
+      ],
+      "selectable": true,
+      "flavorKey": "longshoreman"
+    },
+    {
+      "id": "mage-shek-pvar",
+      "name": "Mage (Shek-Pvar)",
+      "category": "guilded",
+      "years": 7,
+      "source": "4001",
+      "skills": [],
+      "special": [
+        "Depends on Convocation. See Character 25"
+      ],
+      "selectable": true,
+      "flavorKey": "mage-shek-pvar"
+    },
+    {
+      "id": "mason",
+      "name": "Mason",
+      "category": "guilded",
+      "years": 7,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Masonry",
+          "oml": 4
+        },
+        {
+          "name": "Woodcraft",
+          "oml": 4
+        },
+        {
+          "name": "Engineering",
+          "oml": 3
+        },
+        {
+          "name": "Mathematics",
+          "oml": 2
+        },
+        {
+          "name": "Script",
+          "base": 70,
+          "mult": 1
+        }
+      ],
+      "special": [],
+      "selectable": true,
+      "flavorKey": "mason"
+    },
+    {
+      "id": "mercantyler",
+      "name": "Mercantyler",
+      "category": "guilded",
+      "years": 6,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Rhetoric",
+          "oml": 5
+        },
+        {
+          "name": "Intrigue",
+          "oml": 5
+        },
+        {
+          "name": "Mathematics",
+          "oml": 3
+        },
+        {
+          "name": "Law",
+          "oml": 2
+        },
+        {
+          "name": "Language (2nd)",
+          "oml": 2
+        },
+        {
+          "name": "Script",
+          "base": 70,
+          "mult": 1
+        }
+      ],
+      "special": [],
+      "selectable": true,
+      "flavorKey": "mercantyler",
+      "choices": [
+        {
+          "category": "weapon",
+          "count": 1,
+          "bonus": 0
+        }
+      ]
+    },
+    {
+      "id": "metalsmith",
+      "name": "Metalsmith",
+      "category": "guilded",
+      "years": 6,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Metalcraft",
+          "oml": 4
+        },
+        {
+          "name": "Mining",
+          "oml": 2
+        },
+        {
+          "name": "Weaponcraft",
+          "oml": 2
+        }
+      ],
+      "selectable": true,
+      "flavorKey": "metalsmith"
+    },
+    {
+      "id": "miller-millwright",
+      "name": "Miller/Millwright",
+      "category": "guilded",
+      "years": 6,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Milling",
+          "oml": 4
+        },
+        {
+          "name": "Engineering",
+          "oml": 3
+        },
+        {
+          "name": "Agriculture",
+          "oml": 3
+        },
+        {
+          "name": "Script",
+          "base": 70,
+          "mult": 1
+        }
+      ],
+      "special": [],
+      "selectable": true,
+      "flavorKey": "miller-millwright",
+      "titles": [
+        "Miller",
+        "Millwright"
+      ]
+    },
+    {
+      "id": "miner",
+      "name": "Miner",
+      "category": "guilded",
+      "years": 6,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Mining",
+          "oml": 4
+        },
+        {
+          "name": "Engineering",
+          "oml": 3
+        },
+        {
+          "name": "Woodcraft",
+          "oml": 3
+        },
+        {
+          "name": "Metalcraft",
+          "oml": 2
+        },
+        {
+          "name": "Jewelcraft",
+          "oml": 1
+        }
+      ],
+      "selectable": true,
+      "flavorKey": "miner"
+    },
+    {
+      "id": "ostler",
+      "name": "Ostler",
+      "category": "guilded",
+      "years": 5,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Horsecraft",
+          "oml": 4
+        },
+        {
+          "name": "Riding",
+          "oml": 4
+        },
+        {
+          "name": "Hidework",
+          "oml": 4
+        }
+      ],
+      "selectable": true,
+      "flavorKey": "ostler"
+    },
+    {
+      "id": "perfumer",
+      "name": "Perfumer",
+      "category": "guilded",
+      "years": 6,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Perfumery",
+          "oml": 4
+        },
+        {
+          "name": "Alchemy",
+          "oml": 3
+        },
+        {
+          "name": "Herblore",
+          "oml": 3
+        },
+        {
+          "name": "Embalming",
+          "oml": 2
+        },
+        {
+          "name": "Script",
+          "base": 70,
+          "mult": 1
+        }
+      ],
+      "special": [],
+      "selectable": true,
+      "flavorKey": "perfumer"
+    },
+    {
+      "id": "physician",
+      "name": "Physician",
+      "category": "guilded",
+      "years": 7,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Physician",
+          "oml": 4
+        },
+        {
+          "name": "Herblore",
+          "oml": 3
+        },
+        {
+          "name": "Alchemy",
+          "oml": 3
+        },
+        {
+          "name": "Script",
+          "base": 70,
+          "mult": 1
+        }
+      ],
+      "special": [],
+      "selectable": true,
+      "flavorKey": "physician"
+    },
+    {
+      "id": "pilot",
+      "name": "Pilot",
+      "category": "guilded",
+      "years": 9,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Piloting",
+          "oml": 4
+        },
+        {
+          "name": "Weatherlore",
+          "oml": 5
+        },
+        {
+          "name": "Seamanship",
+          "oml": 4
+        },
+        {
+          "name": "Drawing",
+          "oml": 3
+        },
+        {
+          "name": "Shipwright",
+          "oml": 2
+        },
+        {
+          "name": "Mathematics",
+          "oml": 2
+        },
+        {
+          "name": "Script",
+          "base": 70,
+          "mult": 1
+        }
+      ],
+      "special": [],
+      "selectable": true,
+      "flavorKey": "pilot",
+      "choices": [
+        {
+          "category": "weapon",
+          "count": 1,
+          "bonus": 0
+        }
+      ]
+    },
+    {
+      "id": "potter",
+      "name": "Potter",
+      "category": "guilded",
+      "years": 6,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Ceramics",
+          "oml": 5
+        },
+        {
+          "name": "Glassworking",
+          "oml": 2
+        }
+      ],
+      "selectable": true,
+      "flavorKey": "potter"
+    },
+    {
+      "id": "prostitute-pimp",
+      "name": "Prostitute/Pimp",
+      "category": "unguilded",
+      "years": 1,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Lovecraft",
+          "oml": 4
+        },
+        {
+          "name": "Intrigue",
+          "oml": 4
+        },
+        {
+          "name": "Dagger",
+          "oml": 4
+        }
+      ],
+      "selectable": true,
+      "flavorKey": "prostitute-pimp",
+      "titles": [
+        "Prostitute",
+        "Pimp"
+      ]
+    },
+    {
+      "id": "ratter",
+      "name": "Ratter",
+      "category": "unguilded",
+      "years": 3,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Ratcraft",
+          "oml": 5
+        },
+        {
+          "name": "Dogcraft",
+          "oml": 4
+        },
+        {
+          "name": "Net",
+          "oml": 3
+        },
+        {
+          "name": "Club",
+          "oml": 5
+        },
+        {
+          "name": "Herblore",
+          "oml": 2
+        }
+      ],
+      "selectable": true,
+      "flavorKey": "ratter"
+    },
+    {
+      "id": "sage-tutor",
+      "name": "Sage/Tutor",
+      "category": "unguilded",
+      "years": 5,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Folklore",
+          "oml": 5
+        },
+        {
+          "name": "Mathematics",
+          "oml": 2
+        },
+        {
+          "name": "Language (2nd)",
+          "oml": 2
+        },
+        {
+          "name": "Script (1st)",
+          "base": 70,
+          "mult": 1
+        },
+        {
+          "name": "Script (2nd)",
+          "base": 70,
+          "mult": 1
+        }
+      ],
+      "special": [],
+      "selectable": true,
+      "flavorKey": "sage-tutor",
+      "titles": [
+        "Sage",
+        "Tutor"
+      ],
+      "choices": [
+        {
+          "category": "lore",
+          "count": 3,
+          "oml": 4
+        }
+      ]
+    },
+    {
+      "id": "salter",
+      "name": "Salter",
+      "category": "guilded",
+      "years": 4,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Mining",
+          "oml": 3
+        },
+        {
+          "name": "Cookery",
+          "oml": 4
+        },
+        {
+          "name": "Survival",
+          "oml": 4
+        },
+        {
+          "name": "Fishing",
+          "oml": 4
+        },
+        {
+          "name": "Herblore",
+          "oml": 1
+        }
+      ],
+      "selectable": true,
+      "flavorKey": "salter"
+    },
+    {
+      "id": "scribe",
+      "name": "Scribe",
+      "category": "unguilded",
+      "years": 5,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Drawing",
+          "oml": 3
+        },
+        {
+          "name": "Mathematics",
+          "oml": 2
+        },
+        {
+          "name": "Language (2nd)",
+          "oml": 2
+        },
+        {
+          "name": "Script (1st)",
+          "base": 70,
+          "mult": 1
+        },
+        {
+          "name": "Script (2nd)",
+          "base": 70,
+          "mult": 1
+        },
+        {
+          "name": "Script (3rd)",
+          "base": 70,
+          "mult": 1
+        }
+      ],
+      "special": [],
+      "selectable": true,
+      "flavorKey": "scribe"
+    },
+    {
+      "id": "seaman",
+      "name": "Seaman",
+      "category": "guilded",
+      "years": 5,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Seamanship",
+          "oml": 5
+        },
+        {
+          "name": "Climbing",
+          "oml": 5
+        },
+        {
+          "name": "Club",
+          "oml": 5
+        },
+        {
+          "name": "Dagger",
+          "oml": 4
+        },
+        {
+          "name": "Fishing",
+          "oml": 4
+        },
+        {
+          "name": "Weatherlore",
+          "oml": 4
+        },
+        {
+          "name": "Piloting",
+          "oml": 2
+        },
+        {
+          "name": "Shipwright",
+          "oml": 2
+        }
+      ],
+      "selectable": true,
+      "flavorKey": "seaman"
+    },
+    {
+      "id": "shipwright",
+      "name": "Shipwright",
+      "category": "guilded",
+      "years": 7,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Shipwright",
+          "oml": 4
+        },
+        {
+          "name": "Woodcraft",
+          "oml": 4
+        },
+        {
+          "name": "Timbercraft",
+          "oml": 3
+        },
+        {
+          "name": "Metalcraft",
+          "oml": 2
+        },
+        {
+          "name": "Mathematics",
+          "oml": 2
+        },
+        {
+          "name": "Seamanship",
+          "oml": 3
+        },
+        {
+          "name": "Script",
+          "base": 70,
+          "mult": 1
+        }
+      ],
+      "special": [],
+      "selectable": true,
+      "flavorKey": "shipwright"
+    },
+    {
+      "id": "soldier",
+      "name": "Soldier",
+      "category": "unguilded",
+      "years": 4,
+      "source": "4001",
+      "skills": [],
+      "special": [
+        "Depends on military unit type. See Character 27"
+      ],
+      "selectable": true,
+      "flavorKey": "soldier"
+    },
+    {
+      "id": "teamster",
+      "name": "Teamster",
+      "category": "unguilded",
+      "years": 2,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Riding",
+          "oml": 4
+        },
+        {
+          "name": "Animalcraft",
+          "oml": 3
+        },
+        {
+          "name": "Whip",
+          "oml": 3
+        },
+        {
+          "name": "Woodcraft",
+          "oml": 3
+        }
+      ],
+      "selectable": true,
+      "flavorKey": "teamster"
+    },
+    {
+      "id": "tentmaker",
+      "name": "Tentmaker",
+      "category": "guilded",
+      "years": 5,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Textilecraft",
+          "oml": 4
+        },
+        {
+          "name": "Hidework",
+          "oml": 4
+        },
+        {
+          "name": "Woodcraft",
+          "oml": 2
+        }
+      ],
+      "selectable": true,
+      "flavorKey": "tentmaker"
+    },
+    {
+      "id": "thatcher",
+      "name": "Thatcher",
+      "category": "unguilded",
+      "years": 4,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Climbing",
+          "oml": 5
+        },
+        {
+          "name": "Woodcraft",
+          "oml": 4
+        },
+        {
+          "name": "Engineering",
+          "oml": 2
+        }
+      ],
+      "selectable": true,
+      "flavorKey": "thatcher"
+    },
+    {
+      "id": "thespian",
+      "name": "Thespian",
+      "category": "guilded",
+      "years": 7,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Acting",
+          "oml": 5
+        },
+        {
+          "name": "Oratory",
+          "oml": 4
+        },
+        {
+          "name": "Singing",
+          "oml": 4
+        },
+        {
+          "name": "Musician",
+          "oml": 3
+        },
+        {
+          "name": "Drawing",
+          "oml": 3
+        }
+      ],
+      "selectable": true,
+      "flavorKey": "thespian"
+    },
+    {
+      "id": "thief-lia-kavair",
+      "name": "Thief (Lia-Kavair)",
+      "category": "guilded",
+      "years": 3,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Legerdemain",
+          "oml": 4
+        },
+        {
+          "name": "Awareness",
+          "oml": 5
+        },
+        {
+          "name": "Stealth",
+          "oml": 4
+        },
+        {
+          "name": "Intrigue",
+          "oml": 4
+        },
+        {
+          "name": "Lockcraft",
+          "oml": 3
+        },
+        {
+          "name": "Club",
+          "oml": 5
+        },
+        {
+          "name": "Dagger",
+          "oml": 4
+        },
+        {
+          "name": "Acrobatics",
+          "oml": 3
+        }
+      ],
+      "selectable": true,
+      "flavorKey": "thief-lia-kavair"
+    },
+    {
+      "id": "timberwright",
+      "name": "Timberwright",
+      "category": "guilded",
+      "years": 6,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Timbercraft",
+          "oml": 4
+        },
+        {
+          "name": "Survival",
+          "oml": 4
+        },
+        {
+          "name": "Weatherlore",
+          "oml": 4
+        },
+        {
+          "name": "Woodcraft",
+          "oml": 3
+        }
+      ],
+      "selectable": true,
+      "flavorKey": "timberwright"
+    },
+    {
+      "id": "toymaker",
+      "name": "Toymaker",
+      "category": "unguilded",
+      "years": 5,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Woodcraft",
+          "oml": 5
+        },
+        {
+          "name": "Lockcraft",
+          "oml": 3
+        },
+        {
+          "name": "Drawing",
+          "oml": 3
+        },
+        {
+          "name": "Hidework",
+          "oml": 3
+        }
+      ],
+      "selectable": true,
+      "flavorKey": "toymaker"
+    },
+    {
+      "id": "weaponcrafter",
+      "name": "Weaponcrafter",
+      "category": "guilded",
+      "years": 7,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Weaponcraft",
+          "oml": 4
+        },
+        {
+          "name": "Metalcraft",
+          "oml": 3
+        },
+        {
+          "name": "Fletching",
+          "oml": 3
+        },
+        {
+          "name": "Mining",
+          "oml": 2
+        }
+      ],
+      "special": [],
+      "selectable": true,
+      "flavorKey": "weaponcrafter",
+      "choices": [
+        {
+          "category": "weapon",
+          "count": 2,
+          "bonus": 0
+        }
+      ]
+    },
+    {
+      "id": "woodcrafter",
+      "name": "Woodcrafter",
+      "category": "guilded",
+      "years": 7,
+      "source": "4001",
+      "skills": [
+        {
+          "name": "Woodcraft",
+          "oml": 5
+        },
+        {
+          "name": "Metalcraft",
+          "oml": 2
+        },
+        {
+          "name": "Hidework",
+          "oml": 3
+        }
+      ],
+      "selectable": true,
+      "flavorKey": "woodcrafter"
+    }
+  ],
+  "specializations": []
+}

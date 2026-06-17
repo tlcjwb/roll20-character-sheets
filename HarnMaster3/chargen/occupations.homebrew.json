@@ -1,0 +1,16 @@
+{
+  "_meta": {
+    "harnoccupations": 1,
+    "layer": "homebrew",
+    "note": "HOMEBREW occupations — your own, shareable (committed). Deep-merges ON TOP by id (highest precedence): reuse a base id to override/augment specific fields, or use a DISTINCT id to add a separate selectable occupation. `oml` = OML multiplier."
+  },
+  "occupations": [
+    {
+      "id": "_example-ostler-houserule", "name": "Ostler (house variant — example)", "category": "guilded",
+      "years": 5, "source": "homebrew", "selectable": true,
+      "skills": [{ "name": "Horsecraft", "oml": 5 }, { "name": "Riding", "oml": 4 }, { "name": "Hidework", "oml": 4 }],
+      "note": "Distinct id → shows as its own selectable option alongside the 4001 Ostler. Reuse id 'ostler' instead to override the base."
+    }
+  ],
+  "specializations": []
+}

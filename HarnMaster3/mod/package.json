@@ -1,0 +1,5 @@
+{
+  "type": "commonjs",
+  "private": true,
+  "description": "Roll20 API Mod scripts (CommonJS so Node tests can require the pure mapping; Roll20 ignores this file)."
+}

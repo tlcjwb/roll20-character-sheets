@@ -1,0 +1,37 @@
+{
+  "_meta": {
+    "harnflavor": 1,
+    "build": "dist",
+    "edition": "HarnMaster Third Edition (core)",
+    "note": "DISTRIBUTION TEMPLATE. Descriptive prose only — mechanics live in the generator, never here. Every value is intentionally empty: this file contains no copyrighted text and is safe to distribute. To get rich descriptions, copy this to flavor.private.json and fill it in from a rulebook you own (that file is git-ignored and never distributed). Keys mirror the generator's mechanics-data IDs so each description attaches to its mechanical result by key; the full key set is finalized alongside the mechanics-data transcription.",
+    "keyConvention": "lowercase mechanics-data ID (e.g. species 'human', occupation 'mercenary', psyche trait 'phobia')."
+  },
+  "species": {
+    "human": ""
+  },
+  "sunsigns": {
+    "ulandus": "", "aralius": "", "feniri": "", "ahnu": "", "angberelius": "",
+    "nadai": "", "hirin": "", "tarael": "", "tai": "", "skorus": "", "masara": "", "lado": ""
+  },
+  "socialClass": {
+    "slave": "", "serf": "", "unfree": "", "freeman": "", "noble": ""
+  },
+  "occupations": {
+    "_pattern": { "summary": "", "flavor": "" },
+    "mercenary": { "summary": "", "flavor": "" },
+    "farmer": { "summary": "", "flavor": "" }
+  },
+  "psyche": {
+    "_pattern": "description of the trait and how it manifests",
+    "phobia": "", "aversion": "", "attraction": "", "compulsion": "",
+    "fixation": "", "delusion": "", "obsession": ""
+  },
+  "medical": {
+    "_pattern": "description of the condition / disorder",
+    "example_condition": ""
+  },
+  "deities": {
+    "agrik": "", "halea": "", "ilvir": "", "larani": "", "naveh": "",
+    "peoni": "", "sarajin": "", "save_k_nor": "", "siem": "", "morgath": ""
+  }
+}

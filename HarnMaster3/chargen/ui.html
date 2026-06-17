@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HârnMaster Character Generator</title>
+<style>
+  :root { --ink:#2b2118; --paper:#f4ecd8; --paper2:#efe4c8; --line:#c9b48a; --accent:#7a3b2e; --ok:#3a6b35; --muted:#7a6a4f; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:15px/1.45 "Iowan Old Style","Palatino Linotype",Georgia,serif; color:var(--ink); background:var(--paper); }
+  header { background:var(--paper2); border-bottom:2px solid var(--line); padding:.6rem 1rem; display:flex; gap:1rem; align-items:center; flex-wrap:wrap; }
+  header h1 { font-size:1.15rem; margin:0; color:var(--accent); }
+  .tabs { display:flex; gap:.25rem; margin-left:auto; }
+  .tabs button { font:inherit; padding:.35rem .9rem; border:1px solid var(--line); background:var(--paper); cursor:pointer; border-radius:4px 4px 0 0; }
+  .tabs button.active { background:var(--accent); color:var(--paper); border-color:var(--accent); }
+  main { padding:1rem; max-width:1100px; margin:0 auto; }
+  .panel { display:none; } .panel.active { display:block; }
+  fieldset { border:1px solid var(--line); border-radius:6px; margin:0 0 1rem; padding:.6rem .8rem 1rem; background:rgba(255,255,255,.25); }
+  legend { font-weight:bold; color:var(--accent); padding:0 .4rem; }
+  label { font-size:.85rem; color:var(--muted); display:block; }
+  input, select, textarea { font:inherit; padding:.25rem .4rem; border:1px solid var(--line); border-radius:4px; background:var(--paper); color:var(--ink); width:100%; }
+  .grid { display:grid; gap:.5rem .8rem; }
+  .bio { grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); }
+  .attrs { grid-template-columns:repeat(auto-fill,minmax(92px,1fr)); }
+  .attr { text-align:center; } .attr input { text-align:center; font-weight:bold; }
+  .row { display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; margin:.3rem 0; }
+  button.act { font:inherit; padding:.3rem .7rem; border:1px solid var(--accent); background:var(--accent); color:var(--paper); border-radius:4px; cursor:pointer; }
+  button.ghost { background:var(--paper); color:var(--accent); }
+  table { border-collapse:collapse; width:100%; font-size:.9rem; }
+  th,td { border:1px solid var(--line); padding:.2rem .4rem; text-align:left; } th { background:var(--paper2); }
+  td.num,th.num { text-align:center; width:3.2rem; } td input { width:3rem; text-align:center; }
+  .src { font-size:.72rem; color:var(--muted); }
+  .tag { font-size:.7rem; background:var(--paper2); border:1px solid var(--line); border-radius:3px; padding:0 .3rem; margin-left:.3rem; }
+  .pill { font-size:.7rem; border-radius:10px; padding:.05rem .5rem; border:1px solid var(--line); }
+  .pill.dist { background:#e8eecf; } .pill.full { background:#e7ddc2; }
+  textarea { min-height:240px; font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.8rem; }
+  .muted { color:var(--muted); font-size:.85rem; }
+  .rollbtn { font:inherit; font-size:.72rem; border:1px solid var(--line); background:var(--paper); cursor:pointer; border-radius:3px; padding:0 .3rem; margin-left:.25rem; }
+  .rollall { font:inherit; font-size:.78rem; border:1px solid var(--accent); background:var(--paper); color:var(--accent); cursor:pointer; border-radius:4px; padding:.1rem .55rem; margin-left:.4rem; }
+  .rolllog { color:var(--ok); font-size:.82rem; margin:.4rem 0 0; }
+  .subopt { margin:.1rem 0 .3rem 1.6rem; font-size:.85rem; color:var(--muted); }
+  .wide { grid-column:1 / -1; }
+  .warn { color:var(--accent); font-size:.85rem; }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:1rem; } @media(max-width:760px){ .two{grid-template-columns:1fr;} }
+  .steps { position:sticky; top:0; z-index:5; display:flex; flex-wrap:wrap; gap:.3rem; align-items:center; margin:0 0 1rem; padding:.4rem .5rem; background:var(--paper2); border:1px solid var(--line); border-radius:6px; }
+  .steps .lbl { font-size:.72rem; color:var(--muted); margin-right:.2rem; }
+  .steps a { font-size:.74rem; text-decoration:none; color:var(--muted); border:1px solid var(--line); border-radius:11px; padding:.05rem .5rem; cursor:pointer; white-space:nowrap; }
+  .steps a:hover { border-color:var(--accent); color:var(--accent); }
+  .steps a.on { background:var(--accent); color:var(--paper); border-color:var(--accent); }
+  .steps a .n { font-weight:bold; opacity:.7; margin-right:.25rem; }
+</style>
+</head>
+<body>
+<header>
+  <h1>HârnMaster Character Generator</h1>
+  <span id="buildPill" class="pill dist">public build</span>
+  <label style="display:flex;align-items:center;gap:.3rem;color:var(--muted)">
+    <span>Load owner data…</span>
+    <input id="ownerFiles" type="file" accept=".json" multiple style="width:auto">
+  </label>
+  <div class="tabs">
+    <button data-tab="pc" class="active">Character</button>
+    <button data-tab="creature">Creature</button>
+    <button data-tab="houserules">Options</button>
+  </div>
+</header>
+<main>
+  <!-- ============ PC ============ -->
+  <section id="tab-pc" class="panel active">
+    <nav id="pcSteps" class="steps" aria-label="Suggested order — optional, click to jump"></nav>
+    <fieldset>
+      <legend>Identity <button id="rollIdentity" class="rollall">🎲 Roll all</button></legend>
+      <div class="grid bio">
+        <div><label>Name</label><input id="pc-name"></div>
+        <div><label>Species <button class="rollbtn" data-table="species" data-target="pc-species">🎲</button></label><select id="pc-species"></select></div>
+        <div><label>Sex <button class="rollbtn" data-table="sexHuman" data-target="pc-gender">🎲</button></label><select id="pc-gender"><option>Male</option><option>Female</option></select></div>
+        <div><label>Culture</label><select id="pc-culture"></select></div>
+        <div><label>Birthdate <button id="rollBirthdate" class="rollbtn">🎲</button></label><div class="row" style="gap:.3rem;margin:0"><select id="pc-month" style="flex:2"></select><input id="pc-day" type="number" min="1" max="30" value="1" style="flex:1"></div></div>
+        <div><label>Sunsign (from birthdate)</label><select id="pc-sunsign"></select></div>
+      </div>
+      <p id="idNote" class="rolllog"></p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Appearance <button id="rollAppearance" class="rollall">🎲 Roll all</button></legend>
+      <div class="grid bio">
+        <div><label>Frame <button class="rollbtn" data-roll="frame" data-target="pc-frame">🎲</button></label><select id="pc-frame"></select></div>
+        <div><label>Height (in) <button class="rollbtn" data-roll="height" data-target="pc-height">🎲</button></label><input id="pc-height" type="number"></div>
+        <div><label>Weight (lb, derived)</label><input id="pc-weight" readonly></div>
+        <div><label>Comeliness (from CML)</label><input id="pc-comeliness" readonly></div>
+        <div><label>Morality (from MOR)</label><input id="pc-morality" readonly></div>
+      </div>
+      <div id="otherAppearance" style="display:none">
+        <div class="full-width muted" style="margin:.3rem 0">Other appearance (house rule)</div>
+        <div class="grid bio">
+          <div><label>Complexion <button class="rollbtn" data-table="complexion" data-target="pc-complexion">🎲</button></label><select id="pc-complexion"></select></div>
+          <div><label>Hair <button class="rollbtn" data-table="hairColor" data-target="pc-hair">🎲</button></label><select id="pc-hair"></select></div>
+          <div><label>Eyes <button class="rollbtn" data-table="eyeColor" data-target="pc-eyes">🎲</button></label><select id="pc-eyes"></select></div>
+        </div>
+      </div>
+      <p id="appNote" class="rolllog"></p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Background <button id="rollBackground" class="rollall">🎲 Roll all</button></legend>
+      <div class="grid bio">
+        <div><label>Social class <button class="rollbtn" data-table="socialClass" data-target="pc-social">🎲</button></label><select id="pc-social"></select></div>
+        <div><label>Sibling rank <button class="rollbtn" data-table="siblingRank" data-target="pc-sibling">🎲</button></label>
+          <div class="row" style="gap:.3rem;margin:0"><select id="pc-sibling" style="flex:1"></select><span style="align-self:center">of</span><select id="pc-famsize" style="flex:1"></select></div></div>
+        <div><label>Parent <button class="rollbtn" data-table="parent" data-target="pc-parent">🎲</button></label><select id="pc-parent"></select></div>
+        <div><label>Parent occupation <button id="rollParentOcc" class="rollbtn">🎲</button></label><select id="pc-parentocc"></select></div>
+        <div id="parentMilField" style="display:none"><label>Parent military unit</label><select id="pc-parentmilunit"></select></div>
+        <div id="parentDeityField" style="display:none"><label>Parent deity</label><select id="pc-parentdeity"></select></div>
+        <div id="parentConvField" style="display:none"><label>Parent convocation</label><select id="pc-parentconvocation"></select></div>
+        <div><label>Clanhead <button class="rollbtn" data-table="clanhead" data-target="pc-clanhead">🎲</button></label><select id="pc-clanhead"></select></div>
+        <div><label>Estrangement <button class="rollbtn" data-table="estrangement" data-target="pc-estrangement">🎲</button></label><select id="pc-estrangement"></select></div>
+      </div>
+      <p id="bgNote" class="rolllog"></p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Attributes <button id="rollAll" class="rollall">🎲 Roll all</button></legend>
+      <div id="attrGrid" class="grid attrs"></div>
+      <p id="attrNote" class="rolllog"></p>
+      <p class="muted">3d6 + species modifiers (Khuzdul/Sindarin/Human-Female), the weight modifier (Strength) and the frame modifier (Agility) — Appearance above sets weight &amp; frame, so roll it first. Every value stays editable.</p>
+    </fieldset>
+
+    <fieldset id="traitsBox" style="display:none">
+      <legend>Optional traits <button id="rollTraits" class="rollall">🎲 Roll all</button></legend>
+      <div class="grid bio">
+        <div id="psycheField" class="wide" style="display:none"><label>Psyche trait <button class="rollbtn" data-roll="psyche" data-target="pc-psyche">🎲</button></label>
+          <div class="row" style="gap:.3rem;margin:0"><select id="pc-psyche" style="flex:3"></select><select id="pc-psyche-sev" style="flex:1"></select></div><div id="psycheExtra" class="src"></div></div>
+        <div id="medicalField" class="wide" style="display:none"><label>Medical trait <button class="rollbtn" data-roll="medical" data-target="pc-medical">🎲</button></label><select id="pc-medical"></select><div id="medicalExtra" class="src"></div></div>
+        <div id="sexualityField" style="display:none"><label>Sexuality <button class="rollbtn" data-table="sexuality" data-target="pc-sexuality">🎲</button></label><select id="pc-sexuality"></select></div>
+      </div>
+      <p id="allocNote" class="warn"></p>
+      <p id="traitNote" class="rolllog"></p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Occupation <button id="rollOccAll" class="rollall">🎲 Roll all</button></legend>
+      <div class="row">
+        <div style="flex:2;min-width:220px"><label>Occupation <button id="rollOcc" class="rollbtn">🎲</button></label><select id="pc-occupation"></select></div>
+        <div id="specField" style="flex:1;min-width:160px;display:none"><label>Specialization</label><select id="pc-spec"><option value="">— none —</option></select></div>
+        <div id="milUnitField" style="flex:1;min-width:180px;display:none"><label>Military unit <span class="muted">(Char 27)</span></label><select id="pc-milunit"></select></div>
+        <div id="convocationField" style="flex:1;min-width:170px;display:none"><label>Convocation <span class="muted">(Char 26)</span></label><select id="pc-convocation"></select></div>
+        <div id="chantryField" style="flex:0 0 auto;min-width:120px;display:none"><label>Chantry quality</label><select id="pc-chantry"><option>H</option><option>HH</option><option>HHH</option><option selected>HHHH</option><option>HHHHH</option></select></div>
+        <span class="muted" style="align-self:end">+ automatic skills (always opened)</span>
+      </div>
+      <div id="occChoicesField" style="display:none;margin:.3rem 0"></div>
+      <p id="occMeta" class="muted"></p>
+      <p id="occNote" class="rolllog"></p>
+    </fieldset>
+
+    <fieldset id="religionField">
+      <legend>Religion <button id="rollReligion" class="rollall">🎲 Roll all</button></legend>
+      <div class="grid bio">
+        <div><label>Deity</label><select id="pc-deity"></select></div>
+        <div><label>Piety <button class="rollbtn" data-roll="piety" data-target="pc-piety">🎲</button></label><input id="pc-piety" type="number" value="0"></div>
+      </div>
+      <p id="relNote" class="rolllog"></p>
+      <p class="muted">Anyone may have a patron deity; only the rules differ for clerics (opening Piety ≈ Will×5; detailed ritual mechanics are Phase 3b on the sheet). The deity 🎲 picks at random; the Piety 🎲 sets Will×5.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Equipment &amp; Funds</legend>
+      <div class="grid bio">
+        <div><label>Family wealth</label><select id="pc-wealth"><option>Poor</option><option selected>Average</option><option>Rich</option></select></div>
+        <div><label>Starting funds (d)</label><input id="pc-funds" type="number"></div>
+      </div>
+      <div id="equipPicker" style="display:none;margin-top:.5rem">
+        <div class="grid bio">
+          <div><label>Vendor</label><select id="eq-vendor"></select></div>
+          <div><label>Item</label><select id="eq-item"></select></div>
+          <div><label>Qty</label><input id="eq-qty" type="number" value="1" min="1" style="max-width:5rem"></div>
+          <div style="align-self:end"><button id="eq-add" class="rollall">+ add</button></div>
+        </div>
+        <table id="eq-table"><thead><tr><th>Item</th><th class="num">Qty</th><th class="num">Price (d)</th><th class="num">Wt (lb)</th><th></th></tr></thead><tbody></tbody></table>
+        <p id="eq-totals" class="rolllog"></p>
+      </div>
+      <div style="margin-top:.5rem"><label>Equipment / possessions <span class="muted">(free text — anything not on the price list)</span></label><textarea id="pc-equipment" style="min-height:54px"></textarea></div>
+      <p id="equipHint" class="muted">Funds = family wealth (Character 17): the family's <b>Social Class</b> × wealth level (editable). The picker has the 4001 core <b>Weapons</b> &amp; <b>Armour</b> (Combat 3–4) built in. For the wider goods price list, load the optional <b>equipment.lythia.json</b> via “Load owner data…” (fan-compiled <b>Comprehensive Price List</b>, lythia.com, CC BY-NC-SA 3.0) — it adds vendor packs alongside these.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Optional skills <span class="muted">(5 option points — Character 16)</span> <button id="addOpt" class="rollall">+ add</button></legend>
+      <div id="optList"></div>
+      <p id="optNote" class="rolllog"></p>
+      <p class="muted">5 OPs: open a new skill at OML (1 OP), or improve an open skill by SB×1 (1 OP) / SB×2 (3 OP). (Veteran bonus OPs are out of scope.)</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Skills (live: ML = SB × OML)</legend>
+      <table id="skillTable"><thead><tr><th>Skill</th><th class="num">SB</th><th class="num">OML</th><th class="num">ML</th><th>Section</th></tr></thead><tbody></tbody></table>
+      <p id="skillWarn" class="warn"></p>
+    </fieldset>
+
+    <div class="two">
+      <fieldset><legend>harnchar JSON <button id="copyPc" class="act ghost" style="float:right">Copy</button></legend>
+        <textarea id="pc-json" readonly></textarea></fieldset>
+      <fieldset><legend>Printable summary <button id="printPc" class="act ghost" style="float:right">Print</button></legend>
+        <div id="pc-summary" class="muted"></div></fieldset>
+    </div>
+  </section>
+
+  <!-- ============ Creature ============ -->
+  <section id="tab-creature" class="panel">
+    <fieldset>
+      <legend>Bestiary creature</legend>
+      <div class="row">
+        <div style="flex:2;min-width:240px"><label>Creature</label><select id="cr-select"></select></div>
+        <div style="flex:1"><span id="cr-count" class="muted"></span></div>
+      </div>
+    </fieldset>
+    <fieldset><legend>Stat block</legend><div id="cr-block" class="muted">Select a creature.</div></fieldset>
+    <fieldset><legend>harnchar JSON <button id="copyCr" class="act ghost" style="float:right">Copy</button></legend>
+      <textarea id="cr-json" readonly></textarea></fieldset>
+  </section>
+
+  <!-- ============ Options ============ -->
+  <section id="tab-houserules" class="panel">
+    <fieldset>
+      <legend>Canon optional rules (all OFF by default = standard play; ordered by book page; applied to the Character tab)</legend>
+      <label class="row"><input id="hr-otherappearance" type="checkbox" style="width:auto"> &nbsp;Other Appearance (Character 6) — complexion / hair / eyes</label>
+      <label class="row"><input id="hr-keyattributes" type="checkbox" style="width:auto"> &nbsp;Key Attributes (Character 7) — the 7 (Str, Sta, Dex, Agl, Int, Aur, Will) roll 4d6 drop lowest &amp; are marked *</label>
+      <label class="row"><input id="hr-showmedical" type="checkbox" style="width:auto"> &nbsp;Medical Traits (Character 9)</label>
+      <div id="medicalOpts" class="subopt" style="display:none">
+        <label class="row"><input id="hr-medical-opt" type="checkbox" style="width:auto"> &nbsp;Medical Option: +2 attribute points before risking the roll</label>
+      </div>
+      <label class="row"><input id="hr-showpsyche" type="checkbox" style="width:auto"> &nbsp;Psyche Traits (Character 11)</label>
+      <div id="psycheOpts" class="subopt" style="display:none">
+        <label class="row"><input id="hr-psyche-opt1" type="checkbox" style="width:auto"> &nbsp;Option: +3 attribute points (except Will) for risking the roll</label>
+      </div>
+      <label class="row"><input id="hr-sexuality" type="checkbox" style="width:auto"> &nbsp;Sexuality (Character 11)</label>
+      <label class="row"><input id="hr-multiworship" type="checkbox" style="width:auto"> &nbsp;Multiple Worship (Character 12) — worship more than one deity (separate Piety/Ritual each)</label>
+      <label class="row"><input id="hr-godless" type="checkbox" style="width:auto"> &nbsp;Godless Characters (Character 12) — no deity; hides Religion &amp; Piety</label>
+      <label class="row"><input id="hr-militia" type="checkbox" style="width:auto"> &nbsp;Militia Skills (Character 16) — non-military PCs open 2 combat skills at OML+SB</label>
+      <label class="row"><input id="hr-templetongues" type="checkbox" style="width:auto"> &nbsp;Temple Tongues (Character 23) — cleric's church secret tongue at SB×3 (Agrik/Ilvir/Morgath)</label>
+      <label class="row"><input id="hr-neutralspell" type="checkbox" style="width:auto"> &nbsp;Neutral Spell Limits (Character 26) — a mage spends no more than ⅓ of spell OPs on neutral spells</label>
+      <p class="muted">All off = standard HârnMaster, ordered by book page. Toggles reveal/generate optional content where applicable and are recorded in the exported <b>houserules</b> block.</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>House rules (campaign-specific)</legend>
+      <div class="row">
+        <label style="flex:0 0 auto">One other attribute rolled with 4d6 (drop lowest):</label>
+        <select id="hr-4d6" style="width:auto"><option value="">— none —</option></select>
+      </div>
+      <p class="muted">A campaign house rule (not from the rulebook): one attribute of your choice is rolled 4d6-drop-lowest on <b>Roll all</b>. Also recorded in the exported <b>houserules</b> block.</p>
+    </fieldset>
+  </section>
+</main>
+<script>
+/*__BUNDLE__*/
+</script>
+</body>
+</html>

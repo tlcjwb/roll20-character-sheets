@@ -1,0 +1,4310 @@
+{
+  "_meta": {
+    "harntables": 1,
+    "layer": "public",
+    "source": "4001",
+    "note": "PUBLIC chargen roll/lookup tables from 4001 Character 2-5 (functional data). Range tables use 1d100 unless `die` says otherwise; `mod`/notes per the rules. Sunsign is date-based (1d12 month + 1d30 day → day-of-year 1..360). Supplement/homebrew layers deep-merge on top via merge-util."
+  },
+  "tables": {
+    "species": {
+      "die": "d100",
+      "source": "4001",
+      "entries": [
+        {
+          "lo": 1,
+          "hi": 97,
+          "result": "Human"
+        },
+        {
+          "lo": 98,
+          "hi": 98,
+          "result": "Sindarin (elf)"
+        },
+        {
+          "lo": 99,
+          "hi": 99,
+          "result": "Khuzdul (dwarf)"
+        },
+        {
+          "lo": 100,
+          "hi": 100,
+          "result": "Other (GM discretion)"
+        }
+      ]
+    },
+    "sexHuman": {
+      "die": "d100",
+      "source": "4001",
+      "entries": [
+        {
+          "lo": 1,
+          "hi": 48,
+          "result": "Male"
+        },
+        {
+          "lo": 49,
+          "hi": 100,
+          "result": "Female"
+        }
+      ]
+    },
+    "socialClass": {
+      "die": "d100",
+      "source": "4001",
+      "note": "Feudal column. Random generation is NOT recommended (GM chooses); table is for NPCs. Slave is Rethem-only (treat as Serf elsewhere on Hârn).",
+      "entries": [
+        {
+          "lo": 1,
+          "hi": 80,
+          "result": "Serf"
+        },
+        {
+          "lo": 81,
+          "hi": 93,
+          "result": "Unguilded"
+        },
+        {
+          "lo": 94,
+          "hi": 98,
+          "result": "Guilded"
+        },
+        {
+          "lo": 99,
+          "hi": 100,
+          "result": "Noble"
+        }
+      ]
+    },
+    "siblingRank": {
+      "die": "d100",
+      "source": "4001",
+      "note": "Family size = sibling rank + (1d6 - 1). Eldest is often favored: +5 when rolling Estrangement.",
+      "entries": [
+        {
+          "lo": 1,
+          "hi": 25,
+          "result": "Eldest"
+        },
+        {
+          "lo": 26,
+          "hi": 50,
+          "result": "2nd Child"
+        },
+        {
+          "lo": 51,
+          "hi": 70,
+          "result": "3rd Child"
+        },
+        {
+          "lo": 71,
+          "hi": 85,
+          "result": "4th Child"
+        },
+        {
+          "lo": 86,
+          "hi": 95,
+          "result": "5th Child"
+        },
+        {
+          "lo": 96,
+          "hi": 100,
+          "result": "6th Child"
+        }
+      ]
+    },
+    "parent": {
+      "die": "d100",
+      "source": "4001",
+      "entries": [
+        {
+          "lo": 1,
+          "hi": 50,
+          "result": "Offspring",
+          "note": "raised by natural parents",
+          "sub": "parentOffspring"
+        },
+        {
+          "lo": 51,
+          "hi": 70,
+          "result": "Fostered",
+          "note": "lives with another family; reroll Offspring sub-table at +30"
+        },
+        {
+          "lo": 71,
+          "hi": 75,
+          "result": "Adopted"
+        },
+        {
+          "lo": 76,
+          "hi": 90,
+          "result": "Bastard",
+          "note": "acknowledged by father if roll was 76-80"
+        },
+        {
+          "lo": 91,
+          "hi": 100,
+          "result": "Orphan",
+          "sub": "parentOrphan"
+        }
+      ]
+    },
+    "parentOffspring": {
+      "die": "d100",
+      "source": "4001",
+      "entries": [
+        {
+          "lo": 1,
+          "hi": 60,
+          "result": "Both parents alive, living together"
+        },
+        {
+          "lo": 61,
+          "hi": 70,
+          "result": "Father absent (desertion, divorce, etc.)"
+        },
+        {
+          "lo": 71,
+          "hi": 75,
+          "result": "Mother absent (desertion, divorce, etc.)"
+        },
+        {
+          "lo": 76,
+          "hi": 80,
+          "result": "Father dead"
+        },
+        {
+          "lo": 81,
+          "hi": 85,
+          "result": "Father dead; mother remarried"
+        },
+        {
+          "lo": 86,
+          "hi": 90,
+          "result": "Mother dead"
+        },
+        {
+          "lo": 91,
+          "hi": 100,
+          "result": "Mother dead; father remarried"
+        }
+      ]
+    },
+    "parentOrphan": {
+      "die": "d100",
+      "source": "4001",
+      "entries": [
+        {
+          "lo": 1,
+          "hi": 80,
+          "result": "Fostered with another family/clan"
+        },
+        {
+          "lo": 81,
+          "hi": 95,
+          "result": "Adopted by another family/clan"
+        },
+        {
+          "lo": 96,
+          "hi": 100,
+          "result": "Living alone"
+        }
+      ]
+    },
+    "clanhead": {
+      "die": "d100",
+      "source": "4001",
+      "entries": [
+        {
+          "lo": 1,
+          "hi": 50,
+          "result": "Distant Relation",
+          "note": "reroll for father's relation to clanhead; recurse on another Distant Relation"
+        },
+        {
+          "lo": 51,
+          "hi": 75,
+          "result": "Aunt or Uncle"
+        },
+        {
+          "lo": 76,
+          "hi": 85,
+          "result": "Cousin"
+        },
+        {
+          "lo": 86,
+          "hi": 100,
+          "result": "Father or Mother"
+        }
+      ]
+    },
+    "estrangement": {
+      "die": "d100",
+      "source": "4001",
+      "note": "Eldest child +5. Small/unextended clan +20 (but always treat a natural 01 as Outcast).",
+      "entries": [
+        {
+          "lo": 1,
+          "hi": 10,
+          "result": "Outcast"
+        },
+        {
+          "lo": 11,
+          "hi": 40,
+          "result": "Unpopular"
+        },
+        {
+          "lo": 41,
+          "hi": 60,
+          "result": "Average"
+        },
+        {
+          "lo": 61,
+          "hi": 95,
+          "result": "Popular"
+        },
+        {
+          "lo": 96,
+          "hi": 100,
+          "result": "Favorite"
+        }
+      ]
+    },
+    "occupationGen": {
+      "source": "4001",
+      "die": "d100",
+      "note": "Character 14 Occupation Generation: occupations available per social class + a 1d100 roll within the proper culture column. `r` holds per-culture ranges (Tribal/Viking/Feudal/Imperial/Sindarin/Khuzan; absent = unavailable). `id` links to occupations.json (Soldier variants → soldier; Cleric(noble) → cleric-shaman; Bailiff/Knight → knight-bailiff; Chieftain has no 4001 occupation bundle).",
+      "byClass": {
+        "Slave": [
+          {
+            "id": "farmer",
+            "name": "Farmer",
+            "r": {
+              "Tribal": [
+                1,
+                20
+              ],
+              "Viking": [
+                1,
+                80
+              ],
+              "Feudal": [
+                1,
+                80
+              ],
+              "Imperial": [
+                1,
+                75
+              ]
+            }
+          },
+          {
+            "id": "herdsman",
+            "name": "Herdsman",
+            "r": {
+              "Tribal": [
+                21,
+                80
+              ],
+              "Viking": [
+                81,
+                97
+              ],
+              "Feudal": [
+                81,
+                95
+              ],
+              "Imperial": [
+                76,
+                90
+              ]
+            }
+          },
+          {
+            "id": "cook-servant",
+            "name": "Servant/Cook",
+            "r": {
+              "Tribal": [
+                81,
+                100
+              ],
+              "Viking": [
+                98,
+                100
+              ],
+              "Feudal": [
+                96,
+                100
+              ],
+              "Imperial": [
+                91,
+                98
+              ]
+            }
+          },
+          {
+            "id": "gladiator",
+            "name": "Gladiator/Guard",
+            "r": {
+              "Imperial": [
+                99,
+                100
+              ]
+            }
+          }
+        ],
+        "Serf": [
+          {
+            "id": "farmer",
+            "name": "Farmer",
+            "r": {
+              "Feudal": [
+                1,
+                80
+              ]
+            }
+          },
+          {
+            "id": "herdsman",
+            "name": "Herdsman",
+            "r": {
+              "Feudal": [
+                81,
+                95
+              ]
+            }
+          },
+          {
+            "id": "cook-servant",
+            "name": "Servant/Cook",
+            "r": {
+              "Feudal": [
+                96,
+                100
+              ]
+            }
+          }
+        ],
+        "Unguilded": [
+          {
+            "id": "animal-trainer",
+            "name": "Animal Trainer",
+            "r": {
+              "Viking": [
+                1,
+                1
+              ],
+              "Feudal": [
+                1,
+                1
+              ],
+              "Imperial": [
+                1,
+                2
+              ],
+              "Sindarin": [
+                1,
+                1
+              ],
+              "Khuzan": [
+                1,
+                1
+              ]
+            }
+          },
+          {
+            "id": "beggar",
+            "name": "Beggar/Scavenger",
+            "r": {
+              "Viking": [
+                2,
+                3
+              ],
+              "Feudal": [
+                2,
+                5
+              ],
+              "Imperial": [
+                3,
+                6
+              ]
+            }
+          },
+          {
+            "id": "cartographer-artist",
+            "name": "Cartographer/Artist",
+            "r": {
+              "Viking": [
+                4,
+                4
+              ],
+              "Feudal": [
+                6,
+                6
+              ],
+              "Imperial": [
+                7,
+                7
+              ],
+              "Sindarin": [
+                2,
+                3
+              ],
+              "Khuzan": [
+                2,
+                3
+              ]
+            }
+          },
+          {
+            "id": "cleric-shaman",
+            "name": "Cleric/Shaman",
+            "r": {
+              "Tribal": [
+                1,
+                3
+              ],
+              "Viking": [
+                5,
+                6
+              ],
+              "Feudal": [
+                7,
+                8
+              ],
+              "Imperial": [
+                8,
+                9
+              ],
+              "Sindarin": [
+                4,
+                4
+              ],
+              "Khuzan": [
+                4,
+                4
+              ]
+            }
+          },
+          {
+            "id": "cook-servant",
+            "name": "Cook/Servant",
+            "r": {
+              "Viking": [
+                7,
+                10
+              ],
+              "Feudal": [
+                9,
+                12
+              ],
+              "Imperial": [
+                10,
+                13
+              ],
+              "Sindarin": [
+                5,
+                8
+              ],
+              "Khuzan": [
+                5,
+                19
+              ]
+            }
+          },
+          {
+            "id": "farmer",
+            "name": "Farmer",
+            "r": {
+              "Viking": [
+                11,
+                55
+              ],
+              "Feudal": [
+                13,
+                60
+              ],
+              "Imperial": [
+                14,
+                38
+              ]
+            }
+          },
+          {
+            "id": "fisherman",
+            "name": "Fisherman",
+            "r": {
+              "Tribal": [
+                4,
+                20
+              ],
+              "Viking": [
+                56,
+                65
+              ],
+              "Feudal": [
+                61,
+                66
+              ],
+              "Imperial": [
+                39,
+                44
+              ],
+              "Sindarin": [
+                9,
+                19
+              ]
+            }
+          },
+          {
+            "id": "gladiator",
+            "name": "Gladiator",
+            "r": {
+              "Feudal": [
+                67,
+                67
+              ],
+              "Imperial": [
+                45,
+                47
+              ]
+            }
+          },
+          {
+            "id": "herdsman",
+            "name": "Herdsman",
+            "r": {
+              "Tribal": [
+                21,
+                40
+              ],
+              "Viking": [
+                66,
+                70
+              ],
+              "Feudal": [
+                68,
+                69
+              ],
+              "Imperial": [
+                48,
+                54
+              ]
+            }
+          },
+          {
+            "id": "hunter-trapper",
+            "name": "Hunter/Trapper",
+            "r": {
+              "Tribal": [
+                41,
+                100
+              ],
+              "Viking": [
+                71,
+                76
+              ],
+              "Feudal": [
+                70,
+                72
+              ],
+              "Imperial": [
+                55,
+                57
+              ],
+              "Sindarin": [
+                20,
+                57
+              ],
+              "Khuzan": [
+                20,
+                21
+              ]
+            }
+          },
+          {
+            "name": "Laborer/Longshoreman",
+            "r": {
+              "Viking": [
+                77,
+                83
+              ],
+              "Feudal": [
+                73,
+                80
+              ],
+              "Imperial": [
+                58,
+                65
+              ],
+              "Khuzan": [
+                22,
+                33
+              ]
+            },
+            "ids": [
+              "laborer",
+              "longshoreman"
+            ]
+          },
+          {
+            "id": "prostitute-pimp",
+            "name": "Prostitute/Pimp",
+            "r": {
+              "Viking": [
+                84,
+                85
+              ],
+              "Feudal": [
+                81,
+                82
+              ],
+              "Imperial": [
+                66,
+                69
+              ]
+            }
+          },
+          {
+            "id": "ratter",
+            "name": "Ratter",
+            "r": {
+              "Viking": [
+                86,
+                87
+              ],
+              "Feudal": [
+                83,
+                84
+              ],
+              "Imperial": [
+                70,
+                71
+              ]
+            }
+          },
+          {
+            "id": "sage-tutor",
+            "name": "Sage/Tutor",
+            "r": {
+              "Viking": [
+                88,
+                88
+              ],
+              "Feudal": [
+                85,
+                85
+              ],
+              "Imperial": [
+                72,
+                75
+              ],
+              "Khuzan": [
+                34,
+                57
+              ]
+            }
+          },
+          {
+            "id": "scribe",
+            "name": "Scribe",
+            "r": {
+              "Viking": [
+                89,
+                90
+              ],
+              "Feudal": [
+                86,
+                87
+              ],
+              "Imperial": [
+                76,
+                80
+              ],
+              "Sindarin": [
+                58,
+                64
+              ],
+              "Khuzan": [
+                58,
+                64
+              ]
+            }
+          },
+          {
+            "id": "soldier",
+            "name": "Soldier: Legionnaire/Guardsman",
+            "r": {
+              "Viking": [
+                91,
+                91
+              ],
+              "Feudal": [
+                88,
+                88
+              ],
+              "Imperial": [
+                81,
+                90
+              ],
+              "Sindarin": [
+                65,
+                74
+              ],
+              "Khuzan": [
+                65,
+                97
+              ]
+            }
+          },
+          {
+            "id": "soldier",
+            "name": "Soldier: Mercenary/Viking",
+            "r": {
+              "Viking": [
+                92,
+                97
+              ],
+              "Feudal": [
+                89,
+                90
+              ],
+              "Imperial": [
+                91,
+                95
+              ],
+              "Sindarin": [
+                75,
+                95
+              ]
+            }
+          },
+          {
+            "id": "soldier",
+            "name": "Soldier: Yeoman",
+            "r": {
+              "Feudal": [
+                91,
+                97
+              ]
+            }
+          },
+          {
+            "id": "teamster",
+            "name": "Teamster",
+            "r": {
+              "Viking": [
+                98,
+                98
+              ],
+              "Feudal": [
+                98,
+                98
+              ],
+              "Imperial": [
+                96,
+                97
+              ],
+              "Sindarin": [
+                96,
+                96
+              ],
+              "Khuzan": [
+                98,
+                98
+              ]
+            }
+          },
+          {
+            "id": "thatcher",
+            "name": "Thatcher",
+            "r": {
+              "Viking": [
+                99,
+                99
+              ],
+              "Feudal": [
+                99,
+                99
+              ],
+              "Imperial": [
+                98,
+                98
+              ],
+              "Sindarin": [
+                97,
+                97
+              ]
+            }
+          },
+          {
+            "id": "toymaker",
+            "name": "Toymaker",
+            "r": {
+              "Viking": [
+                100,
+                100
+              ],
+              "Feudal": [
+                100,
+                100
+              ],
+              "Imperial": [
+                99,
+                100
+              ],
+              "Sindarin": [
+                98,
+                100
+              ],
+              "Khuzan": [
+                99,
+                100
+              ]
+            }
+          }
+        ],
+        "Guilded": [
+          {
+            "id": "alchemist",
+            "name": "Alchemist",
+            "r": {
+              "Viking": [
+                1,
+                1
+              ],
+              "Feudal": [
+                1,
+                1
+              ],
+              "Imperial": [
+                1,
+                1
+              ],
+              "Sindarin": [
+                1,
+                2
+              ],
+              "Khuzan": [
+                1,
+                1
+              ]
+            }
+          },
+          {
+            "id": "apothecary",
+            "name": "Apothecary",
+            "r": {
+              "Viking": [
+                2,
+                2
+              ],
+              "Feudal": [
+                2,
+                2
+              ],
+              "Imperial": [
+                2,
+                2
+              ],
+              "Sindarin": [
+                3,
+                4
+              ],
+              "Khuzan": [
+                2,
+                2
+              ]
+            }
+          },
+          {
+            "id": "astrologer",
+            "name": "Astrologer",
+            "r": {
+              "Viking": [
+                3,
+                3
+              ],
+              "Feudal": [
+                3,
+                3
+              ],
+              "Imperial": [
+                3,
+                3
+              ],
+              "Sindarin": [
+                5,
+                5
+              ],
+              "Khuzan": [
+                3,
+                3
+              ]
+            }
+          },
+          {
+            "id": "chandler",
+            "name": "Chandler",
+            "r": {
+              "Viking": [
+                4,
+                5
+              ],
+              "Feudal": [
+                4,
+                5
+              ],
+              "Imperial": [
+                4,
+                5
+              ],
+              "Sindarin": [
+                6,
+                6
+              ],
+              "Khuzan": [
+                4,
+                6
+              ]
+            }
+          },
+          {
+            "id": "charcoaler",
+            "name": "Charcoaler",
+            "r": {
+              "Viking": [
+                6,
+                8
+              ],
+              "Feudal": [
+                6,
+                7
+              ],
+              "Imperial": [
+                6,
+                7
+              ],
+              "Sindarin": [
+                7,
+                7
+              ],
+              "Khuzan": [
+                7,
+                7
+              ]
+            }
+          },
+          {
+            "id": "clothier",
+            "name": "Clothier",
+            "r": {
+              "Viking": [
+                9,
+                11
+              ],
+              "Feudal": [
+                8,
+                11
+              ],
+              "Imperial": [
+                8,
+                10
+              ],
+              "Sindarin": [
+                8,
+                12
+              ],
+              "Khuzan": [
+                8,
+                11
+              ]
+            }
+          },
+          {
+            "id": "courtesan",
+            "name": "Courtesan",
+            "r": {
+              "Viking": [
+                12,
+                12
+              ],
+              "Feudal": [
+                12,
+                12
+              ],
+              "Imperial": [
+                11,
+                11
+              ]
+            }
+          },
+          {
+            "id": "embalmer",
+            "name": "Embalmer",
+            "r": {
+              "Viking": [
+                13,
+                14
+              ],
+              "Feudal": [
+                13,
+                14
+              ],
+              "Imperial": [
+                12,
+                13
+              ],
+              "Sindarin": [
+                13,
+                13
+              ],
+              "Khuzan": [
+                12,
+                12
+              ]
+            }
+          },
+          {
+            "id": "glassworker",
+            "name": "Glassworker",
+            "r": {
+              "Viking": [
+                15,
+                16
+              ],
+              "Feudal": [
+                15,
+                16
+              ],
+              "Imperial": [
+                14,
+                15
+              ],
+              "Sindarin": [
+                14,
+                25
+              ],
+              "Khuzan": [
+                13,
+                13
+              ]
+            }
+          },
+          {
+            "id": "harper-skald",
+            "name": "Harper/Skald",
+            "r": {
+              "Viking": [
+                17,
+                21
+              ],
+              "Feudal": [
+                17,
+                19
+              ],
+              "Imperial": [
+                16,
+                18
+              ],
+              "Sindarin": [
+                26,
+                35
+              ],
+              "Khuzan": [
+                14,
+                17
+              ]
+            }
+          },
+          {
+            "id": "hideworker",
+            "name": "Hideworker",
+            "r": {
+              "Viking": [
+                22,
+                27
+              ],
+              "Feudal": [
+                20,
+                26
+              ],
+              "Imperial": [
+                19,
+                24
+              ],
+              "Sindarin": [
+                36,
+                45
+              ],
+              "Khuzan": [
+                18,
+                18
+              ]
+            }
+          },
+          {
+            "id": "innkeeper",
+            "name": "Innkeeper",
+            "r": {
+              "Viking": [
+                28,
+                31
+              ],
+              "Feudal": [
+                27,
+                31
+              ],
+              "Imperial": [
+                25,
+                28
+              ],
+              "Sindarin": [
+                46,
+                49
+              ],
+              "Khuzan": [
+                19,
+                20
+              ]
+            }
+          },
+          {
+            "id": "jeweler",
+            "name": "Jeweler",
+            "r": {
+              "Viking": [
+                32,
+                33
+              ],
+              "Feudal": [
+                32,
+                33
+              ],
+              "Imperial": [
+                29,
+                30
+              ],
+              "Sindarin": [
+                50,
+                58
+              ],
+              "Khuzan": [
+                21,
+                30
+              ]
+            }
+          },
+          {
+            "id": "lexigrapher",
+            "name": "Lexigrapher",
+            "r": {
+              "Viking": [
+                34,
+                35
+              ],
+              "Feudal": [
+                34,
+                35
+              ],
+              "Imperial": [
+                31,
+                32
+              ],
+              "Sindarin": [
+                59,
+                62
+              ],
+              "Khuzan": [
+                31,
+                33
+              ]
+            }
+          },
+          {
+            "id": "litigant",
+            "name": "Litigant",
+            "r": {
+              "Viking": [
+                36,
+                36
+              ],
+              "Feudal": [
+                36,
+                36
+              ],
+              "Imperial": [
+                33,
+                33
+              ],
+              "Khuzan": [
+                34,
+                34
+              ]
+            }
+          },
+          {
+            "id": "locksmith",
+            "name": "Locksmith",
+            "r": {
+              "Viking": [
+                37,
+                37
+              ],
+              "Feudal": [
+                37,
+                37
+              ],
+              "Imperial": [
+                34,
+                34
+              ],
+              "Sindarin": [
+                63,
+                63
+              ],
+              "Khuzan": [
+                35,
+                36
+              ]
+            }
+          },
+          {
+            "id": "mage-shek-pvar",
+            "name": "Mage (Shek-Pvar)",
+            "r": {
+              "Viking": [
+                38,
+                38
+              ],
+              "Feudal": [
+                38,
+                38
+              ],
+              "Imperial": [
+                35,
+                36
+              ],
+              "Sindarin": [
+                64,
+                68
+              ],
+              "Khuzan": [
+                37,
+                37
+              ]
+            }
+          },
+          {
+            "id": "mason",
+            "name": "Mason",
+            "r": {
+              "Viking": [
+                39,
+                40
+              ],
+              "Feudal": [
+                39,
+                41
+              ],
+              "Imperial": [
+                37,
+                39
+              ],
+              "Sindarin": [
+                69,
+                74
+              ],
+              "Khuzan": [
+                38,
+                47
+              ]
+            }
+          },
+          {
+            "id": "mercantyler",
+            "name": "Mercantyler",
+            "r": {
+              "Viking": [
+                41,
+                48
+              ],
+              "Feudal": [
+                42,
+                47
+              ],
+              "Imperial": [
+                40,
+                45
+              ],
+              "Sindarin": [
+                75,
+                76
+              ],
+              "Khuzan": [
+                48,
+                60
+              ]
+            }
+          },
+          {
+            "id": "metalsmith",
+            "name": "Metalsmith",
+            "r": {
+              "Viking": [
+                49,
+                57
+              ],
+              "Feudal": [
+                48,
+                56
+              ],
+              "Imperial": [
+                46,
+                54
+              ],
+              "Sindarin": [
+                77,
+                80
+              ],
+              "Khuzan": [
+                61,
+                68
+              ]
+            }
+          },
+          {
+            "id": "miller-millwright",
+            "name": "Miller/Millwright",
+            "r": {
+              "Viking": [
+                58,
+                64
+              ],
+              "Feudal": [
+                57,
+                64
+              ],
+              "Imperial": [
+                55,
+                62
+              ],
+              "Sindarin": [
+                81,
+                81
+              ],
+              "Khuzan": [
+                69,
+                69
+              ]
+            }
+          },
+          {
+            "id": "miner",
+            "name": "Miner",
+            "r": {
+              "Viking": [
+                65,
+                67
+              ],
+              "Feudal": [
+                65,
+                67
+              ],
+              "Imperial": [
+                63,
+                65
+              ],
+              "Sindarin": [
+                82,
+                82
+              ],
+              "Khuzan": [
+                70,
+                84
+              ]
+            }
+          },
+          {
+            "id": "ostler",
+            "name": "Ostler",
+            "r": {
+              "Viking": [
+                68,
+                68
+              ],
+              "Feudal": [
+                68,
+                69
+              ],
+              "Imperial": [
+                66,
+                68
+              ],
+              "Sindarin": [
+                83,
+                83
+              ]
+            }
+          },
+          {
+            "id": "perfumer",
+            "name": "Perfumer",
+            "r": {
+              "Viking": [
+                69,
+                70
+              ],
+              "Feudal": [
+                70,
+                71
+              ],
+              "Imperial": [
+                69,
+                71
+              ],
+              "Sindarin": [
+                84,
+                84
+              ],
+              "Khuzan": [
+                85,
+                85
+              ]
+            }
+          },
+          {
+            "id": "physician",
+            "name": "Physician",
+            "r": {
+              "Viking": [
+                71,
+                71
+              ],
+              "Feudal": [
+                72,
+                72
+              ],
+              "Imperial": [
+                72,
+                72
+              ],
+              "Sindarin": [
+                85,
+                85
+              ],
+              "Khuzan": [
+                86,
+                86
+              ]
+            }
+          },
+          {
+            "id": "pilot",
+            "name": "Pilot",
+            "r": {
+              "Viking": [
+                72,
+                73
+              ],
+              "Feudal": [
+                73,
+                73
+              ],
+              "Imperial": [
+                73,
+                73
+              ],
+              "Sindarin": [
+                86,
+                86
+              ]
+            }
+          },
+          {
+            "id": "potter",
+            "name": "Potter",
+            "r": {
+              "Viking": [
+                74,
+                77
+              ],
+              "Feudal": [
+                74,
+                77
+              ],
+              "Imperial": [
+                74,
+                77
+              ],
+              "Sindarin": [
+                87,
+                87
+              ],
+              "Khuzan": [
+                87,
+                87
+              ]
+            }
+          },
+          {
+            "id": "salter",
+            "name": "Salter",
+            "r": {
+              "Viking": [
+                78,
+                79
+              ],
+              "Feudal": [
+                78,
+                79
+              ],
+              "Imperial": [
+                78,
+                79
+              ],
+              "Sindarin": [
+                88,
+                88
+              ],
+              "Khuzan": [
+                88,
+                88
+              ]
+            }
+          },
+          {
+            "id": "seaman",
+            "name": "Seaman",
+            "r": {
+              "Viking": [
+                80,
+                83
+              ],
+              "Feudal": [
+                80,
+                82
+              ],
+              "Imperial": [
+                80,
+                82
+              ],
+              "Sindarin": [
+                89,
+                89
+              ]
+            }
+          },
+          {
+            "id": "shipwright",
+            "name": "Shipwright",
+            "r": {
+              "Viking": [
+                84,
+                84
+              ],
+              "Feudal": [
+                83,
+                83
+              ],
+              "Imperial": [
+                83,
+                83
+              ],
+              "Sindarin": [
+                90,
+                90
+              ]
+            }
+          },
+          {
+            "id": "tentmaker",
+            "name": "Tentmaker",
+            "r": {
+              "Viking": [
+                85,
+                85
+              ],
+              "Feudal": [
+                84,
+                84
+              ],
+              "Imperial": [
+                84,
+                84
+              ],
+              "Sindarin": [
+                91,
+                91
+              ],
+              "Khuzan": [
+                89,
+                89
+              ]
+            }
+          },
+          {
+            "id": "thespian",
+            "name": "Thespian",
+            "r": {
+              "Viking": [
+                86,
+                86
+              ],
+              "Feudal": [
+                85,
+                85
+              ],
+              "Imperial": [
+                85,
+                85
+              ],
+              "Sindarin": [
+                92,
+                92
+              ],
+              "Khuzan": [
+                90,
+                90
+              ]
+            }
+          },
+          {
+            "id": "thief-lia-kavair",
+            "name": "Thief (Lia-Kavair)",
+            "r": {
+              "Viking": [
+                87,
+                88
+              ],
+              "Feudal": [
+                86,
+                88
+              ],
+              "Imperial": [
+                86,
+                88
+              ],
+              "Sindarin": [
+                93,
+                93
+              ],
+              "Khuzan": [
+                91,
+                91
+              ]
+            }
+          },
+          {
+            "id": "timberwright",
+            "name": "Timberwright",
+            "r": {
+              "Viking": [
+                89,
+                90
+              ],
+              "Feudal": [
+                89,
+                90
+              ],
+              "Imperial": [
+                89,
+                90
+              ],
+              "Sindarin": [
+                94,
+                94
+              ],
+              "Khuzan": [
+                92,
+                92
+              ]
+            }
+          },
+          {
+            "id": "weaponcrafter",
+            "name": "Weaponcrafter",
+            "r": {
+              "Viking": [
+                91,
+                92
+              ],
+              "Feudal": [
+                91,
+                92
+              ],
+              "Imperial": [
+                91,
+                92
+              ],
+              "Sindarin": [
+                95,
+                96
+              ],
+              "Khuzan": [
+                93,
+                99
+              ]
+            }
+          },
+          {
+            "id": "woodcrafter",
+            "name": "Woodcrafter",
+            "r": {
+              "Viking": [
+                93,
+                100
+              ],
+              "Feudal": [
+                93,
+                100
+              ],
+              "Imperial": [
+                93,
+                100
+              ],
+              "Sindarin": [
+                97,
+                100
+              ],
+              "Khuzan": [
+                100,
+                100
+              ]
+            }
+          }
+        ],
+        "Noble": [
+          {
+            "id": "cleric-shaman",
+            "name": "Cleric (noble)",
+            "r": {
+              "Feudal": [
+                1,
+                5
+              ],
+              "Imperial": [
+                1,
+                5
+              ]
+            }
+          },
+          {
+            "id": "herald",
+            "name": "Herald (noble)",
+            "r": {
+              "Viking": [
+                1,
+                3
+              ],
+              "Feudal": [
+                6,
+                10
+              ],
+              "Imperial": [
+                6,
+                10
+              ],
+              "Sindarin": [
+                1,
+                3
+              ],
+              "Khuzan": [
+                1,
+                2
+              ]
+            }
+          },
+          {
+            "id": "knight-bailiff",
+            "name": "Bailiff (manor)",
+            "r": {
+              "Feudal": [
+                11,
+                15
+              ],
+              "Imperial": [
+                18,
+                38
+              ]
+            }
+          },
+          {
+            "id": "knight-bachelor",
+            "name": "Knight-Bachelor/Lady",
+            "r": {
+              "Feudal": [
+                16,
+                85
+              ]
+            }
+          },
+          {
+            "id": "knight-bailiff",
+            "name": "Knight/Patrician/Lady",
+            "r": {
+              "Viking": [
+                4,
+                100
+              ],
+              "Feudal": [
+                86,
+                100
+              ],
+              "Imperial": [
+                39,
+                100
+              ],
+              "Sindarin": [
+                4,
+                100
+              ],
+              "Khuzan": [
+                3,
+                100
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "psyche": {
+      "die": "d100",
+      "source": "4001",
+      "note": "Mental Disorder table (gated OFF by the 'No psyche' house rule). 66-70 = roll twice more; 38 Multiple Personality = generate a 2nd personality. Pair with psycheSeverity.",
+      "entries": [
+        {
+          "lo": 1,
+          "hi": 3,
+          "result": "Acrophobia (fear of heights)"
+        },
+        {
+          "lo": 4,
+          "hi": 5,
+          "result": "Aichmophobia (fear of sharp blades)"
+        },
+        {
+          "lo": 6,
+          "hi": 6,
+          "result": "Algophobia (fear of pain)"
+        },
+        {
+          "lo": 7,
+          "hi": 8,
+          "result": "Astraphobia (fear of thunder/lightning)"
+        },
+        {
+          "lo": 9,
+          "hi": 9,
+          "result": "Ballistophobia (fear of missiles)"
+        },
+        {
+          "lo": 10,
+          "hi": 11,
+          "result": "Bulimia (eating mania)"
+        },
+        {
+          "lo": 12,
+          "hi": 14,
+          "result": "Claustrophobia (fear of confined spaces)"
+        },
+        {
+          "lo": 15,
+          "hi": 15,
+          "result": "Cynophobia (fear of dogs)"
+        },
+        {
+          "lo": 16,
+          "hi": 17,
+          "result": "Dyslexia (learning/reading disorder)"
+        },
+        {
+          "lo": 18,
+          "hi": 19,
+          "result": "Entomophobia (fear of insects/spiders)"
+        },
+        {
+          "lo": 20,
+          "hi": 22,
+          "result": "Gamblamania (gambling mania)"
+        },
+        {
+          "lo": 23,
+          "hi": 24,
+          "result": "Gephyrophobia (fear of crossing bridges)"
+        },
+        {
+          "lo": 25,
+          "hi": 25,
+          "result": "Heliophobia (fear of sun/daylight)"
+        },
+        {
+          "lo": 26,
+          "hi": 26,
+          "result": "Hemophobia (fear of blood)"
+        },
+        {
+          "lo": 27,
+          "hi": 28,
+          "result": "Hydrophobia (fear of water/drowning)"
+        },
+        {
+          "lo": 29,
+          "hi": 31,
+          "result": "Hypochondria (imagined illnesses)"
+        },
+        {
+          "lo": 32,
+          "hi": 32,
+          "result": "Ivashuphobia (fear of Ivashu)"
+        },
+        {
+          "lo": 33,
+          "hi": 35,
+          "result": "Kleptomania (compulsion to steal)"
+        },
+        {
+          "lo": 36,
+          "hi": 36,
+          "result": "Megalomania (exaggerated self-worth)"
+        },
+        {
+          "lo": 37,
+          "hi": 37,
+          "result": "Mysophobia (fear of dirt/filth)"
+        },
+        {
+          "lo": 38,
+          "hi": 38,
+          "result": "Multiple Personality"
+        },
+        {
+          "lo": 39,
+          "hi": 40,
+          "result": "Musophobia (fear of mice/rats)"
+        },
+        {
+          "lo": 41,
+          "hi": 43,
+          "result": "Necrophobia (fear of corpses)"
+        },
+        {
+          "lo": 44,
+          "hi": 45,
+          "result": "Nyctophobia (fear of darkness/night)"
+        },
+        {
+          "lo": 46,
+          "hi": 46,
+          "result": "Ophidiophobia (fear of snakes)"
+        },
+        {
+          "lo": 47,
+          "hi": 47,
+          "result": "Ornithophobia (fear of birds)"
+        },
+        {
+          "lo": 48,
+          "hi": 48,
+          "result": "Paranoia/Persecution Complex"
+        },
+        {
+          "lo": 49,
+          "hi": 49,
+          "result": "Psychopathy (cannot tell right from wrong)"
+        },
+        {
+          "lo": 50,
+          "hi": 51,
+          "result": "Pvaraphobia (fear of Magic/Wizards)"
+        },
+        {
+          "lo": 52,
+          "hi": 54,
+          "result": "Pyromania (fascination with fire)"
+        },
+        {
+          "lo": 55,
+          "hi": 56,
+          "result": "Pyrophobia (fear of fire)"
+        },
+        {
+          "lo": 57,
+          "hi": 57,
+          "result": "Sadism (pleasure inflicting pain)"
+        },
+        {
+          "lo": 58,
+          "hi": 59,
+          "result": "Sex Mania/Deviancy"
+        },
+        {
+          "lo": 60,
+          "hi": 60,
+          "result": "Theophobia (fear of divine retribution)"
+        },
+        {
+          "lo": 61,
+          "hi": 61,
+          "result": "Toxicophobia (fear of being poisoned)"
+        },
+        {
+          "lo": 62,
+          "hi": 63,
+          "result": "Violent Temper (loses control)"
+        },
+        {
+          "lo": 64,
+          "hi": 64,
+          "result": "Xenophobia (fear of strangers)"
+        },
+        {
+          "lo": 65,
+          "hi": 65,
+          "result": "Yaelaphobia (fear of the moon)"
+        },
+        {
+          "lo": 66,
+          "hi": 70,
+          "result": "Multiple Disorders (roll twice more)"
+        },
+        {
+          "lo": 71,
+          "hi": 100,
+          "result": "No Mental Disorders"
+        }
+      ]
+    },
+    "medical": {
+      "die": "d100",
+      "source": "4001",
+      "columns": "sex",
+      "note": "Sex-specific d100 columns (mlo/mhi = male, flo/fhi = female). Opt-in (house rule). Medical Option: 2 points to attribute(s) before risking the roll. (*) traits: Sindarin treat as Sterile. 66-70 = roll twice more.",
+      "entries": [
+        {
+          "name": "Addiction",
+          "effect": "Will×4 to resist first use, Will×1 each subsequent",
+          "mlo": 1,
+          "mhi": 8,
+          "flo": 1,
+          "fhi": 5
+        },
+        {
+          "name": "Albinism",
+          "effect": "−10 special penalty to most skills in bright light; sunburns easily",
+          "mlo": 9,
+          "mhi": 9,
+          "flo": 6,
+          "fhi": 6
+        },
+        {
+          "name": "Allergy",
+          "effect": "Special Penalty 20 to all skills near the source",
+          "mlo": 10,
+          "mhi": 14,
+          "flo": 7,
+          "fhi": 10
+        },
+        {
+          "name": "Ambidextrous",
+          "effect": "Dexterity +1d3",
+          "mlo": 15,
+          "mhi": 17,
+          "flo": 11,
+          "fhi": 14
+        },
+        {
+          "name": "Arm (missing/deformed)",
+          "effect": "Dexterity −1d3; two-handed actions impossible",
+          "mlo": 18,
+          "mhi": 20,
+          "flo": 15,
+          "fhi": 15
+        },
+        {
+          "name": "Birthmark(s)",
+          "effect": "may reduce Comeliness 1d3",
+          "mlo": 21,
+          "mhi": 24,
+          "flo": 16,
+          "fhi": 19
+        },
+        {
+          "name": "Dwarfism",
+          "effect": "height = species min −2d6, Heavy frame",
+          "mlo": 25,
+          "mhi": 25,
+          "flo": 20,
+          "fhi": 20
+        },
+        {
+          "name": "Epilepsy*",
+          "effect": "seizure (Will×5) if traumatized; Intelligence +1d3",
+          "mlo": 26,
+          "mhi": 27,
+          "flo": 21,
+          "fhi": 22
+        },
+        {
+          "name": "Ear (missing/deaf)",
+          "effect": "Hearing −1d3",
+          "mlo": 28,
+          "mhi": 28,
+          "flo": 23,
+          "fhi": 23
+        },
+        {
+          "name": "Eye (missing/blind)",
+          "effect": "Eyesight −1d3; −10 to combat skills",
+          "mlo": 29,
+          "mhi": 30,
+          "flo": 24,
+          "fhi": 25
+        },
+        {
+          "name": "Gigantism",
+          "effect": "height = species max +2d6, Massive frame",
+          "mlo": 31,
+          "mhi": 31,
+          "flo": 26,
+          "fhi": 26
+        },
+        {
+          "name": "Hemophilia*",
+          "effect": "bloodloss attempts −40; females are carriers only",
+          "mlo": 32,
+          "mhi": 32,
+          "flo": 27,
+          "fhi": 27
+        },
+        {
+          "name": "Hirsutism",
+          "effect": "Comeliness −1d3",
+          "mlo": 33,
+          "mhi": 33,
+          "flo": 28,
+          "fhi": 29
+        },
+        {
+          "name": "Leg (missing/deformed)",
+          "effect": "Agility −50%",
+          "mlo": 34,
+          "mhi": 35,
+          "flo": 30,
+          "fhi": 30
+        },
+        {
+          "name": "Left-Handed",
+          "effect": "Dexterity +1d2",
+          "mlo": 36,
+          "mhi": 39,
+          "flo": 31,
+          "fhi": 40
+        },
+        {
+          "name": "Leprosy*",
+          "effect": "Comeliness −2d6, Rhetoric half ML; Contagion 7",
+          "mlo": 40,
+          "mhi": 41,
+          "flo": 41,
+          "fhi": 42
+        },
+        {
+          "name": "Lycanthropy",
+          "effect": "were-creature (GM discretion)",
+          "mlo": 42,
+          "mhi": 42,
+          "flo": 43,
+          "fhi": 43
+        },
+        {
+          "name": "Monochromasia",
+          "effect": "color blind; Eyesight −1d3",
+          "mlo": 43,
+          "mhi": 44,
+          "flo": 44,
+          "fhi": 45
+        },
+        {
+          "name": "Obesity",
+          "effect": "weight +50–100%; Agility −1d3",
+          "mlo": 45,
+          "mhi": 47,
+          "flo": 46,
+          "fhi": 48
+        },
+        {
+          "name": "Parasites*",
+          "effect": "−10 Rhetoric, −20 Lovecraft",
+          "mlo": 48,
+          "mhi": 57,
+          "flo": 49,
+          "fhi": 58
+        },
+        {
+          "name": "Poxmarks (healed)*",
+          "effect": "Comeliness −1d3",
+          "mlo": 58,
+          "mhi": 60,
+          "flo": 59,
+          "fhi": 61
+        },
+        {
+          "name": "Scars",
+          "effect": "Comeliness −1d3",
+          "mlo": 61,
+          "mhi": 63,
+          "flo": 62,
+          "fhi": 63
+        },
+        {
+          "name": "Sterile",
+          "effect": "cannot have children",
+          "mlo": 64,
+          "mhi": 65,
+          "flo": 64,
+          "fhi": 65
+        },
+        {
+          "name": "Multiple Traits",
+          "effect": "roll twice more",
+          "mlo": 66,
+          "mhi": 70,
+          "flo": 66,
+          "fhi": 70
+        },
+        {
+          "name": "No Medical Traits",
+          "effect": "",
+          "mlo": 71,
+          "mhi": 100,
+          "flo": 71,
+          "fhi": 100
+        }
+      ]
+    },
+    "psycheSeverity": {
+      "die": "d100",
+      "source": "4001",
+      "entries": [
+        {
+          "lo": 1,
+          "hi": 60,
+          "result": "Mild (resist Will×5)"
+        },
+        {
+          "lo": 61,
+          "hi": 90,
+          "result": "Moderate (Will×3)"
+        },
+        {
+          "lo": 91,
+          "hi": 100,
+          "result": "Severe (Will×1)"
+        }
+      ]
+    },
+    "sexuality": {
+      "die": "d100",
+      "source": "4001",
+      "note": "Optional (house rule). Choice or 1d100.",
+      "entries": [
+        {
+          "lo": 1,
+          "hi": 90,
+          "result": "Heterosexual"
+        },
+        {
+          "lo": 91,
+          "hi": 96,
+          "result": "Bi-Sexual"
+        },
+        {
+          "lo": 97,
+          "hi": 100,
+          "result": "Homosexual"
+        }
+      ]
+    },
+    "culture": {
+      "kind": "choice",
+      "source": "4001",
+      "note": "Determined by Birthplace; most Hârnic characters are Feudal.",
+      "options": [
+        "Feudal",
+        "Imperial",
+        "Viking",
+        "Tribal",
+        "Sindarin",
+        "Khuzan"
+      ]
+    },
+    "familyWealth": {
+      "kind": "lookup",
+      "source": "4001",
+      "note": "Starting funds (in d / pennies) by social class × wealth level (Character 17). Spent on the HârnWorld price list + the Combat 3-4 weapon/armour tables; the price list is NOT in 4001 core. GM may vary by family occupation; estrangement can shift it.",
+      "byClass": {
+        "Serf": {
+          "Poor": 40,
+          "Average": 80,
+          "Rich": 160
+        },
+        "Unguilded": {
+          "Poor": 60,
+          "Average": 120,
+          "Rich": 240
+        },
+        "Guilded": {
+          "Poor": 90,
+          "Average": 180,
+          "Rich": 360
+        },
+        "Noble": {
+          "Poor": 600,
+          "Average": 1200,
+          "Rich": 2400
+        }
+      }
+    },
+    "frame": {
+      "die": "3d6",
+      "source": "4001",
+      "note": "Modify the 3d6 roll by species/sex before lookup: Human Female -3, Sindarin -2, Khuzdul +3. Frame modifies optimum weight (Scant -20%, Light -10%, Medium 0, Heavy +10%, Massive +20%).",
+      "factors": {
+        "Scant": 0.8,
+        "Light": 0.9,
+        "Medium": 1,
+        "Heavy": 1.1,
+        "Massive": 1.2
+      },
+      "frameMod": {
+        "humanFemale": -3,
+        "sindarin": -2,
+        "khuzdul": 3
+      },
+      "entries": [
+        {
+          "lo": 3,
+          "hi": 5,
+          "result": "Scant"
+        },
+        {
+          "lo": 6,
+          "hi": 8,
+          "result": "Light"
+        },
+        {
+          "lo": 9,
+          "hi": 12,
+          "result": "Medium"
+        },
+        {
+          "lo": 13,
+          "hi": 15,
+          "result": "Heavy"
+        },
+        {
+          "lo": 16,
+          "hi": 18,
+          "result": "Massive"
+        }
+      ]
+    },
+    "comelinessDesc": {
+      "die": "3d6",
+      "source": "4001",
+      "note": "Descriptor for the Comeliness (CML) attribute value (Sindarin +2).",
+      "entries": [
+        {
+          "lo": 3,
+          "hi": 5,
+          "result": "Ugly"
+        },
+        {
+          "lo": 6,
+          "hi": 8,
+          "result": "Plain"
+        },
+        {
+          "lo": 9,
+          "hi": 12,
+          "result": "Average"
+        },
+        {
+          "lo": 13,
+          "hi": 15,
+          "result": "Attractive"
+        },
+        {
+          "lo": 16,
+          "hi": 18,
+          "result": "Handsome"
+        }
+      ]
+    },
+    "moralityDesc": {
+      "die": "3d6",
+      "source": "4001",
+      "note": "Descriptor NAME for the Morality (MOR) attribute value. NAMES are functional labels (public); the full prose descriptions are IP flavor (owner-populated in flavor.*.json, not shipped).",
+      "entries": [
+        {
+          "lo": 3,
+          "hi": 4,
+          "result": "Diabolical"
+        },
+        {
+          "lo": 5,
+          "hi": 7,
+          "result": "Unscrupulous"
+        },
+        {
+          "lo": 8,
+          "hi": 10,
+          "result": "Corruptible"
+        },
+        {
+          "lo": 11,
+          "hi": 13,
+          "result": "Law-Abiding"
+        },
+        {
+          "lo": 14,
+          "hi": 16,
+          "result": "Principled"
+        },
+        {
+          "lo": 17,
+          "hi": 18,
+          "result": "Exemplary"
+        }
+      ]
+    },
+    "heightBase": {
+      "kind": "lookup",
+      "source": "4001",
+      "note": "Height (inches) = base + 4d6. GM mods: Ivinian +1, nobility +2, urban poor -2.",
+      "dice": "4d6",
+      "bySpecies": {
+        "Human": {
+          "male": 54,
+          "female": 52
+        },
+        "Sindarin": {
+          "male": 51,
+          "female": 50
+        },
+        "Khuzdul": {
+          "male": 40,
+          "female": 40
+        }
+      }
+    },
+    "weightByHeight": {
+      "kind": "lookup",
+      "source": "4001",
+      "note": "Optimum weight (lb) by height in inches; multiply by the frame factor. Heights below 40 use 40; above 89 use 89.",
+      "lb": {
+        "40": 75,
+        "41": 77,
+        "42": 79,
+        "43": 81,
+        "44": 83,
+        "45": 85,
+        "46": 87,
+        "47": 89,
+        "48": 91,
+        "49": 93,
+        "50": 95,
+        "51": 97,
+        "52": 100,
+        "53": 103,
+        "54": 106,
+        "55": 109,
+        "56": 112,
+        "57": 115,
+        "58": 118,
+        "59": 121,
+        "60": 124,
+        "61": 127,
+        "62": 130,
+        "63": 133,
+        "64": 137,
+        "65": 141,
+        "66": 145,
+        "67": 149,
+        "68": 153,
+        "69": 157,
+        "70": 160,
+        "71": 165,
+        "72": 170,
+        "73": 175,
+        "74": 180,
+        "75": 185,
+        "76": 190,
+        "77": 195,
+        "78": 200,
+        "79": 205,
+        "80": 210,
+        "81": 215,
+        "82": 220,
+        "83": 225,
+        "84": 230,
+        "85": 235,
+        "86": 240,
+        "87": 245,
+        "88": 250,
+        "89": 255
+      }
+    },
+    "complexion": {
+      "die": "d100",
+      "source": "4001",
+      "note": "Human column. Sindarin: 01-97 Fair / 98-99 Medium / 00 Dark. Khuzdul: 01-90 Fair / 91-00 Medium.",
+      "entries": [
+        {
+          "lo": 1,
+          "hi": 27,
+          "result": "Fair"
+        },
+        {
+          "lo": 28,
+          "hi": 74,
+          "result": "Medium"
+        },
+        {
+          "lo": 75,
+          "hi": 100,
+          "result": "Dark"
+        }
+      ]
+    },
+    "hairColor": {
+      "die": "d100",
+      "source": "4001",
+      "note": "Human column (youth). Modify +25 for Fair complexion, -25 for Dark.",
+      "entries": [
+        {
+          "lo": 1,
+          "hi": 40,
+          "result": "Brown"
+        },
+        {
+          "lo": 41,
+          "hi": 55,
+          "result": "Black"
+        },
+        {
+          "lo": 56,
+          "hi": 65,
+          "result": "Red"
+        },
+        {
+          "lo": 66,
+          "hi": 70,
+          "result": "Silver"
+        },
+        {
+          "lo": 71,
+          "hi": 100,
+          "result": "Blond"
+        }
+      ]
+    },
+    "eyeColor": {
+      "die": "d100",
+      "source": "4001",
+      "note": "Human column. Modify +25 for Fair complexion, -25 for Dark.",
+      "entries": [
+        {
+          "lo": 1,
+          "hi": 1,
+          "result": "Amber"
+        },
+        {
+          "lo": 2,
+          "hi": 40,
+          "result": "Brown"
+        },
+        {
+          "lo": 41,
+          "hi": 45,
+          "result": "Hazel"
+        },
+        {
+          "lo": 46,
+          "hi": 55,
+          "result": "Gray"
+        },
+        {
+          "lo": 56,
+          "hi": 56,
+          "result": "Violet"
+        },
+        {
+          "lo": 57,
+          "hi": 70,
+          "result": "Green"
+        },
+        {
+          "lo": 71,
+          "hi": 100,
+          "result": "Blue"
+        }
+      ]
+    },
+    "sunsign": {
+      "kind": "date",
+      "source": "4001",
+      "note": "Derived from birthdate (1d12 month + 1d30 day). day-of-year = (month-1)*30 + day. Cusp = within 2 days of a boundary (benefits of both signs).",
+      "signs": [
+        {
+          "sign": "Ulandus",
+          "symbol": "Tree",
+          "fromDoy": 4,
+          "toDoy": 33
+        },
+        {
+          "sign": "Aralius",
+          "symbol": "Wands",
+          "fromDoy": 34,
+          "toDoy": 62
+        },
+        {
+          "sign": "Feniri",
+          "symbol": "Smith",
+          "fromDoy": 63,
+          "toDoy": 93
+        },
+        {
+          "sign": "Ahnu",
+          "symbol": "Fire Dragon",
+          "fromDoy": 94,
+          "toDoy": 124
+        },
+        {
+          "sign": "Angberelius",
+          "symbol": "Flaming Swords",
+          "fromDoy": 125,
+          "toDoy": 156
+        },
+        {
+          "sign": "Nadai",
+          "symbol": "Salamander",
+          "fromDoy": 157,
+          "toDoy": 185
+        },
+        {
+          "sign": "Hirin",
+          "symbol": "Eagle",
+          "fromDoy": 186,
+          "toDoy": 214
+        },
+        {
+          "sign": "Tarael",
+          "symbol": "Pentacle",
+          "fromDoy": 215,
+          "toDoy": 243
+        },
+        {
+          "sign": "Tai",
+          "symbol": "Lantern Bearer",
+          "fromDoy": 244,
+          "toDoy": 272
+        },
+        {
+          "sign": "Skorus",
+          "symbol": "Mixer",
+          "fromDoy": 273,
+          "toDoy": 302
+        },
+        {
+          "sign": "Masara",
+          "symbol": "Chalice",
+          "fromDoy": 303,
+          "toDoy": 331
+        },
+        {
+          "sign": "Lado",
+          "symbol": "Galley",
+          "fromDoy": 332,
+          "toDoy": 3
+        }
+      ]
+    },
+    "military": {
+      "source": "4001",
+      "note": "Character 27 Military Careers. ALL-military common skills open for every unit EXCEPT Militia; on overlap use the higher OML. Recruitment END×mult is informational (chargen assumes already enlisted). Fighting Orders deferred (with religion). knight:true = the noble-knight unit for that culture.",
+      "allCommon": [
+        {
+          "name": "Initiative",
+          "oml": 5
+        },
+        {
+          "name": "Foraging",
+          "oml": 4
+        },
+        {
+          "name": "Survival",
+          "oml": 4
+        },
+        {
+          "name": "Heraldry",
+          "oml": 2
+        },
+        {
+          "name": "Physician",
+          "oml": 2
+        },
+        {
+          "name": "Weaponcraft",
+          "oml": 2
+        }
+      ],
+      "byCulture": {
+        "Feudal": [
+          {
+            "id": "mil-feudal-militia",
+            "name": "Militia",
+            "class": "UF",
+            "end": 6,
+            "skills": [
+              {
+                "name": "Spear",
+                "oml": 4
+              },
+              {
+                "name": "Shield (Roundshield)",
+                "oml": 4
+              }
+            ],
+            "militia": true
+          },
+          {
+            "id": "mil-feudal-yeoman-lf",
+            "name": "Yeoman",
+            "class": "LF",
+            "end": 3,
+            "skills": [
+              {
+                "name": "Spear",
+                "oml": 5
+              },
+              {
+                "name": "Sword (Shortsword)",
+                "oml": 4
+              },
+              {
+                "name": "Dagger",
+                "oml": 4
+              },
+              {
+                "name": "Shield (Roundshield)",
+                "oml": 4
+              }
+            ]
+          },
+          {
+            "id": "mil-feudal-guardsman-lf",
+            "name": "Guardsman",
+            "class": "LF",
+            "end": 4,
+            "skills": [
+              {
+                "name": "Spear",
+                "oml": 6
+              },
+              {
+                "name": "Sword (Shortsword)",
+                "oml": 5
+              },
+              {
+                "name": "Dagger",
+                "oml": 5
+              },
+              {
+                "name": "Shield (Roundshield)",
+                "oml": 5
+              }
+            ]
+          },
+          {
+            "id": "mil-feudal-guardsman-mf",
+            "name": "Guardsman",
+            "class": "MF",
+            "end": 3,
+            "skills": [
+              {
+                "name": "Spear",
+                "oml": 6
+              },
+              {
+                "name": "Sword (Falchion)",
+                "oml": 5
+              },
+              {
+                "name": "Dagger",
+                "oml": 5
+              },
+              {
+                "name": "Shield (Roundshield)",
+                "oml": 5
+              }
+            ]
+          },
+          {
+            "id": "mil-feudal-yeoman-sb",
+            "name": "Yeoman",
+            "class": "SB",
+            "end": 3,
+            "skills": [
+              {
+                "name": "Bow (Shortbow)",
+                "oml": 5
+              },
+              {
+                "name": "Sword (Falchion)",
+                "oml": 5
+              },
+              {
+                "name": "Dagger",
+                "oml": 5
+              },
+              {
+                "name": "Shield (Buckler)",
+                "oml": 5
+              }
+            ]
+          },
+          {
+            "id": "mil-feudal-yeoman-lb",
+            "name": "Yeoman",
+            "class": "LB",
+            "end": 2,
+            "skills": [
+              {
+                "name": "Bow (Longbow)",
+                "oml": 5
+              },
+              {
+                "name": "Sword (Falchion)",
+                "oml": 5
+              },
+              {
+                "name": "Dagger",
+                "oml": 5
+              },
+              {
+                "name": "Shield (Buckler)",
+                "oml": 5
+              }
+            ]
+          },
+          {
+            "id": "mil-feudal-knight-mh",
+            "name": "Knight",
+            "class": "MH",
+            "end": 4,
+            "skills": [
+              {
+                "name": "Riding",
+                "oml": 6
+              },
+              {
+                "name": "Initiative",
+                "oml": 6
+              },
+              {
+                "name": "Polearm (Lance)",
+                "oml": 6
+              },
+              {
+                "name": "Sword (Broadsword)",
+                "oml": 5
+              },
+              {
+                "name": "Axe (Handaxe)",
+                "oml": 5
+              },
+              {
+                "name": "Dagger",
+                "oml": 5
+              },
+              {
+                "name": "Shield (Knight Shield)",
+                "oml": 6
+              },
+              {
+                "name": "Dancing",
+                "oml": 3
+              }
+            ],
+            "knight": true
+          },
+          {
+            "id": "mil-feudal-knight-hh",
+            "name": "Knight",
+            "class": "HH",
+            "end": 3,
+            "skills": [
+              {
+                "name": "Riding",
+                "oml": 6
+              },
+              {
+                "name": "Initiative",
+                "oml": 6
+              },
+              {
+                "name": "Polearm (Lance)",
+                "oml": 6
+              },
+              {
+                "name": "Sword (Bastard Sword)",
+                "oml": 5
+              },
+              {
+                "name": "Axe (Handaxe)",
+                "oml": 5
+              },
+              {
+                "name": "Dagger",
+                "oml": 5
+              },
+              {
+                "name": "Shield (Kite Shield)",
+                "oml": 6
+              },
+              {
+                "name": "Dancing",
+                "oml": 3
+              }
+            ],
+            "knight": true
+          }
+        ],
+        "Imperial": [
+          {
+            "id": "mil-imperial-militia",
+            "name": "Militia",
+            "class": "UF",
+            "end": 6,
+            "skills": [
+              {
+                "name": "Spear",
+                "oml": 4
+              },
+              {
+                "name": "Shield (Roundshield)",
+                "oml": 4
+              }
+            ],
+            "militia": true
+          },
+          {
+            "id": "mil-imperial-legionnaire-lf",
+            "name": "Legionnaire",
+            "class": "LF",
+            "end": 4,
+            "skills": [
+              {
+                "name": "Spear",
+                "oml": 5
+              },
+              {
+                "name": "Sword (Shortsword)",
+                "oml": 4
+              },
+              {
+                "name": "Dagger",
+                "oml": 4
+              },
+              {
+                "name": "Shield (Tower Shield)",
+                "oml": 5
+              }
+            ]
+          },
+          {
+            "id": "mil-imperial-legionnaire-mf",
+            "name": "Legionnaire",
+            "class": "MF",
+            "end": 3,
+            "skills": [
+              {
+                "name": "Spear",
+                "oml": 6
+              },
+              {
+                "name": "Sword (Shortsword)",
+                "oml": 5
+              },
+              {
+                "name": "Dagger",
+                "oml": 4
+              },
+              {
+                "name": "Shield (Tower Shield)",
+                "oml": 5
+              }
+            ]
+          },
+          {
+            "id": "mil-imperial-legionnaire-sb",
+            "name": "Legionnaire",
+            "class": "SB",
+            "end": 3,
+            "skills": [
+              {
+                "name": "Bow (Shortbow)",
+                "oml": 6
+              },
+              {
+                "name": "Sword (Shortsword)",
+                "oml": 5
+              },
+              {
+                "name": "Dagger",
+                "oml": 5
+              },
+              {
+                "name": "Shield (Buckler)",
+                "oml": 5
+              }
+            ]
+          },
+          {
+            "id": "mil-imperial-officer-mh",
+            "name": "Officer/Cavalry",
+            "class": "MH",
+            "end": 2,
+            "skills": [
+              {
+                "name": "Riding",
+                "oml": 6
+              },
+              {
+                "name": "Initiative",
+                "oml": 6
+              },
+              {
+                "name": "Polearm (Lance)",
+                "oml": 6
+              },
+              {
+                "name": "Sword (Broadsword)",
+                "oml": 5
+              },
+              {
+                "name": "Axe (Handaxe)",
+                "oml": 5
+              },
+              {
+                "name": "Dagger",
+                "oml": 5
+              },
+              {
+                "name": "Shield (Kite Shield)",
+                "oml": 6
+              },
+              {
+                "name": "Dancing",
+                "oml": 3
+              }
+            ],
+            "knight": true
+          }
+        ],
+        "Viking": [
+          {
+            "id": "mil-viking-clansman-uf",
+            "name": "Clansman",
+            "class": "UF",
+            "end": 5,
+            "skills": [
+              {
+                "name": "Spear",
+                "oml": 5
+              },
+              {
+                "name": "Shield (Roundshield)",
+                "oml": 5
+              },
+              {
+                "name": "Axe (Shorkana)",
+                "oml": 4
+              },
+              {
+                "name": "Seamanship",
+                "oml": 3
+              }
+            ]
+          },
+          {
+            "id": "mil-viking-clansman-lf",
+            "name": "Clansman",
+            "class": "LF",
+            "end": 4,
+            "skills": [
+              {
+                "name": "Spear",
+                "oml": 6
+              },
+              {
+                "name": "Shield (Roundshield)",
+                "oml": 6
+              },
+              {
+                "name": "Bow (Shortbow)",
+                "oml": 5
+              },
+              {
+                "name": "Dagger",
+                "oml": 4
+              },
+              {
+                "name": "Axe (Shorkana)",
+                "oml": 4
+              },
+              {
+                "name": "Seamanship",
+                "oml": 3
+              }
+            ]
+          },
+          {
+            "id": "mil-viking-huscarl-mf",
+            "name": "Huscarl",
+            "class": "MF",
+            "end": 3,
+            "skills": [
+              {
+                "name": "Axe (Battleaxe)",
+                "oml": 6
+              },
+              {
+                "name": "Initiative",
+                "oml": 6
+              },
+              {
+                "name": "Sword (Broadsword)",
+                "oml": 5
+              },
+              {
+                "name": "Shield (Roundshield)",
+                "oml": 5
+              },
+              {
+                "name": "Dagger",
+                "oml": 5
+              },
+              {
+                "name": "Axe (Shorkana)",
+                "oml": 4
+              },
+              {
+                "name": "Seamanship",
+                "oml": 3
+              },
+              {
+                "name": "Piloting",
+                "oml": 2
+              }
+            ]
+          },
+          {
+            "id": "mil-viking-huscarl-lh",
+            "name": "Huscarl",
+            "class": "LH",
+            "end": 2,
+            "skills": [
+              {
+                "name": "Riding",
+                "oml": 6
+              },
+              {
+                "name": "Initiative",
+                "oml": 6
+              },
+              {
+                "name": "Polearm (Lance)",
+                "oml": 6
+              },
+              {
+                "name": "Sword (Broadsword)",
+                "oml": 5
+              },
+              {
+                "name": "Dagger",
+                "oml": 5
+              },
+              {
+                "name": "Shield (Roundshield)",
+                "oml": 5
+              },
+              {
+                "name": "Axe (Shorkana)",
+                "oml": 4
+              },
+              {
+                "name": "Seamanship",
+                "oml": 3
+              },
+              {
+                "name": "Piloting",
+                "oml": 2
+              }
+            ],
+            "knight": true
+          }
+        ],
+        "Khuzan": [
+          {
+            "id": "mil-khuzan-clansman-lf",
+            "name": "Clansman",
+            "class": "LF",
+            "end": 4,
+            "skills": [
+              {
+                "name": "Spear",
+                "oml": 6
+              },
+              {
+                "name": "Axe (Handaxe)",
+                "oml": 5
+              },
+              {
+                "name": "Shield (Roundshield)",
+                "oml": 5
+              }
+            ]
+          },
+          {
+            "id": "mil-khuzan-lowguard-mf",
+            "name": "Low Guard",
+            "class": "MF",
+            "end": 3,
+            "skills": [
+              {
+                "name": "Spear",
+                "oml": 6
+              },
+              {
+                "name": "Axe (Battleaxe)",
+                "oml": 5
+              },
+              {
+                "name": "Dagger",
+                "oml": 5
+              },
+              {
+                "name": "Shield (Roundshield)",
+                "oml": 5
+              }
+            ]
+          },
+          {
+            "id": "mil-khuzan-highguard-hf",
+            "name": "High Guard",
+            "class": "HF",
+            "end": 2,
+            "skills": [
+              {
+                "name": "Initiative",
+                "oml": 6
+              },
+              {
+                "name": "Polearm (Poleaxe)",
+                "oml": 6
+              },
+              {
+                "name": "Club (Mace)",
+                "oml": 5
+              },
+              {
+                "name": "Dagger",
+                "oml": 5
+              },
+              {
+                "name": "Shield (Roundshield)",
+                "oml": 5
+              }
+            ],
+            "knight": true
+          }
+        ],
+        "Sindarin": [
+          {
+            "id": "mil-sindarin-ranger-uf",
+            "name": "Ranger",
+            "class": "UF",
+            "end": 5,
+            "skills": [
+              {
+                "name": "Bow (Hartbow)",
+                "oml": 6
+              },
+              {
+                "name": "Sword (Longknife)",
+                "oml": 5
+              },
+              {
+                "name": "Dagger",
+                "oml": 5
+              },
+              {
+                "name": "Shield (Buckler)",
+                "oml": 5
+              }
+            ]
+          },
+          {
+            "id": "mil-sindarin-ranger-lf",
+            "name": "Ranger",
+            "class": "LF",
+            "end": 4,
+            "skills": [
+              {
+                "name": "Bow (Hartbow)",
+                "oml": 6
+              },
+              {
+                "name": "Sword (Longknife)",
+                "oml": 5
+              },
+              {
+                "name": "Dagger",
+                "oml": 5
+              },
+              {
+                "name": "Shield (Buckler)",
+                "oml": 5
+              }
+            ]
+          },
+          {
+            "id": "mil-sindarin-guardian-mf",
+            "name": "Guardian",
+            "class": "MF",
+            "end": 3,
+            "skills": [
+              {
+                "name": "Spear",
+                "oml": 7
+              },
+              {
+                "name": "Sword (Longknife)",
+                "oml": 6
+              },
+              {
+                "name": "Dagger",
+                "oml": 5
+              },
+              {
+                "name": "Shield (Roundshield)",
+                "oml": 6
+              }
+            ]
+          },
+          {
+            "id": "mil-sindarin-horsebow-lh",
+            "name": "Horsebow",
+            "class": "LH",
+            "end": 2,
+            "skills": [
+              {
+                "name": "Riding",
+                "oml": 6
+              },
+              {
+                "name": "Bow (Hartbow)",
+                "oml": 6
+              },
+              {
+                "name": "Polearm (Lance)",
+                "oml": 5
+              },
+              {
+                "name": "Sword (Longknife)",
+                "oml": 5
+              },
+              {
+                "name": "Shield (Knight Shield)",
+                "oml": 6
+              },
+              {
+                "name": "Dancing",
+                "oml": 3
+              },
+              {
+                "name": "Musician",
+                "oml": 2
+              }
+            ]
+          },
+          {
+            "id": "mil-sindarin-knight-mh",
+            "name": "Knight",
+            "class": "MH",
+            "end": 2,
+            "skills": [
+              {
+                "name": "Riding",
+                "oml": 7
+              },
+              {
+                "name": "Initiative",
+                "oml": 6
+              },
+              {
+                "name": "Polearm (Lance)",
+                "oml": 7
+              },
+              {
+                "name": "Sword (Longknife)",
+                "oml": 6
+              },
+              {
+                "name": "Shield (Knight Shield)",
+                "oml": 6
+              },
+              {
+                "name": "Dancing",
+                "oml": 3
+              },
+              {
+                "name": "Musician",
+                "oml": 2
+              }
+            ],
+            "knight": true
+          }
+        ]
+      }
+    },
+    "clerics": {
+      "source": "4001",
+      "note": "Character 23 Cleric occupation skills. Bundle = ALL (common) + the deity-specific list, unioned with the higher OML winning on overlap. RML = Ritual opened to SB×4; Piety = Will×5. Invocations (deity articles / 4401) are deferred. `special` holds non-OML grants (70+SB scripts, optional temple tongues, choose-N).",
+      "allCommon": [
+        {
+          "name": "Rhetoric",
+          "oml": 4
+        },
+        {
+          "name": "Intrigue",
+          "oml": 4
+        },
+        {
+          "name": "Mental Conflict",
+          "oml": 4
+        },
+        {
+          "name": "Oratory",
+          "oml": 3
+        },
+        {
+          "name": "Folklore",
+          "oml": 4
+        },
+        {
+          "name": "Embalming",
+          "oml": 2
+        },
+        {
+          "name": "Physician",
+          "oml": 2
+        },
+        {
+          "name": "Law",
+          "oml": 2
+        },
+        {
+          "name": "Drawing",
+          "oml": 3
+        },
+        {
+          "name": "Heraldry",
+          "oml": 2
+        },
+        {
+          "name": "Script (Local)",
+          "base": 70,
+          "mult": 1
+        }
+      ],
+      "allCommonSpecial": [],
+      "byDeity": {
+        "Agrik": {
+          "skills": [
+            {
+              "name": "Initiative",
+              "oml": 5
+            },
+            {
+              "name": "Unarmed",
+              "oml": 5
+            },
+            {
+              "name": "Axe (Sickle)",
+              "oml": 4
+            },
+            {
+              "name": "Club (Mace)",
+              "oml": 5
+            },
+            {
+              "name": "Shield",
+              "oml": 4
+            },
+            {
+              "name": "Heraldry",
+              "oml": 3
+            }
+          ],
+          "special": [
+            "Surikal/3 (optional temple tongue)"
+          ],
+          "ritual": {
+            "attrs": [
+              "voi",
+              "int",
+              "str"
+            ],
+            "sun": "nad+2; ang/ahn+1"
+          },
+          "church": {
+            "language": "Azeryani",
+            "script": "Zerin"
+          },
+          "templeTongue": "Surikal"
+        },
+        "Halea": {
+          "skills": [
+            {
+              "name": "Lovecraft",
+              "oml": 4
+            },
+            {
+              "name": "Dancing",
+              "oml": 3
+            },
+            {
+              "name": "Mathematics",
+              "oml": 2
+            },
+            {
+              "name": "Musician",
+              "oml": 2
+            },
+            {
+              "name": "Perfumery",
+              "oml": 2
+            },
+            {
+              "name": "Language (2nd)",
+              "oml": 4
+            },
+            {
+              "name": "Script (2nd)",
+              "base": 70,
+              "mult": 1
+            }
+          ],
+          "special": [],
+          "ritual": {
+            "attrs": [
+              "voi",
+              "int",
+              "cml"
+            ],
+            "sun": "tar+2; hir/mas+1"
+          },
+          "church": {
+            "language": "Karuia",
+            "script": "Zerin"
+          }
+        },
+        "Ilvir": {
+          "skills": [
+            {
+              "name": "Animalcraft (Ivashu)",
+              "oml": 4
+            },
+            {
+              "name": "Drawing",
+              "oml": 4
+            },
+            {
+              "name": "Physician",
+              "oml": 3
+            },
+            {
+              "name": "Tarotry",
+              "oml": 2
+            },
+            {
+              "name": "Herblore",
+              "oml": 2
+            }
+          ],
+          "special": [
+            "Ivashi/3 (optional temple tongue)",
+            "Lore (Ivashu)/4 may substitute for Animalcraft (Ivashu)"
+          ],
+          "ritual": {
+            "attrs": [
+              "voi",
+              "int",
+              "aur"
+            ],
+            "sun": "sko+2; tai/ula+1"
+          },
+          "church": {
+            "language": "Old Jarinese",
+            "script": "Khruni"
+          },
+          "templeTongue": "Ivashi"
+        },
+        "Larani": {
+          "skills": [
+            {
+              "name": "Initiative",
+              "oml": 5
+            },
+            {
+              "name": "Unarmed",
+              "oml": 5
+            },
+            {
+              "name": "Dagger",
+              "oml": 4
+            },
+            {
+              "name": "Sword",
+              "oml": 4
+            },
+            {
+              "name": "Shield",
+              "oml": 4
+            },
+            {
+              "name": "Heraldry",
+              "oml": 3
+            }
+          ],
+          "special": [],
+          "ritual": {
+            "attrs": [
+              "voi",
+              "int",
+              "wil"
+            ],
+            "sun": "ang+2; ahn/fen+1"
+          },
+          "church": {
+            "language": "Emela",
+            "script": "Khruni"
+          }
+        },
+        "Morgath": {
+          "skills": [
+            {
+              "name": "Dagger",
+              "oml": 4
+            },
+            {
+              "name": "Embalming",
+              "oml": 3
+            },
+            {
+              "name": "Hidework (Human Skin)",
+              "oml": 3
+            },
+            {
+              "name": "Woodcraft (Masks)",
+              "oml": 3
+            },
+            {
+              "name": "Tarotry",
+              "oml": 2
+            }
+          ],
+          "special": [
+            "Ormauk/3 (optional temple tongue)"
+          ],
+          "ritual": {
+            "attrs": [
+              "voi",
+              "int",
+              "aur"
+            ],
+            "sun": "lad+2; ahn/mas+1"
+          },
+          "church": {
+            "language": "Azeri",
+            "script": "Nuvesarl"
+          },
+          "templeTongue": "Ormauk"
+        },
+        "Naveh": {
+          "skills": [
+            {
+              "name": "Initiative",
+              "oml": 5
+            },
+            {
+              "name": "Unarmed",
+              "oml": 6
+            },
+            {
+              "name": "Stealth",
+              "oml": 5
+            },
+            {
+              "name": "Dagger",
+              "oml": 4
+            },
+            {
+              "name": "Acrobatics",
+              "oml": 4
+            },
+            {
+              "name": "Legerdemain",
+              "oml": 2
+            },
+            {
+              "name": "Lockcraft",
+              "oml": 2
+            }
+          ],
+          "special": [],
+          "ritual": {
+            "attrs": [
+              "voi",
+              "int",
+              "wil"
+            ],
+            "sun": "mas+2; sko/tar+1"
+          },
+          "church": {
+            "language": "Besha",
+            "script": "Neramic"
+          }
+        },
+        "Peoni": {
+          "skills": [
+            {
+              "name": "Agriculture",
+              "oml": 4
+            },
+            {
+              "name": "Weatherlore",
+              "oml": 4
+            },
+            {
+              "name": "Animalcraft",
+              "oml": 3
+            },
+            {
+              "name": "Herblore",
+              "oml": 3
+            },
+            {
+              "name": "Physician",
+              "oml": 3
+            },
+            {
+              "name": "Textilecraft",
+              "oml": 3
+            }
+          ],
+          "special": [],
+          "ritual": {
+            "attrs": [
+              "voi",
+              "int",
+              "dex"
+            ],
+            "sun": "ara+2; ang/ula+1"
+          },
+          "church": {
+            "language": "Emela",
+            "script": "Khruni"
+          }
+        },
+        "Sarajin": {
+          "skills": [
+            {
+              "name": "Initiative",
+              "oml": 5
+            },
+            {
+              "name": "Unarmed",
+              "oml": 5
+            },
+            {
+              "name": "Axe",
+              "oml": 4
+            },
+            {
+              "name": "Dagger",
+              "oml": 4
+            },
+            {
+              "name": "Shield",
+              "oml": 4
+            },
+            {
+              "name": "Runecraft",
+              "oml": 3
+            },
+            {
+              "name": "Seamanship",
+              "oml": 3
+            }
+          ],
+          "special": [],
+          "ritual": {
+            "attrs": [
+              "voi",
+              "int",
+              "str"
+            ],
+            "sun": "fen+2; ara/lad+1"
+          },
+          "church": {
+            "language": "Ivinian",
+            "script": "Runic"
+          }
+        },
+        "Save-K'nor": {
+          "skills": [
+            {
+              "name": "Drawing",
+              "oml": 4
+            },
+            {
+              "name": "Mathematics",
+              "oml": 3
+            },
+            {
+              "name": "Law",
+              "oml": 3
+            },
+            {
+              "name": "Heraldry",
+              "oml": 3
+            },
+            {
+              "name": "Language (2nd)",
+              "oml": 4
+            },
+            {
+              "name": "Language (3rd)",
+              "oml": 3
+            },
+            {
+              "name": "Script (2nd)",
+              "base": 70,
+              "mult": 1
+            }
+          ],
+          "special": [],
+          "ritual": {
+            "attrs": [
+              "voi",
+              "int",
+              "int"
+            ],
+            "sun": "tai+2; sko/tar+1"
+          },
+          "church": {
+            "language": "Azeri",
+            "script": "Tianta"
+          },
+          "choices": [
+            {
+              "category": "lore",
+              "count": 3,
+              "oml": 4
+            }
+          ]
+        },
+        "Siem": {
+          "skills": [
+            {
+              "name": "Astrology",
+              "oml": 4
+            },
+            {
+              "name": "Runecraft",
+              "oml": 3
+            },
+            {
+              "name": "Foraging",
+              "oml": 4
+            },
+            {
+              "name": "Survival",
+              "oml": 4
+            },
+            {
+              "name": "Weatherlore",
+              "oml": 4
+            },
+            {
+              "name": "Tarotry",
+              "oml": 2
+            },
+            {
+              "name": "Musician",
+              "oml": 2
+            },
+            {
+              "name": "Herblore",
+              "oml": 2
+            }
+          ],
+          "special": [],
+          "ritual": {
+            "attrs": [
+              "voi",
+              "int",
+              "aur"
+            ],
+            "sun": "hir+2; fen/ula+1"
+          },
+          "church": {
+            "language": "Sindarin",
+            "script": "Selenian"
+          }
+        }
+      }
+    },
+    "mages": {
+      "source": "4001",
+      "note": "Character 26 Satia-Mavari Occupational Skills. Bundle = ALL + chosen convocation list (higher OML). The Convocation + Neutral open as CML magic skills (→ magic block); CML defaults to CSB×3 (an HHHH chantry). Spells deferred. csb = CSB attrs (Char 25); convocational sunsign mods not yet applied.",
+      "allCommon": [
+        {
+          "name": "Folklore",
+          "oml": 5
+        },
+        {
+          "name": "Mathematics",
+          "oml": 2
+        },
+        {
+          "name": "Script (Local)",
+          "base": 70,
+          "mult": 2
+        }
+      ],
+      "allCommonSpecial": [],
+      "neutralCsb": [
+        "aur",
+        "aur",
+        "wil"
+      ],
+      "byConvocation": {
+        "Lyahvi": {
+          "csb": [
+            "aur",
+            "aur",
+            "eye"
+          ],
+          "skills": [
+            {
+              "name": "Legerdemain",
+              "oml": 3
+            },
+            {
+              "name": "Glassworking",
+              "oml": 3
+            },
+            {
+              "name": "Jewelcraft",
+              "oml": 3
+            }
+          ],
+          "specialties": [
+            "Wind",
+            "Magnification",
+            "Visual Illusions"
+          ]
+        },
+        "Peleahn": {
+          "csb": [
+            "aur",
+            "aur",
+            "agl"
+          ],
+          "skills": [
+            {
+              "name": "Alchemy",
+              "oml": 3
+            },
+            {
+              "name": "Cookery",
+              "oml": 4
+            },
+            {
+              "name": "Metalcraft",
+              "oml": 2
+            },
+            {
+              "name": "Weaponcraft",
+              "oml": 2
+            }
+          ],
+          "specialties": [
+            "Fireballs",
+            "Volcanos",
+            "Movement Enhancement"
+          ]
+        },
+        "Jmorvi": {
+          "csb": [
+            "aur",
+            "aur",
+            "str"
+          ],
+          "skills": [
+            {
+              "name": "Metalcraft",
+              "oml": 3
+            },
+            {
+              "name": "Lockcraft",
+              "oml": 3
+            },
+            {
+              "name": "Mineralogy",
+              "oml": 2
+            },
+            {
+              "name": "Weaponcraft",
+              "oml": 2
+            }
+          ],
+          "specialties": [
+            "Weapon Creation",
+            "Prospecting/Mining",
+            "Lockboxes"
+          ]
+        },
+        "Fyvria": {
+          "csb": [
+            "aur",
+            "aur",
+            "sml"
+          ],
+          "skills": [
+            {
+              "name": "Foraging",
+              "oml": 4
+            },
+            {
+              "name": "Survival",
+              "oml": 4
+            },
+            {
+              "name": "Agriculture",
+              "oml": 3
+            },
+            {
+              "name": "Herblore",
+              "oml": 3
+            },
+            {
+              "name": "Tracking",
+              "oml": 3
+            },
+            {
+              "name": "Animalcraft",
+              "oml": 2
+            },
+            {
+              "name": "Embalming",
+              "oml": 2
+            },
+            {
+              "name": "Physician",
+              "oml": 2
+            }
+          ],
+          "specialties": [
+            "Healing",
+            "Horticulture",
+            "Necromancy",
+            "Earthquakes"
+          ]
+        },
+        "Odivshe": {
+          "csb": [
+            "aur",
+            "aur",
+            "dex"
+          ],
+          "skills": [
+            {
+              "name": "Fishing",
+              "oml": 4
+            },
+            {
+              "name": "Swimming",
+              "oml": 4
+            },
+            {
+              "name": "Brewing",
+              "oml": 3
+            },
+            {
+              "name": "Seamanship",
+              "oml": 3
+            },
+            {
+              "name": "Piloting",
+              "oml": 2
+            }
+          ],
+          "specialties": [
+            "Waves",
+            "Precipitation",
+            "Movement Reduction"
+          ]
+        },
+        "Savorya": {
+          "csb": [
+            "aur",
+            "aur",
+            "int"
+          ],
+          "skills": [
+            {
+              "name": "Mental Conflict",
+              "oml": 5
+            },
+            {
+              "name": "Drawing",
+              "oml": 4
+            },
+            {
+              "name": "Runecraft",
+              "oml": 3
+            },
+            {
+              "name": "Tarotry",
+              "oml": 3
+            }
+          ],
+          "specialties": [
+            "Divination",
+            "Written Works",
+            "Memory Suppression"
+          ]
+        }
+      },
+      "sunMods": {
+        "Lyahvi": {
+          "Ulandus": -3,
+          "Aralius": -2,
+          "Feneri": -1,
+          "Ahnu": 0,
+          "Angberelius": 1,
+          "Nadai": 2,
+          "Hirin": 3,
+          "Tarael": 2,
+          "Tai": 1,
+          "Skorus": 0,
+          "Masara": -1,
+          "Lado": -2
+        },
+        "Peleahn": {
+          "Ulandus": -1,
+          "Aralius": 0,
+          "Feneri": 1,
+          "Ahnu": 2,
+          "Angberelius": 3,
+          "Nadai": 2,
+          "Hirin": 1,
+          "Tarael": 0,
+          "Tai": -1,
+          "Skorus": -2,
+          "Masara": -3,
+          "Lado": -2
+        },
+        "Jmorvi": {
+          "Ulandus": 1,
+          "Aralius": 2,
+          "Feneri": 3,
+          "Ahnu": 2,
+          "Angberelius": 1,
+          "Nadai": 0,
+          "Hirin": -1,
+          "Tarael": -2,
+          "Tai": -3,
+          "Skorus": -2,
+          "Masara": -1,
+          "Lado": 0
+        },
+        "Fyvria": {
+          "Ulandus": 3,
+          "Aralius": 2,
+          "Feneri": 1,
+          "Ahnu": 0,
+          "Angberelius": -1,
+          "Nadai": -2,
+          "Hirin": -3,
+          "Tarael": -2,
+          "Tai": -1,
+          "Skorus": 0,
+          "Masara": 1,
+          "Lado": 2
+        },
+        "Odivshe": {
+          "Ulandus": 1,
+          "Aralius": 0,
+          "Feneri": -1,
+          "Ahnu": -2,
+          "Angberelius": -3,
+          "Nadai": -2,
+          "Hirin": -1,
+          "Tarael": 0,
+          "Tai": 1,
+          "Skorus": 2,
+          "Masara": 3,
+          "Lado": 2
+        },
+        "Savorya": {
+          "Ulandus": -1,
+          "Aralius": -2,
+          "Feneri": -3,
+          "Ahnu": -2,
+          "Angberelius": -1,
+          "Nadai": 0,
+          "Hirin": 1,
+          "Tarael": 2,
+          "Tai": 3,
+          "Skorus": 2,
+          "Masara": 1,
+          "Lado": 0
+        }
+      }
+    },
+    "instruments": {
+      "note": "Common instruments — pick when opening a Musician specialty. General list (GM may add culture-specific).",
+      "common": [
+        "Lute",
+        "Harp",
+        "Lyre",
+        "Flute",
+        "Pipes",
+        "Drum",
+        "Fiddle",
+        "Horn",
+        "Whistle",
+        "Bell",
+        "Cittern",
+        "Bagpipe"
+      ]
+    }
+  }
+}

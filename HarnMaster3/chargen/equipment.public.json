@@ -1,0 +1,1781 @@
+{
+  "_meta": {
+    "harnequip": 1,
+    "build": "public",
+    "note": "PUBLIC core 4001 equipment — functional game data (names/weights/prices/protection/weapon class), inlined into the generator. No prose. Weapons = Combat 3 Weapon Data; armour = Combat 4 Armour Data + Combat 5 Armour Protective Values. Prices in d (pennies); M/W/H price prefixes are craftsman codes.",
+    "source": "HarnMaster Third Edition core (4001), Combat 3-5",
+    "edition": "v3.5.2",
+    "vendorCount": 2,
+    "itemCount": 103
+  },
+  "vendors": [
+    {
+      "id": "weapons-4001",
+      "label": "Weapons (4001)",
+      "items": [
+        {
+          "name": "Battleaxe",
+          "kind": "weapon",
+          "class": "Axe",
+          "oml": "SB×3",
+          "wt": 6,
+          "d": 100,
+          "wq": 12,
+          "ad": "20/10",
+          "hm": "–15",
+          "impact": {
+            "b": 6,
+            "e": 9,
+            "p": 6
+          }
+        },
+        {
+          "name": "Handaxe",
+          "kind": "weapon",
+          "class": "Axe",
+          "oml": "SB×3",
+          "wt": 3,
+          "d": 72,
+          "wq": 11,
+          "ad": "10/5",
+          "impact": {
+            "b": 4,
+            "e": 6,
+            "p": 4
+          }
+        },
+        {
+          "name": "Hatchet",
+          "kind": "weapon",
+          "class": "Axe",
+          "oml": "SB×3",
+          "wt": 2,
+          "d": 12,
+          "pr": "M/12d",
+          "wq": 9,
+          "ad": "5/5",
+          "impact": {
+            "b": 3,
+            "e": 4,
+            "p": 0
+          }
+        },
+        {
+          "name": "Shorkana",
+          "kind": "weapon",
+          "class": "Axe",
+          "oml": "SB×3",
+          "wt": 2,
+          "d": 48,
+          "wq": 10,
+          "ad": "5/5",
+          "impact": {
+            "b": 3,
+            "e": 5,
+            "p": 0
+          }
+        },
+        {
+          "name": "Sickle",
+          "kind": "weapon",
+          "class": "Axe",
+          "oml": "SB×3",
+          "wt": 1,
+          "d": 10,
+          "pr": "M/10d",
+          "wq": 9,
+          "ad": "5/5",
+          "impact": {
+            "b": 1,
+            "e": 4,
+            "p": 3
+          }
+        },
+        {
+          "name": "Warhammer",
+          "kind": "weapon",
+          "class": "Axe",
+          "oml": "SB×3",
+          "wt": 5,
+          "d": 90,
+          "wq": 11,
+          "ad": "15/5",
+          "hm": "–5",
+          "impact": {
+            "b": 6,
+            "e": 0,
+            "p": 5
+          }
+        },
+        {
+          "name": "Blowgun",
+          "kind": "weapon",
+          "class": "Blowgun",
+          "oml": "SB×4",
+          "wt": 1,
+          "d": 12,
+          "wq": 8,
+          "ad": "5/5",
+          "impact": {
+            "b": 1,
+            "e": 0,
+            "p": 0
+          }
+        },
+        {
+          "name": "Crossbow",
+          "kind": "weapon",
+          "class": "Bow",
+          "oml": "SB×2",
+          "wt": 5,
+          "d": 60,
+          "wq": 10,
+          "ad": "5/5",
+          "impact": {
+            "b": 3,
+            "e": 0,
+            "p": 0
+          }
+        },
+        {
+          "name": "Hartbow",
+          "kind": "weapon",
+          "class": "Bow",
+          "oml": "SB×2",
+          "wt": 2,
+          "d": 96,
+          "wq": 13,
+          "ad": "5/5",
+          "impact": {
+            "b": 1,
+            "e": 0,
+            "p": 0
+          }
+        },
+        {
+          "name": "Longbow",
+          "kind": "weapon",
+          "class": "Bow",
+          "oml": "SB×2",
+          "wt": 3,
+          "d": 36,
+          "wq": 11,
+          "ad": "5/5",
+          "impact": {
+            "b": 2,
+            "e": 0,
+            "p": 0
+          }
+        },
+        {
+          "name": "Shortbow",
+          "kind": "weapon",
+          "class": "Bow",
+          "oml": "SB×2",
+          "wt": 2,
+          "d": 24,
+          "wq": 10,
+          "ad": "5/5",
+          "impact": {
+            "b": 1,
+            "e": 0,
+            "p": 0
+          }
+        },
+        {
+          "name": "Club",
+          "kind": "weapon",
+          "class": "Club",
+          "oml": "SB×4",
+          "wt": 3,
+          "d": 12,
+          "pr": "W/12d",
+          "wq": 9,
+          "ad": "15/5",
+          "impact": {
+            "b": 4,
+            "e": 0,
+            "p": 3
+          }
+        },
+        {
+          "name": "Mace",
+          "kind": "weapon",
+          "class": "Club",
+          "oml": "SB×4",
+          "wt": 4,
+          "d": 84,
+          "wq": 11,
+          "ad": "15/5",
+          "impact": {
+            "b": 6,
+            "e": 0,
+            "p": 0
+          }
+        },
+        {
+          "name": "Maul",
+          "kind": "weapon",
+          "class": "Club",
+          "oml": "SB×4",
+          "wt": 7,
+          "d": 24,
+          "pr": "W/24d",
+          "wq": 9,
+          "ad": "20/5",
+          "hm": "–20",
+          "impact": {
+            "b": 7,
+            "e": 0,
+            "p": 0
+          }
+        },
+        {
+          "name": "Morningstar",
+          "kind": "weapon",
+          "class": "Club",
+          "oml": "SB×4",
+          "wt": 5,
+          "d": 48,
+          "wq": 11,
+          "ad": "20/5",
+          "hm": "–10",
+          "impact": {
+            "b": 0,
+            "e": 0,
+            "p": 5
+          }
+        },
+        {
+          "name": "Stick (2ft)",
+          "kind": "weapon",
+          "class": "Club",
+          "oml": "SB×4",
+          "wt": 2,
+          "d": null,
+          "pr": "n/a",
+          "wq": 9,
+          "ad": "5/5",
+          "impact": {
+            "b": 2,
+            "e": 0,
+            "p": 2
+          }
+        },
+        {
+          "name": "Dagger",
+          "kind": "weapon",
+          "class": "Dagger",
+          "oml": "SB×3",
+          "wt": 1,
+          "d": 24,
+          "wq": 11,
+          "ad": "5/5",
+          "impact": {
+            "b": 1,
+            "e": 2,
+            "p": 5
+          }
+        },
+        {
+          "name": "Keltan",
+          "kind": "weapon",
+          "class": "Dagger",
+          "oml": "SB×3",
+          "wt": 2,
+          "d": 36,
+          "wq": 12,
+          "ad": "5/10",
+          "impact": {
+            "b": 2,
+            "e": 0,
+            "p": 3
+          }
+        },
+        {
+          "name": "Knife",
+          "kind": "weapon",
+          "class": "Dagger",
+          "oml": "SB×3",
+          "wt": 1,
+          "d": 6,
+          "pr": "M/6d",
+          "wq": 10,
+          "ad": "5/0",
+          "impact": {
+            "b": 0,
+            "e": 1,
+            "p": 4
+          }
+        },
+        {
+          "name": "Taburi",
+          "kind": "weapon",
+          "class": "Dagger",
+          "oml": "SB×3",
+          "wt": 1,
+          "d": 20,
+          "wq": 10,
+          "ad": "5/0",
+          "impact": {
+            "b": 0,
+            "e": 0,
+            "p": 4
+          }
+        },
+        {
+          "name": "Ball & Chain",
+          "kind": "weapon",
+          "class": "Flail",
+          "oml": "SB×1",
+          "wt": 4,
+          "d": 60,
+          "wq": 12,
+          "ad": "20/10",
+          "impact": {
+            "b": 8,
+            "e": 0,
+            "p": 6
+          }
+        },
+        {
+          "name": "Grainflail",
+          "kind": "weapon",
+          "class": "Flail",
+          "oml": "SB×1",
+          "wt": 2,
+          "d": 12,
+          "pr": "W/12d",
+          "wq": 9,
+          "ad": "20/5",
+          "impact": {
+            "b": 5,
+            "e": 0,
+            "p": 0
+          }
+        },
+        {
+          "name": "Nachakas",
+          "kind": "weapon",
+          "class": "Flail",
+          "oml": "SB×1",
+          "wt": 1,
+          "d": 12,
+          "wq": 10,
+          "ad": "15/10",
+          "impact": {
+            "b": 4,
+            "e": 0,
+            "p": 0
+          }
+        },
+        {
+          "name": "Warflail",
+          "kind": "weapon",
+          "class": "Flail",
+          "oml": "SB×1",
+          "wt": 5,
+          "d": 60,
+          "wq": 11,
+          "ad": "25/10",
+          "hm": "–20",
+          "impact": {
+            "b": 9,
+            "e": 0,
+            "p": 6
+          }
+        },
+        {
+          "name": "Net",
+          "kind": "weapon",
+          "class": "Net",
+          "oml": "SB×1",
+          "wt": 4,
+          "d": 48,
+          "wq": 9,
+          "ad": "20/0",
+          "impact": {
+            "b": 2,
+            "e": 0,
+            "p": 1
+          }
+        },
+        {
+          "name": "Glaive/Bill",
+          "kind": "weapon",
+          "class": "Polearm",
+          "oml": "SB×2",
+          "wt": 8,
+          "d": 84,
+          "wq": 11,
+          "ad": "25/10",
+          "hm": "–20",
+          "impact": {
+            "b": 6,
+            "e": 7,
+            "p": 6
+          }
+        },
+        {
+          "name": "Pike (12ft)",
+          "kind": "weapon",
+          "class": "Polearm",
+          "oml": "SB×2",
+          "wt": 12,
+          "d": 96,
+          "wq": 12,
+          "ad": "25/5",
+          "hm": "–25",
+          "impact": {
+            "b": 4,
+            "e": 0,
+            "p": 8
+          }
+        },
+        {
+          "name": "Poleaxe (10ft)",
+          "kind": "weapon",
+          "class": "Polearm",
+          "oml": "SB×2",
+          "wt": 8,
+          "d": 96,
+          "wq": 11,
+          "ad": "25/5",
+          "hm": "–15",
+          "impact": {
+            "b": 6,
+            "e": 9,
+            "p": 6
+          }
+        },
+        {
+          "name": "Sling",
+          "kind": "weapon",
+          "class": "Sling",
+          "oml": "SB×1",
+          "wt": 0,
+          "d": 6,
+          "pr": "H/6d",
+          "wq": 9,
+          "ad": "n/a",
+          "impact": {
+            "b": 0,
+            "e": 0,
+            "p": 0
+          }
+        },
+        {
+          "name": "Staff Sling",
+          "kind": "weapon",
+          "class": "Sling",
+          "oml": "SB×1",
+          "wt": 1,
+          "d": 12,
+          "pr": "W/12d",
+          "wq": 10,
+          "ad": "5/0",
+          "hm": "–10",
+          "impact": {
+            "b": 1,
+            "e": 0,
+            "p": 0
+          }
+        },
+        {
+          "name": "Javelin",
+          "kind": "weapon",
+          "class": "Spear",
+          "oml": "SB×3",
+          "wt": 3,
+          "d": 48,
+          "wq": 10,
+          "ad": "15/5",
+          "hm": "–10",
+          "impact": {
+            "b": 2,
+            "e": 0,
+            "p": 6
+          }
+        },
+        {
+          "name": "Jousting Pole",
+          "kind": "weapon",
+          "class": "Spear",
+          "oml": "SB×2",
+          "wt": 8,
+          "d": 40,
+          "wq": 8,
+          "ad": "25/5",
+          "hm": "–25",
+          "impact": {
+            "b": 3,
+            "e": 0,
+            "p": 0
+          }
+        },
+        {
+          "name": "Lance (10ft)",
+          "kind": "weapon",
+          "class": "Spear",
+          "oml": "SB×2",
+          "wt": 8,
+          "d": 120,
+          "wq": 11,
+          "ad": "25/5",
+          "hm": "–15",
+          "impact": {
+            "b": 4,
+            "e": 0,
+            "p": 8
+          }
+        },
+        {
+          "name": "Spear (6ft)",
+          "kind": "weapon",
+          "class": "Spear",
+          "oml": "SB×3",
+          "wt": 5,
+          "d": 60,
+          "wq": 11,
+          "ad": "20/10",
+          "hm": "–10",
+          "impact": {
+            "b": 4,
+            "e": 0,
+            "p": 7
+          }
+        },
+        {
+          "name": "Staff",
+          "kind": "weapon",
+          "class": "Spear",
+          "oml": "SB×3",
+          "wt": 4,
+          "d": 36,
+          "pr": "W/36d",
+          "wq": 11,
+          "ad": "20/15",
+          "hm": "–10",
+          "impact": {
+            "b": 4,
+            "e": 0,
+            "p": 0
+          }
+        },
+        {
+          "name": "Trident",
+          "kind": "weapon",
+          "class": "Spear",
+          "oml": "SB×3",
+          "wt": 6,
+          "d": 72,
+          "wq": 12,
+          "ad": "20/15",
+          "hm": "–10",
+          "impact": {
+            "b": 4,
+            "e": 0,
+            "p": 5
+          }
+        },
+        {
+          "name": "Bastard Sword",
+          "kind": "weapon",
+          "class": "Sword",
+          "oml": "SB×3",
+          "wt": 5,
+          "d": 180,
+          "wq": 12,
+          "ad": "20/10",
+          "hm": "–10",
+          "impact": {
+            "b": 4,
+            "e": 7,
+            "p": 4
+          }
+        },
+        {
+          "name": "Battlesword",
+          "kind": "weapon",
+          "class": "Sword",
+          "oml": "SB×3",
+          "wt": 8,
+          "d": 230,
+          "wq": 13,
+          "ad": "25/10",
+          "hm": "–20",
+          "impact": {
+            "b": 5,
+            "e": 8,
+            "p": 4
+          }
+        },
+        {
+          "name": "Broadsword",
+          "kind": "weapon",
+          "class": "Sword",
+          "oml": "SB×3",
+          "wt": 3,
+          "d": 150,
+          "wq": 12,
+          "ad": "15/10",
+          "impact": {
+            "b": 3,
+            "e": 5,
+            "p": 3
+          }
+        },
+        {
+          "name": "Estoc",
+          "kind": "weapon",
+          "class": "Sword",
+          "oml": "SB×3",
+          "wt": 3,
+          "d": 150,
+          "wq": 11,
+          "ad": "15/10",
+          "impact": {
+            "b": 3,
+            "e": 0,
+            "p": 6
+          }
+        },
+        {
+          "name": "Falchion",
+          "kind": "weapon",
+          "class": "Sword",
+          "oml": "SB×3",
+          "wt": 4,
+          "d": 120,
+          "wq": 12,
+          "ad": "15/5",
+          "impact": {
+            "b": 4,
+            "e": 6,
+            "p": 1
+          }
+        },
+        {
+          "name": "Longknife",
+          "kind": "weapon",
+          "class": "Sword",
+          "oml": "SB×3",
+          "wt": 1,
+          "d": 96,
+          "wq": 12,
+          "ad": "10/15",
+          "impact": {
+            "b": 1,
+            "e": 3,
+            "p": 5
+          }
+        },
+        {
+          "name": "Mang",
+          "kind": "weapon",
+          "class": "Sword",
+          "oml": "SB×3",
+          "wt": 3,
+          "d": 110,
+          "wq": 11,
+          "ad": "15/10",
+          "hm": "–5",
+          "impact": {
+            "b": 3,
+            "e": 6,
+            "p": 0
+          }
+        },
+        {
+          "name": "Mankar",
+          "kind": "weapon",
+          "class": "Sword",
+          "oml": "SB×3",
+          "wt": 2,
+          "d": 84,
+          "wq": 11,
+          "ad": "10/5",
+          "impact": {
+            "b": 2,
+            "e": 5,
+            "p": 0
+          }
+        },
+        {
+          "name": "Shortsword",
+          "kind": "weapon",
+          "class": "Sword",
+          "oml": "SB×3",
+          "wt": 2,
+          "d": 90,
+          "wq": 12,
+          "ad": "10/5",
+          "impact": {
+            "b": 2,
+            "e": 4,
+            "p": 4
+          }
+        },
+        {
+          "name": "Isagra",
+          "kind": "weapon",
+          "class": "Whip",
+          "oml": "SB×1",
+          "wt": 4,
+          "d": 20,
+          "pr": "H/20d",
+          "wq": 11,
+          "ad": "25/5",
+          "impact": {
+            "b": 3,
+            "e": 3,
+            "p": 0
+          }
+        },
+        {
+          "name": "Whip",
+          "kind": "weapon",
+          "class": "Whip",
+          "oml": "SB×1",
+          "wt": 2,
+          "d": 12,
+          "pr": "H/12d",
+          "wq": 9,
+          "ad": "25/5",
+          "impact": {
+            "b": 2,
+            "e": 1,
+            "p": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "armour-4001",
+      "label": "Armour (4001)",
+      "items": [
+        {
+          "name": "Cloth Cap",
+          "kind": "armor",
+          "material": "Cloth",
+          "d": 8,
+          "wt": 0.4,
+          "locations": [
+            "Skull"
+          ],
+          "protection": {
+            "b": 1,
+            "e": 1,
+            "p": 1,
+            "f": 1
+          }
+        },
+        {
+          "name": "Cloth Hood",
+          "kind": "armor",
+          "material": "Cloth",
+          "d": 16,
+          "wt": 0.8,
+          "locations": [
+            "Skull",
+            "Neck"
+          ],
+          "protection": {
+            "b": 1,
+            "e": 1,
+            "p": 1,
+            "f": 1
+          }
+        },
+        {
+          "name": "Cloth Leggings",
+          "kind": "armor",
+          "material": "Cloth",
+          "d": 88,
+          "wt": 4.4,
+          "locations": [
+            "Hips",
+            "Groin",
+            "Thighs",
+            "Knees",
+            "Calves",
+            "Feet"
+          ],
+          "protection": {
+            "b": 1,
+            "e": 1,
+            "p": 1,
+            "f": 1
+          }
+        },
+        {
+          "name": "Cloth Robe",
+          "kind": "armor",
+          "material": "Cloth",
+          "d": 158,
+          "wt": 7.9,
+          "locations": [
+            "Upper Arms",
+            "Shoulders",
+            "Thorax",
+            "Abdomen",
+            "Hips",
+            "Groin",
+            "Forearms",
+            "Elbow",
+            "Thighs",
+            "Knees",
+            "Calves"
+          ],
+          "protection": {
+            "b": 1,
+            "e": 1,
+            "p": 1,
+            "f": 1
+          }
+        },
+        {
+          "name": "Cloth Surcoat",
+          "kind": "armor",
+          "material": "Cloth",
+          "d": 106,
+          "wt": 5.3,
+          "locations": [
+            "Shoulders",
+            "Thorax",
+            "Abdomen",
+            "Hips",
+            "Groin",
+            "Thighs"
+          ],
+          "protection": {
+            "b": 1,
+            "e": 1,
+            "p": 1,
+            "f": 1
+          }
+        },
+        {
+          "name": "Cloth Tunic",
+          "kind": "armor",
+          "material": "Cloth",
+          "d": 88,
+          "wt": 4.4,
+          "locations": [
+            "Upper Arms",
+            "Shoulders",
+            "Thorax",
+            "Abdomen",
+            "Hips",
+            "Groin"
+          ],
+          "protection": {
+            "b": 1,
+            "e": 1,
+            "p": 1,
+            "f": 1
+          }
+        },
+        {
+          "name": "Cloth Vest",
+          "kind": "armor",
+          "material": "Cloth",
+          "d": 56,
+          "wt": 2.8,
+          "locations": [
+            "Shoulders",
+            "Thorax",
+            "Abdomen"
+          ],
+          "protection": {
+            "b": 1,
+            "e": 1,
+            "p": 1,
+            "f": 1
+          }
+        },
+        {
+          "name": "Kurbul Ailettes/2",
+          "kind": "armor",
+          "material": "Kurbul",
+          "d": 20,
+          "wt": 1,
+          "locations": [
+            "Shoulders"
+          ],
+          "protection": {
+            "b": 4,
+            "e": 5,
+            "p": 4,
+            "f": 3
+          }
+        },
+        {
+          "name": "Kurbul Backplate",
+          "kind": "armor",
+          "material": "Kurbul",
+          "d": 60,
+          "wt": 3,
+          "locations": [
+            "Back"
+          ],
+          "protection": {
+            "b": 4,
+            "e": 5,
+            "p": 4,
+            "f": 3
+          }
+        },
+        {
+          "name": "Kurbul Breastplate",
+          "kind": "armor",
+          "material": "Kurbul",
+          "d": 60,
+          "wt": 3,
+          "locations": [
+            "Chest"
+          ],
+          "protection": {
+            "b": 4,
+            "e": 5,
+            "p": 4,
+            "f": 3
+          }
+        },
+        {
+          "name": "Kurbul Coudes/2",
+          "kind": "armor",
+          "material": "Kurbul",
+          "d": 10,
+          "wt": 0.5,
+          "locations": [
+            "Elbow"
+          ],
+          "protection": {
+            "b": 4,
+            "e": 5,
+            "p": 4,
+            "f": 3
+          }
+        },
+        {
+          "name": "Kurbul Greaves/2",
+          "kind": "armor",
+          "material": "Kurbul",
+          "d": 50,
+          "wt": 2.5,
+          "locations": [
+            "Calves"
+          ],
+          "protection": {
+            "b": 4,
+            "e": 5,
+            "p": 4,
+            "f": 3
+          }
+        },
+        {
+          "name": "Kurbul Halfhelm",
+          "kind": "armor",
+          "material": "Kurbul",
+          "d": 20,
+          "wt": 1,
+          "locations": [
+            "Skull"
+          ],
+          "protection": {
+            "b": 4,
+            "e": 5,
+            "p": 4,
+            "f": 3
+          }
+        },
+        {
+          "name": "Kurbul Kneecops/2",
+          "kind": "armor",
+          "material": "Kurbul",
+          "d": 15,
+          "wt": 0.8,
+          "locations": [
+            "Knees"
+          ],
+          "protection": {
+            "b": 4,
+            "e": 5,
+            "p": 4,
+            "f": 3
+          }
+        },
+        {
+          "name": "Kurbul Rerebraces/2",
+          "kind": "armor",
+          "material": "Kurbul",
+          "d": 30,
+          "wt": 1.5,
+          "locations": [
+            "Upper Arms"
+          ],
+          "protection": {
+            "b": 4,
+            "e": 5,
+            "p": 4,
+            "f": 3
+          }
+        },
+        {
+          "name": "Kurbul Vambraces/2",
+          "kind": "armor",
+          "material": "Kurbul",
+          "d": 25,
+          "wt": 1.3,
+          "locations": [
+            "Forearms"
+          ],
+          "protection": {
+            "b": 4,
+            "e": 5,
+            "p": 4,
+            "f": 3
+          }
+        },
+        {
+          "name": "Leather Calf Boots/2",
+          "kind": "armor",
+          "material": "Leather",
+          "d": 64,
+          "wt": 3.2,
+          "locations": [
+            "Calves",
+            "Feet"
+          ],
+          "protection": {
+            "b": 2,
+            "e": 4,
+            "p": 3,
+            "f": 3
+          }
+        },
+        {
+          "name": "Leather Cap",
+          "kind": "armor",
+          "material": "Leather",
+          "d": 16,
+          "wt": 0.8,
+          "locations": [
+            "Skull"
+          ],
+          "protection": {
+            "b": 2,
+            "e": 4,
+            "p": 3,
+            "f": 3
+          }
+        },
+        {
+          "name": "Leather Cowl",
+          "kind": "armor",
+          "material": "Leather",
+          "d": 32,
+          "wt": 1.6,
+          "locations": [
+            "Skull",
+            "Neck"
+          ],
+          "protection": {
+            "b": 2,
+            "e": 4,
+            "p": 3,
+            "f": 3
+          }
+        },
+        {
+          "name": "Leather Gauntlets/2",
+          "kind": "armor",
+          "material": "Leather",
+          "d": 16,
+          "wt": 0.8,
+          "locations": [
+            "Hands"
+          ],
+          "protection": {
+            "b": 2,
+            "e": 4,
+            "p": 3,
+            "f": 3
+          }
+        },
+        {
+          "name": "Leather Knee Boots/2",
+          "kind": "armor",
+          "material": "Leather",
+          "d": 76,
+          "wt": 3.8,
+          "locations": [
+            "Knees",
+            "Calves",
+            "Feet"
+          ],
+          "protection": {
+            "b": 2,
+            "e": 4,
+            "p": 3,
+            "f": 3
+          }
+        },
+        {
+          "name": "Leather Leggings",
+          "kind": "armor",
+          "material": "Leather",
+          "d": 176,
+          "wt": 8.8,
+          "locations": [
+            "Hips",
+            "Groin",
+            "Thighs",
+            "Knees",
+            "Calves",
+            "Feet"
+          ],
+          "protection": {
+            "b": 2,
+            "e": 4,
+            "p": 3,
+            "f": 3
+          }
+        },
+        {
+          "name": "Leather Shoes/2",
+          "kind": "armor",
+          "material": "Leather",
+          "d": 24,
+          "wt": 1.2,
+          "locations": [
+            "Feet"
+          ],
+          "protection": {
+            "b": 2,
+            "e": 4,
+            "p": 3,
+            "f": 3
+          }
+        },
+        {
+          "name": "Leather Surcoat",
+          "kind": "armor",
+          "material": "Leather",
+          "d": 212,
+          "wt": 10.6,
+          "locations": [
+            "Shoulders",
+            "Thorax",
+            "Abdomen",
+            "Hips",
+            "Groin",
+            "Thighs"
+          ],
+          "protection": {
+            "b": 2,
+            "e": 4,
+            "p": 3,
+            "f": 3
+          }
+        },
+        {
+          "name": "Leather Tunic",
+          "kind": "armor",
+          "material": "Leather",
+          "d": 176,
+          "wt": 8.8,
+          "locations": [
+            "Upper Arms",
+            "Shoulders",
+            "Thorax",
+            "Abdomen",
+            "Hips",
+            "Groin"
+          ],
+          "protection": {
+            "b": 2,
+            "e": 4,
+            "p": 3,
+            "f": 3
+          }
+        },
+        {
+          "name": "Leather Vest",
+          "kind": "armor",
+          "material": "Leather",
+          "d": 112,
+          "wt": 5.6,
+          "locations": [
+            "Shoulders",
+            "Thorax",
+            "Abdomen"
+          ],
+          "protection": {
+            "b": 2,
+            "e": 4,
+            "p": 3,
+            "f": 3
+          }
+        },
+        {
+          "name": "Mail Byrnie",
+          "kind": "armor",
+          "material": "Mail",
+          "d": 660,
+          "wt": 22,
+          "locations": [
+            "Upper Arms",
+            "Shoulders",
+            "Thorax",
+            "Abdomen",
+            "Hips",
+            "Groin"
+          ],
+          "protection": {
+            "b": 2,
+            "e": 8,
+            "p": 5,
+            "f": 1
+          }
+        },
+        {
+          "name": "Mail Cowl",
+          "kind": "armor",
+          "material": "Mail",
+          "d": 120,
+          "wt": 4,
+          "locations": [
+            "Skull",
+            "Neck"
+          ],
+          "protection": {
+            "b": 2,
+            "e": 8,
+            "p": 5,
+            "f": 1
+          }
+        },
+        {
+          "name": "Mail Hauberk",
+          "kind": "armor",
+          "material": "Mail",
+          "d": 990,
+          "wt": 33,
+          "locations": [
+            "Forearms",
+            "Elbow",
+            "Upper Arms",
+            "Shoulders",
+            "Thorax",
+            "Abdomen",
+            "Hips",
+            "Groin",
+            "Thighs"
+          ],
+          "protection": {
+            "b": 2,
+            "e": 8,
+            "p": 5,
+            "f": 1
+          }
+        },
+        {
+          "name": "Mail Leggings",
+          "kind": "armor",
+          "material": "Mail",
+          "d": 660,
+          "wt": 22,
+          "locations": [
+            "Hips",
+            "Groin",
+            "Thighs",
+            "Knees",
+            "Calves",
+            "Feet"
+          ],
+          "protection": {
+            "b": 2,
+            "e": 8,
+            "p": 5,
+            "f": 1
+          }
+        },
+        {
+          "name": "Mail Mittens/2",
+          "kind": "armor",
+          "material": "Mail",
+          "d": 60,
+          "wt": 2,
+          "locations": [
+            "Hands"
+          ],
+          "protection": {
+            "b": 2,
+            "e": 8,
+            "p": 5,
+            "f": 1
+          }
+        },
+        {
+          "name": "Plate 3/4 Helm",
+          "kind": "armor",
+          "material": "Plate",
+          "d": 175,
+          "wt": 5.6,
+          "locations": [
+            "Skull",
+            "Face"
+          ],
+          "protection": {
+            "b": 6,
+            "e": 10,
+            "p": 6,
+            "f": 2
+          }
+        },
+        {
+          "name": "Plate Ailettes/2",
+          "kind": "armor",
+          "material": "Plate",
+          "d": 100,
+          "wt": 3.2,
+          "locations": [
+            "Shoulders"
+          ],
+          "protection": {
+            "b": 6,
+            "e": 10,
+            "p": 6,
+            "f": 2
+          }
+        },
+        {
+          "name": "Plate Backplate",
+          "kind": "armor",
+          "material": "Plate",
+          "d": 300,
+          "wt": 9.6,
+          "locations": [
+            "Back"
+          ],
+          "protection": {
+            "b": 6,
+            "e": 10,
+            "p": 6,
+            "f": 2
+          }
+        },
+        {
+          "name": "Plate Breastplate",
+          "kind": "armor",
+          "material": "Plate",
+          "d": 300,
+          "wt": 9.6,
+          "locations": [
+            "Chest"
+          ],
+          "protection": {
+            "b": 6,
+            "e": 10,
+            "p": 6,
+            "f": 2
+          }
+        },
+        {
+          "name": "Plate Coudes/2",
+          "kind": "armor",
+          "material": "Plate",
+          "d": 50,
+          "wt": 1.6,
+          "locations": [
+            "Elbow"
+          ],
+          "protection": {
+            "b": 6,
+            "e": 10,
+            "p": 6,
+            "f": 2
+          }
+        },
+        {
+          "name": "Plate Great Helm",
+          "kind": "armor",
+          "material": "Plate",
+          "d": 275,
+          "wt": 8.8,
+          "locations": [
+            "Skull",
+            "Face",
+            "Neck"
+          ],
+          "protection": {
+            "b": 6,
+            "e": 10,
+            "p": 6,
+            "f": 2
+          }
+        },
+        {
+          "name": "Plate Greaves/2",
+          "kind": "armor",
+          "material": "Plate",
+          "d": 250,
+          "wt": 8,
+          "locations": [
+            "Calves"
+          ],
+          "protection": {
+            "b": 6,
+            "e": 10,
+            "p": 6,
+            "f": 2
+          }
+        },
+        {
+          "name": "Plate Halfhelm",
+          "kind": "armor",
+          "material": "Plate",
+          "d": 100,
+          "wt": 3.2,
+          "locations": [
+            "Skull"
+          ],
+          "protection": {
+            "b": 6,
+            "e": 10,
+            "p": 6,
+            "f": 2
+          }
+        },
+        {
+          "name": "Plate Kneecops/2",
+          "kind": "armor",
+          "material": "Plate",
+          "d": 75,
+          "wt": 2.4,
+          "locations": [
+            "Knees"
+          ],
+          "protection": {
+            "b": 6,
+            "e": 10,
+            "p": 6,
+            "f": 2
+          }
+        },
+        {
+          "name": "Plate Rerebraces/2",
+          "kind": "armor",
+          "material": "Plate",
+          "d": 150,
+          "wt": 4.8,
+          "locations": [
+            "Upper Arms"
+          ],
+          "protection": {
+            "b": 6,
+            "e": 10,
+            "p": 6,
+            "f": 2
+          }
+        },
+        {
+          "name": "Plate Vambraces/2",
+          "kind": "armor",
+          "material": "Plate",
+          "d": 125,
+          "wt": 4,
+          "locations": [
+            "Forearms"
+          ],
+          "protection": {
+            "b": 6,
+            "e": 10,
+            "p": 6,
+            "f": 2
+          }
+        },
+        {
+          "name": "Quilt Cap",
+          "kind": "armor",
+          "material": "Quilt",
+          "d": 16,
+          "wt": 1.2,
+          "locations": [
+            "Skull"
+          ],
+          "protection": {
+            "b": 5,
+            "e": 3,
+            "p": 2,
+            "f": 4
+          }
+        },
+        {
+          "name": "Quilt Cowl",
+          "kind": "armor",
+          "material": "Quilt",
+          "d": 32,
+          "wt": 2.4,
+          "locations": [
+            "Skull",
+            "Neck"
+          ],
+          "protection": {
+            "b": 5,
+            "e": 3,
+            "p": 2,
+            "f": 4
+          }
+        },
+        {
+          "name": "Quilt Gambeson",
+          "kind": "armor",
+          "material": "Quilt",
+          "d": 264,
+          "wt": 19.8,
+          "locations": [
+            "Forearms",
+            "Elbow",
+            "Upper Arms",
+            "Shoulders",
+            "Thorax",
+            "Abdomen",
+            "Hips",
+            "Groin",
+            "Thighs"
+          ],
+          "protection": {
+            "b": 5,
+            "e": 3,
+            "p": 2,
+            "f": 4
+          }
+        },
+        {
+          "name": "Quilt Leggings",
+          "kind": "armor",
+          "material": "Quilt",
+          "d": 176,
+          "wt": 13.2,
+          "locations": [
+            "Hips",
+            "Groin",
+            "Thighs",
+            "Knees",
+            "Calves",
+            "Feet"
+          ],
+          "protection": {
+            "b": 5,
+            "e": 3,
+            "p": 2,
+            "f": 4
+          }
+        },
+        {
+          "name": "Quilt Tunic",
+          "kind": "armor",
+          "material": "Quilt",
+          "d": 176,
+          "wt": 13.2,
+          "locations": [
+            "Upper Arms",
+            "Shoulders",
+            "Thorax",
+            "Abdomen",
+            "Hips",
+            "Groin"
+          ],
+          "protection": {
+            "b": 5,
+            "e": 3,
+            "p": 2,
+            "f": 4
+          }
+        },
+        {
+          "name": "Ring Byrnie",
+          "kind": "armor",
+          "material": "Ring",
+          "d": 308,
+          "wt": 17.6,
+          "locations": [
+            "Upper Arms",
+            "Shoulders",
+            "Thorax",
+            "Abdomen",
+            "Hips",
+            "Groin"
+          ],
+          "protection": {
+            "b": 3,
+            "e": 6,
+            "p": 4,
+            "f": 3
+          }
+        },
+        {
+          "name": "Ring Gauntlets/2",
+          "kind": "armor",
+          "material": "Ring",
+          "d": 28,
+          "wt": 1.6,
+          "locations": [
+            "Hands"
+          ],
+          "protection": {
+            "b": 3,
+            "e": 6,
+            "p": 4,
+            "f": 3
+          }
+        },
+        {
+          "name": "Ring Halfhelm",
+          "kind": "armor",
+          "material": "Ring",
+          "d": 28,
+          "wt": 1.6,
+          "locations": [
+            "Skull"
+          ],
+          "protection": {
+            "b": 3,
+            "e": 6,
+            "p": 4,
+            "f": 3
+          }
+        },
+        {
+          "name": "Ring Hauberk",
+          "kind": "armor",
+          "material": "Ring",
+          "d": 462,
+          "wt": 26.4,
+          "locations": [
+            "Forearms",
+            "Elbow",
+            "Upper Arms",
+            "Shoulders",
+            "Thorax",
+            "Abdomen",
+            "Hips",
+            "Groin",
+            "Thighs"
+          ],
+          "protection": {
+            "b": 3,
+            "e": 6,
+            "p": 4,
+            "f": 3
+          }
+        },
+        {
+          "name": "Ring Leggings",
+          "kind": "armor",
+          "material": "Ring",
+          "d": 308,
+          "wt": 17.6,
+          "locations": [
+            "Hips",
+            "Groin",
+            "Thighs",
+            "Knees",
+            "Calves",
+            "Feet"
+          ],
+          "protection": {
+            "b": 3,
+            "e": 6,
+            "p": 4,
+            "f": 3
+          }
+        },
+        {
+          "name": "Ring Vest",
+          "kind": "armor",
+          "material": "Ring",
+          "d": 196,
+          "wt": 11.2,
+          "locations": [
+            "Shoulders",
+            "Thorax",
+            "Abdomen"
+          ],
+          "protection": {
+            "b": 3,
+            "e": 6,
+            "p": 4,
+            "f": 3
+          }
+        },
+        {
+          "name": "Scale Byrnie",
+          "kind": "armor",
+          "material": "Scale",
+          "d": 440,
+          "wt": 30.8,
+          "locations": [
+            "Upper Arms",
+            "Shoulders",
+            "Thorax",
+            "Abdomen",
+            "Hips",
+            "Groin"
+          ],
+          "protection": {
+            "b": 5,
+            "e": 9,
+            "p": 4,
+            "f": 5
+          }
+        },
+        {
+          "name": "Scale Hauberk",
+          "kind": "armor",
+          "material": "Scale",
+          "d": 660,
+          "wt": 46.2,
+          "locations": [
+            "Forearms",
+            "Elbow",
+            "Upper Arms",
+            "Shoulders",
+            "Thorax",
+            "Abdomen",
+            "Hips",
+            "Groin",
+            "Thighs"
+          ],
+          "protection": {
+            "b": 5,
+            "e": 9,
+            "p": 4,
+            "f": 5
+          }
+        },
+        {
+          "name": "Scale Vest",
+          "kind": "armor",
+          "material": "Scale",
+          "d": 280,
+          "wt": 19.6,
+          "locations": [
+            "Shoulders",
+            "Thorax",
+            "Abdomen"
+          ],
+          "protection": {
+            "b": 5,
+            "e": 9,
+            "p": 4,
+            "f": 5
+          }
+        }
+      ]
+    }
+  ]
+}

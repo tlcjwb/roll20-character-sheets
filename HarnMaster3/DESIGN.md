@@ -286,11 +286,17 @@ and the README. It is **Pro-only and per-campaign** (Mod scripts don't ship with
 sheet), so it's a "your game" enhancement, not something all sheet users get. Rules basis: HM
 intends each steed to have its own profile (Combat 19) and a **per-steed Riding EML** (Combat 20).
 
+**Generalized 2026-06-14: a horse is just one Bestiary creature.** Phase 7's "steed sheet" is now
+the **generic creature sheet** (see 7e), and Phase 10's chargen *creature mode* is what builds these
+sheets (from `bestiary*.json` or by hand). The mount-import path below is unchanged — it reads a
+creature sheet's **live** attrs at runtime — it just now imports *any* creature, not only horses.
+
 **Architecture (approach #1 + hybrid):**
-- **Each horse is its own Roll20 character + token** (RAW: "each steed should have its own Character
-  Profile").
+- **Each horse/creature is its own Roll20 character + token** (RAW: "each steed should have its own
+  Character Profile").
 - The **rider's sheet keeps one embedded "active mount" panel** (the existing `h*` horse section)
-  for whichever horse is currently ridden, plus the existing mounted move/initiative integration.
+  for whichever creature is currently ridden, plus the existing mounted move/initiative integration.
+  This panel is **always hidden on a creature's own sheet** (a wolf doesn't ride).
 - A **companion Mod script** bridges what sheetworkers can't do (cross-character reads, token edits).
 
 **7a — Steed-mode sheet toggle (sheet-only).** A `sheetmode` setting (`character`/`steed`) that
@@ -334,11 +340,25 @@ version also enables a Mod/sheet compatibility check.
   supported in that field) + a fuller GM-facing blurb. *(Worthwhile standalone quick-win even without
   Phase 7 — also listed under Phase 5.)*
 
-**Risk:** high — spans sheet + API + docs, introduces active-mount/handshake concepts, and the Mod
-script is a separate per-campaign artifact to maintain. **Distribution:** Pro-only, per-game; does
-not travel with the published sheet. **Verify:** in-VTT with the Mod installed (import fills the
-panel; token swaps; button shows) *and* not installed (import UI stays hidden; sheet otherwise
-normal).
+**7e — Creature mode + data-driven hit locations (sheet-only; pairs with Phase 10).** Generalizes 7a
+from "steed" to "any Bestiary creature." A `kind` (`pc`/`creature`) + `archetype`
+(`humanoid`/`quadruped`/`winged`/`custom`) toggle:
+- Hides PC/life-path fields **and the active-mount panel** in creature mode (CSS-toggle pattern).
+- Reuses the existing attribute keys (`str…wil`) so creatures ride the same sheet.
+- **Hit locations become data-driven** — a `repeating_hitlocation` section (name, d100 range, armor
+  b/e/p, impact mod) **seeded from the archetype** but **overridable per creature** (the five Ivashu
+  each carry their own table; same archetype, different locations). The existing **human + horse fixed
+  layouts are left untouched** (additive, no migration); data-driven locations apply to creature mode
+  only. This is the one real scope-growth from "switch between fixed grids."
+- Built by Phase 10's chargen creature mode (the brains) + this Mod importer (`!harnimport` for
+  creatures, same family as `!hm-mount`). Bestiary data lives in `chargen/bestiary*.json`
+  (tri-state public/homebrew/harn — see `chargen/CONTRACT.md` §11).
+
+**Risk:** high — spans sheet + API + docs, introduces active-mount/handshake + creature-mode/data-
+driven-locations concepts, and the Mod script is a separate per-campaign artifact to maintain.
+**Distribution:** Pro-only, per-game; does not travel with the published sheet. **Verify:** in-VTT
+with the Mod installed (import fills the panel; token swaps; button shows; a creature sheet renders
+its own locations) *and* not installed (import UI stays hidden; sheet otherwise normal).
 
 ### Phase 8 — Rules-conformance enhancements (from the v3.2.0 audit) · M · polish / coverage
 A conformance sweep of Character / Skills / Combat / Physician / Psionics against the core rules
@@ -437,8 +457,22 @@ tab that produces a playable character and **propagates** into the existing attr
 5. **Equipment & Funds → Contacts.**
 
 #### Design
-- **Dedicated "Character Generation" tab**, separate from the play tabs — a step-by-step flow in the
-  pipeline order above.
+**Architecture (decided 2026-06-14): a local single-file HTML generator + a light Mod importer —
+NOT in the character sheet.** A one-time generator in a play tab would risk clobbering live data and
+can't create skill rows anyway (sheet workers can't add repeating rows). A pure chat-driven Mod was
+rejected too: it's request/response, so it can't cleanly do the live "change occupation → repopulate
+skills + OMLs" recompute that chargen needs.
+- **Local HTML generator = the brains.** An offline HTML+JS file with the full interactive pipeline
+  and **live recompute** (pick an occupation → its skills + OMLs repopulate; re-roll a stat → SBs/OMLs
+  update; a running option-point budget). Roll or override any field. No hosting, no Pro,
+  **unit-testable in Node** like the sheet, reusable outside Roll20, and **fast to build — no Roll20
+  round-trip until the importer.**
+- **Light Mod (API) importer = the on-ramp (Pro).** The generator emits a small JSON blob; a thin
+  `!harnimport` Mod (paste, or read from a handout) creates a **new** Character, writes its attributes,
+  and **creates the skill rows** — the one thing the sheet can't. The Mod holds **no rules logic**;
+  all smarts stay in the HTML file. Rides on the Phase 7 Mod groundwork.
+- **Non-Pro fallback:** the generator shows a clean summary; hand-enter attributes + skill names and
+  the sheet's Phase 3/3.2 auto-fill SB/ML (light, since the generator did the hard part).
 - **Random or manual per field.** Every rollable field gets a **roll button** (a worker generates
   the value from the table) *and* stays editable, so a player can roll, accept, or type a chosen
   result. Re-rolling a step is allowed until the character is locked.
@@ -451,21 +485,68 @@ tab that produces a playable character and **propagates** into the existing attr
     +3/veteran-yr) that decrements as skills are opened/improved.
   - Psyche/medical traits → a **traits section** whose mechanical entries feed the penalty math
     (this is the *psyche & honor* hole noted separately — folded in here).
-- **Lock when live.** A `character_finalized` flag: once set ("begin play"), the chargen tab goes
-  **read-only** (roll buttons hidden, inputs disabled) so an in-use character can't be accidentally
-  regenerated. Reversible behind a confirm. New sheets start unlocked; imported/existing characters
-  can simply leave the tab unused (chargen is fully opt-in).
-- **Data tables to transcribe** (values only, no prose — copyright, like the Weapon Data table):
-  Species, Social Class, Sibling Rank, Parent, Estrangement, Frame/Weight/Comeliness modifiers,
-  Psyche, medical traits, Honor, and the per-occupation skill lists (the large one).
+- **No lock needed.** The importer always creates a **fresh** Character, so there's nothing to lock
+  on the play sheet — the old in-sheet `character_finalized` idea is moot now that chargen lives
+  outside the sheet.
+- **Copyright line (decided 2026-06-14): functional mechanics are public; only prose is gated.**
+  Game rules/data are uncopyrightable methods (§102(b); the retroclone principle) — that includes the
+  numeric tables AND the **occupation→skill bundles** (functional selection, not a creative
+  compilation; no more protected than SB or OML). So the generator embeds all of it: dice, SB/OML,
+  the skill list, occupation→skill bundles, and every table's partitions + result **labels** +
+  mechanical **effects**.
+- **Flavor file (owner-populated):** the only protected layer is descriptive **prose** (psyche/medical
+  descriptions, species/culture/occupation flavor, setting lore). Ship an **empty `flavor.json`
+  schema** (keys only, no text); the generator loads it if present; an **owner transcribes their own
+  book's text into it**. We never distribute the prose — public users get labels + mechanics, owners
+  add descriptions from the book they own.
+- **Data to transcribe (functional):** Species, Social Class, Sibling Rank, Parent, Estrangement,
+  Frame/Weight/Comeliness, Psyche/medical (labels + effects), Honor, occupations + skill bundles.
 
-**Risk:** high — largest feature in the plan; many tables; writes attribute + skill data, so the
-lock + opt-in gating are essential to avoid clobbering a live character. **Dependencies:** builds on
-Phase 3 (SB-from-attrs + skill routing) and the existing sunsign mapping; pairs with Phase 3b if
-clerical chargen (RML = SB×4, opening Piety = Will×5) is included. **Verify:** unit tests that each
-table roll lands in-range and that occupation→skill propagation opens the right skills at SB×mult
-(against a worked chargen example, e.g. Takar the Peoni cleric, Character 23–24); in-VTT that
-locking disables the tab and that re-rolling before lock doesn't corrupt play-tab data.
+**JSON contract + flow + scope (decided 2026-06-14) — see `chargen/CONTRACT.md`.**
+- **Contract (`harnchar` v1):** the schema the generator emits → `!harnimport` consumes → sheet
+  expects, every field mapped to a **real `attr_` name** (verified against `harnsheet.html`).
+  Principle: **emit inputs, not derived** (attributes, bio, skill rows name+ML, SB only when
+  auto-calc is off) — the sheet recomputes endurance/move/SB/penalties on import. Repeating rows are
+  created by the Mod (`createObj` + `generateRowID()`); SB omitted per row so the sheet's Phase 3/3.2
+  fills it.
+- **Flow:** a **step wizard** (species/culture → sunsign/birth → class & family → attributes →
+  frame/comeliness → occupation → skills → psyche → honor) that ends in a **single fully-editable
+  long form** — change occupation there and the skill bundle re-populates/re-OMLs live (the thing a
+  chat-Mod can't do). Export = "Copy JSON" + "Print summary".
+- **Scope: full pipeline EXCEPT HM Magic** (not owned in PDF). The `magic` block is **fully specified
+  now** and maps to the sheet's existing `magicskill`/`spells`/`spell_convocation`, so it stays
+  forward-compatible and a hand-built magic block would import today — generator just leaves it empty.
+- **Two flavor files built:** `chargen/flavor.dist.json` (distribution template, all values empty —
+  no protected text) and `chargen/flavor.private.json` (owner-populated, **git-ignored**). Same schema;
+  generator loads the private one when present.
+- **⚠ Sheet gaps found:** the sheet has **no `occupation`, psyche, or honor field** (magic is fine).
+  Until added, the importer parks those three in `various_notes`. Promoting them to real fields is an
+  additive **patch** (no migration) — do core pipeline now, wire the fields in a follow-up.
+
+**Creature mode + bestiary (decided 2026-06-14) — generator gains a second mode.**
+- **PC mode** = the life-path pipeline above. **Creature mode** = stat-block driven (hides occupation/
+  parent/sunsign/social/psyche/honor); builds a **standalone creature character sheet** (Phase 7 7e).
+  A horse is just creature #1. `kind:"pc"|"creature"` on the contract envelope.
+- **Bestiary data** (`chargen/bestiary*.json`, tri-state): `public` ships, `homebrew` shareable,
+  `harn` git-ignored. **Composition** — `extends` (single inheritance) + referenced components
+  (`archetype`→default hit-locations, `sizeClass`→movement); `rank` (species/breed) is a soft label.
+  Per-node `setting` flag is authoritative; a lint keeps `harn` out of the public file.
+- **Copyright:** functional stat blocks are public (ship all **non-IP** 4001 table creatures — Lion,
+  Killer Whale, …); **coined Hârn creatures + lore + their unique location tables** (Gargun/Ivashu/
+  Yelgri articles, Hârn genera/species/breeds) → private. Even a *public* creature's prose description
+  is owner-populated flavor.
+- **Implementation started 2026-06-14:** `chargen/CONTRACT.md` §10–11 + `chargen/bestiary*.json` stubs
+  + `chargen/bestiary.mjs` engine (merge → resolve `extends`/components → lint) with Node tests. UI
+  wizard + the Phase-7 sheet creature-mode are the next pieces.
+
+**Risk:** high — largest feature in the plan; many tables. But the clobber risk is **gone**: the
+importer always creates a **fresh** Character, so there's no play-sheet lock to manage. **Dependencies:**
+builds on Phase 3 (SB-from-attrs + skill routing) and the existing sunsign mapping; pairs with Phase 3b
+if clerical chargen (RML = SB×4, opening Piety = Will×5) is included; the importer rides on Phase 7 Mod
+groundwork. **Verify:** unit tests that each table roll lands in-range, that occupation→skill
+propagation opens the right skills at SB×mult (against a worked example, e.g. Takar the Peoni cleric,
+Character 23–24), and that emitted JSON validates against `harnchar` v1; in-VTT that `!harnimport`
+creates a character with the right attrs + skill rows.
 
 ### Phase 11 — Skill specialties · S–M · setting-gated
 Adds structured **skill specialties** (4001 Skills 7), toggled by a setting `hr_specialties`

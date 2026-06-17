@@ -1,0 +1,19 @@
+{
+  "_meta": {
+    "harnbestiary": 1,
+    "setting": "homebrew",
+    "note": "HOMEBREW bestiary — your own creatures (not Hârn IP). Committed + shareable: a 'share my bestiary' export = public + homebrew (never private). Same node shape as bestiary.json; every node here should carry setting:'homebrew'. Reuse public components (archetype/sizeClass) and extends a public baseline to keep entries small."
+  },
+  "components": { "archetypes": {}, "sizeClasses": {} },
+  "nodes": [
+    {
+      "id": "_example-dire-wolf", "name": "Dire Wolf (example)", "rank": "species",
+      "genus": "cats", "setting": "homebrew", "source": "homebrew", "selectable": true,
+      "archetype": "quadruped", "sizeClass": "large", "_example": true,
+      "attributes": { "str": 0, "sta": 0, "agl": 0, "int": 0 },
+      "attacks": [ { "name": "Bite", "ml": 0, "impact": 0, "aspect": "p" } ],
+      "armor": { "natural": "Hide", "byLocation": {} },
+      "skills": [], "specialQualities": [], "flavorKey": "_example-dire-wolf"
+    }
+  ]
+}
