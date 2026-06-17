@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// build-equipment-public.mjs — emit chargen/equipment.public.json from the 4001 CORE
+// build-equipment.mjs — emit chargen/equipment.json (PUBLIC) from the 4001 CORE
 // Combat 3 (Weapon Data) + Combat 4 (Armour Data) + Combat 5 (Armour Protective Values) tables.
 //
 // This is FUNCTIONAL game data (item names, weights, prices, protection values, weapon classes) —
@@ -11,13 +11,13 @@
 // merges both. Weapon items add weapon-specific fields (class/oml/wq/ad/hm/impact) for future
 // repeating_weapon routing; the picker itself only needs name/d/wt.
 //
-// Run:  node chargen/tools/build-equipment-public.mjs
+// Run:  node chargen/tools/build-equipment.mjs
 
 import { writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const OUT = join(dirname(fileURLToPath(import.meta.url)), '..', 'equipment.public.json');
+const OUT = join(dirname(fileURLToPath(import.meta.url)), '..', 'equipment.json');
 
 // ── Combat 3 — Weapon Data Table ───────────────────────────────────────────
 // Row: [name, class, oml, wt(lb), wq, ad, hm, B, E, P, price]. "•"/"-" = none(0); price "n/a"=null;
@@ -186,4 +186,4 @@ const out = {
 };
 
 writeFileSync(OUT, JSON.stringify(out, null, 2) + '\n');
-console.log(`equipment.public.json: ${out.vendors.length} vendors, ${out._meta.itemCount} items (${weaponItems.length} weapons + ${armourItems.length} armour) → ${OUT}`);
+console.log(`equipment.json: ${out.vendors.length} vendors, ${out._meta.itemCount} items (${weaponItems.length} weapons + ${armourItems.length} armour) → ${OUT}`);

@@ -22,7 +22,7 @@ const data = [
   'const DATA_OCC = ' + min('chargen/occupations.json') + ';',
   'const DATA_BEST = ' + min('chargen/bestiary.json') + ';',
   'const DATA_TABLES = ' + min('chargen/tables.json') + ';',
-  'const DATA_EQUIP = ' + min('chargen/equipment.public.json') + ';',
+  'const DATA_EQUIP = ' + min('chargen/equipment.json') + ';',
   'const SKILLS = ' + JSON.stringify(JSON.parse(readFileSync('chargen/skills.json', 'utf8')).skills) + ';',
 ].join('\n');
 

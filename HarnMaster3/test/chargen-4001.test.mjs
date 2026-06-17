@@ -70,7 +70,7 @@ describe('Character 17 — Equipment & Funds', () => {
 });
 
 describe('Character 17 — public 4001 equipment catalog (Combat 3-5)', () => {
-  const EQ = JSON.parse(readFileSync('chargen/equipment.public.json', 'utf8'));
+  const EQ = JSON.parse(readFileSync('chargen/equipment.json', 'utf8'));
   const allItems = EQ.vendors.flatMap((v) => v.items);
   const byName = (n) => allItems.find((it) => it.name === n);
   test('two vendors (Weapons + Armour), harnequip schema', () => {
