@@ -144,19 +144,20 @@ test('per-species attribute modifiers (3d6 + species/sex/weight)', () => {
   assert.equal(speciesKey('Sindarin (elf)'), 'sindarin');
   assert.equal(speciesKey('Human'), 'human');
   assert.deepEqual(attrMods('str', 'Khuzdul (dwarf)', 'Male', 0), [{ label: 'khuzdul', val: 4 }]);
-  assert.deepEqual(attrMods('sta', 'Khuzdul (dwarf)', 'Male', 0), [{ label: 'khuzdul', val: 2 }]); // sta +2 (not +4)
+  assert.deepEqual(attrMods('sta', 'Khuzdul (dwarf)', 'Male', 0), [{ label: 'khuzdul', val: 4 }]); // STA Khuzdul +4 (v3.5.2 canonical)
   assert.deepEqual(attrMods('dex', 'Khuzdul (dwarf)', 'Male', 0), [{ label: 'khuzdul', val: 1 }]); // dex +1 (not +4)
   assert.deepEqual(attrMods('dex', 'Sindarin (elf)', 'Male', 0), [{ label: 'sindarin', val: 2 }]);
   assert.deepEqual(attrMods('wil', 'Khuzdul (dwarf)', 'Male', 0), [{ label: 'khuzdul', val: 3 }]);
   assert.deepEqual(attrMods('aur', 'Sindarin (elf)', 'Male', 0), [{ label: 'sindarin', val: 4 }]);
   assert.deepEqual(attrMods('aur', 'Human', 'Female', 0), [{ label: 'female', val: 2 }]);
   assert.deepEqual(attrMods('aur', 'Human', 'Male', 0), []); // human male: no aura mod
-  // Strength = weight; Agility = frame; Stamina = neither
+  // Strength = weight; Agility = frame; Stamina = species only (NO weight, NO frame)
   assert.equal(weightMod(170), 1); assert.equal(weightMod(80), -4); assert.equal(weightMod(150), 0);
   assert.deepEqual(attrMods('str', 'Human', 'Male', 200), [{ label: 'weight', val: 3 }]);
-  assert.deepEqual(attrMods('agl', 'Human', 'Male', 200, 'Heavy'), [{ label: 'frame', val: -1 }]); // frame, not weight
+  assert.deepEqual(attrMods('sta', 'Human', 'Male', 200, 'Heavy'), []); // STA: no weight, no frame
+  assert.deepEqual(attrMods('sta', 'Khuzdul (dwarf)', 'Male', 80, 'Heavy'), [{ label: 'khuzdul', val: 4 }]); // STA: race only, ignores weight+frame
+  assert.deepEqual(attrMods('agl', 'Human', 'Male', 200, 'Heavy'), [{ label: 'frame', val: -1 }]); // AGL: frame, not weight
   assert.deepEqual(attrMods('agl', 'Sindarin (elf)', 'Male', 0, 'Scant'), [{ label: 'sindarin', val: 2 }, { label: 'frame', val: 2 }]);
-  assert.deepEqual(attrMods('sta', 'Human', 'Male', 200, 'Heavy'), []); // stamina: no weight/frame mod
   assert.deepEqual(attrMods('eye', 'Human', 'Male', 0, 'Medium', 'Tribal'), [{ label: 'tribesmen', val: 1 }]);
 });
 

@@ -1591,6 +1591,20 @@
       "flavorKey": "soldier"
     },
     {
+      "id": "fighting-order",
+      "name": "Fighting Order",
+      "category": "religious",
+      "years": 4,
+      "source": "4001",
+      "sources": ["4001", "4401"],
+      "classes": ["Unguilded", "Guilded", "Noble"],
+      "skills": [],
+      "special": [
+        "Religious military (Char 27 Fighting Order unit). Choose a deity with fighting orders (Agrik or Larani), one of its fighting orders, and a unit type — Knight (MH/HH) requires Noble birth."
+      ],
+      "selectable": true
+    },
+    {
       "id": "teamster",
       "name": "Teamster",
       "category": "unguilded",

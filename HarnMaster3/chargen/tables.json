@@ -2760,6 +2760,13 @@
           "oml": 2
         }
       ],
+      "fightingOrder": [
+        { "id": "mil-fo-infantry-lf", "name": "Infantry", "class": "LF", "end": 4, "skills": [ { "name": "Spear", "oml": 6 }, { "name": "Sword (Shortsword)", "oml": 5 }, { "name": "Dagger", "oml": 5 }, { "name": "Shield (Roundshield)", "oml": 5 } ] },
+        { "id": "mil-fo-infantry-mf", "name": "Infantry", "class": "MF", "end": 3, "skills": [ { "name": "Spear", "oml": 6 }, { "name": "Sword (Falchion)", "oml": 5 }, { "name": "Dagger", "oml": 5 }, { "name": "Shield (Roundshield)", "oml": 5 } ] },
+        { "id": "mil-fo-archer-sb", "name": "Archer", "class": "SB", "end": 2, "skills": [ { "name": "Bow (Shortbow)", "oml": 5 }, { "name": "Sword (Shortsword)", "oml": 5 }, { "name": "Dagger", "oml": 5 }, { "name": "Shield (Buckler)", "oml": 5 } ] },
+        { "id": "mil-fo-knight-mh", "name": "Knight", "class": "MH", "end": 3, "knight": true, "skills": [ { "name": "Riding", "oml": 6 }, { "name": "Initiative", "oml": 6 }, { "name": "Polearm (Lance)", "oml": 6 }, { "name": "Sword (Broadsword)", "oml": 5 }, { "name": "Club (Mace)", "oml": 5 }, { "name": "Dagger", "oml": 5 }, { "name": "Shield (Knight Shield)", "oml": 6 }, { "name": "Dancing", "oml": 3 } ] },
+        { "id": "mil-fo-knight-hh", "name": "Knight", "class": "HH", "end": 2, "knight": true, "skills": [ { "name": "Riding", "oml": 6 }, { "name": "Initiative", "oml": 6 }, { "name": "Polearm (Lance)", "oml": 6 }, { "name": "Sword (Bastard Sword)", "oml": 5 }, { "name": "Club (Mace)", "oml": 5 }, { "name": "Dagger", "oml": 5 }, { "name": "Shield (Kite Shield)", "oml": 6 }, { "name": "Dancing", "oml": 3 } ] }
+      ],
       "byCulture": {
         "Feudal": [
           {
@@ -3534,6 +3541,12 @@
       "allCommonSpecial": [],
       "byDeity": {
         "Agrik": {
+          "orders": [
+            { "name": "Eight Demons" }, { "name": "Fuming Gate" }, { "name": "Herpa the Mace" }, { "name": "Kukshin" }, { "name": "Mamaka the Master" }, { "name": "Octagonal Pit" }, { "name": "Pillar of Fire" }
+          ],
+          "fightingOrders": [
+            { "name": "Cohorts of Gashang" }, { "name": "Copper Hook" }, { "name": "Red Shadows of Herpa" }, { "name": "Crimson Dancer" }, { "name": "Warriors of Mamaka" }, { "name": "Pameshlu the Insatiable" }, { "name": "Roving Doom" }
+          ],
           "skills": [
             {
               "name": "Initiative",
@@ -3624,6 +3637,10 @@
           }
         },
         "Ilvir": {
+          "orders": [
+            { "name": "Chuchlaen Wheelwright" }, { "name": "Meamyt the Hermit" }, { "name": "The Ochre Womb" }, { "name": "Order of the Pia-Gardith" }, { "name": "Order of the Seafarer Ibenis" }, { "name": "Sudelrhynn the Bearer of Loam" }, { "name": "Tuarbalt the Golden-Limbed" }, { "name": "The Verdant Pool" }, { "name": "The Yellow Hand" }
+          ],
+          "ordersOptional": true,
           "skills": [
             {
               "name": "Animalcraft (Ivashu)",
@@ -3665,6 +3682,12 @@
           "templeTongue": "Ivashi"
         },
         "Larani": {
+          "orders": [
+            { "name": "Order of the Spear of Shattered Sorrow" }, { "name": "Order of Hyvrik" }
+          ],
+          "fightingOrders": [
+            { "name": "Order of the Lady of Paladins" }, { "name": "Order of the Checkered Shield" }
+          ],
           "skills": [
             {
               "name": "Initiative",
@@ -3706,6 +3729,9 @@
           }
         },
         "Morgath": {
+          "orders": [
+            { "name": "Order of the Lord of Chaos" }
+          ],
           "skills": [
             {
               "name": "Dagger",
@@ -3791,6 +3817,9 @@
           }
         },
         "Peoni": {
+          "orders": [
+            { "name": "Balm of Joy", "sex": "F" }, { "name": "Irreproachable Order", "sex": "M" }
+          ],
           "skills": [
             {
               "name": "Agriculture",

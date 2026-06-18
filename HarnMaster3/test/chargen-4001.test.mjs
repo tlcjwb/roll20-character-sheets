@@ -120,6 +120,11 @@ describe('Character 27 — Military Careers', () => {
     assert.deepEqual(b.skills, []);
     assert.equal(b.needs, 'unit');
   });
+  test('Soldier excludes Knight units (knight is its own Noble occupation)', () => {
+    const b = occBundle('soldier', { culture: 'Feudal', milunit: 'mil-feudal-knight-mh' }, DATA);
+    assert.deepEqual(b.skills, [], 'a knight unit id is not resolvable under soldier');
+    assert.equal(b.needs, 'unit');
+  });
 });
 
 describe('Character 27 / Noble — Knights (Pattern F4/G)', () => {
@@ -141,6 +146,37 @@ describe('Character 27 / Noble — Knights (Pattern F4/G)', () => {
     assert.equal(lady.name, 'Lady');
     assert.ok(lady.skills.some((s) => s.name === 'Needlework'), 'Lady bundle, not knight');
     assert.ok(!lady.skills.some((s) => s.name === 'Lance'));
+  });
+});
+
+describe('Character 27 — Fighting Orders (deity-sponsored religious military)', () => {
+  test('FO unit skills come from the Char-27 Fighting Order block (Knight MH carries Mace — distinct from Feudal)', () => {
+    const b = occBundle('fighting-order', { milunit: 'mil-fo-knight-mh', deity: 'Larani', fightingOrder: 'Order of the Lady of Paladins' }, DATA);
+    const n = names(b);
+    assert.ok(n.includes('Club (Mace)'), 'Fighting Order Knight has Mace');
+    assert.ok(n.includes('Polearm (Lance)') && n.includes('Riding') && n.includes('Initiative'));
+    assert.ok(n.includes('Foraging'), 'ALL MILITARY common skills unioned in');
+    assert.equal(b.deity, 'Larani');
+    assert.equal(b.fightingOrder, 'Order of the Lady of Paladins');
+    assert.ok(b.name.includes('Order of the Lady of Paladins'));
+  });
+  test('FO infantry/archer use their own kit; deity carried through', () => {
+    const inf = occBundle('fighting-order', { milunit: 'mil-fo-infantry-mf', deity: 'Agrik', fightingOrder: 'Roving Doom' }, DATA);
+    assert.ok(names(inf).includes('Spear') && names(inf).includes('Sword (Falchion)'));
+    assert.equal(inf.deity, 'Agrik');
+    assert.equal(inf.fightingOrder, 'Roving Doom');
+  });
+  test('no unit chosen → needs a unit (skills empty)', () => {
+    const b = occBundle('fighting-order', { deity: 'Larani' }, DATA);
+    assert.equal(b.skills.length, 0);
+    assert.equal(b.needs, 'unit');
+  });
+  test('order names present: Agrik 7 fighting orders, Larani 2; Peoni cleric orders are gendered', () => {
+    assert.equal(TABLES.clerics.byDeity.Agrik.fightingOrders.length, 7);
+    assert.deepEqual(TABLES.clerics.byDeity.Larani.fightingOrders.map((o) => o.name), ['Order of the Lady of Paladins', 'Order of the Checkered Shield']);
+    const peoni = TABLES.clerics.byDeity.Peoni.orders;
+    assert.ok(peoni.find((o) => o.name === 'Balm of Joy' && o.sex === 'F'));
+    assert.ok(peoni.find((o) => o.name === 'Irreproachable Order' && o.sex === 'M'));
   });
 });
 

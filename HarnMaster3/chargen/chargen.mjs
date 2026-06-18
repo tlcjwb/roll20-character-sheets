@@ -125,14 +125,15 @@ export function rollAttributes(dice, rng) {
 // ---- per-species attribute modifiers (4001 Character 6-8) ----
 // All attributes roll 3d6; species/sex/culture/weight/frame modify the result.
 export const SPECIES_ATTR_MOD = {
-  khuzdul: { str: 4, sta: 2, dex: 1, eye: 1, hrg: 2, sml: 2, aur: -2, wil: 3 },
+  khuzdul: { str: 4, sta: 4, dex: 1, eye: 1, hrg: 2, sml: 2, aur: -2, wil: 3 },
   sindarin: { str: 1, sta: 1, dex: 2, agl: 2, eye: 2, hrg: 2, sml: 3, voi: 2, cml: 2, aur: 4, moral: 3 },
 };
 const TRIBAL_ATTR_MOD = { eye: 1, hrg: 2, sml: 2 }; // Tribal culture (keener senses)
 const FRAME_AGL_MOD = { Scant: 2, Light: 1, Medium: 0, Heavy: -1, Massive: -2 }; // frame → Agility
 export const speciesKey = (species) => { const s = String(species || '').toLowerCase(); return /khuzdul|dwarf/.test(s) ? 'khuzdul' : /sindarin|elf/.test(s) ? 'sindarin' : 'human'; };
 
-// Weight modifies STRENGTH only (heavier → stronger). Stamina/Agility are NOT weight-modified.
+// Weight modifies STRENGTH only (heavier → stronger), per the Character 6 weight table. Stamina is
+// modified by species/race only (NOT weight); Agility is modified by FRAME (see FRAME_AGL_MOD).
 export function weightMod(weight) {
   const w = Number(weight) || 0;
   const t = [[56, 85, -4], [86, 110, -3], [111, 130, -2], [131, 145, -1], [146, 155, 0], [156, 170, 1], [171, 190, 2], [191, 215, 3], [216, 245, 4]];
@@ -140,7 +141,8 @@ export function weightMod(weight) {
   return e ? e[2] : 0;
 }
 
-// Modifiers applied to a 3d6 roll for `attr` → [{ label, val }]. Strength uses weight; Agility uses frame.
+// Modifiers applied to a 3d6 roll for `attr` → [{ label, val }]. Strength uses weight; Agility uses
+// frame; Stamina is species-only (Character 6-8). Species + female-aura + tribal-senses also apply.
 export function attrMods(attr, species, sex, weight, frame, culture) {
   const mods = []; const sk = speciesKey(species);
   const sm = (SPECIES_ATTR_MOD[sk] || {})[attr]; if (sm) mods.push({ label: sk, val: sm });
@@ -247,10 +249,19 @@ export function occBundle(occId, sel, data) {
     return { unit, skills: unit ? militaryUnitSkills(unit, mil.allCommon) : [] };
   };
   if (occId === 'soldier') {
-    const mil = data.military; const units = (mil && mil.byCulture[cul]) || [];
+    const mil = data.military; const units = ((mil && mil.byCulture[cul]) || []).filter((u) => !u.knight); // knights are their own (Noble) occupation
     const unit = units.find((u) => u.id === sel.milunit);
     if (unit) return { name: `${unit.name} (${unit.class})`, skills: militaryUnitSkills(unit, mil.allCommon), end: unit.end };
     return { name: 'Soldier', skills: [], needs: units.length ? 'unit' : 'none-for-culture' };
+  }
+  // Fighting Order (Char 27 'Fighting Order' unit block, public) — deity-sponsored religious military.
+  // Unit skills are 4001; the order name comes from the deity's 4401 fightingOrders (names only).
+  if (occId === 'fighting-order') {
+    const mil = data.military; const fo = (mil && mil.fightingOrder) || [];
+    const unit = fo.find((u) => u.id === sel.milunit);
+    const order = sel.fightingOrder || null; const dn = sel.deity || null;
+    if (unit) return { name: `${unit.name} (${unit.class})${order ? `, ${order}` : ''}`, skills: militaryUnitSkills(unit, mil.allCommon), end: unit.end, deity: dn, fightingOrder: order };
+    return { name: 'Fighting Order', skills: [], needs: fo.length ? 'unit' : 'none', deity: dn, fightingOrder: order };
   }
   if (isKnightOcc(occId)) {
     if (/^f/i.test(sel.sex || '')) { const lady = reso('lady'); return { name: 'Lady', skills: lady.skills || [] }; }

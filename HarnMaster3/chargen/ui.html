@@ -126,6 +126,7 @@
         <div><label>Sibling rank <button class="rollbtn" data-table="siblingRank" data-target="pc-sibling">🎲</button></label>
           <div class="row" style="gap:.3rem;margin:0"><select id="pc-sibling" style="flex:1"></select><span style="align-self:center">of</span><select id="pc-famsize" style="flex:1"></select></div></div>
         <div><label>Parent <button class="rollbtn" data-table="parent" data-target="pc-parent">🎲</button></label><select id="pc-parent"></select></div>
+        <div><label>Parent social class <button id="rollParentSocial" class="rollbtn">🎲</button></label><select id="pc-parent-social"></select></div>
         <div><label>Parent occupation <button id="rollParentOcc" class="rollbtn">🎲</button></label><select id="pc-parentocc"></select></div>
         <div id="parentMilField" style="display:none"><label>Parent military unit</label><select id="pc-parentmilunit"></select></div>
         <div id="parentDeityField" style="display:none"><label>Parent deity</label><select id="pc-parentdeity"></select></div>
@@ -174,6 +175,8 @@
       <legend>Religion <button id="rollReligion" class="rollall">🎲 Roll all</button></legend>
       <div class="grid bio">
         <div><label>Deity</label><select id="pc-deity"></select></div>
+        <div id="clericOrderField" style="display:none"><label>Cleric order <span class="muted">(4401)</span></label><select id="pc-clericorder"></select></div>
+        <div id="foField" style="display:none"><label>Fighting order <span class="muted">(4401)</span></label><select id="pc-fightingorder"></select></div>
         <div><label>Piety <button class="rollbtn" data-roll="piety" data-target="pc-piety">🎲</button></label><input id="pc-piety" type="number" value="0"></div>
       </div>
       <p id="relNote" class="rolllog"></p>
