@@ -179,8 +179,14 @@
         <div id="foField" style="display:none"><label>Fighting order <span class="muted">(4401)</span></label><select id="pc-fightingorder"></select></div>
         <div><label>Piety <button class="rollbtn" data-roll="piety" data-target="pc-piety">🎲</button></label><input id="pc-piety" type="number" value="0"></div>
       </div>
+      <div id="invocField" style="display:none;margin-top:.4rem">
+        <label>Ritual invocations <span class="muted">(4401 — all Circle-II Common are free; buy more at 1 Ritual Option Pt / circle, pool = RSB)</span></label>
+        <div class="row" style="gap:.4rem;margin:.2rem 0"><select id="invoc-add" style="flex:1"></select><button id="invoc-addbtn" class="rollbtn">+ learn</button></div>
+        <div id="invocList"></div>
+        <p id="invocNote" class="rolllog"></p>
+      </div>
       <p id="relNote" class="rolllog"></p>
-      <p class="muted">Anyone may have a patron deity; only the rules differ for clerics (opening Piety ≈ Will×5; detailed ritual mechanics are Phase 3b on the sheet). The deity 🎲 picks at random; the Piety 🎲 sets Will×5.</p>
+      <p class="muted">Anyone may have a patron deity; only the rules differ for clerics (opening Piety ≈ Will×5). Invocations need the 4401 owner file loaded. The deity 🎲 picks at random; the Piety 🎲 sets Will×5.</p>
     </fieldset>
 
     <fieldset>
@@ -1019,6 +1025,7 @@ const SKILLS = {"acrobatics":{"attrs":["str","agl","agl"],"sun":"nad+2; hir+1","
   let MERGED_OCC, MERGED_BEST, MERGED_TABLES;
   const mlOverride = {};
   const optSkills = []; // [4] Optional skills: [{skill, action}]
+  let invocPicks = []; // [4401] additional ritual invocations a cleric learns beyond the free Common-II (names)
   const OPT_ACTIONS = { new: { label: 'open at OML', cost: 1 }, improve1: { label: 'improve +SB', cost: 1 }, improve2: { label: 'improve +SB×2', cost: 3 } };
   let fundsOverride = null;
   let parentSocialTouched = false; // family social class defaults to the character's class until the user sets it
@@ -1320,7 +1327,7 @@ const SKILLS = {"acrobatics":{"attrs":["str","agl","agl"],"sun":"nad+2; hir+1","
   }
   ['pc-parentmilunit', 'pc-parentdeity', 'pc-parentconvocation'].forEach((id) => $(id).addEventListener('change', () => { familyPick = ''; recomputePC(); }));
   $('pc-chantry').addEventListener('change', recomputePC);
-  $('pc-occupation').addEventListener('change', () => { Object.keys(mlOverride).forEach((k) => delete mlOverride[k]); occChoicePicks = {}; fillSpec(); fillMilUnit(); fillConvocation(); fillFO(); fillClericOrder(); fillOccChoices(); recomputePC(); });
+  $('pc-occupation').addEventListener('change', () => { Object.keys(mlOverride).forEach((k) => delete mlOverride[k]); occChoicePicks = {}; invocPicks = []; fillSpec(); fillMilUnit(); fillConvocation(); fillFO(); fillClericOrder(); fillInvoc(); fillOccChoices(); recomputePC(); });
   $('pc-convocation').addEventListener('change', () => { Object.keys(mlOverride).forEach((k) => delete mlOverride[k]); recomputePC(); });
   $('pc-gender').addEventListener('change', () => { fillMilUnit(); fillClericOrder(); fillOccChoices(); recomputePC(); });
 
@@ -1369,7 +1376,7 @@ const SKILLS = {"acrobatics":{"attrs":["str","agl","agl"],"sun":"nad+2; hir+1","
     def.forEach((g, gi) => { for (let si = 0; si < g.count; si++) { const k = occChoicePicks[`${gi}_${si}`]; if (k) out.push(g.bonus != null ? { name: skTitle(k), useOwnOml: true, bonus: g.bonus } : { name: skTitle(k), oml: g.oml }); } });
     return out;
   }
-  $('pc-deity').addEventListener('change', () => { occChoicePicks = {}; fillOccChoices(); fillFO(); fillClericOrder(); });
+  $('pc-deity').addEventListener('change', () => { occChoicePicks = {}; invocPicks = []; fillOccChoices(); fillFO(); fillClericOrder(); fillInvoc(); });
   $('pc-milunit').addEventListener('change', () => { Object.keys(mlOverride).forEach((k) => delete mlOverride[k]); recomputePC(); });
   $('pc-fightingorder').addEventListener('change', recomputePC);
   $('pc-clericorder').addEventListener('change', recomputePC);
@@ -1389,6 +1396,31 @@ const SKILLS = {"acrobatics":{"attrs":["str","agl","agl"],"sun":"nad+2; hir+1","
     }));
   }
   $('addOpt').onclick = () => { optSkills.push({ skill: '', action: 'new' }); renderOptList(); recomputePC(); };
+
+  // ---------- [4401] cleric ritual invocations (needs the 4401 owner file loaded) ----------
+  function clericInvocs() {
+    const cl = tbl('clerics'); const dn = $('pc-deity').value;
+    if (!cl || !cl.commonInvocations || !dn) return null;          // 4401 not loaded / no deity
+    const common = (cl.commonInvocations || []).map((iv) => ({ ...iv, source: 'common' }));
+    const deity = ((cl.byDeity[dn] && cl.byDeity[dn].invocations) || []).map((iv) => ({ ...iv, source: dn }));
+    return { all: [...common, ...deity], common, deity };
+  }
+  function fillInvoc() {
+    const av = clericInvocs();
+    if ($('pc-occupation').value !== 'cleric-shaman' || !av) return;
+    const free = new Set(av.all.filter((iv) => iv.source === 'common' && iv.circle === 2).map((iv) => iv.name));
+    const opts = av.all.filter((iv) => !free.has(iv.name) && !invocPicks.includes(iv.name))
+      .map((iv) => `<option value="${escAttr(iv.name)}">${escAttr(iv.name)} — Circle ${iv.circle} (${iv.source === 'common' ? 'Common' : iv.source}) · ${iv.circle} ROP</option>`).join('');
+    $('invoc-add').innerHTML = '<option value="">— learn an invocation —</option>' + opts;
+  }
+  function renderInvoc(av, free, picked, rsb, ropUsed) {
+    const row = (iv, rm) => `<div class="row" style="gap:.4rem;margin:.1rem 0;font-size:.85rem"><span>${escAttr(iv.name)} <span class="src">(C${iv.circle}, ${iv.source === 'common' ? 'Common' : iv.source}${rm ? '' : ', free'})</span></span>${rm ? `<button data-rm="${escAttr(iv.name)}" class="rollbtn">✕</button>` : ''}</div>`;
+    $('invocList').innerHTML = free.map((iv) => row(iv, false)).join('') + picked.map((iv) => row(iv, true)).join('');
+    $('invocList').querySelectorAll('button[data-rm]').forEach((b) => { b.onclick = (e) => { e.preventDefault(); invocPicks = invocPicks.filter((n) => n !== b.dataset.rm); fillInvoc(); recomputePC(); }; });
+    const over = ropUsed > rsb;
+    $('invocNote').innerHTML = `${free.length} free Common-II · learned ${picked.length} · <span class="${over ? 'warn' : ''}">ROP ${ropUsed} / ${rsb}${over ? ' — over budget' : ''}</span>`;
+  }
+  $('invoc-addbtn').onclick = (e) => { e.preventDefault(); const v = $('invoc-add').value; if (v && !invocPicks.includes(v)) { invocPicks.push(v); fillInvoc(); recomputePC(); } };
 
   // ---------- appearance derived ----------
   function updateDerived() {
@@ -1637,7 +1669,22 @@ const SKILLS = {"acrobatics":{"attrs":["str","agl","agl"],"sun":"nad+2; hir+1","
       const oc = $('pc-occupation').value;
       const order = oc === 'fighting-order' ? $('pc-fightingorder').value : oc === 'cleric-shaman' ? $('pc-clericorder').value : '';
       religion = { deity: $('pc-deity').value, piety: Number($('pc-piety').value) || 0, ...(order ? { order } : {}) };
+      // [4401] Ritual invocations for a cleric: all Circle-II Common are free; extra ones cost their
+      // circle in Ritual Option Points, pool = RSB (the Ritual skill's SB). Needs the 4401 owner file.
+      if (oc === 'cleric-shaman') {
+        const av = clericInvocs();
+        if (av) {
+          const ritRow = skillRows.find((r) => /^Ritual\b/i.test(r.name));
+          const rsb = ritRow ? ritRow.sb : 0;
+          const free = av.all.filter((iv) => iv.source === 'common' && iv.circle === 2);
+          const picked = invocPicks.map((nm) => av.all.find((iv) => iv.name === nm)).filter(Boolean);
+          const ropUsed = picked.reduce((n, iv) => n + (iv.circle || 0), 0);
+          religion.invocations = [...free, ...picked].map((iv) => ({ name: iv.name, circle: iv.circle, source: iv.source }));
+          renderInvoc(av, free, picked, rsb, ropUsed);
+        }
+      }
     }
+    $('invocField').style.display = (!hr.godless && $('pc-occupation').value === 'cleric-shaman' && $('pc-deity').value && clericInvocs()) ? '' : 'none';
     // Funds = family wealth (Character 17): the FAMILY's social class (parent) × wealth level — NOT the
     // character's current class (a peasant-born knight starts with peasant family resources). Slave → Serf tier.
     const fw = tbl('familyWealth'); let cls = $('pc-parent-social').value; if (cls === 'Slave') cls = 'Serf';
@@ -1803,7 +1850,7 @@ const SKILLS = {"acrobatics":{"attrs":["str","agl","agl"],"sun":"nad+2; hir+1","
     remerge(); remergeEquip();
   }
   function refreshOwnerUI() {
-    buildSelects(); fillOccupations(); fillSpec(); fillMilUnit(); fillConvocation(); fillFO(); fillClericOrder(); fillParentSub(); fillOccChoices(); fillCreatures(); fillEquipVendors(); recomputePC();
+    buildSelects(); fillOccupations(); fillSpec(); fillMilUnit(); fillConvocation(); fillFO(); fillClericOrder(); fillInvoc(); fillParentSub(); fillOccChoices(); fillCreatures(); fillEquipVendors(); recomputePC();
   }
   function renderSources() {
     const pills = ['<span class="srcpill">4001 core</span>'];
@@ -1850,7 +1897,7 @@ const SKILLS = {"acrobatics":{"attrs":["str","agl","agl"],"sun":"nad+2; hir+1","
 
   // ---------- init ----------
   BASE_SKILLS = JSON.parse(JSON.stringify(SKILLS)); // baseline for skills-layer load/unload
-  remerge(); remergeEquip(); buildAttrGrid(); fillHR(); restoreOptions(); markKeyAttrs(); buildSelects(); fillOccupations(); fillMilUnit(); fillConvocation(); fillFO(); fillClericOrder(); fillCreatures(); fillEquipVendors(); renderOptList(); deriveSunsign(); renderSources(); applyHRVisibility(); recomputePC();
+  remerge(); remergeEquip(); buildAttrGrid(); fillHR(); restoreOptions(); markKeyAttrs(); buildSelects(); fillOccupations(); fillMilUnit(); fillConvocation(); fillFO(); fillClericOrder(); fillInvoc(); fillCreatures(); fillEquipVendors(); renderOptList(); deriveSunsign(); renderSources(); applyHRVisibility(); recomputePC();
 })();
 
 </script>

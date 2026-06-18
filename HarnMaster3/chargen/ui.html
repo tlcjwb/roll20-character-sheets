@@ -179,8 +179,14 @@
         <div id="foField" style="display:none"><label>Fighting order <span class="muted">(4401)</span></label><select id="pc-fightingorder"></select></div>
         <div><label>Piety <button class="rollbtn" data-roll="piety" data-target="pc-piety">🎲</button></label><input id="pc-piety" type="number" value="0"></div>
       </div>
+      <div id="invocField" style="display:none;margin-top:.4rem">
+        <label>Ritual invocations <span class="muted">(4401 — all Circle-II Common are free; buy more at 1 Ritual Option Pt / circle, pool = RSB)</span></label>
+        <div class="row" style="gap:.4rem;margin:.2rem 0"><select id="invoc-add" style="flex:1"></select><button id="invoc-addbtn" class="rollbtn">+ learn</button></div>
+        <div id="invocList"></div>
+        <p id="invocNote" class="rolllog"></p>
+      </div>
       <p id="relNote" class="rolllog"></p>
-      <p class="muted">Anyone may have a patron deity; only the rules differ for clerics (opening Piety ≈ Will×5; detailed ritual mechanics are Phase 3b on the sheet). The deity 🎲 picks at random; the Piety 🎲 sets Will×5.</p>
+      <p class="muted">Anyone may have a patron deity; only the rules differ for clerics (opening Piety ≈ Will×5). Invocations need the 4401 owner file loaded. The deity 🎲 picks at random; the Piety 🎲 sets Will×5.</p>
     </fieldset>
 
     <fieldset>
